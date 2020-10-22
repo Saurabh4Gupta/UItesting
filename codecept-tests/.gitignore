@@ -1,0 +1,9 @@
+node_modules
+.vscode
+output/
+.DS_Store
+package-lock.json
+/.vs
+/.idea
+git
+reports/
