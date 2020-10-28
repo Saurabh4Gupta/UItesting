@@ -10,6 +10,7 @@ import Stack from '@dentsu-ui/components/dist/cjs/components/Stack';
 import Caption from '@dentsu-ui/components/dist/cjs/components/Caption';
 import Heading from '@dentsu-ui/components/dist/cjs/components/Heading';
 import Overview from './modules/Overview/Overview';
+import CreateData from './modules/CreateData/CreateData';
 
 const Application = (props) => {
 
@@ -30,7 +31,9 @@ const Application = (props) => {
           </Box>
           <Switch>
             <Route exact path="/">
+              <CreateData />
               <Overview />
+
             </Route>
           </Switch>
         </Frame>
