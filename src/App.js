@@ -2,20 +2,14 @@ import React, { Suspense } from 'react';
 import { ApolloProvider } from '@apollo/react-hooks';
 import client from './apollo';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { Frame, Loading, Page, Groups, Tabs, Select, Image, TextContainer } from '@dentsu-ui/components';
-import "@dentsu-ui/components/styles.css";
-
-import { Overview } from './modules';
-import { SideNavigation } from './components/SideNavigation';
+import { Frame, Loading, Page, Tabs, Select, Image, TextContainer } from '@dentsu-ui/components';
 import "./app.css"
 import Layout from '@dentsu-ui/components/dist/cjs/components/Layout';
-import Wizard from '@dentsu-ui/components/dist/cjs/components/Wizard';
-import Takeover from '@dentsu-ui/components/dist/cjs/components/Takeover';
 import Box from '@dentsu-ui/components/dist/cjs/components/Box';
-import Card from '@dentsu-ui/components/dist/cjs/components/Card';
 import Stack from '@dentsu-ui/components/dist/cjs/components/Stack';
 import Caption from '@dentsu-ui/components/dist/cjs/components/Caption';
 import Heading from '@dentsu-ui/components/dist/cjs/components/Heading';
+import Overview from './modules/Overview/Overview';
 
 const Application = (props) => {
 
@@ -36,35 +30,7 @@ const Application = (props) => {
           </Box>
           <Switch>
             <Route exact path="/">
-              <Layout>
-                <Page>
-
-                  <Layout>
-                    <Layout.Section>
-                      <Layout.Panel>
-                        <Loading />
-                      </Layout.Panel>
-                    </Layout.Section>
-                  </Layout>
-                  <Layout>
-                    <Layout.Section>
-                      <Box size="5/6">
-                        <Tabs>
-                          <Tabs.List>
-                            <Tabs.Tab label="Active" count={0} />
-                            <Tabs.Tab label="Archived" count={"0"} />
-                          </Tabs.List>
-                        </Tabs>
-
-                        <Layout.Panel>
-                          <h1>No xZXXXXXXxxxxxxaxsaxsaxsaxaxaaxaxrecoedxcascsac</h1>
-                        </Layout.Panel>
-
-                      </Box>
-                    </Layout.Section>
-                  </Layout>
-                </Page>
-              </Layout>
+              <Overview />
             </Route>
           </Switch>
         </Frame>

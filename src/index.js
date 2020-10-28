@@ -3,23 +3,11 @@ import ReactDOM from 'react-dom';
 
 // import Shell from '@dentsu/platform-shell';
 import 'react-app-polyfill/ie11';
-// import '@dentsu/components/styles.css';
+import "@dentsu-ui/components/styles.css";
 
-import App from './app';
-
-
-// ReactDOM.render(
-//   <Shell
-//     isEmbeddedApp={false}
-//     cmsConfig={{ collectionName: {} }}
-//     serviceconfig={''}
-//   >
-//     <App />
-//   </Shell>,
-//   document.getElementById('root'),
-// );
+import Shell from './Shell';
 
 ReactDOM.render(
-  <App />,
+  <Shell />,
   document.getElementById('root'),
 );

@@ -3,7 +3,7 @@ import { WebSocketLink } from 'apollo-link-ws';
 import { split } from 'apollo-link';
 import { getMainDefinition } from 'apollo-utilities';
 import { setContext } from 'apollo-link-context';
-import config from '../config';
+import config from '../config/config';
 
 const uri = config.uri;
 const subsUri = config.sUri;

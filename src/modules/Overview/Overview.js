@@ -1,37 +1,41 @@
 import React from 'react';
-import { withRouter } from 'react-router-dom';
+
+import { Loading, Page, Tabs, Box, Layout } from '@dentsu-ui/components';
 
 
-import {
-  Page,
-  Layout,
-} from '@dentsu-ui/components';
-
-
-function Overview({ history, ...rest }) {
+const Overview = () => {
 
   return (
-    <Page
-      title="Client App"
-      description="Please ignore copy"
-      primaryAction={{
-        content: 'Create client',
-        disabled: false,
-        onClick: () => console.log('clicked'),
-      }}>
-      <Layout>
-        <Layout.Section>
-          <Layout.Panel>
-            <div>Welcome</div>
-          </Layout.Panel>
-        </Layout.Section>
-      </Layout>
-    </Page>
+    <Layout>
+      <Page>
+
+        <Layout>
+          <Layout.Section>
+            <Layout.Panel>
+              <Loading />
+            </Layout.Panel>
+          </Layout.Section>
+        </Layout>
+        <Layout>
+          <Layout.Section>
+            <Box size="5/6">
+              <Tabs>
+                <Tabs.List>
+                  <Tabs.Tab label="Active" count={0} />
+                  <Tabs.Tab label="Archived" count={"0"} />
+                </Tabs.List>
+              </Tabs>
+
+              <Layout.Panel>
+                <h1>No xZXXXXXXxxxxxxaxsaxsaxsaxaxaaxaxrecoedxcascsac</h1>
+              </Layout.Panel>
+
+            </Box>
+          </Layout.Section>
+        </Layout>
+      </Page>
+    </Layout>
   );
 }
 
-// function Overview({ history, ...rest }) {
-//   return (<div>Welcome</div>)
-// }
-
-export default withRouter(Overview);
+export default Overview;
