@@ -5,7 +5,7 @@ import { getMainDefinition } from 'apollo-utilities';
 import { setContext } from 'apollo-link-context';
 import config from '../config/config';
 
-const uri = config.uri;
+const { uri } = config;
 const subsUri = config.sUri;
 
 const httpLink = new HttpLink({ uri });
@@ -37,9 +37,7 @@ wsLink.subscriptionClient.on('disconnected', () => {
   console.log('disconnected');
 });
 
-wsLink.subscriptionClient.maxConnectTimeGenerator.duration = () => {
-  return wsLink.subscriptionClient.maxConnectTimeGenerator.max;
-};
+wsLink.subscriptionClient.maxConnectTimeGenerator.duration = () => wsLink.subscriptionClient.maxConnectTimeGenerator.max;
 
 const authLink = setContext((_, { headers }) => {
   const token = localStorage.getItem('token');

@@ -4,5 +4,6 @@
   "parser": "flow",
   "semi": true,
   "singleQuote": true,
-  "trailingComma": "all"
+  "trailingComma": "all",
+  "embeddedLanguageFormatting": "auto"
 }

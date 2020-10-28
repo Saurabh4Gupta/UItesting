@@ -4,15 +4,14 @@ import Overview from '../Overview/Overview';
 import PageController from '../PageController/PageController';
 import DataList from './DataList';
 
-
-const DataField = (props) => {
-  return <>
+const DataField = (props) => (
+  <>
     <PageController />
     <Overview />
     <CreateData />
     <DataList />
 
   </>
-}
+)
 
 export default DataField;

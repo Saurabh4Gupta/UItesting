@@ -9,6 +9,6 @@ const config = {
   },
   cmsURL: envVars.REACT_APP_CMS_URL,
   isBypassSecurity: envVars.REACT_APP_IS_BYPASS_SECURITY,
-  appOrigin: envVars.REACT_APP_APPORIGIN
+  appOrigin: envVars.REACT_APP_APPORIGIN,
 };
 export default config;

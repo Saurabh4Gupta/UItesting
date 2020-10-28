@@ -1,10 +1,10 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
-import DataField from './modules/ProductivityDataList/DataField';
 import { Frame } from '@dentsu-ui/components';
+import DataField from './modules/ProductivityDataList/DataField';
 
-const Routes = (props) => {
-  return <Router {...props}>
+const Routes = (props) => (
+  <Router {...props}>
     <Frame>
       <Switch>
         <Route exact path="/datafield">
@@ -17,5 +17,5 @@ const Routes = (props) => {
       </Switch>
     </Frame>
   </Router>
-}
+)
 export default Routes;

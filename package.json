@@ -37,6 +37,7 @@
     "flow-bin": "0.97.0",
     "husky": "^4.3.0",
     "mochawesome": "^6.1.1",
+    "prettier": "^2.1.2",
     "randomstring": "^1.1.5",
     "react-scripts": "^3.4.1"
   },
@@ -50,7 +51,7 @@
     "test:c": "jest --coverage",
     "test:watch": "npm run test:c -- --watch",
     "lint-new": "eslint ./src/** --ext .js --ext .jsx",
-    "lint": "eslint ./src/** --ext .js --ext .jsx",
+    "lint": "eslint src --ext .jsx --ext .js",
     "lint-fix": "eslint ./src/** --ext .js --ext .jsx --fix"
   },
   "eslintConfig": {

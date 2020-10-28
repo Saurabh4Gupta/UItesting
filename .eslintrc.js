@@ -12,6 +12,9 @@ module.exports = {
       "experimentalObjectRestSpread": true
     }
   },
+  "extends": [
+    "airbnb"
+  ],
   "rules": {
     "indent": [0, "tab"],
     "no-tabs": 0,
@@ -27,7 +30,9 @@ module.exports = {
     "import/no-named-as-default": 0,
     "import/extensions": 0,
     "import/no-unresolved": 0,
+    "react/jsx-props-no-spreading": "off",
     "func-names": ["error", "as-needed"],
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "max-len": [
       "error",
       {
