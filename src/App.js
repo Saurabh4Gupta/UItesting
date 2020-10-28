@@ -1,7 +1,7 @@
-import React, { Suspense } from 'react';
+import React from 'react';
 import { ApolloProvider } from '@apollo/react-hooks';
 import client from './apollo';
-import "./app.css"
+import "./app.css";
 import Routes from './Routes';
 
 const Application = (props) => {
@@ -12,7 +12,6 @@ const Application = (props) => {
 
   );
 };
-
 export default Application;
 
 
