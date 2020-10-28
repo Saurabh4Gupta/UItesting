@@ -1,1 +1,0 @@
-export { constructData } from './data';

@@ -1,6 +1,7 @@
 import React from 'react';
 const [modalOpen, setModalOpen] = useState(false);
 const DeleteData = () => {
+
   const handleDelete = () => {
     console.log('Hello deleted');
     setModalOpen(false);

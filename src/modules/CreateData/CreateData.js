@@ -8,11 +8,12 @@ import Subheading from '@dentsu-ui/components/dist/cjs/components/Subheading';
 import Caption from '@dentsu-ui/components/dist/cjs/components/Caption';
 import Modal from '@dentsu-ui/components/dist/cjs/components/Modal';
 
+
 const CreateData = () => {
   const [formData, setFormData] = useState({});
   const [modalOpen, setModalOpen] = useState(false);
 
-  const onSubmit = () => {
+  const handleSubmit = () => {
     console.log('Hello Data is ');
     setModalOpen(false)
   }
@@ -30,7 +31,7 @@ const CreateData = () => {
         <Button variant="secondary" onClick={() => setModalOpen(false)}>
           cancel
     </Button>
-        <Button onClick={onSubmit}>
+        <Button onClick={handleSubmit}>
           Send
     </Button>
       </Modal.Footer>
