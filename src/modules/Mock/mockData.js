@@ -36,4 +36,4 @@ const data = {
   ],
 }
 
-const getData = () => data;
+export default data;

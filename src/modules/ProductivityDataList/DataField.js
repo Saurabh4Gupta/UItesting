@@ -4,7 +4,7 @@ import Overview from '../Overview/Overview';
 import PageController from '../PageController/PageController';
 import DataList from './DataList';
 
-const DataField = (props) => (
+const DataField = () => (
   <>
     <PageController />
     <Overview />

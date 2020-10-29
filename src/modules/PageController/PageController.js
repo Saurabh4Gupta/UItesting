@@ -1,20 +1,20 @@
 import React from 'react';
 import { Page, Select, Image, TextContainer, Box, Stack, Caption, Heading } from '@dentsu-ui/components';
 
-const PageController = (props) => (
+const PageController = () => (
   <Box bg="rgba(220,220,220,0.4)" className="main">
     <Page
       metadata={<Title />}
       breadcrumbs={[{
-      content: 'Back to Clients',
-      url: '/',
-    }]}
+        content: 'Back to Clients',
+        url: '/',
+      }]}
       primaryAction={{
-      content: 'Upload new file',
-      icon: 'upload',
-      onClick: () => console.log('Create button clicked'),
-      isDisabled: false,
-    }}
+        content: 'Upload new file',
+        icon: 'upload',
+        onClick: () => console.log('Create button clicked'),
+        isDisabled: false,
+      }}
     />
   </Box>
 )

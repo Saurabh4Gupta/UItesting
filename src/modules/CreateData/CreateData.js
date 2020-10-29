@@ -9,7 +9,7 @@ import Modal from '@dentsu-ui/components/dist/cjs/components/Modal';
 import Form from './Forms';
 
 const CreateData = () => {
-  const [formData, setFormData] = useState({});
+  // const [formData, setFormData] = useState({});
   const [modalOpen, setModalOpen] = useState(false);
 
   const handleSubmit = () => {
