@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "@apollo/react-hooks": "^3.1.5",
-    "@dentsu-ui/components": "0.34.3",
+    "@dentsu-ui/components": "0.35.4",
     "@okta/okta-react": "3.0.1",
     "apollo-boost": "^0.4.8",
     "apollo-cache-inmemory": "1.6.6",

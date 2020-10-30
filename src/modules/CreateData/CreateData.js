@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import Form from './Forms';
 import Stack from '@dentsu-ui/components/dist/cjs/components/Stack';
 import Box from '@dentsu-ui/components/dist/cjs/components/Box';
 import Button from '@dentsu-ui/components/dist/cjs/components/Button';
@@ -7,34 +6,27 @@ import TextContainer from '@dentsu-ui/components/dist/cjs/components/TextContain
 import Subheading from '@dentsu-ui/components/dist/cjs/components/Subheading';
 import Caption from '@dentsu-ui/components/dist/cjs/components/Caption';
 import Modal from '@dentsu-ui/components/dist/cjs/components/Modal';
+import FormModal from './Form'
 
 const CreateData = () => {
   const [formData, setFormData] = useState({});
   const [modalOpen, setModalOpen] = useState(false);
+  
 
-  const onSubmit = () => {
-    console.log('Hello Data is ');
-    setModalOpen(false)
-  }
+ 
   const handleCreateData = () => {
+    console.log('HERE')
     setModalOpen(true);
   }
 
+  const closeModalHandler = () => {
+    setModalOpen(false)
+  }
+
+  console.log('[RENDERING CREATE DATA]')
+
   return <>
-    <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)} >
-      <Modal.Header hasCloseButton={true} title="create new data requests" />
-      <Modal.Body>
-        <Form />
-      </Modal.Body>
-      <Modal.Footer>
-        <Button variant="secondary" onClick={() => setModalOpen(false)}>
-          cancel
-    </Button>
-        <Button onClick={onSubmit}>
-          Send
-    </Button>
-      </Modal.Footer>
-    </Modal>
+  {modalOpen && <FormModal closeModal={closeModalHandler}/>}
     <Box m="10px">
       <Stack flexDirection="row" justifyContent="space-between">
         <Stack>
