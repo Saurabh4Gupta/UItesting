@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Modal, Button } from '@dentsu-ui/components/dist/cjs/components/Modal';
 
 const [modalOpen, setModalOpen] = useState(false);
