@@ -34,13 +34,13 @@ const CreateData = () => {
           <Button onClick={handleSubmit}>Send</Button>
         </Modal.Footer>
       </Modal>
-      <Box m="10px">
+      <Box m="30px">
         <Stack flexDirection="row" justifyContent="space-between">
           <Stack>
             <TextContainer>
               <Subheading>Productivity data requests</Subheading>
-              <Caption>
-                View the active and previous data request that are available
+              <Caption isItalic isSecondary>
+                The ongoing and complete productivity data requests created for this client
               </Caption>
             </TextContainer>
           </Stack>

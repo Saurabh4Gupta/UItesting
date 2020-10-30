@@ -10,8 +10,7 @@ const DataField = (props) => (
     <Overview />
     <CreateData />
     <DataList />
-
   </>
-)
+);
 
 export default DataField;
