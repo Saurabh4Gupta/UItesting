@@ -15,7 +15,7 @@ const data = {
       createdAt: '2020-08-14',
       assignTo: 'UK Team',
       isActive: true,
-      isDeleted: false
+      isDeleted: false,
     },
     {
       id: 2,
@@ -32,10 +32,8 @@ const data = {
       isDeleted: false,
       createdAt: '2020-08-14',
       assignTo: 'UK Team',
-    }
-  ]
+    },
+  ],
 }
 
-const getData = () => {
-  return data;
-};
+export default data;
