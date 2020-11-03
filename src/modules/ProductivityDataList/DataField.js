@@ -1,16 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Box } from '@dentsu-ui/components';
 import CreateData from '../CreateData/CreateData';
 import Overview from '../Overview/Overview';
 import PageController from '../PageController/PageController';
 import DataList from './DataList';
+import { dataFieldCms as PageContent } from '../../cms'
 
-const DataField = () => (
-  <>
-    <PageController />
-    <Overview />
-    <CreateData />
-    <DataList />
-  </>
-);
-
-export default DataField;
+const DataField = () => {
+  const [market] = useState('')
+  return (
+    <>
+      <PageController />
+      <Box m="30px">
+        <Overview />
+        <CreateData cmsData={PageContent} market={market} />
+        <DataList />
+      </Box>
+    </>
+  )
+}
+export default (DataField);

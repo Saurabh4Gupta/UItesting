@@ -27,6 +27,7 @@ module.exports = {
     "no-param-reassign": 0,
     "react/forbid-prop-types": 0,
     "import/prefer-default-export": "off",
+    "no-nested-ternary": "off",
     "import/no-named-as-default": 0,
     "import/extensions": 0,
     "import/no-unresolved": 0,

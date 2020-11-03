@@ -1,56 +1,72 @@
-import React, { useState } from 'react';
-import Stack from '@dentsu-ui/components/dist/cjs/components/Stack';
-import Box from '@dentsu-ui/components/dist/cjs/components/Box';
-import Button from '@dentsu-ui/components/dist/cjs/components/Button';
-import TextContainer from '@dentsu-ui/components/dist/cjs/components/TextContainer';
-import Subheading from '@dentsu-ui/components/dist/cjs/components/Subheading';
-import Caption from '@dentsu-ui/components/dist/cjs/components/Caption';
-import Modal from '@dentsu-ui/components/dist/cjs/components/Modal';
-import Form from './Forms';
+import React, { useState } from 'react'
+import { Caption, Subheading, TextContainer, Button, Stack } from '@dentsu-ui/components';
+import PropTypes from 'prop-types';
+import FormModal from './Form'
+import useCustomForm from '../../hooks/useCustomForm';
+import validationRule from '../../utils/validate';
 
-const CreateData = () => {
-  // const [formData, setFormData] = useState({});
-  const [modalOpen, setModalOpen] = useState(false);
-
-  const handleSubmit = () => {
-    console.log('Hello Data is ');
-    setModalOpen(false);
+const CreateData = (props) => {
+  const { cmsData, market } = props;
+  const initialValues = {
+    localMarket: market,
+    name: '',
+    briefing: '',
+    actualData: '',
+    forecastData: '',
+    dueDate: '',
+    assignTo: '',
   };
+  const [isModalOpen, setModalOpen] = useState(false);
+
+  const onSubmit = () => {
+
+  }
+  const { handleChange, values,
+    handleSelectField, handleSubmit,
+    errors, handleCancel } = useCustomForm({ initialValues, onSubmit, validate: validationRule });
   const handleCreateData = () => {
     setModalOpen(true);
   };
 
+  const closeModalHandler = () => {
+    setModalOpen(false)
+    handleCancel();
+  }
   return (
     <>
-      <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)}>
-        <Modal.Header hasCloseButton title="create new data requests" />
-        <Modal.Body>
-          <Form />
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={() => setModalOpen(false)}>
-            cancel
-          </Button>
-          <Button onClick={handleSubmit}>Send</Button>
-        </Modal.Footer>
-      </Modal>
-      <Box m="30px">
-        <Stack flexDirection="row" justifyContent="space-between">
-          <Stack>
-            <TextContainer>
-              <Subheading>Productivity data requests</Subheading>
-              <Caption isItalic isSecondary>
-                The ongoing and complete productivity data requests created for this client
-              </Caption>
-            </TextContainer>
-          </Stack>
-          <Button variant="secondary" iconLeft="add" onClick={handleCreateData}>
-            Create new data request
-          </Button>
+      <FormModal
+        values={values}
+        handleChange={handleChange}
+        onSubmit={handleSubmit}
+        handleSelectField={handleSelectField}
+        errors={errors}
+        isModalOpen={isModalOpen}
+        closeModal={closeModalHandler}
+        cmsData={cmsData}
+      />
+      <Stack flexDirection="row" justifyContent="space-between">
+        <Stack>
+          <TextContainer>
+            <Subheading>{cmsData.productivityDatarequestHeading}</Subheading>
+            <Caption>
+              {cmsData.productivityDatarequestCaption}
+            </Caption>
+          </TextContainer>
         </Stack>
-      </Box>
+        <Button variant="secondary" iconLeft="add" onClick={handleCreateData}>
+          {cmsData.createNewDataRequest}
+        </Button>
+      </Stack>
     </>
-  );
+  )
 };
+CreateData.propTypes = {
+  cmsData: PropTypes.object,
+  market: PropTypes.string,
+}
+CreateData.defaultProps = {
+  cmsData: {},
+  market: 'UK',
+}
 
 export default CreateData;
