@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Caption, Subheading, TextContainer, Button, Stack } from '@dentsu-ui/components';
 import PropTypes from 'prop-types';
 import FormModal from './Form'
@@ -17,13 +17,27 @@ const CreateData = (props) => {
     assignTo: '',
   };
   const [isModalOpen, setModalOpen] = useState(false);
+  const [isReadyToSubmit, setIsReadyToSubmit] = useState(false);
 
   const onSubmit = () => {
-
+    if (isReadyToSubmit) {
+      setModalOpen(false)
+    }
   }
+
   const { handleChange, values,
     handleSelectField, handleSubmit,
     errors, handleCancel } = useCustomForm({ initialValues, onSubmit, validate: validationRule });
+
+  useEffect(() => {
+    const isAnyValidationError = errors && !!(errors.localMarket || errors.name
+      || errors.briefing || errors.dueDate || errors.assignTo || errors.forecastData
+      || errors.forecastData);
+    const isAllValuesFilled = values.localMarket && values.name && values.assignTo
+      && values.dueDate && values.forecastData && values.actualData && values.briefing;
+    setIsReadyToSubmit(isAllValuesFilled && !isAnyValidationError);
+  }, [errors, values]);
+
   const handleCreateData = () => {
     setModalOpen(true);
   };
