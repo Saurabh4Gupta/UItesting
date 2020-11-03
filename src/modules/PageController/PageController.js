@@ -13,30 +13,24 @@ import {
 const PageController = () => (
   <Box bg="rgba(220,220,220,0.4)" className="main">
     <Page
-      metadata={<Title />}
+      title={<Title />}
       breadcrumbs={[{
         content: 'Back to Clients',
         url: '/',
       }]}
-      primaryAction={{
-        content: 'Upload new file',
-        icon: 'upload',
-        onClick: () => console.log('Create button clicked'),
-        isDisabled: false,
-      }}
     />
   </Box>
 );
 
 const HeaderContent = () => (
   <Stack flex="row" mt="30px">
-    <Box width={200} mr="10px">
-      <Select placeholder="Currency GBP(Default)" width={100} />
-    </Box>
-    <Box width={130} mr="10px">
-      <Select placeholder="All Markets" />
+    <Box width={240} mr="10px">
+      <Select placeholder="Currency GBP (Default)" width={100} />
     </Box>
     <Box width={150} mr="10px">
+      <Select placeholder="All Markets" />
+    </Box>
+    <Box width={160} mr="10px">
       <Select placeholder="Year to Date" style={{ backgound: 'none' }} />
     </Box>
   </Stack>
@@ -54,15 +48,12 @@ const Title = () => (
     <Stack flexDirection="column" ml="20px">
       <div>
         <TextContainer>
-          <Caption>Client Overview</Caption>
+          <Caption isSecondary>CLIENT OVERVIEW</Caption>
         </TextContainer>
       </div>
       <div>
         <TextContainer>
-          <h1>
-            {' '}
-            <Heading>Microsoft Corporation </Heading>
-          </h1>
+          <Heading>Microsoft Corporation</Heading>
         </TextContainer>
       </div>
       <HeaderContent />
