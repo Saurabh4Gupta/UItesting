@@ -13,8 +13,19 @@ const useCustomForm = ({
     setValues({ ...values, [name]: value });
   };
 
-  const handleSelectField = (value, fieldName) => {
-    setValues({ ...values, [fieldName]: value });
+  const handleSelectField = (value, event) => {
+    const { name } = event;
+    if (name === 'actualData') {
+      const forecast = 12 - value.value;
+      const data = { value: forecast, label: forecast.toString() }
+      setValues(values.forecastData = data)
+    }
+    if (name === 'forecastData') {
+      const actual = 12 - value.value;
+      const data = { value: actual, label: actual.toString() }
+      setValues(values.actualData = data)
+    }
+    setValues({ ...values, [name]: value });
   }
   const handleValidation = async (field, value) => {
     const validationError = await validate(field, value);
@@ -23,7 +34,10 @@ const useCustomForm = ({
       [field]: validationError,
     }));
   };
-
+  const handleCancel = () => {
+    setErrors({});
+    setValues(initialValues);
+  }
   const handleSubmit = async (event) => {
     if (event) event.preventDefault();
     await Object.keys(values).forEach(key => {
@@ -38,6 +52,7 @@ const useCustomForm = ({
     handleChange,
     handleSelectField,
     handleSubmit,
+    handleCancel,
   };
 };
 

@@ -25,6 +25,14 @@ function validationRule(field, value) {
       return !value
         ? 'This field cannot be blank'
         : '';
+    case 'actualData':
+      return !value
+        ? 'This field cannot be blank'
+        : '';
+    case 'forecastData':
+      return !value
+        ? 'This field cannot be blank'
+        : '';
     default:
       break;
   }

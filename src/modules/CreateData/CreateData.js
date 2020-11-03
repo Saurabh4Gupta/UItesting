@@ -1,62 +1,72 @@
 import React, { useState } from 'react'
 import { Caption, Subheading, TextContainer, Button, Stack } from '@dentsu-ui/components';
+import PropTypes from 'prop-types';
 import FormModal from './Form'
 import useCustomForm from '../../hooks/useCustomForm';
 import validationRule from '../../utils/validate';
 
-const CreateData = () => {
+const CreateData = (props) => {
+  const { cmsData, market } = props;
   const initialValues = {
-    localMarket: '',
+    localMarket: market,
     name: '',
     briefing: '',
-    startDate: null,
-    endDate: null,
+    actualData: '',
+    forecastData: '',
     dueDate: '',
     assignTo: '',
   };
-  const [modalOpen, setModalOpen] = useState(false);
+  const [isModalOpen, setModalOpen] = useState(false);
 
   const onSubmit = () => {
 
   }
-  const { handleChange, values, handleSelectField, handleSubmit, errors } = useCustomForm({ initialValues, onSubmit, validate: validationRule });
+  const { handleChange, values,
+    handleSelectField, handleSubmit,
+    errors, handleCancel } = useCustomForm({ initialValues, onSubmit, validate: validationRule });
   const handleCreateData = () => {
-    console.log('HERE')
     setModalOpen(true);
   };
 
   const closeModalHandler = () => {
     setModalOpen(false)
+    handleCancel();
   }
-
   return (
     <>
-      {modalOpen && (
       <FormModal
         values={values}
         handleChange={handleChange}
         onSubmit={handleSubmit}
         handleSelectField={handleSelectField}
         errors={errors}
+        isModalOpen={isModalOpen}
         closeModal={closeModalHandler}
+        cmsData={cmsData}
       />
-)}
-
       <Stack flexDirection="row" justifyContent="space-between">
         <Stack>
           <TextContainer>
-            <Subheading>Productivity data requests</Subheading>
+            <Subheading>{cmsData.productivityDatarequestHeading}</Subheading>
             <Caption>
-              View the active and previous data request that are available
+              {cmsData.productivityDatarequestCaption}
             </Caption>
           </TextContainer>
         </Stack>
         <Button variant="secondary" iconLeft="add" onClick={handleCreateData}>
-          Create new data request
+          {cmsData.createNewDataRequest}
         </Button>
       </Stack>
     </>
-)
+  )
 };
+CreateData.propTypes = {
+  cmsData: PropTypes.object,
+  market: PropTypes.string,
+}
+CreateData.defaultProps = {
+  cmsData: {},
+  market: 'UK',
+}
 
 export default CreateData;
