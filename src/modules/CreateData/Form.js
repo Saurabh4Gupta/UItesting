@@ -149,7 +149,7 @@ const Form = (props) => {
             dateFormat="DD/MM/YYYY"
             parseDate={(date) => new Date(date)}
             formatDate={(date) => date.toLocaleDateString()}
-            onChange={(date, event) => handleSelectField(date, event)}
+            onChange={(date) => handleSelectField(date, { name: 'dueDate' })}
           />
         </FormField>
 
@@ -167,6 +167,7 @@ const Form = (props) => {
             value={values.assignTo}
           />
         </FormField>
+
       </Modal.Body>
       <Modal.Footer>
         <Button variant="secondary" onClick={closeModal}>
