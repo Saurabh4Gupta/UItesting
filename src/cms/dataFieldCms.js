@@ -1,5 +1,5 @@
 export const dataFieldCms = {
-  createNewDataRequest: 'Create new data requests',
+  createNewDataRequest: 'Create new data request',
   localMarketLabel: 'Local Market',
   localMarketHint: 'Choose the market you want to create a data request',
   nameLabel: 'Name',
@@ -20,7 +20,7 @@ export const dataFieldCms = {
   create: 'Create',
   cancel: 'Cancel',
   productivityDatarequestHeading: 'Productivity data requests',
-  productivityDatarequestCaption: ' View the active and previous data request that are available',
+  productivityDatarequestCaption: ' The ongoing and complete productivity data requests created for this client',
   selectPlaceHolder: 'Please Select',
   datePlaceHolder: 'Date',
 }

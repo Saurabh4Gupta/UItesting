@@ -48,7 +48,7 @@ const CreateData = (props) => {
         <Stack>
           <TextContainer>
             <Subheading>{cmsData.productivityDatarequestHeading}</Subheading>
-            <Caption>
+            <Caption isAssistive>
               {cmsData.productivityDatarequestCaption}
             </Caption>
           </TextContainer>

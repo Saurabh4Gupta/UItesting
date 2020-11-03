@@ -4,7 +4,7 @@ import Box from '@dentsu-ui/components/dist/cjs/components/Box';
 import EmptyTable from './EmptyTable';
 
 const DataList = () => (
-  <Box m="30px">
+  <Box mt="30px">
     <Tabs>
       <Tabs.List>
         <Tabs.Tab label="Ongoing" count="0" />
