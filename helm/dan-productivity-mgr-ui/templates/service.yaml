@@ -1,10 +1,10 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ template "dentsu-platform-client.fullname" . }}
+  name: {{ template "dan-productivity-mgr-ui.fullname" . }}
   labels:
-    app: {{ template "dentsu-platform-client.name" . }}
-    chart: {{ template "dentsu-platform-client.chart" . }}
+    app: {{ template "dan-productivity-mgr-ui.name" . }}
+    chart: {{ template "dan-productivity-mgr-ui.chart" . }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
 spec:
@@ -15,5 +15,5 @@ spec:
       protocol: TCP
       name: http
   selector:
-    app: {{ template "dentsu-platform-client.name" . }}
+    app: {{ template "dan-productivity-mgr-ui.name" . }}
     release: {{ .Release.Name }}
