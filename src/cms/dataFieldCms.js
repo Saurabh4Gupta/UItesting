@@ -23,4 +23,8 @@ export const dataFieldCms = {
   productivityDatarequestCaption: ' The ongoing and complete productivity data requests created for this client',
   selectPlaceHolder: 'Please Select',
   datePlaceHolder: 'Date',
+  completeLabel: 'Complete',
+  ongoingLabel: 'Ongoing',
+  emptyProductivityDatarequestCaption: 'No productivity data requests have been moved to this section yet.',
+  emptyLabel: 'Create new data request',
 }

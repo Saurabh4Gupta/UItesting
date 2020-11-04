@@ -13,7 +13,7 @@ import {
 const PageController = () => (
   <Box bg="rgba(220,220,220,0.4)" className="main">
     <Page
-      title={<Title />}
+      metadata={<Title />}
       breadcrumbs={[{
         content: 'Back to Clients',
         url: '/',

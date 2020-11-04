@@ -4,16 +4,16 @@ import {
   Paragraph,
   EmptyState,
 } from '@dentsu-ui/components';
+import { dataFieldCms as PageContent } from '../../cms'
 
 const EmptyTable = () => (
-
   <EmptyState
     layout="horizontal"
     size="small"
     image="create"
     actions={{
           secondary: {
-            label: 'Create new data request',
+            label: PageContent.emptyLabel,
             url: 'http://www.google.com',
             onClick: () => alert('Secondary action callback fired!'),
             isDisabled: false,
@@ -25,7 +25,7 @@ const EmptyTable = () => (
         }}
   >
     <Paragraph>
-      No productivity data requests have been moved to this section yet.
+      { PageContent.emptyProductivityDatarequestCaption }
     </Paragraph>
   </EmptyState>
   );
