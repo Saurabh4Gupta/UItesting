@@ -1,10 +1,10 @@
-apiVersion: apps/v1beta2
+apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ template "dentsu-platform-client.fullname" . }}
+  name: {{ template "dan-productivity-mgr-ui.fullname" . }}
   labels:
-    app: {{ template "dentsu-platform-client.name" . }}
-    chart: {{ template "dentsu-platform-client.chart" . }}
+    app: {{ template "dan-productivity-mgr-ui.name" . }}
+    chart: {{ template "dan-productivity-mgr-ui.chart" . }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
   annotations: # Annotation for the pod
@@ -15,7 +15,7 @@ spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: {{ template "dentsu-platform-client.name" . }}
+      app: {{ template "dan-productivity-mgr-ui.name" . }}
       release: {{ .Release.Name }}
   template:
     metadata:
@@ -24,7 +24,7 @@ spec:
         {{ $key }}: {{ $val | quote }}
         {{- end}}
       labels:
-        app: {{ template "dentsu-platform-client.name" . }}
+        app: {{ template "dan-productivity-mgr-ui.name" . }}
         release: {{ .Release.Name }}
     spec:
       containers:
@@ -34,36 +34,24 @@ spec:
           env:
             - name: NODE_ENV
               value: "{{ .Values.node_env }}"
-            - name: APOLLO_GRAPHQL_URI
-              value: "{{ .Values.apollo_graphql_uri }}"
+            - name: IS_BYPASS_SECURITY
+              value: "{{ .Values.is_bypass_security }}"
             - name: PORT
               value: "{{ .Values.port }}"
-            - name: CORS_ORIGIN
-              value: "{{ .Values.cors_origin }}"
-            - name: APOLLO_SUBSCRIPTION_URI
-              value: "{{ .Values.apollo_subscription_uri}}"
             - name: OKTA_ISSUER
               value: "{{ .Values.okta_issuer }}"
-            - name: OKTA_REDIRECT
-              value: "{{ .Values.okta_redirect }}"
             - name: CLIENT_ID
               value: "{{ .Values.client_id }}"
-            - name: TERM_OF_SERVICE_ID
-              value: "{{ .Values.tos_id }}"
-            - name: CLIENTID
-              value: "{{ .Values.clientid }}"
-            - name: CLIENT_NAME
-              value: "{{ .Values.react_app_client_name }}"
-            - name: CMS_URL
-              value: "{{ .Values.cms_url }}"
-            - name: CMS_APOLLO_GRAPHQL_URI
-              value: "{{ .Values.cms_apollo_graphql_uri }}"
-            - name: CMS_APOLLO_SUBSCRIPTION_URI
-              value: "{{ .Values.cms_apollo_subscription_uri }}"
+            - name: SKIP_PREFLIGHT_TRUE
+              value: "{{ .Values.skip_preflight_true }}"
+            - name: APPOLO_GRAPHQL_URI
+              value: "{{ .Values.apollo_graphql_uri }}"
+            - name: APPOLO_SUBSCRIPTION_URI
+              value: "{{ .Values.apollo_subscription_uri }}"
           ports:
             - name: http
               containerPort: {{ .Values.port }}
-              protocol: TCP
+              protocol: TCP  
           livenessProbe:
             httpGet:
               path: /_healthz

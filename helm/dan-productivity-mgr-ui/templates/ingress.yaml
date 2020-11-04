@@ -1,13 +1,13 @@
 {{- if .Values.ingress.enabled -}}
-{{- $fullName := include "dentsu-platform-client.fullname" . -}}
+{{- $fullName := include "dan-productivity-mgr-ui.fullname" . -}}
 {{- $ingressPath := .Values.ingress.path -}}
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
   name: {{ $fullName }}
   labels:
-    app: {{ template "dentsu-platform-client.name" . }}
-    chart: {{ template "dentsu-platform-client.chart" . }}
+    app: {{ template "dan-productivity-mgr-ui.name" . }}
+    chart: {{ template "dan-productivity-mgr-ui.chart" . }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
 {{- with .Values.ingress.annotations }}
