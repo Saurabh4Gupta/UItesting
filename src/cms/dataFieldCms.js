@@ -23,4 +23,11 @@ export const dataFieldCms = {
   productivityDatarequestCaption: ' View the active and previous data request that are available',
   selectPlaceHolder: 'Please Select',
   datePlaceHolder: 'Date',
+  viewDetails:'View Details',
+  actualMonth:'month actuals',
+  forecastMonth:'month forecast',
+  overdue:'Overdue',
+  ongoing:'Ongoing',
+  complete:'Complete',
+  lastUpdate:'Last Update',
 }
