@@ -7,26 +7,6 @@ const useCustomForm = ({
   const [values, setValues] = useState(initialValues || {});
   const [errors, setErrors] = useState({});
 
-  const handleChange = (event) => {
-    const { target } = event;
-    const { name, value } = target;
-    setValues({ ...values, [name]: value });
-  };
-
-  const handleSelectField = (value, event) => {
-    const { name } = event;
-    if (name === 'actualData') {
-      const forecast = 12 - value.value;
-      const data = { value: forecast, label: forecast.toString() }
-      setValues(values.forecastData = data)
-    }
-    if (name === 'forecastData') {
-      const actual = 12 - value.value;
-      const data = { value: actual, label: actual.toString() }
-      setValues(values.actualData = data)
-    }
-    setValues({ ...values, [name]: value });
-  }
   const handleValidation = async (field, value) => {
     const validationError = await validate(field, value);
     setErrors(prevState => ({
@@ -34,6 +14,31 @@ const useCustomForm = ({
       [field]: validationError,
     }));
   };
+  const handleChange = (event) => {
+    const { target } = event;
+    const { name, value } = target;
+    handleValidation(name, value);
+    setValues({ ...values, [name]: value });
+  };
+
+  const handleSelectField = (value, event) => {
+    const { name } = event;
+    if (name === 'actualData') {
+      const forecast = 12 - value.value;
+      const data = { value: forecast, label: forecast.toString() };
+      handleValidation('forecastData', forecast);
+      setValues(values.forecastData = data)
+    }
+    if (name === 'forecastData') {
+      const actual = 12 - value.value;
+      const data = { value: actual, label: actual.toString() };
+      handleValidation('actualData', actual)
+      setValues(values.actualData = data)
+    }
+    handleValidation(name, value)
+    setValues({ ...values, [name]: value });
+  }
+
   const handleCancel = () => {
     setErrors({});
     setValues(initialValues);
