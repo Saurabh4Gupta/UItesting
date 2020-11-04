@@ -21,8 +21,8 @@ const PageController = () => (
 
 const HeaderContent = () => (
   <Stack flex="row" mt="30px">
-    <Box width={200} mr="10px">
-      <Select placeholder="Currency GBP(Default)" width={100} />
+    <Box mr="10px">
+      <Select placeholder="Currency GBP(Default)" width={200} />
     </Box>
     <Box width={130} mr="10px">
       <Select placeholder="All Markets" />
@@ -46,7 +46,6 @@ const Title = () => (
       <div>
         <TextContainer>
           <h1>
-            {' '}
             <Heading>Microsoft Corporation </Heading>
           </h1>
         </TextContainer>
