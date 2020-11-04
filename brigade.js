@@ -14,7 +14,7 @@ async function getValues(teamEnv, project){
     },
     okta_issuer: project.secrets[`${teamEnv}_okta_issuer`],
     client_id: project.secrets[`${teamEnv}_client_id`],
-    skip_preflight_true: project.secrets[`${teamEnv}_skip_preflight_true`],
+    skip_preflight_check: project.secrets[`${teamEnv}_skip_preflight_check`],
     ingress: {
       class: 'nginx',
       enabled: true,
