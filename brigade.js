@@ -15,6 +15,19 @@ async function getValues(teamEnv, project){
     okta_issuer: project.secrets[`${teamEnv}_okta_issuer`],
     client_id: project.secrets[`${teamEnv}_client_id`],
     skip_preflight_true: project.secrets[`${teamEnv}_skip_preflight_true`],
+    ingress: {
+      class: 'nginx',
+      enabled: true,
+      hosts: [`${teamEnv}-${project.secrets.app_name}.az.${project.secrets[`${teamEnv}-target_name`]}.gdpdentsu.net`],
+      tls: [
+        {
+          secretName: `${teamEnv}-${project.secrets.app_name}.az.${project.secrets[teamEnv + "-target_name"]}.gdpdentsu.net`,
+          hosts: [
+            `${teamEnv}-${project.secrets.app_name}.az.${project.secrets[teamEnv + "-target_name"]}.gdpdentsu.net`,
+          ],
+        },
+      ]
+    },
   };
 
   
