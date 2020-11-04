@@ -24,8 +24,8 @@ const PageController = () => (
 
 const HeaderContent = () => (
   <Stack flex="row" mt="30px">
-    <Box width={240} mr="10px">
-      <Select placeholder="Currency GBP (Default)" width={100} />
+    <Box mr="10px">
+      <Select placeholder="Currency GBP(Default)" width={200} />
     </Box>
     <Box width={150} mr="10px">
       <Select placeholder="All Markets" />
