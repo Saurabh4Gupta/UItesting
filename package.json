@@ -45,6 +45,7 @@
     "start": "react-scripts start",
     "prebuild": "rm -rf build",
     "build:ibrp": "npm run prebuild && babel src -d build --copy-files",
+    "build:prod": "sh nginx-build-script.sh",
     "build": "react-scripts build",
     "postinstall": "npm run build:ibrp",
     "test": "jest --u",
