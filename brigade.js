@@ -82,7 +82,6 @@ async function getValues(teamEnv, project){
       ],
     }, ];
   }
-
   return values;
 }
 
