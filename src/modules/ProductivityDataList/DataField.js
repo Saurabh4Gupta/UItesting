@@ -9,14 +9,16 @@ import { dataFieldCms as PageContent } from '../../cms';
 const DataField = (props) => {
   const [market] = useState('');
   return (
+
     <>
       <PageController {...props} />
       <Box m="30px">
         <Overview />
         <CreateData cmsData={PageContent} market={market} />
-        <DataList  />
+        <DataList cmsData={PageContent}  />
       </Box>
     </>
-  );
-};
-export default DataField;
+  )
+}
+
+export default (DataField);

@@ -10,7 +10,6 @@ import {
   Textarea,
   DateInput,
   Dropzone,
-  BulletedList,
   Stack,
   Box,
 } from '@dentsu-ui/components';
@@ -21,7 +20,7 @@ const Form = (props) => {
   const { MAX_FILE_SIZE, ALLOWED_FILE_TYPES } = constant;
   const { values, handleChange, onSubmit, handleSelectField, errors, closeModal, isModalOpen, cmsData } = props;
 
-  const [files, setFiles] = useState([]);
+  const [setFiles] = useState([]);
 
   const handleInit = () => {
     console.log('Dropzone instance has initialised');
@@ -90,18 +89,6 @@ const Form = (props) => {
             acceptedFileTypes={ALLOWED_FILE_TYPES}
           />
         </FormField>
-        <BulletedList>
-          {files.map((file) => (
-            <BulletedList.Item>
-              {file.file.name}
-              {' '}
-              -
-              {file.file.size}
-              B -
-              {file.file.type}
-            </BulletedList.Item>
-          ))}
-        </BulletedList>
         <Stack flex="row">
           <Box mr="30px">
             <FormField

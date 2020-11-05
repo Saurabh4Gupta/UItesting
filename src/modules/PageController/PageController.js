@@ -16,31 +16,23 @@ const PageController = (props) => (
   <Box bg="rgba(220,220,220,0.4)" className="main">
     <Page
       metadata={<Title {...props} />}
-      breadcrumbs={[
-        {
-          content: 'Back to Clients',
-          url: '/',
-        },
-      ]}
-      primaryAction={{
-        content: 'Upload new file',
-        icon: 'upload',
-        onClick: () => console.log('Create button clicked'),
-        isDisabled: false,
-      }}
+      breadcrumbs={[{
+        content: 'Back to Clients',
+        url: '/',
+      }]}
     />
   </Box>
 );
 
 const HeaderContent = () => (
   <Stack flex="row" mt="30px">
-    <Box width={200} mr="10px">
+    <Box mr="10px">
       <Select placeholder="Currency GBP(Default)" width={200} />
     </Box>
-    <Box width={130} mr="10px">
+    <Box width={150} mr="10px">
       <Select placeholder="All Markets" />
     </Box>
-    <Box width={150} mr="10px">
+    <Box width={160} mr="10px">
       <Select placeholder="Year to Date" style={{ backgound: 'none' }} />
     </Box>
   </Stack>
