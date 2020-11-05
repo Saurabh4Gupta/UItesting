@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 const useCustomForm = ({
   initialValues,
-  onSubmit, validate,
+  validate,
 }) => {
   const [values, setValues] = useState(initialValues || {});
   const [errors, setErrors] = useState({});
@@ -48,7 +48,6 @@ const useCustomForm = ({
     await Object.keys(values).forEach(key => {
       handleValidation(key, values[key])
     })
-    await onSubmit();
   };
 
   return {

@@ -13,7 +13,7 @@ const Routes = (props) => (
         <Route exact path="/viewdetails/:id">
           <h1>This is View Details Page </h1>
         </Route>
-        <Redirect to="/datafield" />
+        <Redirect to="/" />
       </Switch>
     </Frame>
   </Router>
