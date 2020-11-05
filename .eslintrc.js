@@ -50,6 +50,14 @@ module.exports = {
         ]
       }
     ],
+    "jsx-a11y/anchor-is-valid": [
+      "warn",
+      {
+      "aspects": [
+      "invalidHref"
+      ]
+      }
+      ],
     "object-curly-newline": ["error", { "consistent": true }]
   }
 }
