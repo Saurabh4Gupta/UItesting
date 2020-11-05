@@ -4,14 +4,14 @@ import CreateData from '../CreateData/CreateData';
 import Overview from '../Overview/Overview';
 import PageController from '../PageController/PageController';
 import DataList from './DataList';
-import { dataFieldCms as PageContent } from '../../cms'
+import { dataFieldCms as PageContent } from '../../cms';
 
-const DataField = () => {
-  const [market] = useState('')
+const DataField = (props) => {
+  const [market] = useState('');
   return (
 
     <>
-      <PageController />
+      <PageController {...props} />
       <Box m="30px">
         <Overview />
         <CreateData cmsData={PageContent} market={market} />
