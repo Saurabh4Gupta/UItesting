@@ -58,6 +58,7 @@ module.exports = {
       ]
       }
       ],
+    "jsx-a11y/href-no-hash": "off",
     "object-curly-newline": ["error", { "consistent": true }]
   }
 }
