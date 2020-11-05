@@ -1,5 +1,6 @@
 export const dataFieldCms = {
   createNewDataRequest: 'Create new data request',
+  editDataRequest: 'Edit data request',
   localMarketLabel: 'Local Market',
   localMarketHint: 'Choose the market you want to create a data request',
   nameLabel: 'Name',
@@ -30,4 +31,5 @@ export const dataFieldCms = {
   ongoingLabel: 'Ongoing',
   emptyProductivityDatarequestCaption: 'No productivity data requests have been moved to this section yet.',
   emptyLabel: 'Create new data request',
+  edit: 'Edit',
 }
