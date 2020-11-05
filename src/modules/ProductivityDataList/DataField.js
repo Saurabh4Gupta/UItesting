@@ -4,9 +4,9 @@ import CreateData from '../CreateData/CreateData';
 import Overview from '../Overview/Overview';
 import PageController from '../PageController/PageController';
 import DataList from './DataList';
-import { dataFieldCms as PageContent } from '../../cms'
+import { dataFieldCms as PageContent } from '../../cms';
 
-const DataField = () => {
+const DataField = (props) => {
   const [market] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const handleModal = (value) => {
@@ -15,7 +15,7 @@ const DataField = () => {
   }
   return (
     <>
-      <PageController />
+      <PageController {...props} />
       <Box m="30px">
         <Overview />
         <CreateData

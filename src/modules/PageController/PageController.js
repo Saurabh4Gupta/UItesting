@@ -9,11 +9,13 @@ import {
   Caption,
   Heading,
 } from '@dentsu-ui/components';
+import PropTypes from 'prop-types';
+import { clientList } from '../Mock/mockData';
 
-const PageController = () => (
+const PageController = (props) => (
   <Box bg="rgba(220,220,220,0.4)" className="main">
     <Page
-      metadata={<Title />}
+      metadata={<Title {...props} />}
       breadcrumbs={[{
         content: 'Back to Clients',
         url: '/',
@@ -36,29 +38,43 @@ const HeaderContent = () => (
   </Stack>
 );
 
-const Title = () => (
-  <Stack>
-    <Image
-      src="abc.ico"
-      fallbackSrc="https://via.placeholder.com/150"
-      isRounded
-      htmlWidth="110"
-      htmlHeight="110"
-    />
-    <Stack flexDirection="column" ml="20px">
-      <div>
-        <TextContainer>
-          <Caption isSecondary>CLIENT OVERVIEW</Caption>
-        </TextContainer>
-      </div>
-      <div>
-        <TextContainer>
-          <Heading>Microsoft Corporation</Heading>
-        </TextContainer>
-      </div>
-      <HeaderContent />
+const Title = (props) => {
+  const { title, avatar } = clientList.find(client => client.clientCode === props.match.params.clientCode);
+  return (
+    <Stack>
+      <Image
+        src={`/${avatar}`}
+        fallbackSrc="https://via.placeholder.com/150"
+        isRounded
+        htmlWidth="110"
+        htmlHeight="110"
+      />
+      <Stack flexDirection="column" ml="20px">
+        <div>
+          <TextContainer>
+            <Caption>Client Overview</Caption>
+          </TextContainer>
+        </div>
+        <div>
+          <TextContainer>
+            <h1>
+              {' '}
+              <Heading>{title}</Heading>
+            </h1>
+          </TextContainer>
+        </div>
+        <HeaderContent />
+      </Stack>
     </Stack>
-  </Stack>
-);
+  );
+};
+
+Title.propTypes = {
+  match: PropTypes.object,
+}
+
+Title.defaultProps = {
+  match: {},
+}
 
 export default PageController;
