@@ -32,4 +32,12 @@ export const dataFieldCms = {
   emptyProductivityDatarequestCaption: 'There are currently no active Productivity data requests',
   emptyLabel: 'Create new data request',
   edit: 'Edit',
+  actualMonth:'month actuals',
+  forecastMonth:'month forecast',
+  overdue:'Overdue',
+  ongoing:'Ongoing',
+  complete:'Complete',
+  lastUpdate:'Last Update',
+  moveToComplete:'Move to Complete',
+  delete:'Delete',
 }
