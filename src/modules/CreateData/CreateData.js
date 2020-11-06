@@ -1,12 +1,14 @@
-import React, { useState } from 'react'
-import { Caption, Subheading, TextContainer, Button, Stack } from '@dentsu-ui/components';
+import React, { useState, useEffect } from 'react'
+import { Caption, Subheading, TextContainer, Button, Stack, Modal } from '@dentsu-ui/components';
 import PropTypes from 'prop-types';
-import FormModal from './Form'
+import { withRouter } from 'react-router';
+import Form from './Form'
 import useCustomForm from '../../hooks/useCustomForm';
 import validationRule from '../../utils/validate';
 
 const CreateData = (props) => {
-  const { cmsData, market } = props;
+  const { cmsData, market, isModalOpen, handleModal } = props;
+  const [isReadyToSubmit, setIsReadyToSubmit] = useState(false);
   const initialValues = {
     localMarket: market,
     name: '',
@@ -16,39 +18,58 @@ const CreateData = (props) => {
     dueDate: '',
     assignTo: '',
   };
-  const [isModalOpen, setModalOpen] = useState(false);
-
-  const onSubmit = () => {
-
-  }
   const { handleChange, values,
     handleSelectField, handleSubmit,
-    errors, handleCancel } = useCustomForm({ initialValues, onSubmit, validate: validationRule });
-  const handleCreateData = () => {
-    setModalOpen(true);
-  };
+    errors, handleCancel } = useCustomForm({ initialValues, validate: validationRule });
 
+  useEffect(() => {
+    const isAnyValidationError = errors && !!(errors.localMarket || errors.name
+      || errors.briefing || errors.dueDate || errors.assignTo || errors.forecastData
+      || errors.forecastData);
+    const isAllValuesFilled = values.localMarket && values.name && values.assignTo
+      && values.dueDate && values.forecastData && values.actualData && values.briefing;
+    setIsReadyToSubmit(isAllValuesFilled && !isAnyValidationError);
+  }, [errors, values]);
+
+  const onSubmit = () => {
+    handleSubmit();
+    if (isReadyToSubmit) {
+      // mutation will be done here
+      handleModal(false);
+    }
+  }
+  const handleCreateData = () => {
+    handleModal(true);
+  };
   const closeModalHandler = () => {
-    setModalOpen(false)
+    handleModal(false)
     handleCancel();
   }
   return (
     <>
-      <FormModal
-        values={values}
-        handleChange={handleChange}
-        onSubmit={handleSubmit}
-        handleSelectField={handleSelectField}
-        errors={errors}
-        isModalOpen={isModalOpen}
-        closeModal={closeModalHandler}
-        cmsData={cmsData}
-      />
+      <Modal isOpen={isModalOpen} onClose={closeModalHandler}>
+        <Modal.Header hasCloseButton title={cmsData.createNewDataRequest} />
+        <Modal.Body>
+          <Form
+            values={values}
+            handleChange={handleChange}
+            handleSelectField={handleSelectField}
+            errors={errors}
+            cmsData={cmsData}
+          />
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={closeModalHandler}>
+            {cmsData.cancel}
+          </Button>
+          <Button onClick={onSubmit}>{cmsData.create}</Button>
+        </Modal.Footer>
+      </Modal>
       <Stack flexDirection="row" justifyContent="space-between">
         <Stack>
           <TextContainer>
             <Subheading>{cmsData.productivityDatarequestHeading}</Subheading>
-            <Caption>
+            <Caption isAssistive>
               {cmsData.productivityDatarequestCaption}
             </Caption>
           </TextContainer>
@@ -63,10 +84,14 @@ const CreateData = (props) => {
 CreateData.propTypes = {
   cmsData: PropTypes.object,
   market: PropTypes.string,
+  isModalOpen: PropTypes.bool,
+  handleModal: PropTypes.func,
 }
 CreateData.defaultProps = {
   cmsData: {},
   market: 'UK',
+  isModalOpen: false,
+  handleModal: () => { },
 }
 
-export default CreateData;
+export default withRouter(CreateData);
