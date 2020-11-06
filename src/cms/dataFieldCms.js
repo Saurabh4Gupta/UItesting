@@ -29,7 +29,7 @@ export const dataFieldCms = {
   viewClientsCaption : 'Choose the client you wish to view',
   completeLabel: 'Complete',
   ongoingLabel: 'Ongoing',
-  emptyProductivityDatarequestCaption: 'No productivity data requests have been moved to this section yet.',
+  emptyProductivityDatarequestCaption: 'There are currently no active Productivity data requests',
   emptyLabel: 'Create new data request',
   edit: 'Edit',
 }
