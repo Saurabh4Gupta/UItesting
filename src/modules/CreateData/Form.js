@@ -10,6 +10,7 @@ import {
   Dropzone,
   Stack,
   Box,
+  Paragraph
 } from '@dentsu-ui/components';
 import constant from '../../utils/constant';
 import { assignToOptions, options, monthOptions } from '../Mock/mockData'
@@ -18,7 +19,7 @@ const Form = (props) => {
   const { MAX_FILE_SIZE, ALLOWED_FILE_TYPES } = constant;
   const { values, handleChange, handleSelectField, errors, cmsData } = props;
 
-  const [setFiles] = useState([]);
+  const [files, setFiles] = useState([]);
 
   const handleInit = () => {
     console.log('Dropzone instance has initialised');
@@ -37,8 +38,8 @@ const Form = (props) => {
           options={options}
           onChange={(selected, event) => handleSelectField(selected, event)}
           value={
-          options.find(key => key.value === values.localMarket)
-        }
+            options.find(key => key.value === values.localMarket)
+          }
         />
       </FormField>
       <FormField
@@ -77,13 +78,14 @@ const Form = (props) => {
           allowReorder
           onInit={() => handleInit()}
           onUpdateFiles={(fileItems) => {
-          setFiles(fileItems);
-        }}
+            setFiles(fileItems);
+          }}
           maxFiles={1}
           maxFileSize={MAX_FILE_SIZE}
           server="./"
           acceptedFileTypes={ALLOWED_FILE_TYPES}
         />
+        {files.length === 0 && <Paragraph>No file in the Dropzone</Paragraph>}
       </FormField>
       <Stack flex="row">
         <Box mr="30px">
@@ -98,8 +100,8 @@ const Form = (props) => {
               value={values.actualData}
               placeholder={cmsData.selectPlaceHolder}
               onChange={(selected, event) => {
-              handleSelectField(selected, event)
-            }}
+                handleSelectField(selected, event)
+              }}
             />
           </FormField>
         </Box>
@@ -115,8 +117,8 @@ const Form = (props) => {
               value={values.forecastData}
               options={monthOptions}
               onChange={(selected, event) => {
-              handleSelectField(selected, event)
-            }}
+                handleSelectField(selected, event)
+              }}
             />
 
           </FormField>
@@ -151,7 +153,7 @@ const Form = (props) => {
         />
       </FormField>
     </>
-)
+  )
 };
 
 export default Form;
