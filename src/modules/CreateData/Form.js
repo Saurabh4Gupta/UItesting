@@ -10,7 +10,7 @@ import {
   Dropzone,
   Stack,
   Box,
-  Paragraph
+  Paragraph,
 } from '@dentsu-ui/components';
 import constant from '../../utils/constant';
 import { assignToOptions, options, monthOptions } from '../Mock/mockData'
