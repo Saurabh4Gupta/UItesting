@@ -35,6 +35,7 @@ const CreateData = (props) => {
     handleSubmit();
     if (isReadyToSubmit) {
       // mutation will be done here
+      handleModal(false);
     }
   }
   const handleCreateData = () => {
