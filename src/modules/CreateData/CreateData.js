@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { Caption, Subheading, TextContainer, Button, Stack, Modal } from '@dentsu-ui/components';
 import PropTypes from 'prop-types';
-import { withRouter } from 'react-router';
 import Form from './Form'
 import useCustomForm from '../../hooks/useCustomForm';
 import validationRule from '../../utils/validate';
+import { data, options, monthOptions } from '../Mock/mockData'
 
 const CreateData = (props) => {
   const { cmsData, market, isModalOpen, handleModal } = props;
@@ -31,20 +31,23 @@ const CreateData = (props) => {
     setIsReadyToSubmit(isAllValuesFilled && !isAnyValidationError);
   }, [errors, values]);
 
+  const closeModalHandler = () => {
+    handleModal(false)
+    handleCancel();
+  }
   const onSubmit = () => {
     handleSubmit();
     if (isReadyToSubmit) {
       // mutation will be done here
-      handleModal(false);
+      closeModalHandler();
+      console.log('values', values);
+      data.data.push(values);
     }
   }
   const handleCreateData = () => {
     handleModal(true);
   };
-  const closeModalHandler = () => {
-    handleModal(false)
-    handleCancel();
-  }
+
   return (
     <>
       <Modal isOpen={isModalOpen} onClose={closeModalHandler}>
@@ -56,6 +59,8 @@ const CreateData = (props) => {
             handleSelectField={handleSelectField}
             errors={errors}
             cmsData={cmsData}
+            options={options}
+            monthOptions={monthOptions}
           />
         </Modal.Body>
         <Modal.Footer>
@@ -94,4 +99,4 @@ CreateData.defaultProps = {
   handleModal: () => { },
 }
 
-export default withRouter(CreateData);
+export default CreateData;

@@ -10,7 +10,6 @@ const DataField = (props) => {
   const [market] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const handleModal = (value) => {
-    console.log('Hello');
     setIsModalOpen(value)
   }
   return (

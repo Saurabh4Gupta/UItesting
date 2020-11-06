@@ -10,17 +10,14 @@ import {
   Dropzone,
   Stack,
   Box,
-  Paragraph,
 } from '@dentsu-ui/components';
 import constant from '../../utils/constant';
-import { assignToOptions, options, monthOptions } from '../Mock/mockData'
 
 const Form = (props) => {
   const { MAX_FILE_SIZE, ALLOWED_FILE_TYPES } = constant;
-  const { values, handleChange, handleSelectField, errors, cmsData } = props;
-
+  const { values, handleChange, handleSelectField, errors, cmsData, options, monthOptions } = props;
   const [files, setFiles] = useState([]);
-
+  console.log(files);
   const handleInit = () => {
     console.log('Dropzone instance has initialised');
   };
@@ -72,6 +69,7 @@ const Form = (props) => {
       <FormField
         label={cmsData.templateFileLabel}
         hint={cmsData.templateFileHint}
+        {...(errors.actualData ? { error: errors.actualData } : {})}
       >
         <Dropzone
           allowMultiple={false}
@@ -85,7 +83,7 @@ const Form = (props) => {
           server="./"
           acceptedFileTypes={ALLOWED_FILE_TYPES}
         />
-        {files.length === 0 && <Paragraph>No file in the Dropzone</Paragraph>}
+
       </FormField>
       <Stack flex="row">
         <Box mr="30px">
@@ -145,11 +143,13 @@ const Form = (props) => {
       >
         <Select
           menuPosition="fixed"
-          options={assignToOptions}
+          options={options}
           name="assignTo"
           placeholder={cmsData.selectPlaceHolder}
           onChange={(selected, event) => handleSelectField(selected, event)}
-          value={values.assignTo}
+          value={
+            options.find(key => key.value === values.localMarket)
+          }
         />
       </FormField>
     </>
