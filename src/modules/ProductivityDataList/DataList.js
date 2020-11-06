@@ -29,7 +29,7 @@ DataList.propTypes = {
 }
 DataList.defaultProps = {
   cmsData: {},
-  handleModal: () => { }
+  handleModal: () => { },
 }
 
 export default DataList;
