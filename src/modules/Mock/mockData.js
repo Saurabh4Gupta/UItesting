@@ -18,6 +18,8 @@ const data = {
       forecastDataMonth:'6',
       isActive: true,
       isDeleted: false,
+      year:'2020',
+      quarter:'Q2',
     },
     {
       id: 2,
@@ -36,6 +38,8 @@ const data = {
       forecastDataMonth:'6',
       createdAt: '2020-08-14',
       assignTo: 'UK Team',
+      year:'2020',
+      quarter:'Q2',
     },
   ],
 }

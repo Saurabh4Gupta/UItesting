@@ -82,10 +82,12 @@ const DataList = () => {
                 name,
                 actualDataMonth,
                 forecastDataMonth,
+                year,
+                quarter,
               } = item;
               return (
-                <List.Card padding="15px">
-                  <Stack>
+                <div>
+                  <Stack padding="15px">
                     <Stack
                       alignItems="center"
                       flexDirection="row"
@@ -102,7 +104,10 @@ const DataList = () => {
                       <Box width="32%">
                         <b>{name}</b>
                         <Caption>
-                          2020 Q2:
+                          {year}
+                          {' '}
+                          {quarter}
+                          :
                           {' '}
                           {actualDataMonth}
                           {' '}
@@ -133,14 +138,15 @@ const DataList = () => {
                     >
                       <Box>
                         <Button variant="ghost" size="small" iconLeft="layers">
-                          View Details
+                          {dataFieldCms.viewDetails}
                         </Button>
                       </Box>
                       <Divider orientation="vertical" isFlexChild />
                       <Box>{actions}</Box>
                     </Stack>
                   </Stack>
-                </List.Card>
+                  <Divider />
+                </div>
               );
             }}
           />
