@@ -4,30 +4,30 @@ import {
   Paragraph,
   EmptyState,
 } from '@dentsu-ui/components';
+import { withRouter } from 'react-router-dom';
 import { dataFieldCms as PageContent } from '../../cms'
 
-const EmptyTable = () => (
+const EmptyTable = (props) => (
   <EmptyState
     layout="horizontal"
     size="small"
     image="create"
     actions={{
-          secondary: {
-            label: PageContent.emptyLabel,
-            url: 'http://www.google.com',
-            onClick: () => alert('Secondary action callback fired!'),
-            isDisabled: false,
-            isExternal: true,
-            iconLeft: 'add',
-            iconRight: null,
-            isLoading: false,
-          },
-        }}
+      secondary: {
+        label: PageContent.emptyLabel,
+        onClick: () => props.handleModal(true),
+        isDisabled: false,
+        isExternal: true,
+        iconLeft: 'add',
+        iconRight: null,
+        isLoading: false,
+      },
+    }}
   >
     <Paragraph>
-      { PageContent.emptyProductivityDatarequestCaption }
+      {PageContent.emptyProductivityDatarequestCaption}
     </Paragraph>
   </EmptyState>
-  );
+);
 
-export default EmptyTable;
+export default withRouter(EmptyTable);

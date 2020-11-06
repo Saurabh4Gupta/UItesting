@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import EmptyTable from './EmptyTable';
 
 const DataList = (props) => {
-  const { cmsData } = props;
+  const { cmsData, handleModal } = props;
   return (
     <Box mt="30px">
       <Tabs>
@@ -15,10 +15,7 @@ const DataList = (props) => {
         </Tabs.List>
         <Tabs.Panels>
           <Tabs.Panel>
-            <EmptyTable />
-          </Tabs.Panel>
-          <Tabs.Panel>
-            <EmptyTable />
+            <EmptyTable handleModal={handleModal} />
           </Tabs.Panel>
         </Tabs.Panels>
       </Tabs>
@@ -28,9 +25,11 @@ const DataList = (props) => {
 
 DataList.propTypes = {
   cmsData: PropTypes.object,
+  handleModal: PropTypes.func,
 }
 DataList.defaultProps = {
   cmsData: {},
+  handleModal: () => { },
 }
 
 export default DataList;
