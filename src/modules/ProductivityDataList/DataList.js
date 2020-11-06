@@ -22,8 +22,8 @@ const DataList = (props) => {
     <Menu>
       <Menu.Button />
       <Menu.List>
-        <Menu.Item onClick={() => {}}>Move to Complete</Menu.Item>
-        <Menu.Item onClick={() => {}}>Delete</Menu.Item>
+        <Menu.Item onClick={() => {}}>{cmsData.moveToComplete}</Menu.Item>
+        <Menu.Item onClick={() => {}}>{cmsData.delete}</Menu.Item>
       </Menu.List>
     </Menu>
   );
@@ -31,8 +31,8 @@ const DataList = (props) => {
     <Box mt="30px">
       <Tabs>
         <Tabs.List>
-          <Tabs.Tab label={cmsData.ongoingLabel} count={2} />
-          <Tabs.Tab label={cmsData.completeLabel} count={2} />
+          <Tabs.Tab label={cmsData.ongoingLabel} count={data.totalCount} />
+          <Tabs.Tab label={cmsData.completeLabel} count={data.totalCount} />
         </Tabs.List>
         <Tabs.Panels>
           <Tabs.Panel>
@@ -77,6 +77,7 @@ const DataList = (props) => {
                     forecastDataMonth,
                     year,
                     quarter,
+                    updatedAt,
                   } = item;
                   return (
                     <div>
@@ -89,28 +90,13 @@ const DataList = (props) => {
                         >
                           <Box width="25%">
                             <b>
-                              {client}
-                              {''}
-                              {localMarket}
+                              {`${client} ${localMarket}`}
                             </b>
                           </Box>
                           <Box width="32%">
                             <b>{name}</b>
                             <Caption>
-                              {year}
-                              {' '}
-                              {quarter}
-                              :
-                              {' '}
-                              {actualDataMonth}
-                              {' '}
-                              {cmsData.actualMonth}
-                              {' '}
-                              +
-                              {' '}
-                              {forecastDataMonth}
-                              {' '}
-                              {cmsData.forecastMonth}
+                              {`${year} ${quarter}: ${actualDataMonth} ${cmsData.actualMonth} + ${forecastDataMonth} ${cmsData.forecastMonth}`}
                             </Caption>
                           </Box>
                           <Box width="13%">
@@ -123,8 +109,7 @@ const DataList = (props) => {
                             </Chip>
                           </Box>
                           <Box width="30%">
-                            {cmsData.lastUpdate}
-                            : 29/10/20 at 14:32
+                            {`${cmsData.lastUpdate}: ${updatedAt}`}
                           </Box>
                         </Stack>
                         <Stack

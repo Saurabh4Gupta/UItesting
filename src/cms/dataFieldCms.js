@@ -38,4 +38,6 @@ export const dataFieldCms = {
   ongoing:'Ongoing',
   complete:'Complete',
   lastUpdate:'Last Update',
+  moveToComplete:'Move to Complete',
+  delete:'Delete',
 }
