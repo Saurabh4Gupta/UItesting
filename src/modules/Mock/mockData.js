@@ -1,8 +1,59 @@
 const data = {
-  totalCount: 2,
   data: [
-
+    {
+      id: 1,
+      client: 'Microsoft',
+      localMarket: { value: 'UK', label: 'United Kingdom' },
+      status: 'Active',
+      name: 'Productivity Q2 2020',
+      briefing: 'Need Data for the Q2 2020',
+      dueDate: '2020-08-25',
+      updatedAt: '29/10/20 at 14:32',
+      createdAt: '2020-08-14',
+      assignTo: 'UK Team',
+      actualData: { value: 4, label: '4 months' },
+      forecastData: { value: 8, label: '8 months' },
+      isActive: true,
+      isDeleted: false,
+      year: '2020',
+      quarter: 'Q2',
+    },
+    {
+      id: 2,
+      client: 'GM',
+      localMarket: { value: 'USA', label: 'USA' },
+      status: 'Complete',
+      name: 'Productivity Q2 2020',
+      briefing: 'Need Data for the Q2 2020',
+      dueDate: '2020-08-25',
+      updatedAt: '29/10/20 at 14:32',
+      isActive: true,
+      isDeleted: false,
+      actualData: { value: 6, label: '6 months' },
+      forecastData: { value: 6, label: '6 months' },
+      createdAt: '2020-08-14',
+      assignTo: 'UK Team',
+      year: '2020',
+      quarter: 'Q2',
+    },
   ],
+}
+
+export const getData = () => ({
+    totalCount: data.data.length,
+    data: data.data,
+  })
+
+export function updateData(values) {
+  values.createdAt = new Date();
+  values.isActive = true;
+  values.year = '2020';
+  values.quarter = 'Q3';
+  values.isDeleted = false;
+  values.id = data.data.length + 1;
+  values.client = 'Microsoft';
+  console.log('values', values);
+  data.data.push(values);
 }
 
 const options = [

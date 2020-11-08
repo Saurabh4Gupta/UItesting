@@ -4,10 +4,10 @@ import PropTypes from 'prop-types';
 import Form from './Form'
 import useCustomForm from '../../hooks/useCustomForm';
 import validationRule from '../../utils/validate';
-import { data, options, monthOptions } from '../Mock/mockData'
+import { options, monthOptions, updateData } from '../Mock/mockData'
 
 const CreateData = (props) => {
-  const { cmsData, market, isModalOpen, handleModal } = props;
+  const { cmsData, market, isModalOpen, handleModal, setDataCreated } = props;
   const [isReadyToSubmit, setIsReadyToSubmit] = useState(false);
   const initialValues = {
     localMarket: market,
@@ -40,8 +40,9 @@ const CreateData = (props) => {
     if (isReadyToSubmit) {
       // mutation will be done here
       closeModalHandler();
-      console.log('values', values);
-      data.data.push(values);
+
+      updateData(values)
+      setDataCreated(true)
     }
   }
   const handleCreateData = () => {
@@ -91,12 +92,14 @@ CreateData.propTypes = {
   market: PropTypes.string,
   isModalOpen: PropTypes.bool,
   handleModal: PropTypes.func,
+  setDataCreated: PropTypes.func,
 }
 CreateData.defaultProps = {
   cmsData: {},
   market: 'UK',
   isModalOpen: false,
   handleModal: () => { },
+  setDataCreated: () => false,
 }
 
 export default CreateData;

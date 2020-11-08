@@ -17,9 +17,8 @@ const Form = (props) => {
   const { MAX_FILE_SIZE, ALLOWED_FILE_TYPES } = constant;
   const { values, handleChange, handleSelectField, errors, cmsData, options, monthOptions } = props;
   const [files, setFiles] = useState([]);
-  console.log(files);
   const handleInit = () => {
-    console.log('Dropzone instance has initialised');
+    console.log('Dropzone instance has initialised', files);
   };
 
   return (
