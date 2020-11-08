@@ -33,6 +33,10 @@ function validationRule(field, value) {
       return !value
         ? 'This field cannot be blank'
         : '';
+    case 'fileUpload':
+      return !value
+        ? 'Upload tracker template'
+        : ''
     default:
       break;
   }
