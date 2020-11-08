@@ -41,6 +41,7 @@
     "faker": "^4.1.0",
     "flow-bin": "0.97.0",
     "husky": "^4.3.0",
+    "jest-sonar-reporter": "^2.0.0",
     "mochawesome": "^6.1.1",
     "prettier": "^2.1.2",
     "randomstring": "^1.1.5",
