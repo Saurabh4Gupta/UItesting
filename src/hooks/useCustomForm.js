@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { monthOptions } from '../modules/Mock/mockData';
 
 const useCustomForm = ({
   initialValues,
@@ -25,13 +26,15 @@ const useCustomForm = ({
     const { name } = event;
     if (name === 'actualData') {
       const forecast = 12 - value.value;
-      const data = { value: forecast, label: forecast.toString() };
+      const label = monthOptions.find(key => key.value === forecast)
+      const data = { value: label.value, label: label.label };
       handleValidation('forecastData', forecast);
       setValues(values.forecastData = data)
     }
     if (name === 'forecastData') {
       const actual = 12 - value.value;
-      const data = { value: actual, label: actual.toString() };
+      const label = monthOptions.find(key => key.value === actual)
+      const data = { value: label.value, label: label.label };
       handleValidation('actualData', actual)
       setValues(values.actualData = data)
     }
