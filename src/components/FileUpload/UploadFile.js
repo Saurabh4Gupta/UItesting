@@ -5,10 +5,7 @@ import constant from '../../utils/constant';
 
 const UploadFile = (props) => {
   const { MAX_FILE_SIZE, ALLOWED_FILE_TYPES } = constant;
-  const { cmsData } = props;
-
-  const [error, setError] = useState(false);
-  const [modalOpen, setModalOpen] = useState(false);
+  const { cmsData, modalOpen, setModalOpen } = props;
 
   const [files, setFiles] = useState(
     { files: [] },
@@ -17,15 +14,10 @@ const UploadFile = (props) => {
   const handleSubmit = (fileLength) => {
     if (!fileLength || fileLength === 0) {
       return setError(true);
-      }
+    }
 
-      return setModalOpen(false);
+    return setModalOpen(false);
   };
-
-  const handleCreateData = () => {
-    setModalOpen(true);
-  };
-
   const handleInit = () => {
     console.log('Dropzone instance has initialised');
   };
@@ -62,7 +54,7 @@ const UploadFile = (props) => {
               dropValidation
             />
           </FormField>
-          {error &&  <Paragraph>No file in the Dropzone</Paragraph>}
+          {error && <Paragraph>No file in the Dropzone</Paragraph>}
         </Modal.Body>
         <Modal.Footer>
           <Button
@@ -74,17 +66,18 @@ const UploadFile = (props) => {
           <Button onClick={() => handleSubmit(files.length)}>Upload</Button>
         </Modal.Footer>
       </Modal>
-      <Button bg="rgba(220,220,220,0.4)" icon="upload" onClick={handleCreateData}>
-        {cmsData.uploadButtonText}
-      </Button>
     </>
   );
 };
 UploadFile.propTypes = {
   cmsData: PropTypes.object,
+  modalOpen: PropTypes.bool,
+  setModalOpen: PropTypes.func,
 }
 
 UploadFile.defaultProps = {
   cmsData: {},
+  modalOpen: false,
+  setModalOpen: () => { },
 }
 export default UploadFile;
