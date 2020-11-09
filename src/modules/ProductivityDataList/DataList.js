@@ -15,7 +15,6 @@ import EmptyTable from './EmptyTable';
 
 const DataList = (props) => {
   const { cmsData, handleModal, dataList } = props;
-  console.log('DataList', dataList);
   const { data, totalCount } = dataList;
   const actions = (
     <Menu>
@@ -31,7 +30,7 @@ const DataList = (props) => {
       <Tabs>
         <Tabs.List>
           <Tabs.Tab label={cmsData.ongoingLabel} count={dataList.totalCount} />
-          <Tabs.Tab label={cmsData.completeLabel} count={dataList.totalCount} />
+          <Tabs.Tab label={cmsData.completeLabel} count={0} />
         </Tabs.List>
         <Tabs.Panels>
           <Tabs.Panel>
