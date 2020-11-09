@@ -11,14 +11,12 @@ const UploadFile = (props) => {
     { files: [] },
   );
 
-  const handleSubmit = () => {
-    if (files.length === 0) {
-      return true;
-    } if (files.length > 0 && files[0].file && files[0].file.name) {
-      setModalOpen(false);
-      return true;
+  const handleSubmit = (fileLength) => {
+    if (!fileLength || fileLength === 0) {
+      return setError(true);
     }
-    return true;
+
+    return setModalOpen(false);
   };
   const handleInit = () => {
     console.log('Dropzone instance has initialised');
@@ -53,9 +51,10 @@ const UploadFile = (props) => {
               maxFileSize={MAX_FILE_SIZE}
               server="./"
               acceptedFileTypes={ALLOWED_FILE_TYPES}
+              dropValidation
             />
           </FormField>
-          {files.length === 0 && <Paragraph>No file in the Dropzone</Paragraph>}
+          {error && <Paragraph>No file in the Dropzone</Paragraph>}
         </Modal.Body>
         <Modal.Footer>
           <Button
@@ -64,7 +63,7 @@ const UploadFile = (props) => {
           >
             cancel
           </Button>
-          <Button onClick={handleSubmit}>Upload</Button>
+          <Button onClick={() => handleSubmit(files.length)}>Upload</Button>
         </Modal.Footer>
       </Modal>
     </>
