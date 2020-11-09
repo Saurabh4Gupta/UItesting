@@ -6,21 +6,24 @@ import constant from '../../utils/constant';
 const UploadFile = (props) => {
   const { MAX_FILE_SIZE, ALLOWED_FILE_TYPES } = constant;
   const { cmsData } = props;
-
+  
+  const [error, setError] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
 
   const [files, setFiles] = useState(
     { files: [] },
   );
 
-  const handleSubmit = () => {
-    if (files.length === 0) {
-      return true;
-    } if (files.length > 0 && files[0].file && files[0].file.name) {
+  const handleSubmit = (fileLength) => {
+
+    if (!fileLength || fileLength === 0) {
+      return setError(true);
+      } 
+      
+     
       setModalOpen(false);
-      return true;
-    }
-    return true;
+      
+    
   };
 
   const handleCreateData = () => {
@@ -60,9 +63,10 @@ const UploadFile = (props) => {
               maxFileSize={MAX_FILE_SIZE}
               server="./"
               acceptedFileTypes={ALLOWED_FILE_TYPES}
+              dropValidation={true}
             />
           </FormField>
-          {files.length === 0 && <Paragraph>No file in the Dropzone</Paragraph>}
+          {error &&  <Paragraph>No file in the Dropzone</Paragraph>}
         </Modal.Body>
         <Modal.Footer>
           <Button
@@ -71,7 +75,7 @@ const UploadFile = (props) => {
           >
             cancel
           </Button>
-          <Button onClick={handleSubmit}>Upload</Button>
+          <Button onClick={() => handleSubmit(files.length)}>Upload</Button>
         </Modal.Footer>
       </Modal>
       <Button bg="rgba(220,220,220,0.4)" icon="upload" onClick={handleCreateData}>
