@@ -6,7 +6,7 @@ import constant from '../../utils/constant';
 const UploadFile = (props) => {
   const { MAX_FILE_SIZE, ALLOWED_FILE_TYPES } = constant;
   const { cmsData } = props;
-  
+
   const [error, setError] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
 
@@ -15,15 +15,11 @@ const UploadFile = (props) => {
   );
 
   const handleSubmit = (fileLength) => {
-
     if (!fileLength || fileLength === 0) {
       return setError(true);
-      } 
-      
-     
-      setModalOpen(false);
-      
-    
+      }
+
+      return setModalOpen(false);
   };
 
   const handleCreateData = () => {
@@ -63,7 +59,7 @@ const UploadFile = (props) => {
               maxFileSize={MAX_FILE_SIZE}
               server="./"
               acceptedFileTypes={ALLOWED_FILE_TYPES}
-              dropValidation={true}
+              dropValidation
             />
           </FormField>
           {error &&  <Paragraph>No file in the Dropzone</Paragraph>}
