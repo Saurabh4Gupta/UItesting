@@ -11,19 +11,18 @@ import {
   Tabs,
 } from '@dentsu-ui/components';
 import PropTypes from 'prop-types';
-import { data } from '../Mock/mockData';
 import EmptyTable from './EmptyTable';
 
 const DataList = (props) => {
-  const { cmsData, handleModal } = props;
-  const mockData = data.data;
-  // const mockData = [];
+  const { cmsData, handleModal, dataList } = props;
+  console.log('DataList', dataList);
+  const { data, totalCount } = dataList;
   const actions = (
     <Menu>
       <Menu.Button />
       <Menu.List>
-        <Menu.Item onClick={() => {}}>{cmsData.moveToComplete}</Menu.Item>
-        <Menu.Item onClick={() => {}}>{cmsData.delete}</Menu.Item>
+        <Menu.Item onClick={() => { }}>{cmsData.moveToComplete}</Menu.Item>
+        <Menu.Item onClick={() => { }}>{cmsData.delete}</Menu.Item>
       </Menu.List>
     </Menu>
   );
@@ -31,14 +30,14 @@ const DataList = (props) => {
     <Box mt="30px">
       <Tabs>
         <Tabs.List>
-          <Tabs.Tab label={cmsData.ongoingLabel} count={data.totalCount} />
-          <Tabs.Tab label={cmsData.completeLabel} count={data.totalCount} />
+          <Tabs.Tab label={cmsData.ongoingLabel} count={dataList.totalCount} />
+          <Tabs.Tab label={cmsData.completeLabel} count={dataList.totalCount} />
         </Tabs.List>
         <Tabs.Panels>
           <Tabs.Panel>
-            {mockData.length > 0 ? (
+            {totalCount > 0 ? (
               <List
-                items={mockData}
+                items={data}
                 searchBy="title"
                 isSearchable
                 rowsText="results in total"
@@ -73,8 +72,8 @@ const DataList = (props) => {
                     client,
                     localMarket,
                     name,
-                    actualDataMonth,
-                    forecastDataMonth,
+                    actualData,
+                    forecastData,
                     year,
                     quarter,
                     updatedAt,
@@ -90,13 +89,13 @@ const DataList = (props) => {
                         >
                           <Box width="25%">
                             <b>
-                              {`${client} ${localMarket}`}
+                              {`${client} ${localMarket.label}`}
                             </b>
                           </Box>
                           <Box width="32%">
                             <b>{name}</b>
                             <Caption>
-                              {`${year} ${quarter}: ${actualDataMonth} ${cmsData.actualMonth} + ${forecastDataMonth} ${cmsData.forecastMonth}`}
+                              {`${year} ${quarter}: ${actualData.label} + ${forecastData.label}`}
                             </Caption>
                           </Box>
                           <Box width="13%">
@@ -138,7 +137,7 @@ const DataList = (props) => {
               />
             ) : (
               <EmptyTable handleModal={handleModal} />
-            )}
+              )}
           </Tabs.Panel>
           <Tabs.Panel>Complete Tab</Tabs.Panel>
         </Tabs.Panels>
@@ -150,9 +149,11 @@ const DataList = (props) => {
 DataList.propTypes = {
   cmsData: PropTypes.object,
   handleModal: PropTypes.func,
+  dataList: PropTypes.object,
 };
 DataList.defaultProps = {
   cmsData: {},
-  handleModal: () => {},
+  handleModal: () => { },
+  dataList: {},
 };
 export default DataList;

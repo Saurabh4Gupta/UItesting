@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import { Caption, Subheading, TextContainer, Button, Stack, Modal } from '@dentsu-ui/components';
 import PropTypes from 'prop-types';
-import { withRouter } from 'react-router';
 import Form from './Form'
 import useCustomForm from '../../hooks/useCustomForm';
 import validationRule from '../../utils/validate';
+import { options, monthOptions, updateData } from '../Mock/mockData'
 
 const CreateData = (props) => {
-  const { cmsData, market, isModalOpen, handleModal } = props;
+  const { cmsData, market, isModalOpen, handleModal, setDataCreated } = props;
   const [isReadyToSubmit, setIsReadyToSubmit] = useState(false);
   const initialValues = {
     localMarket: market,
@@ -31,20 +31,24 @@ const CreateData = (props) => {
     setIsReadyToSubmit(isAllValuesFilled && !isAnyValidationError);
   }, [errors, values]);
 
+  const closeModalHandler = () => {
+    handleModal(false)
+    handleCancel();
+  }
   const onSubmit = () => {
     handleSubmit();
     if (isReadyToSubmit) {
       // mutation will be done here
-      handleModal(false);
+      closeModalHandler();
+
+      updateData(values)
+      setDataCreated(true)
     }
   }
   const handleCreateData = () => {
     handleModal(true);
   };
-  const closeModalHandler = () => {
-    handleModal(false)
-    handleCancel();
-  }
+
   return (
     <>
       <Modal isOpen={isModalOpen} onClose={closeModalHandler}>
@@ -56,6 +60,8 @@ const CreateData = (props) => {
             handleSelectField={handleSelectField}
             errors={errors}
             cmsData={cmsData}
+            options={options}
+            monthOptions={monthOptions}
           />
         </Modal.Body>
         <Modal.Footer>
@@ -86,12 +92,14 @@ CreateData.propTypes = {
   market: PropTypes.string,
   isModalOpen: PropTypes.bool,
   handleModal: PropTypes.func,
+  setDataCreated: PropTypes.func,
 }
 CreateData.defaultProps = {
   cmsData: {},
   market: 'UK',
   isModalOpen: false,
   handleModal: () => { },
+  setDataCreated: () => false,
 }
 
-export default withRouter(CreateData);
+export default CreateData;
