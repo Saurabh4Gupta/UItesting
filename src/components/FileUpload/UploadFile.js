@@ -5,9 +5,7 @@ import constant from '../../utils/constant';
 
 const UploadFile = (props) => {
   const { MAX_FILE_SIZE, ALLOWED_FILE_TYPES } = constant;
-  const { cmsData } = props;
-
-  const [modalOpen, setModalOpen] = useState(false);
+  const { cmsData, modalOpen, setModalOpen } = props;
 
   const [files, setFiles] = useState(
     { files: [] },
@@ -22,11 +20,6 @@ const UploadFile = (props) => {
     }
     return true;
   };
-
-  const handleCreateData = () => {
-    setModalOpen(true);
-  };
-
   const handleInit = () => {
     console.log('Dropzone instance has initialised');
   };
@@ -74,17 +67,18 @@ const UploadFile = (props) => {
           <Button onClick={handleSubmit}>Upload</Button>
         </Modal.Footer>
       </Modal>
-      <Button bg="rgba(220,220,220,0.4)" icon="upload" onClick={handleCreateData}>
-        {cmsData.uploadButtonText}
-      </Button>
     </>
   );
 };
 UploadFile.propTypes = {
   cmsData: PropTypes.object,
+  modalOpen: PropTypes.bool,
+  setModalOpen: PropTypes.func,
 }
 
 UploadFile.defaultProps = {
   cmsData: {},
+  modalOpen: false,
+  setModalOpen: () => { },
 }
 export default UploadFile;
