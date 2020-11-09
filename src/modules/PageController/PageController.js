@@ -76,12 +76,15 @@ const Title = (props) => {
 
 Title.propTypes = {
   match: PropTypes.object,
-  setIsUploadModal: PropTypes.func,
 }
 
 Title.defaultProps = {
   match: {},
+}
+PageController.propTypes = {
+  setIsUploadModal: PropTypes.func,
+}
+PageController.defaultProps = {
   setIsUploadModal: () => { },
 }
-
 export default PageController;
