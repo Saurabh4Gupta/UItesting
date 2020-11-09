@@ -2,7 +2,7 @@ export const dataFieldCms = {
   createNewDataRequest: 'Create new data request',
   editDataRequest: 'Edit data request',
   localMarketLabel: 'Local Market',
-  localMarketHint: 'Choose the market you wish to create a data request for',
+  localMarketHint: 'Choose the market you wish to create this data request for',
   nameLabel: 'Data request name',
   nameHint: "Make sure it's clear to help others identify it.Max 255 characters",
   briefLabel: 'Briefing',
