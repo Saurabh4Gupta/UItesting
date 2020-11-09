@@ -31,7 +31,7 @@ const DataList = (props) => {
       <Tabs>
         <Tabs.List>
           <Tabs.Tab label={cmsData.ongoingLabel} count={dataList.totalCount} />
-          <Tabs.Tab label={cmsData.completeLabel} count={dataList.totalCount} />
+          <Tabs.Tab label={cmsData.completeLabel} count={0} />
         </Tabs.List>
         <Tabs.Panels>
           <Tabs.Panel>
@@ -95,7 +95,7 @@ const DataList = (props) => {
                           <Box width="32%">
                             <b>{name}</b>
                             <Caption>
-                              {`${year} ${quarter}: ${actualData.label} + ${forecastData.label}`}
+                              {`${year} ${quarter}: ${actualData.label} ${cmsData.actual} + ${forecastData.label} ${cmsData.forecast}`}
                             </Caption>
                           </Box>
                           <Box width="13%">
