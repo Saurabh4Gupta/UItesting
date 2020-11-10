@@ -6,7 +6,7 @@ import PageController from '../PageController/PageController';
 import DataList from './DataList';
 import { dataFieldCms as PageContent } from '../../cms';
 import { getData } from '../Mock/mockData';
-import UploadFile from '../../components/FileUpload/UploadFile';
+import UploadFile from '../FileUpload/UploadFile';
 
 const DataField = (props) => {
   const [market] = useState('');
