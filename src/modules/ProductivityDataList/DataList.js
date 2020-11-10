@@ -37,7 +37,7 @@ const DataList = (props) => {
             {totalCount > 0 ? (
               <List
                 items={data}
-                searchBy="title"
+                searchBy="client"
                 isSearchable
                 rowsText="results in total"
                 filters={[
@@ -94,7 +94,7 @@ const DataList = (props) => {
                           <Box width="32%">
                             <b>{name}</b>
                             <Caption>
-                              {`${year} ${quarter}: ${actualData.label} + ${forecastData.label}`}
+                              {`${year} ${quarter}: ${actualData.label} ${cmsData.actual} + ${forecastData.label} ${cmsData.forecast}`}
                             </Caption>
                           </Box>
                           <Box width="13%">
@@ -135,10 +135,10 @@ const DataList = (props) => {
                 }}
               />
             ) : (
-              <EmptyTable handleModal={handleModal} />
+              <EmptyTable defaultText={cmsData.emptyProductivityDatarequestCaption} handleModal={handleModal} />
               )}
           </Tabs.Panel>
-          <Tabs.Panel>Complete Tab</Tabs.Panel>
+          <Tabs.Panel><EmptyTable defaultText={cmsData.emptyCompletedProductivityDatarequestCaption} handleModal={handleModal} /></Tabs.Panel>
         </Tabs.Panels>
       </Tabs>
     </Box>
