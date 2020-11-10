@@ -40,6 +40,8 @@ const DataList = (props) => {
                 searchBy="client"
                 isSearchable
                 rowsText="results in total"
+                filteredText=""
+                rowText="result in total"
                 filters={[
                   {
                     key: 'enabled',
