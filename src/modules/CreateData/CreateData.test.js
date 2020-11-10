@@ -17,6 +17,18 @@ describe('Success test cases for: Loader component', () => {
     it('Renders correctly', () => {
       expect(wrapper.exists()).toBe(true);
     });
+
+    it('handle create ', () => {
+      wrapper.find("[data-test='handle-create']").simulate('click')
+    })
+
+    it('handle model', () => {
+      wrapper.find("[data-test='handle-modal']").simulate('click')
+    })
+
+    it('handle create', () => {
+      wrapper.find("[data-test='handle-button']").simulate('click')
+    })
   });
 });
 

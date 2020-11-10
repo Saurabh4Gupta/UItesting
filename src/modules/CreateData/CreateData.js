@@ -65,10 +65,10 @@ const CreateData = (props) => {
           />
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={closeModalHandler}>
+          <Button variant="secondary" data-test="handle-modal" onClick={closeModalHandler}>
             {cmsData.cancel}
           </Button>
-          <Button onClick={onSubmit}>{cmsData.create}</Button>
+          <Button data-test="handle-button" onClick={onSubmit}>{cmsData.create}</Button>
         </Modal.Footer>
       </Modal>
       <Stack flexDirection="row" justifyContent="space-between">
@@ -80,7 +80,7 @@ const CreateData = (props) => {
             </Caption>
           </TextContainer>
         </Stack>
-        <Button variant="secondary" iconLeft="add" onClick={handleCreateData}>
+        <Button variant="secondary" iconLeft="add" data-test="handle-create" onClick={handleCreateData}>
           {cmsData.createNewDataRequest}
         </Button>
       </Stack>
