@@ -38,7 +38,7 @@ const DataList = (props) => {
             {totalCount > 0 ? (
               <List
                 items={data}
-                searchBy="title"
+                searchBy="client"
                 isSearchable
                 rowsText="results in total"
                 filters={[
@@ -136,10 +136,10 @@ const DataList = (props) => {
                 }}
               />
             ) : (
-              <EmptyTable handleModal={handleModal} />
+              <EmptyTable defaultText={cmsData.emptyProductivityDatarequestCaption} handleModal={handleModal} />
               )}
           </Tabs.Panel>
-          <Tabs.Panel>Complete Tab</Tabs.Panel>
+          <Tabs.Panel><EmptyTable defaultText={cmsData.emptyCompletedProductivityDatarequestCaption} handleModal={handleModal} /></Tabs.Panel>
         </Tabs.Panels>
       </Tabs>
     </Box>

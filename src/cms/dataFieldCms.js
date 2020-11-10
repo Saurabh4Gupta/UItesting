@@ -40,4 +40,5 @@ export const dataFieldCms = {
   lastUpdate: 'Last Update',
   moveToComplete: 'Move to Complete',
   delete: 'Delete',
+  emptyCompletedProductivityDatarequestCaption: 'No Productivity data requests have been moved to this section yet.',
 }
