@@ -14,13 +14,20 @@ const UploadFile = (props) => {
       setError({ error: 'Upload tracker template' })
       return false;
     }
+
+    setError({});
     return true;
+
+
   }
 
   const onSubmit = () => {
     const isValid = validate();
+    console.log("++",isValid)
     if (isValid) {
       setModalOpen(false)
+      setFiles([])
+      setError({})
     }
   };
 
@@ -31,7 +38,9 @@ const UploadFile = (props) => {
   };
 
   const handleFileChange = (fileItems) => {
+    validate();
     setFiles(fileItems);
+    setError({})
   }
 
   return (

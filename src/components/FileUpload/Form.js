@@ -14,6 +14,7 @@ const Form = (props) => {
     console.log('Dropzone instance has initialised', files);
   };
 
+  
   return (
     <>
       <FormField
