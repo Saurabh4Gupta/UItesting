@@ -40,7 +40,7 @@ const data = {
 }
 
 export const getData = () => ({
-    totalCount: data.data.length,
+    totalCount: 0,
     data: data.data,
   })
 
