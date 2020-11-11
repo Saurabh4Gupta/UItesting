@@ -25,7 +25,7 @@ const DataField = (props) => {
   return (
     <>
       <PageController {...props} setIsUploadModal={setIsUploadModal} />
-      <Box m="30px">
+      <Box m="45px" mb="200px">
         <Overview />
         <CreateData
           cmsData={PageContent}

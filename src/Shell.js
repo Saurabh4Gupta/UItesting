@@ -5,12 +5,12 @@ import config from './config/config';
 import App from './App';
 
 const Shell = () => {
-  const { isBypassSecurity, isEmbeddedApp } = config;
+  const { isBypassSecurity, appOrigin, isEmbeddedApp } = config;
   // const { changeLanguage } = useContext(CmsContext);
   createBridge({
     // localeChangeHandler: locale => changeLanguage(locale),
     isBypassSecurity,
-    appOrigin: 'https://gdp-client01-brp-g1ga-media-ecosystem.az.brp.gdpdentsu.net',
+    appOrigin,
   });
   return (
     <PlatformShell cmsConfig={{ collectionName: '' }} showSideBar={false} isEmbeddedApp={isEmbeddedApp} appTitle="Productivity Manager">
