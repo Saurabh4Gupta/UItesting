@@ -15,14 +15,13 @@ import EmptyTable from './EmptyTable';
 
 const DataList = (props) => {
   const { cmsData, handleModal, dataList } = props;
-  console.log('DataList', dataList);
   const { data, totalCount } = dataList;
   const actions = (
     <Menu>
       <Menu.Button />
       <Menu.List>
-        <Menu.Item onClick={() => { }}>{cmsData.moveToComplete}</Menu.Item>
-        <Menu.Item onClick={() => { }}>{cmsData.delete}</Menu.Item>
+        <Menu.Item onClick={() => {}}>{cmsData.moveToComplete}</Menu.Item>
+        <Menu.Item onClick={() => {}}>{cmsData.delete}</Menu.Item>
       </Menu.List>
     </Menu>
   );
@@ -38,9 +37,11 @@ const DataList = (props) => {
             {totalCount > 0 ? (
               <List
                 items={data}
-                searchBy="title"
+                searchBy="client"
                 isSearchable
                 rowsText="results in total"
+                filteredText=""
+                rowText="result in total"
                 filters={[
                   {
                     key: 'enabled',
@@ -77,6 +78,7 @@ const DataList = (props) => {
                     year,
                     quarter,
                     updatedAt,
+                    status,
                   } = item;
                   return (
                     <div>
@@ -85,12 +87,9 @@ const DataList = (props) => {
                           alignItems="center"
                           flexDirection="row"
                           justifyContent="space-between"
-                          width="80%"
-                        >
+                          width="80%">
                           <Box width="25%">
-                            <b>
-                              {`${client} ${localMarket.label}`}
-                            </b>
+                            <b>{`${client} ${localMarket.label}`}</b>
                           </Box>
                           <Box width="32%">
                             <b>{name}</b>
@@ -99,13 +98,17 @@ const DataList = (props) => {
                             </Caption>
                           </Box>
                           <Box width="13%">
-                            <Chip
-                              variant="status"
-                              status="warning"
-                              hasStatusLight
-                            >
-                              {cmsData.overdue}
-                            </Chip>
+                            {status === cmsData.overdue ? (
+                              <Chip
+                                variant="status"
+                                status="warning"
+                                hasStatusLight
+                              >
+                                {cmsData.overdue}
+                              </Chip>
+                            ) : (
+                              ''
+                            )}
                           </Box>
                           <Box width="30%">
                             {`${cmsData.lastUpdate}: ${updatedAt}`}
@@ -115,14 +118,12 @@ const DataList = (props) => {
                           alignItems="center"
                           flexDirection="row"
                           justifyContent="flex-end"
-                          width="20%"
-                        >
+                          width="20%">
                           <Box>
                             <Button
                               variant="ghost"
                               size="small"
-                              iconLeft="layers"
-                            >
+                              iconLeft="layers">
                               {cmsData.viewDetails}
                             </Button>
                           </Box>
@@ -136,10 +137,18 @@ const DataList = (props) => {
                 }}
               />
             ) : (
-              <EmptyTable handleModal={handleModal} />
-              )}
+              <EmptyTable
+                defaultText={cmsData.emptyProductivityDatarequestCaption}
+                handleModal={handleModal}
+              />
+            )}
           </Tabs.Panel>
-          <Tabs.Panel>Complete Tab</Tabs.Panel>
+          <Tabs.Panel>
+            <EmptyTable
+              defaultText={cmsData.emptyCompletedProductivityDatarequestCaption}
+              handleModal={handleModal}
+            />
+          </Tabs.Panel>
         </Tabs.Panels>
       </Tabs>
     </Box>
@@ -153,7 +162,7 @@ DataList.propTypes = {
 };
 DataList.defaultProps = {
   cmsData: {},
-  handleModal: () => { },
+  handleModal: () => {},
   dataList: {},
 };
 export default DataList;
