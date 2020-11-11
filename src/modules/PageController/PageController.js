@@ -17,7 +17,8 @@ const PageController = (props) => (
     <Page
       metadata={<Title {...props} />}
       primaryAction={{
-        content: 'Upload File',
+        content: 'Upload new File',
+        icon: 'upload',
         onClick: () => props.setIsUploadModal(true),
         isDisabled: false,
       }}
