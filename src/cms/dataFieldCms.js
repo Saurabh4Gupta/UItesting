@@ -9,6 +9,8 @@ export const dataFieldCms = {
   briefHint: 'Tell us in detail what this data request is for, max 4000 characters',
   templateFileLabel: 'Add tracker template file',
   templateFileHint: 'Only .xls, .xlsx, .csv, .xlsb, .xlsm, .xlt, .xltm, .xltx files in 20mb or less',
+  uploadFileLabel: 'To upload a new file,drag and drop you file below or browse using the link',
+  uploadButtonText:'Upload new file',
   actualDataLabel: 'Actual Productivity Data',
   actualDataHint: 'Select the number of months data required',
   forecastDataLabel: 'Forecast Productivity Data',
