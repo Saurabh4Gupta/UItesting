@@ -87,7 +87,8 @@ const DataList = (props) => {
                           alignItems="center"
                           flexDirection="row"
                           justifyContent="space-between"
-                          width="80%">
+                          width="80%"
+                        >
                           <Box width="25%">
                             <b>{`${client} ${localMarket.label}`}</b>
                           </Box>
@@ -118,12 +119,14 @@ const DataList = (props) => {
                           alignItems="center"
                           flexDirection="row"
                           justifyContent="flex-end"
-                          width="20%">
+                          width="20%"
+                        >
                           <Box>
                             <Button
                               variant="ghost"
                               size="small"
-                              iconLeft="layers">
+                              iconLeft="layers"
+                            >
                               {cmsData.viewDetails}
                             </Button>
                           </Box>
