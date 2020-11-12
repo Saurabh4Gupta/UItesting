@@ -16,6 +16,12 @@ const PageController = (props) => (
   <Box bg="rgba(220,220,220,0.4)" className="main">
     <Page
       metadata={<Title {...props} />}
+      primaryAction={{
+        content: 'Upload new File',
+        icon: 'upload',
+        onClick: () => props.setIsUploadModal(true),
+        isDisabled: false,
+      }}
       breadcrumbs={[{
         content: 'Back to Clients',
         url: '/',
@@ -76,5 +82,10 @@ Title.propTypes = {
 Title.defaultProps = {
   match: {},
 }
-
+PageController.propTypes = {
+  setIsUploadModal: PropTypes.func,
+}
+PageController.defaultProps = {
+  setIsUploadModal: () => { },
+}
 export default PageController;
