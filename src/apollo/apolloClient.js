@@ -3,13 +3,10 @@ import { ApolloClient } from 'apollo-client';
 import link from './link';
 
 
-const apolloClient = (token, serviceconfig) => new ApolloClient({
-  link: link(`Bearer ${token}`, serviceconfig),
+const apolloClient = (token) => new ApolloClient({
+  link: link(`Bearer ${token}`),
   addTypename: false,
-  cache: new InMemoryCache({
-    // eslint-disable-next-line no-underscore-dangle
-    dataIdFromObject: o => (o._id ? `${o.__typename}:${o._id}` : null),
-  }),
+  cache: new InMemoryCache(),
 });
 
 export default apolloClient;

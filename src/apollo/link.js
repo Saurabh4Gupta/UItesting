@@ -8,25 +8,23 @@ import config from '../config/config';
 const { uri } = config;
 const subsUri = config.sUri;
 
-function getAuthLink(token, serviceconfig) {
+function getAuthLink(token) {
   const httpLink = new HttpLink({ uri });
   const authLink = setContext((_, { headers }) => ({
     headers: {
       ...headers,
       authorization: token || '',
-      serviceconfig,
     },
   }));
   return authLink.concat(httpLink)
 }
-function getWsLink(token, serviceconfig) {
+function getWsLink(token) {
   const wsLink = new WebSocketLink({
     uri: subsUri,
     options: {
       reconnect: true,
       connectionParams: {
         authorization: token,
-        serviceconfig,
       },
     },
   });
@@ -51,13 +49,13 @@ function getWsLink(token, serviceconfig) {
 }
 
 
-const link = (token, serviceconfig) => split(
+const link = (token) => split(
   ({ query }) => {
     const { kind, operation } = getMainDefinition(query);
     return kind === 'OperationDefinition' && operation === 'subscription';
   },
-  getWsLink(token, serviceconfig),
-  getAuthLink(token, serviceconfig),
+  getWsLink(token),
+  getAuthLink(token),
 );
 
 export default link;
