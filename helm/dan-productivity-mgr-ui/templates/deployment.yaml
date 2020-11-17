@@ -48,6 +48,10 @@ spec:
               value: "{{ .Values.apollo_graphql_uri }}"
             - name: APPOLO_SUBSCRIPTION_URI
               value: "{{ .Values.apollo_subscription_uri }}"
+            - name: APPORIGIN
+              value: "{{ .Values.apporigin }}"
+            - name: USE_METHOD_TO_FETCH_PERMS
+              value: "{{ .Values.use_method_to_fetch_perms }}"
           ports:
             - name: http
               containerPort: {{ .Values.port }}
