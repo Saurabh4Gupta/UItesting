@@ -7,11 +7,11 @@ import App from './App';
 const Shell = () => {
   const { isBypassSecurity, appOrigin, isEmbeddedApp } = config;
   // const { changeLanguage } = useContext(CmsContext);
-  createBridge({
-    // localeChangeHandler: locale => changeLanguage(locale),
-    isBypassSecurity,
-    appOrigin,
-  });
+//   createBridge({
+//     // localeChangeHandler: locale => changeLanguage(locale),
+//     isBypassSecurity,
+//     appOrigin,
+//   });
   return (
     <PlatformShell cmsConfig={{ collectionName: '' }} showSideBar={false} isEmbeddedApp={isEmbeddedApp} appTitle="Productivity Manager">
       <App />
