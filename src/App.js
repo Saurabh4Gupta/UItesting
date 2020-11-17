@@ -8,9 +8,9 @@ import client from './apollo';
 const Application = () => {
   const { token } = useAuth();
   return (
-    <ApolloProvider client={client(token)}>
+    //<ApolloProvider client={client(token)}>
       <Routes />
-    </ApolloProvider>
+   // </ApolloProvider>
   )
 };
 export default Application;
