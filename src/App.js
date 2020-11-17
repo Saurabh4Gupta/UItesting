@@ -6,9 +6,9 @@ import Routes from './Routes';
 import client from './apollo';
 
 const Application = () => {
-  const { token, serviceconfig } = useAuth();
+  const { token } = useAuth();
   return (
-    <ApolloProvider client={client(token, serviceconfig)}>
+    <ApolloProvider client={client(token)}>
       <Routes />
     </ApolloProvider>
   )
