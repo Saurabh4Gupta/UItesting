@@ -6,6 +6,9 @@ import Routes from './Routes';
 // import client from './apollo';
 
 const Application = () => {
+  console.log('>>>>>>>>>>>>>', useAuth());
+  const n = localStorage.getItem('okta-token-storage');
+  console.log('<<<<<<<<<<<<<<<<<<<<', JSON.parse(n).idToken);
   const { token } = useAuth();
   return (
     //<ApolloProvider client={client(token)}>
