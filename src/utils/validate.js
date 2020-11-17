@@ -1,5 +1,6 @@
 /* eslint-disable consistent-return */
 function validationRule(field, value) {
+  const date = new Date();
   switch (field) {
     case 'localMarket':
       return !value
@@ -20,17 +21,19 @@ function validationRule(field, value) {
     case 'dueDate':
       return !value
         ? 'This field cannot be blank'
-        : '';
+        : value < date.setDate(date.getDate() + 1)
+          ? 'Provide date greater than day after today date'
+          : '';
     case 'assignTo':
       return !value
         ? 'This field cannot be blank'
         : '';
     case 'actualData':
-      return !value
+      return (value === '')
         ? 'This field cannot be blank'
         : '';
     case 'forecastData':
-      return !value
+      return (value === '')
         ? 'This field cannot be blank'
         : '';
     case 'fileUpload':

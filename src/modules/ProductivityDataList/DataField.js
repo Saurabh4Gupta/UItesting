@@ -6,12 +6,14 @@ import PageController from '../PageController/PageController';
 import DataList from './DataList';
 import { dataFieldCms as PageContent } from '../../cms';
 import { getData } from '../Mock/mockData';
+import UploadFile from '../FileUpload/UploadFile';
 
 const DataField = (props) => {
   const [market] = useState('');
   const [dataList, setDataList] = useState(getData());
   const [isDataCreated, setDataCreated] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isUploadModal, setIsUploadModal] = useState(false);
   const handleModal = (value) => {
     setIsModalOpen(value)
   }
@@ -22,8 +24,8 @@ const DataField = (props) => {
   }, [isDataCreated])
   return (
     <>
-      <PageController {...props} />
-      <Box m="30px">
+      <PageController {...props} setIsUploadModal={setIsUploadModal} />
+      <Box m="45px" mb="200px">
         <Overview />
         <CreateData
           cmsData={PageContent}
@@ -32,6 +34,7 @@ const DataField = (props) => {
           handleModal={handleModal}
           setDataCreated={setDataCreated}
         />
+        <UploadFile cmsData={PageContent} modalOpen={isUploadModal} setModalOpen={setIsUploadModal} />
         <DataList cmsData={PageContent} handleModal={handleModal} dataList={dataList} />
       </Box>
     </>

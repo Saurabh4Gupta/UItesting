@@ -8,7 +8,8 @@ const config = {
     client_id: envVars.REACT_APP_CLIENT_ID,
   },
   cmsURL: envVars.REACT_APP_CMS_URL,
-  isBypassSecurity: envVars.REACT_APP_IS_BYPASS_SECURITY,
+  isBypassSecurity: envVars.REACT_APP_IS_BYPASS_SECURITY === 'true',
+  isEmbeddedApp: envVars.REACT_APP_FLAGIT_IS_EMBEDDED_APP === 'true',
   appOrigin: envVars.REACT_APP_APPORIGIN,
 };
 export default config;
