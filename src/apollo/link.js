@@ -8,54 +8,56 @@ import config from '../config/config';
 const { uri } = config;
 const subsUri = config.sUri;
 
-const httpLink = new HttpLink({ uri });
-const wsLink = new WebSocketLink({
-  uri: subsUri,
-  options: {
-    reconnect: true,
-    connectionParams: {
-      auth: localStorage.getItem('token')
-        ? `Bearer ${localStorage.getItem('token')}`
-        : '',
-    },
-  },
-});
-
-wsLink.subscriptionClient.on('connecting', () => {
-  console.log('connecting');
-});
-wsLink.subscriptionClient.on('connected', () => {
-  console.log('connected');
-});
-wsLink.subscriptionClient.on('reconnecting', () => {
-  console.log('reconnecting');
-});
-wsLink.subscriptionClient.on('reconnected', () => {
-  console.log('reconnected');
-});
-wsLink.subscriptionClient.on('disconnected', () => {
-  console.log('disconnected');
-});
-
-wsLink.subscriptionClient.maxConnectTimeGenerator.duration = () => wsLink.subscriptionClient.maxConnectTimeGenerator.max;
-
-const authLink = setContext((_, { headers }) => {
-  const token = localStorage.getItem('token');
-  return {
+function getAuthLink(token, serviceconfig) {
+  const httpLink = new HttpLink({ uri });
+  const authLink = setContext((_, { headers }) => ({
     headers: {
       ...headers,
-      auth: token ? `Bearer ${token}` : '',
+      authorization: token || '',
+      serviceconfig,
     },
-  };
-});
+  }));
+  return authLink.concat(httpLink)
+}
+function getWsLink(token, serviceconfig) {
+  const wsLink = new WebSocketLink({
+    uri: subsUri,
+    options: {
+      reconnect: true,
+      connectionParams: {
+        authorization: token,
+        serviceconfig,
+      },
+    },
+  });
+  wsLink.subscriptionClient.on('connecting', () => {
+    console.log('connecting');
+  });
+  wsLink.subscriptionClient.on('connected', () => {
+    console.log('connected');
+  });
+  wsLink.subscriptionClient.on('reconnecting', () => {
+    console.log('reconnecting');
+  });
+  wsLink.subscriptionClient.on('reconnected', () => {
+    console.log('reconnected');
+  });
+  wsLink.subscriptionClient.on('disconnected', () => {
+    console.log('disconnected');
+  });
 
-const link = split(
+  wsLink.subscriptionClient.maxConnectTimeGenerator.duration = () => wsLink.subscriptionClient.maxConnectTimeGenerator.max;
+  return wsLink;
+}
+
+
+const link = (token, serviceconfig) => split(
   ({ query }) => {
     const { kind, operation } = getMainDefinition(query);
     return kind === 'OperationDefinition' && operation === 'subscription';
   },
-  wsLink,
-  authLink.concat(httpLink),
+  getWsLink(token, serviceconfig),
+  getAuthLink(token, serviceconfig),
 );
 
 export default link;
