@@ -14,8 +14,11 @@ import PropTypes from 'prop-types';
 import EmptyTable from './EmptyTable';
 
 const DataList = (props) => {
-  const { cmsData, handleModal, dataList } = props;
+  const { cmsData, handleModal, dataList, clientCode } = props;
   const { data, totalCount } = dataList;
+  const showDataRequestDetails = (id) => {
+    props.history.push(`/viewDetails/${clientCode}?id=${id}`);
+  };
   const actions = (
     <Menu>
       <Menu.Button />
@@ -70,6 +73,7 @@ const DataList = (props) => {
                 ]}
                 renderItem={(item) => {
                   const {
+                    id,
                     client,
                     localMarket,
                     name,
@@ -126,6 +130,7 @@ const DataList = (props) => {
                               variant="ghost"
                               size="small"
                               iconLeft="layers"
+                              onClick={() => showDataRequestDetails(id)}
                             >
                               {cmsData.viewDetails}
                             </Button>
@@ -162,10 +167,14 @@ DataList.propTypes = {
   cmsData: PropTypes.object,
   handleModal: PropTypes.func,
   dataList: PropTypes.object,
+  clientCode: PropTypes.string,
+  history: PropTypes.object,
 };
 DataList.defaultProps = {
   cmsData: {},
   handleModal: () => {},
   dataList: {},
+  clientCode: '',
+  history: {},
 };
 export default DataList;

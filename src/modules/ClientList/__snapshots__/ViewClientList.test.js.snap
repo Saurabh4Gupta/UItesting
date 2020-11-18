@@ -50,5 +50,6 @@ exports[`Success test cases for: ViewClientList component Snapshot test for  Vie
       "viewDetails": "View Details",
     }
   }
+  history={Object {}}
 />
 `;
