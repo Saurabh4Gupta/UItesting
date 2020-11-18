@@ -44,9 +44,9 @@ spec:
               value: "{{ .Values.client_id }}"
             - name: SKIP_PREFLIGHT_CHECK
               value: "{{ .Values.skip_preflight_check }}"
-            - name: APPOLO_GRAPHQL_URI
+            - name: APOLLO_GRAPHQL_URI
               value: "{{ .Values.apollo_graphql_uri }}"
-            - name: APPOLO_SUBSCRIPTION_URI
+            - name: APOLLO_SUBSCRIPTION_URI
               value: "{{ .Values.apollo_subscription_uri }}"
           ports:
             - name: http
