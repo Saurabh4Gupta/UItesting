@@ -16,6 +16,7 @@ async function getValues(teamEnv, project){
     client_id: project.secrets[`${teamEnv}_client_id`],
     skip_preflight_check: project.secrets[`${teamEnv}_skip_preflight_check`],
     apporigin: project.secrets[`${teamEnv}_apporigin`],
+    flagit_is_embedded_app: project.secrets[`${teamEnv}_flagit_is_embedded_app`],
     use_method_to_fetch_perms: project.secrets[`${teamEnv}_use_method_to_fetch_perms`],
     ingress: {
       class: 'nginx',

@@ -52,6 +52,8 @@ spec:
               value: "{{ .Values.apporigin }}"
             - name: USE_METHOD_TO_FETCH_PERMS
               value: "{{ .Values.use_method_to_fetch_perms }}"
+            - name: FLAGIT_IS_EMBEDDED_APP
+              value: "{{ .Values.flagit_is_embedded_app }}"
           ports:
             - name: http
               containerPort: {{ .Values.port }}
