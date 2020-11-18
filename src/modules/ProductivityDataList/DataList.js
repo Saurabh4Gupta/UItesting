@@ -1,144 +1,38 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
-  List,
-  Menu,
-  Button,
-  Chip,
-  Stack,
-  Caption,
   Box,
-  Divider,
   Tabs,
 } from '@dentsu-ui/components';
 import PropTypes from 'prop-types';
 import EmptyTable from './EmptyTable';
+import TableList from './TableList';
 
 const DataList = (props) => {
   const { cmsData, handleModal, dataList } = props;
-  const { data, totalCount } = dataList;
-  const actions = (
-    <Menu>
-      <Menu.Button />
-      <Menu.List>
-        <Menu.Item onClick={() => {}}>{cmsData.moveToComplete}</Menu.Item>
-        <Menu.Item onClick={() => {}}>{cmsData.delete}</Menu.Item>
-      </Menu.List>
-    </Menu>
-  );
+  const { data, data2 } = dataList;
+  const [completeList, setCompleteList] = useState(data2);
+  const [ongoingList, setOngoingList] = useState(data);
+
+  console.log('this is complete list', completeList);
+  console.log('this is ongoing list', ongoingList);
+
+
+  const hanldleMoveToComplete = () => {
+    console.log('i am hittttttttttttttttttttttttttttttttttttt');
+    setOngoingList(ongoingList.splice(0, 1));
+  }
+
   return (
     <Box mt="30px">
       <Tabs>
         <Tabs.List>
-          <Tabs.Tab label={cmsData.ongoingLabel} count={dataList.totalCount} />
-          <Tabs.Tab label={cmsData.completeLabel} count={0} />
+          <Tabs.Tab label={cmsData.ongoingLabel} count={data.length} />
+          <Tabs.Tab label={cmsData.completeLabel} count={data2.length} />
         </Tabs.List>
         <Tabs.Panels>
           <Tabs.Panel>
-            {totalCount > 0 ? (
-              <List
-                items={data}
-                searchBy="client"
-                isSearchable
-                rowsText="results in total"
-                filteredText=""
-                rowText="result in total"
-                filters={[
-                  {
-                    key: 'enabled',
-                    label: 'Show',
-                    type: 'choice',
-                    defaultText: 'All',
-                    options: [
-                      {
-                        label: '2020 Q1',
-                        value: '2020 Q1',
-                      },
-                      {
-                        label: '2020 Q2',
-                        value: '2020 Q2',
-                      },
-                      {
-                        label: '2020 Q3',
-                        value: '2020 Q3',
-                      },
-                      {
-                        label: '2020 Q4',
-                        value: '2020 Q4',
-                      },
-                    ],
-                  },
-                ]}
-                renderItem={(item) => {
-                  const {
-                    client,
-                    localMarket,
-                    name,
-                    actualData,
-                    forecastData,
-                    year,
-                    quarter,
-                    updatedAt,
-                    status,
-                  } = item;
-                  return (
-                    <div>
-                      <Stack padding="15px">
-                        <Stack
-                          alignItems="center"
-                          flexDirection="row"
-                          justifyContent="space-between"
-                          width="80%"
-                        >
-                          <Box width="25%">
-                            <b>{`${client} ${localMarket.label}`}</b>
-                          </Box>
-                          <Box width="32%">
-                            <b>{name}</b>
-                            <Caption>
-                              {`${year} ${quarter}: ${actualData.label} ${cmsData.actual} + ${forecastData.label} ${cmsData.forecast}`}
-                            </Caption>
-                          </Box>
-                          <Box width="13%">
-                            {status === cmsData.overdue ? (
-                              <Chip
-                                variant="status"
-                                status="warning"
-                                hasStatusLight
-                              >
-                                {cmsData.overdue}
-                              </Chip>
-                            ) : (
-                              ''
-                            )}
-                          </Box>
-                          <Box width="30%">
-                            {`${cmsData.lastUpdate}: ${updatedAt}`}
-                          </Box>
-                        </Stack>
-                        <Stack
-                          alignItems="center"
-                          flexDirection="row"
-                          justifyContent="flex-end"
-                          width="20%"
-                        >
-                          <Box>
-                            <Button
-                              variant="ghost"
-                              size="small"
-                              iconLeft="layers"
-                            >
-                              {cmsData.viewDetails}
-                            </Button>
-                          </Box>
-                          <Divider orientation="vertical" isFlexChild />
-                          <Box>{actions}</Box>
-                        </Stack>
-                      </Stack>
-                      <Divider />
-                    </div>
-                  );
-                }}
-              />
+            {data.length > 0 ? (
+              <TableList data={ongoingList} cmsData={cmsData} handleClick={hanldleMoveToComplete} />
             ) : (
               <EmptyTable
                 defaultText={cmsData.emptyProductivityDatarequestCaption}
@@ -147,10 +41,14 @@ const DataList = (props) => {
             )}
           </Tabs.Panel>
           <Tabs.Panel>
+            {data2.length > 0 ? (
+              <TableList data={completeList} cmsData={cmsData} />
+          ) : (
             <EmptyTable
               defaultText={cmsData.emptyCompletedProductivityDatarequestCaption}
               handleModal={handleModal}
             />
+          )}
           </Tabs.Panel>
         </Tabs.Panels>
       </Tabs>
