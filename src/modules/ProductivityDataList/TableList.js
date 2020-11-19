@@ -2,7 +2,6 @@
 import React from 'react';
 import {
   List,
-  Menu,
   Button,
   Chip,
   Stack,
@@ -10,19 +9,11 @@ import {
   Box,
   Divider,
 } from '@dentsu-ui/components';
+import ActionBtn from './ActionBtn';
 
 const TableList = (props) => {
-  const { cmsData, data, handleClick  } = props;
+  const { cmsData, data, hanldleMoveToComplete  } = props;
 
-  const actions = (
-    <Menu>
-      <Menu.Button />
-      <Menu.List>
-        <Menu.Item onClick={handleClick}>{cmsData.moveToComplete}</Menu.Item>
-        <Menu.Item onClick={() => {}}>{cmsData.delete}</Menu.Item>
-      </Menu.List>
-    </Menu>
-  );
   return (
     <Box mt="30px">
       <List
@@ -69,6 +60,7 @@ const TableList = (props) => {
                     quarter,
                     updatedAt,
                     status,
+                    id,
                   } = item;
                   return (
                     <div>
@@ -121,7 +113,13 @@ const TableList = (props) => {
                             </Button>
                           </Box>
                           <Divider orientation="vertical" isFlexChild />
-                          <Box>{actions}</Box>
+                          <Box>
+                            <ActionBtn
+                              actionName={cmsData.moveToComplete}
+                              moveToCompleteAction={() => hanldleMoveToComplete(id)}
+                              deleteBtn={cmsData.delete}
+                            />
+                          </Box>
                         </Stack>
                       </Stack>
                       <Divider />

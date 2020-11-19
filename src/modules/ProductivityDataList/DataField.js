@@ -5,23 +5,34 @@ import Overview from '../Overview/Overview';
 import PageController from '../PageController/PageController';
 import DataList from './DataList';
 import { dataFieldCms as PageContent } from '../../cms';
-import { getData } from '../Mock/mockData';
+import { data } from '../Mock/mockData';
 import UploadFile from '../FileUpload/UploadFile';
 
 const DataField = (props) => {
   const [market] = useState('');
-  const [dataList, setDataList] = useState(getData());
+  const [dataList, setDataList] = useState(data);
+  const [completeData, setCompleteData] = useState([]);
   const [isDataCreated, setDataCreated] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isUploadModal, setIsUploadModal] = useState(false);
+
+
+  const hanldleMoveToComplete = (id) => {
+    const filterCompleteList = dataList.filter((item) => item.id === id);
+    const filterOngoinglist = dataList.filter((item) => item.id !== id);
+    setDataList(filterOngoinglist)
+    setCompleteData([...completeData, ...filterCompleteList]);
+  }
+
   const handleModal = (value) => {
     setIsModalOpen(value)
   }
   useEffect(() => {
     if (isDataCreated) {
-      setDataList(getData());
+      setDataList(data);
     }
   }, [isDataCreated])
+
   return (
     <>
       <PageController {...props} setIsUploadModal={setIsUploadModal} />
@@ -35,7 +46,13 @@ const DataField = (props) => {
           setDataCreated={setDataCreated}
         />
         <UploadFile cmsData={PageContent} modalOpen={isUploadModal} setModalOpen={setIsUploadModal} />
-        <DataList cmsData={PageContent} handleModal={handleModal} dataList={dataList} />
+        <DataList
+          cmsData={PageContent}
+          handleModal={handleModal}
+          dataList={dataList}
+          completeDataList={completeData}
+          hanldleMoveToComplete={hanldleMoveToComplete}
+        />
       </Box>
     </>
   )

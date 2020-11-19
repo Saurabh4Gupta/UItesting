@@ -1,4 +1,4 @@
-const data  = [
+export const data  = [
     {
       id: 1,
       client: 'Microsoft',
@@ -54,32 +54,6 @@ const data  = [
       quarter: 'Q2',
     },
   ]
-
-const data2 = [
-    {
-      id: 4,
-      client: 'Microsoft',
-      localMarket: { value: 'UK', label: 'United Kingdom' },
-      status: 'Overdue',
-      name: 'Productivity Q2 2020',
-      briefing: 'Need Data for the Q2 2020',
-      dueDate: '2020-08-25',
-      updatedAt: '29/10/20 at 14:32',
-      createdAt: '2020-08-14',
-      assignTo: 'UK Team',
-      actualData: { value: 4, label: '4 months' },
-      forecastData: { value: 8, label: '8 months' },
-      isActive: true,
-      isDeleted: false,
-      year: '2020',
-      quarter: 'Q2',
-    },
-  ]
-
-export const getData = () => ({
-    data,
-    data2,
-  })
 
 export function updateData(values) {
   values.createdAt = new Date();
@@ -196,4 +170,4 @@ const clientList = [
   { title: 'Procter & Gamble', avatar: '', clientCode: 'PG' },
 ]
 
-export { data, assignToOptions, monthOptions, options, clientList };
+export { assignToOptions, monthOptions, options, clientList };
