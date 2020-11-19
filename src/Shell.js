@@ -7,7 +7,7 @@ import App from './App';
 const Shell = () => {
   const { isEmbeddedApp } = config;
 
-  
+
   console.log('config>>>>>>', config);
   return (
     <PlatformShell isEmbeddedApp={isEmbeddedApp} appTitle="Productivity Manager">
