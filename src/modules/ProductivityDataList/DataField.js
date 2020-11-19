@@ -10,28 +10,39 @@ import UploadFile from '../FileUpload/UploadFile';
 
 const DataField = (props) => {
   const [market] = useState('');
-  const [dataList, setDataList] = useState(data);
+  const [ongoingData, setDataList] = useState(data);
   const [completeData, setCompleteData] = useState([]);
   const [isDataCreated, setDataCreated] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isUploadModal, setIsUploadModal] = useState(false);
-
+  const [tabIndex, setTabIndex] = useState(0);
 
   const hanldleMoveToComplete = (id) => {
-    const filterCompleteList = dataList.filter((item) => item.id === id);
-    const filterOngoinglist = dataList.filter((item) => item.id !== id);
-    setDataList(filterOngoinglist)
-    setCompleteData([...completeData, ...filterCompleteList]);
-  }
+    if (tabIndex === 0) {
+      const filterOngoinglist = ongoingData.filter((item) => item.id !== id);
+      const filterCompleteList = ongoingData.filter((item) => item.id === id);
+      setDataList(filterOngoinglist);
+      setCompleteData([...completeData, ...filterCompleteList]);
+    } else {
+      const filterOngoinglist = data.filter((item) => item.id === id);
+      const filterCompleteList = completeData.filter((item) => item.id !== id);
+      setDataList([...ongoingData, ...filterOngoinglist]);
+      setCompleteData([...filterCompleteList]);
+    }
+  };
+
+  const handleTabIndex = (index) => {
+    setTabIndex(index);
+  };
 
   const handleModal = (value) => {
-    setIsModalOpen(value)
-  }
+    setIsModalOpen(value);
+  };
   useEffect(() => {
     if (isDataCreated) {
       setDataList(data);
     }
-  }, [isDataCreated])
+  }, [isDataCreated]);
 
   return (
     <>
@@ -45,17 +56,23 @@ const DataField = (props) => {
           handleModal={handleModal}
           setDataCreated={setDataCreated}
         />
-        <UploadFile cmsData={PageContent} modalOpen={isUploadModal} setModalOpen={setIsUploadModal} />
+        <UploadFile
+          cmsData={PageContent}
+          modalOpen={isUploadModal}
+          setModalOpen={setIsUploadModal}
+        />
         <DataList
           cmsData={PageContent}
           handleModal={handleModal}
-          dataList={dataList}
+          dataList={ongoingData}
           completeDataList={completeData}
           hanldleMoveToComplete={hanldleMoveToComplete}
+          tabIndex={tabIndex}
+          handleTabIndex={handleTabIndex}
         />
       </Box>
     </>
-  )
-}
+  );
+};
 
-export default (DataField);
+export default DataField;

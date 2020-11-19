@@ -9,11 +9,10 @@ import EmptyTable from './EmptyTable';
 import TableList from './TableList';
 
 const DataList = (props) => {
-  const { cmsData, handleModal, dataList, completeDataList, hanldleMoveToComplete } = props;
-
+  const { cmsData, handleModal, dataList, completeDataList, hanldleMoveToComplete, tabIndex, handleTabIndex } = props;
   return (
     <Box mt="30px">
-      <Tabs>
+      <Tabs onChange={handleTabIndex} index={tabIndex}>
         <Tabs.List>
           <Tabs.Tab label={cmsData.ongoingLabel} count={dataList.length} />
           <Tabs.Tab label={cmsData.completeLabel} count={completeDataList.length} />
@@ -21,7 +20,7 @@ const DataList = (props) => {
         <Tabs.Panels>
           <Tabs.Panel>
             {dataList.length > 0 ? (
-              <TableList data={dataList} cmsData={cmsData} hanldleMoveToComplete={hanldleMoveToComplete} />
+              <TableList data={dataList} cmsData={cmsData} hanldleMoveToComplete={hanldleMoveToComplete} actionName={cmsData.moveToComplete} />
             ) : (
               <EmptyTable
                 defaultText={cmsData.emptyProductivityDatarequestCaption}
@@ -31,7 +30,13 @@ const DataList = (props) => {
           </Tabs.Panel>
           <Tabs.Panel>
             {completeDataList.length > 0 ? (
-              <TableList data={completeDataList} cmsData={cmsData} />
+              <TableList
+                data={completeDataList}
+                cmsData={cmsData}
+                actionName={cmsData.moveToOnGoing}
+                hanldleMoveToComplete={hanldleMoveToComplete}
+                showStatus={false}
+              />
           ) : (
             <EmptyTable
               defaultText={cmsData.emptyCompletedProductivityDatarequestCaption}
