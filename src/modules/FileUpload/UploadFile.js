@@ -34,13 +34,11 @@ const UploadFile = (props) => {
     setError({})
     setFiles([])
   };
-
   const handleFileChange = (fileItems) => {
     validate();
     setFiles(fileItems);
     setError({})
   }
-
   return (
     <>
       <Modal
