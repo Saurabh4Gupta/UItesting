@@ -1,5 +1,6 @@
-/* eslint-disable react/prop-types */
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import {
   List,
   Button,
@@ -12,13 +13,7 @@ import {
 import ActionBtn from './ActionBtn';
 
 const TableList = (props) => {
-  const {
-    cmsData,
-    data,
-    hanldleMoveToComplete,
-    actionName,
-    showStatus,
-  } = props;
+  const { cmsData, data, handleToggleData, actionName, showStatus } = props;
 
   return (
     <Box mt="30px">
@@ -116,7 +111,7 @@ const TableList = (props) => {
                   <Box>
                     <ActionBtn
                       actionName={actionName}
-                      moveToCompleteAction={() => hanldleMoveToComplete(id)}
+                      handleToggleData={() => handleToggleData(id)}
                       deleteBtn={cmsData.delete}
                       showStatus={showStatus}
                     />
@@ -130,6 +125,16 @@ const TableList = (props) => {
       />
     </Box>
   );
+};
+TableList.propTypes = {
+  cmsData: PropTypes.object,
+  data: PropTypes.arrayOf(PropTypes.object).isRequired,
+  handleToggleData: PropTypes.func.isRequired,
+  actionName: PropTypes.string.isRequired,
+  showStatus: PropTypes.string.isRequired,
+};
+TableList.defaultProps = {
+  cmsData: {},
 };
 
 export default TableList;

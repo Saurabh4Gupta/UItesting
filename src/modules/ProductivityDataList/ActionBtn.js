@@ -1,14 +1,14 @@
-/* eslint-disable react/prop-types */
 import React from 'react';
 import { Menu } from '@dentsu-ui/components';
+import PropTypes from 'prop-types';
 
 const ActionBtn = (props) => {
-  const { moveToCompleteAction, actionName, deleteBtn, showStatus } =  props;
+  const { handleToggleData, actionName, deleteBtn, showStatus } =  props;
   return (
     <Menu>
       <Menu.Button />
       <Menu.List>
-        <Menu.Item onClick={moveToCompleteAction}>{ actionName }</Menu.Item>
+        <Menu.Item onClick={handleToggleData}>{ actionName }</Menu.Item>
         {
           showStatus === false ? '' :  <Menu.Item>{deleteBtn}</Menu.Item>
         }
@@ -16,4 +16,11 @@ const ActionBtn = (props) => {
     </Menu>
   )
 }
+ActionBtn.propTypes = {
+  handleToggleData: PropTypes.func.isRequired,
+  actionName: PropTypes.string.isRequired,
+  deleteBtn: PropTypes.string.isRequired,
+  showStatus: PropTypes.object.isRequired,
+};
+
 export default ActionBtn;

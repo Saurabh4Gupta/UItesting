@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import React from 'react';
 import {
   Box,
@@ -9,18 +8,18 @@ import EmptyTable from './EmptyTable';
 import TableList from './TableList';
 
 const DataList = (props) => {
-  const { cmsData, handleModal, dataList, completeDataList, hanldleMoveToComplete, tabIndex, handleTabIndex } = props;
+  const { cmsData, handleModal, ongoingDataList, completeDataList, handleToggleData, tabIndex, handleTabIndex } = props;
   return (
     <Box mt="30px">
       <Tabs onChange={handleTabIndex} index={tabIndex}>
         <Tabs.List>
-          <Tabs.Tab label={cmsData.ongoingLabel} count={dataList.length} />
+          <Tabs.Tab label={cmsData.ongoingLabel} count={ongoingDataList.length} />
           <Tabs.Tab label={cmsData.completeLabel} count={completeDataList.length} />
         </Tabs.List>
         <Tabs.Panels>
           <Tabs.Panel>
-            {dataList.length > 0 ? (
-              <TableList data={dataList} cmsData={cmsData} hanldleMoveToComplete={hanldleMoveToComplete} actionName={cmsData.moveToComplete} />
+            {ongoingDataList.length > 0 ? (
+              <TableList data={ongoingDataList} cmsData={cmsData} handleToggleData={handleToggleData} actionName={cmsData.moveToComplete} />
             ) : (
               <EmptyTable
                 defaultText={cmsData.emptyProductivityDatarequestCaption}
@@ -34,7 +33,7 @@ const DataList = (props) => {
                 data={completeDataList}
                 cmsData={cmsData}
                 actionName={cmsData.moveToOnGoing}
-                hanldleMoveToComplete={hanldleMoveToComplete}
+                handleToggleData={handleToggleData}
                 showStatus={false}
               />
           ) : (
@@ -53,11 +52,16 @@ const DataList = (props) => {
 DataList.propTypes = {
   cmsData: PropTypes.object,
   handleModal: PropTypes.func,
-  dataList: PropTypes.object,
+  ongoingDataList: PropTypes.arrayOf(PropTypes.object),
+  completeDataList:PropTypes.arrayOf(PropTypes.object),
+  handleToggleData:PropTypes.func.isRequired,
+  tabIndex: PropTypes.number.isRequired,
+  handleTabIndex:PropTypes.func.isRequired,
 };
 DataList.defaultProps = {
   cmsData: {},
   handleModal: () => {},
-  dataList: {},
+  ongoingDataList: {},
+  completeDataList:[],
 };
 export default DataList;

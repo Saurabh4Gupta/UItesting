@@ -17,7 +17,7 @@ const DataField = (props) => {
   const [isUploadModal, setIsUploadModal] = useState(false);
   const [tabIndex, setTabIndex] = useState(0);
 
-  const hanldleMoveToComplete = (id) => {
+  const handleToggleData = (id) => {
     if (tabIndex === 0) {
       const filterOngoinglist = ongoingData.filter((item) => item.id !== id);
       const filterCompleteList = ongoingData.filter((item) => item.id === id);
@@ -64,9 +64,9 @@ const DataField = (props) => {
         <DataList
           cmsData={PageContent}
           handleModal={handleModal}
-          dataList={ongoingData}
+          ongoingDataList={ongoingData}
           completeDataList={completeData}
-          hanldleMoveToComplete={hanldleMoveToComplete}
+          handleToggleData={handleToggleData}
           tabIndex={tabIndex}
           handleTabIndex={handleTabIndex}
         />
