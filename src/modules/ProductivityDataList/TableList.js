@@ -13,7 +13,14 @@ import {
 import ActionBtn from './ActionBtn';
 
 const TableList = (props) => {
-  const { cmsData, data, handleToggleData, actionName, showStatus, deleteRequest, setIsDeleteModal, isDeleteModal } = props;
+  const {
+    cmsData,
+    data,
+    handleToggleData,
+    actionName,
+    showStatus,
+    handleDeleteModel,
+  } = props;
 
   return (
     <Box mt="30px">
@@ -114,9 +121,8 @@ const TableList = (props) => {
                       handleToggleData={() => handleToggleData(id)}
                       deleteBtn={cmsData.delete}
                       showStatus={showStatus}
-                      deleteRequest={() => deleteRequest(id)}
-                      setIsDeleteModal={setIsDeleteModal}
-                      isDeleteModal={isDeleteModal}
+                      objId={id}
+                      handleDeleteModel={handleDeleteModel}
                     />
                   </Box>
                 </Stack>
@@ -135,9 +141,7 @@ TableList.propTypes = {
   handleToggleData: PropTypes.func.isRequired,
   actionName: PropTypes.string.isRequired,
   showStatus: PropTypes.string,
-  deleteRequest: PropTypes.func.isRequired,
-  setIsDeleteModal: PropTypes.func.isRequired,
-  isDeleteModal: PropTypes.bool.isRequired,
+  handleDeleteModel: PropTypes.func.isRequired,
 };
 TableList.defaultProps = {
   cmsData: {},
