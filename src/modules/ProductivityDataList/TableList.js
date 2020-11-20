@@ -20,7 +20,12 @@ const TableList = (props) => {
     actionName,
     showStatus,
     handleDeleteModel,
+    clientCode,
   } = props;
+
+  const showDataRequestDetails = (id) => {
+    props.history.push(`/viewDetails/${clientCode}?id=${id}`);
+  };
 
   return (
     <Box mt="30px">
@@ -110,7 +115,12 @@ const TableList = (props) => {
                   width="20%"
                 >
                   <Box>
-                    <Button variant="ghost" size="small" iconLeft="layers">
+                    <Button
+                      variant="ghost"
+                      size="small"
+                      iconLeft="layers"
+                      onClick={() => showDataRequestDetails(id)}
+                    >
                       {cmsData.viewDetails}
                     </Button>
                   </Box>
@@ -142,10 +152,14 @@ TableList.propTypes = {
   actionName: PropTypes.string.isRequired,
   showStatus: PropTypes.string,
   handleDeleteModel: PropTypes.func.isRequired,
+  history: PropTypes.object,
+  clientCode: PropTypes.string,
 };
 TableList.defaultProps = {
   cmsData: {},
   showStatus: '',
+  history: {},
+  clientCode: '',
 };
 
 export default TableList;
