@@ -34,18 +34,16 @@ const UploadFile = (props) => {
     setError({})
     setFiles([])
   };
-
   const handleFileChange = (fileItems) => {
     validate();
     setFiles(fileItems);
     setError({})
   }
-
   return (
     <>
       <Modal
         isFullHeight={false}
-        width="540px"
+        width="650px"
         isOpen={modalOpen}
         onClose={onCloseModal}
       >
