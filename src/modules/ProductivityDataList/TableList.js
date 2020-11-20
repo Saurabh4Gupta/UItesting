@@ -13,7 +13,7 @@ import {
 import ActionBtn from './ActionBtn';
 
 const TableList = (props) => {
-  const { cmsData, data, handleToggleData, actionName, showStatus } = props;
+  const { cmsData, data, handleToggleData, actionName, showStatus, deleteRequest, setIsDeleteModal, isDeleteModal } = props;
 
   return (
     <Box mt="30px">
@@ -50,7 +50,7 @@ const TableList = (props) => {
             ],
           },
         ]}
-        renderItem={(item) => {
+        renderItem={(item, index) => {
           const {
             client,
             localMarket,
@@ -64,7 +64,7 @@ const TableList = (props) => {
             id,
           } = item;
           return (
-            <div>
+            <div key={index}>
               <Stack padding="15px">
                 <Stack
                   alignItems="center"
@@ -114,6 +114,9 @@ const TableList = (props) => {
                       handleToggleData={() => handleToggleData(id)}
                       deleteBtn={cmsData.delete}
                       showStatus={showStatus}
+                      deleteRequest={() => deleteRequest(id)}
+                      setIsDeleteModal={setIsDeleteModal}
+                      isDeleteModal={isDeleteModal}
                     />
                   </Box>
                 </Stack>
@@ -131,10 +134,14 @@ TableList.propTypes = {
   data: PropTypes.arrayOf(PropTypes.object).isRequired,
   handleToggleData: PropTypes.func.isRequired,
   actionName: PropTypes.string.isRequired,
-  showStatus: PropTypes.string.isRequired,
+  showStatus: PropTypes.string,
+  deleteRequest: PropTypes.func.isRequired,
+  setIsDeleteModal: PropTypes.func.isRequired,
+  isDeleteModal: PropTypes.bool.isRequired,
 };
 TableList.defaultProps = {
   cmsData: {},
+  showStatus: '',
 };
 
 export default TableList;

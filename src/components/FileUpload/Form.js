@@ -18,7 +18,7 @@ const Form = (props) => {
   return (
     <>
       <FormField
-        label={cmsData.templateFileLabel}
+        label={cmsData.uploadFileLabel}
         hint={cmsData.templateFileHint}
         {...errors}
       >

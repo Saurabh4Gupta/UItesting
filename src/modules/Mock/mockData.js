@@ -1,4 +1,5 @@
-export const data  = [
+const data = {
+  data: [
     {
       id: 1,
       client: 'Microsoft',
@@ -53,7 +54,20 @@ export const data  = [
       year: '2020',
       quarter: 'Q2',
     },
-  ]
+  ],
+};
+
+const completedData = {
+  data: [],
+};
+export const getCompletedData = () => ({
+  completedCount: completedData.data.length,
+  completedData: completedData.data,
+});
+export const getData = () => ({
+  totalCount: data.data.length,
+  data: data.data,
+});
 
 export function updateData(values) {
   values.createdAt = new Date();
@@ -139,7 +153,7 @@ const monthOptions = [
     value: 12,
     label: '12 months',
   },
-]
+];
 const assignToOptions = [
   {
     value: 'ARG',
@@ -168,6 +182,6 @@ const clientList = [
   { title: 'The Kraft Heinz Company', avatar: '', clientCode: 'KHC' },
   { title: 'Microsoft Corporation', avatar: 'abc.ico', clientCode: 'MC' },
   { title: 'Procter & Gamble', avatar: '', clientCode: 'PG' },
-]
+];
 
 export { assignToOptions, monthOptions, options, clientList };

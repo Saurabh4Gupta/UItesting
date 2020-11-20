@@ -65,7 +65,7 @@ const UploadFile = (props) => {
             variant="secondary"
             onClick={onCloseModal}
           >
-            cancel
+            Cancel
           </Button>
           <Button onClick={() => onSubmit()}>Upload</Button>
         </Modal.Footer>
