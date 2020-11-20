@@ -57,6 +57,8 @@ const DataList = (props) => {
                 actionName={cmsData.moveToOnGoing}
                 handleToggleData={handleToggleData}
                 showStatus={false}
+                clientCode={clientCode}
+                {...props}
               />
             ) : (
               <EmptyTable
