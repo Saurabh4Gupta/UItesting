@@ -14,9 +14,7 @@ const DataList = (props) => {
     handleToggleData,
     tabIndex,
     handleTabIndex,
-    deleteRequest,
-    setIsDeleteModal,
-    isDeleteModal,
+    handleDeleteModel,
   } = props;
   const { data, totalCount } = ongoingDataList;
   const { completedData, completedCount } = completeDataList;
@@ -39,9 +37,7 @@ const DataList = (props) => {
                 cmsData={cmsData}
                 handleToggleData={handleToggleData}
                 actionName={cmsData.moveToComplete}
-                deleteRequest={deleteRequest}
-                setIsDeleteModal={setIsDeleteModal}
-                isDeleteModal={isDeleteModal}
+                handleDeleteModel={handleDeleteModel}
               />
             ) : (
               <EmptyTable
@@ -82,9 +78,7 @@ DataList.propTypes = {
   handleToggleData: PropTypes.func.isRequired,
   tabIndex: PropTypes.number.isRequired,
   handleTabIndex: PropTypes.func.isRequired,
-  deleteRequest: PropTypes.func.isRequired,
-  setIsDeleteModal: PropTypes.func.isRequired,
-  isDeleteModal: PropTypes.bool.isRequired,
+  handleDeleteModel: PropTypes.func.isRequired,
 };
 DataList.defaultProps = {
   cmsData: {},

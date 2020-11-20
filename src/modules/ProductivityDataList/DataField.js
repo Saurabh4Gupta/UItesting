@@ -8,6 +8,7 @@ import DataList from './DataList';
 import { dataFieldCms as PageContent } from '../../cms';
 import { getData, getCompletedData } from '../Mock/mockData';
 import UploadFile from '../FileUpload/UploadFile';
+import DeleteData from '../CreateData/DeleteData';
 
 const DataField = (props) => {
   const { match } = props;
@@ -21,6 +22,7 @@ const DataField = (props) => {
   const [isUploadModal, setIsUploadModal] = useState(false);
   const [isDeleteModal, setIsDeleteModal] = useState(false);
   const [tabIndex, setTabIndex] = useState(0);
+  const [idDelete, setID] = useState(0);
 
   const handleToggleData = (id) => {
     if (tabIndex === 0) {
@@ -57,12 +59,17 @@ const DataField = (props) => {
     }
   };
 
-  const deleteRequest = (id) => {
-    const OngoingRequest = ongoingData.data.filter((item) => item.id !== id);
-    const filterOngoinglist = { totalCount:OngoingRequest.length, data: OngoingRequest }
-    setIsDeleteModal(false)
-    setDataList(filterOngoinglist)
-  }
+  const deleteRequest = () => {
+    const OngoingRequest = ongoingData.data.filter(
+      (item) => item.id !== idDelete,
+    );
+    const filterOngoinglist = {
+      totalCount: OngoingRequest.length,
+      data: OngoingRequest,
+    };
+    setIsDeleteModal(false);
+    setDataList(filterOngoinglist);
+  };
 
   const handleTabIndex = (index) => {
     setTabIndex(index);
@@ -70,6 +77,11 @@ const DataField = (props) => {
 
   const handleModal = (value) => {
     setIsModalOpen(value);
+  };
+
+  const handleDeleteModel = (value) => {
+    setIsDeleteModal(true);
+    setID(value);
   };
   useEffect(() => {
     if (isDataCreated) {
@@ -98,6 +110,11 @@ const DataField = (props) => {
           modalOpen={isUploadModal}
           setModalOpen={setIsUploadModal}
         />
+        <DeleteData
+          modalOpen={isDeleteModal}
+          setModalOpen={setIsDeleteModal}
+          deleteRequest={deleteRequest}
+        />
         <DataList
           cmsData={PageContent}
           handleModal={handleModal}
@@ -106,9 +123,7 @@ const DataField = (props) => {
           handleToggleData={handleToggleData}
           tabIndex={tabIndex}
           handleTabIndex={handleTabIndex}
-          setIsDeleteModal={setIsDeleteModal}
-          isDeleteModal={isDeleteModal}
-          deleteRequest={deleteRequest}
+          handleDeleteModel={handleDeleteModel}
         />
       </Box>
     </>
