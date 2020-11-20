@@ -172,9 +172,10 @@ const clientList = [
   { title: 'Burger King', avatar: '', clientCode: 'BK' },
   { title: 'General Motors', avatar: '', clientCode: 'GM' },
   { title: "Kellogg's Company", avatar: '', clientCode: 'KC' },
-  { title: 'The Kraft Heinz Company', avatar: '', clientCode: 'KHC' },
   { title: 'Microsoft Corporation', avatar: 'abc.ico', clientCode: 'MC' },
   { title: 'Procter & Gamble', avatar: '', clientCode: 'PG' },
+  { title: 'The Kraft Heinz Company', avatar: '', clientCode: 'KHC' },
+
 ]
 
 export { data, assignToOptions, monthOptions, options, clientList };

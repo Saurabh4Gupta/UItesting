@@ -8,27 +8,42 @@ import {
   Stack,
   Caption,
   Heading,
+  Link,
 } from '@dentsu-ui/components';
 import PropTypes from 'prop-types';
 import { clientList } from '../Mock/mockData';
 
-const PageController = (props) => (
-  <Box bg="rgba(220,220,220,0.4)" className="main">
-    <Page
-      metadata={<Title {...props} />}
-      primaryAction={{
-        content: 'Upload new File',
-        icon: 'upload',
-        onClick: () => props.setIsUploadModal(true),
-        isDisabled: false,
-      }}
-      breadcrumbs={[{
-        content: 'Back to Clients',
-        url: '/',
-      }]}
-    />
-  </Box>
-);
+const PageController = (props) => {
+  const { isToShowDataRequest, history, clientCode } = props;
+  const { title } = clientList.find(
+    (client) => client.clientCode === clientCode,
+  );
+  const contentToShow = isToShowDataRequest
+    ? `Back to ${title}`
+    : 'Back to Clients';
+  const clientNavigationHandler = () => (isToShowDataRequest
+      ? history.replace(`/datafield/${clientCode}`)
+      : history.replace('/'));
+  return (
+    <Box bg="rgba(220,220,220,0.4)" className="main">
+      <Page
+        metadata={<Title onBack={clientNavigationHandler} {...props} />}
+        primaryAction={{
+          content: 'Upload new File',
+          icon: 'upload',
+          onClick: () => props.setIsUploadModal(true),
+          isDisabled: false,
+        }}
+        breadcrumbs={[
+          {
+            content: contentToShow,
+            onClick: clientNavigationHandler,
+          },
+        ]}
+      />
+    </Box>
+  );
+};
 
 const HeaderContent = () => (
   <Stack flex="row" mt="30px">
@@ -45,16 +60,24 @@ const HeaderContent = () => (
 );
 
 const Title = (props) => {
-  const { title, avatar } = clientList.find(client => client.clientCode === props.match.params.clientCode);
+  const { onBack, isToShowDataRequest, clientCode } = props;
+  const { title, avatar } = clientList.find(
+    (client) => client.clientCode === clientCode,
+  );
+  const clientLogo = (
+    <Image
+      src={`/${avatar}`}
+      fallbackSrc="https://via.placeholder.com/150"
+      isRounded
+      htmlWidth="110"
+      htmlHeight="110"
+      onClick={isToShowDataRequest && onBack}
+    />
+  );
   return (
     <Stack>
-      <Image
-        src={`/${avatar}`}
-        fallbackSrc="https://via.placeholder.com/150"
-        isRounded
-        htmlWidth="110"
-        htmlHeight="110"
-      />
+      {isToShowDataRequest ? <Link>{clientLogo}</Link> : clientLogo}
+
       <Stack flexDirection="column" ml="20px">
         <div>
           <TextContainer>
@@ -76,16 +99,26 @@ const Title = (props) => {
 };
 
 Title.propTypes = {
-  match: PropTypes.object,
-}
+  isToShowDataRequest: PropTypes.bool,
+  clientCode: PropTypes.string,
+  onBack: PropTypes.func,
+};
 
 Title.defaultProps = {
-  match: {},
-}
+  isToShowDataRequest: false,
+  clientCode: '',
+  onBack: () => {},
+};
 PageController.propTypes = {
   setIsUploadModal: PropTypes.func,
-}
+  isToShowDataRequest: PropTypes.bool,
+  clientCode: PropTypes.string,
+  history: PropTypes.object,
+};
 PageController.defaultProps = {
-  setIsUploadModal: () => { },
-}
+  setIsUploadModal: () => {},
+  isToShowDataRequest: false,
+  clientCode: '',
+  history: {},
+};
 export default PageController;
