@@ -37,12 +37,14 @@ const ClientList = (props) => {
                   </Link>
                 )}
                 media={(
-                  <Image
-                    src={avatar}
-                    size="30px"
-                    fallbackSrc="https://via.placeholder.com/150"
-                    onClick={() => showClientDetails(clientCode)}
-                  />
+                  <Link>
+                    <Image
+                      src={avatar}
+                      size="30px"
+                      fallbackSrc="https://via.placeholder.com/150"
+                      onClick={() => showClientDetails(clientCode)}
+                    />
+                  </Link>
                 )}
                 actions={(
                   <Link iconLeft="layers" url={`/datafield/${item.clientCode}`}>

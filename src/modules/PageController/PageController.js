@@ -8,6 +8,7 @@ import {
   Stack,
   Caption,
   Heading,
+  Link,
 } from '@dentsu-ui/components';
 import PropTypes from 'prop-types';
 import { clientList } from '../Mock/mockData';
@@ -63,16 +64,20 @@ const Title = (props) => {
   const { title, avatar } = clientList.find(
     (client) => client.clientCode === clientCode,
   );
+  const clientLogo = (
+    <Image
+      src={`/${avatar}`}
+      fallbackSrc="https://via.placeholder.com/150"
+      isRounded
+      htmlWidth="110"
+      htmlHeight="110"
+      onClick={isToShowDataRequest && onBack}
+    />
+  );
   return (
     <Stack>
-      <Image
-        src={`/${avatar}`}
-        fallbackSrc="https://via.placeholder.com/150"
-        isRounded
-        htmlWidth="110"
-        htmlHeight="110"
-        onClick={isToShowDataRequest && onBack}
-      />
+      {isToShowDataRequest ? <Link>{clientLogo}</Link> : clientLogo}
+
       <Stack flexDirection="column" ml="20px">
         <div>
           <TextContainer>
