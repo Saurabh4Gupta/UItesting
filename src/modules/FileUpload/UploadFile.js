@@ -45,7 +45,7 @@ const UploadFile = (props) => {
     <>
       <Modal
         isFullHeight={false}
-        width="540px"
+        width="650px"
         isOpen={modalOpen}
         onClose={onCloseModal}
       >
