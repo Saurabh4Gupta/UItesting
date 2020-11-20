@@ -13,10 +13,10 @@ describe('Success test cases for: UploadFile component', () => {
     });
 
     it('Test Upload click event', () => {
-      wrapper.find({children: "Upload"}).simulate('click');
+      wrapper.find({ children: 'Upload' }).simulate('click');
     });
     it('Test Cancel click event', () => {
-      wrapper.find({children: "Cancel"}).simulate('click');
+      wrapper.find({ children: 'Cancel' }).simulate('click');
     });
 
 
@@ -32,7 +32,7 @@ describe('Success test cases for: UploadFile component', () => {
   //     //   target: {
   //     //     value: fn,
   //     //   },
-  //     // }); 
+  //     // });
   //     //wrapper.find('Button').simulate('click');
   //    // expect(fn).toHaveBeenCalled();
   //   });
@@ -46,9 +46,9 @@ describe('Success test cases for: UploadFile component', () => {
     //     value: {setFiles(files)}
     //           },
     // });
-    //const [error, setError] = useState({});
-    //const [files, setFiles] = useState([]);
-    
+    // const [error, setError] = useState({});
+    // const [files, setFiles] = useState([]);
+
     // expect(setFiles).toBeTruthy();
     // })
 
@@ -60,7 +60,5 @@ describe('Success test cases for: UploadFile component', () => {
     it('Renders correctly', () => {
       expect(wrapper.exists()).toBe(true);
     });
-
   });
 });
-
