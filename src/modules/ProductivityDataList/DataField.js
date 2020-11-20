@@ -10,7 +10,9 @@ import { getData } from '../Mock/mockData';
 import UploadFile from '../FileUpload/UploadFile';
 
 const DataField = (props) => {
-  const { clientCode } = props;
+  const { match } = props;
+  const { params } = match;
+  const { clientCode } = params;
   const [market] = useState('');
   const [dataList, setDataList] = useState(getData());
   const [isDataCreated, setDataCreated] = useState(false);
@@ -59,10 +61,10 @@ const DataField = (props) => {
 };
 
 DataField.propTypes = {
-  clientCode: PropTypes.string,
+  match: PropTypes.object,
 };
 DataField.defaultProps = {
-  clientCode: '',
+  match: {},
 };
 
 export default DataField;
