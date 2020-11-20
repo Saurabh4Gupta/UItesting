@@ -10,6 +10,8 @@ export const dataFieldCms = {
   templateFileLabel: 'Add tracker template file',
   templateFileHint: 'Only .xls, .xlsx, .csv, .xlsb, .xlsm, .xlt, .xltm, .xltx files in 20mb or less',
   uploadFileLabel: 'To upload a new file,drag and drop you file below or browse using the link',
+  uploadFileLargeMessage: 'File must be less than 20MB',
+  labelFileTypeNotAllowed:'File must be of type .xls, .xlsx, .csv, .xlsb, .xlsm, .xlt, .xltm, .xltx',
   uploadButtonText:'Upload new file',
   actualDataLabel: 'Actual Productivity Data',
   actualDataHint: 'Select the number of months data required',

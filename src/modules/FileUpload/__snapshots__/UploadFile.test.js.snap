@@ -1,0 +1,86 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Success test cases for: UploadFile component Snapshot test for  UploadFile component Test to match the snapsot 1`] = `
+<Fragment>
+  <ForwardRef
+    isFullHeight={false}
+    isOpen={false}
+    onClose={[Function]}
+    width="650px"
+  >
+    <ForwardRef
+      title="Upload new file"
+    />
+    <ForwardRef>
+      <Form
+        cmsData={
+          Object {
+            "actual": "actuals",
+            "actualDataHint": "Select the number of months data required",
+            "actualDataLabel": "Actual Productivity Data",
+            "assignToHint": "Only the person or team you assign this to will have access. Once you click 'Create' ,
+  they will be sent email notifications asking them to fill in the data request.",
+            "assignToLabel": "Assign To",
+            "briefHint": "Tell us in detail what this data request is for, max 4000 characters",
+            "briefLabel": "Briefing",
+            "cancel": "Cancel",
+            "complete": "Complete",
+            "completeLabel": "Complete",
+            "create": "Create",
+            "createNewDataRequest": "Create new data request",
+            "datePlaceHolder": "Date",
+            "delete": "Delete",
+            "dueDateHint": "Enter the date that you need this data request by",
+            "dueDateLabel": "Due Date",
+            "edit": "Edit",
+            "editDataRequest": "Edit data request",
+            "emptyCompletedProductivityDatarequestCaption": "No Productivity data requests have been moved to this section yet.",
+            "emptyLabel": "Create new data request",
+            "emptyProductivityDatarequestCaption": "There are currently no active Productivity data requests",
+            "forecast": "forecast",
+            "forecastDataHint": "Select the number of months data required",
+            "forecastDataLabel": "Forecast Productivity Data",
+            "labelFileTypeNotAllowed": "File must be of type .xls, .xlsx, .csv, .xlsb, .xlsm, .xlt, .xltm, .xltx",
+            "lastUpdate": "Last Update",
+            "localMarketHint": "Choose the market you wish to create this data request for",
+            "localMarketLabel": "Local Market",
+            "moveToComplete": "Move to Complete",
+            "nameHint": "Make sure it's clear to help others identify it.Max 255 characters",
+            "nameLabel": "Data request name",
+            "ongoing": "Ongoing",
+            "ongoingLabel": "Ongoing",
+            "overdue": "Overdue",
+            "productivityDatarequestCaption": " The ongoing and complete productivity data requests created for this client",
+            "productivityDatarequestHeading": "Productivity data requests",
+            "selectPlaceHolder": "Please Select",
+            "templateFileHint": "Only .xls, .xlsx, .csv, .xlsb, .xlsm, .xlt, .xltm, .xltx files in 20mb or less",
+            "templateFileLabel": "Add tracker template file",
+            "uploadButtonText": "Upload new file",
+            "uploadFileLabel": "To upload a new file,drag and drop you file below or browse using the link",
+            "uploadFileLargeMessage": "File must be less than 20MB",
+            "viewClientsCaption": "Choose the client you wish to view",
+            "viewClientsHeading": "My clients",
+            "viewDetails": "View Details",
+          }
+        }
+        errors={Object {}}
+        files={Array []}
+        handleFileChange={[Function]}
+      />
+    </ForwardRef>
+    <ForwardRef>
+      <ForwardRef
+        onClick={[Function]}
+        variant="secondary"
+      >
+        Cancel
+      </ForwardRef>
+      <ForwardRef
+        onClick={[Function]}
+      >
+        Upload
+      </ForwardRef>
+    </ForwardRef>
+  </ForwardRef>
+</Fragment>
+`;
