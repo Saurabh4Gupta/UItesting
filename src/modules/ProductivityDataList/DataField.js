@@ -124,6 +124,8 @@ const DataField = (props) => {
           tabIndex={tabIndex}
           handleTabIndex={handleTabIndex}
           handleDeleteModel={handleDeleteModel}
+          clientCode={clientCode}
+          {...props}
         />
       </Box>
     </>
