@@ -55,12 +55,19 @@ const data = {
       quarter: 'Q2',
     },
   ],
-}
+};
 
+const completedData = {
+  data: [],
+};
+export const getCompletedData = () => ({
+  completedCount: completedData.data.length,
+  completedData: completedData.data,
+});
 export const getData = () => ({
-    totalCount: data.data.length,
-    data: data.data,
-  })
+  totalCount: data.data.length,
+  data: data.data,
+});
 
 export function updateData(values) {
   values.createdAt = new Date();
@@ -146,7 +153,7 @@ const monthOptions = [
     value: 12,
     label: '12 months',
   },
-]
+];
 const assignToOptions = [
   {
     value: 'ARG',
@@ -172,10 +179,9 @@ const clientList = [
   { title: 'Burger King', avatar: '', clientCode: 'BK' },
   { title: 'General Motors', avatar: '', clientCode: 'GM' },
   { title: "Kellogg's Company", avatar: '', clientCode: 'KC' },
+  { title: 'The Kraft Heinz Company', avatar: '', clientCode: 'KHC' },
   { title: 'Microsoft Corporation', avatar: 'abc.ico', clientCode: 'MC' },
   { title: 'Procter & Gamble', avatar: '', clientCode: 'PG' },
-  { title: 'The Kraft Heinz Company', avatar: '', clientCode: 'KHC' },
+];
 
-]
-
-export { data, assignToOptions, monthOptions, options, clientList };
+export { assignToOptions, monthOptions, options, clientList };
