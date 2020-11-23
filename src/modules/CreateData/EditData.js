@@ -5,7 +5,7 @@ import { withRouter } from 'react-router';
 import Form from './Form'
 import useCustomForm from '../../hooks/useCustomForm';
 import validationRule from '../../utils/validate';
-import { options, updateData } from '../Mock/mockData'
+import { options, updateData, monthOptions } from '../Mock/mockData'
 
 const EditData = (props) => {
   const { cmsData, isModalOpen, handleModal } = props;
@@ -55,6 +55,7 @@ const EditData = (props) => {
             errors={errors}
             cmsData={cmsData}
             options={options}
+            monthOptions={monthOptions}
           />
         </Modal.Body>
         <Modal.Footer>
