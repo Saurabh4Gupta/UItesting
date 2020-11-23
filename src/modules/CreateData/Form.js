@@ -36,6 +36,7 @@ const Form = (props) => {
           value={
             options.find(key => key.value === values.localMarket)
           }
+          defaultValue={values.localMarket}
         />
       </FormField>
       <FormField
@@ -132,6 +133,7 @@ const Form = (props) => {
           parseDate={(date) => new Date(date)}
           formatDate={(date) => date.toLocaleDateString()}
           onChange={(date) => handleSelectField(date, { name: 'dueDate' })}
+          defaultValue={new Date(values.dueDate)}
         />
       </FormField>
 
@@ -149,6 +151,7 @@ const Form = (props) => {
           value={
             options.find(key => key.value === values.localMarket)
           }
+          defaultValue={values.assignTo}
         />
       </FormField>
     </>
