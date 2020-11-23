@@ -46,4 +46,6 @@ export const dataFieldCms = {
   moveToOnGoing: 'Move to Ongoing',
   delete: 'Delete',
   emptyCompletedProductivityDatarequestCaption: 'No Productivity data requests have been moved to this section yet.',
+  editRequest: 'Edit request',
+  save: 'Save',
 }
