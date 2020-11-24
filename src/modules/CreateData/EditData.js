@@ -16,7 +16,7 @@ const EditData = (props) => {
     briefing: 'Give some details about this quarter',
     actualData: { value: 0, label: '0' },
     forecastData: { value: 12, label: '12' },
-    dueDate: '2020-11-23',
+    dueDate: new Date(),
     assignTo: { value: 'UK', label: 'United Kingdom' },
   };
   const { handleChange, values,
