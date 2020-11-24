@@ -13,7 +13,7 @@ import { clientList } from '../Mock/mockData';
 const ClientList = (props) => {
   const { cmsData } = props;
   const showClientDetails = (clientCode) => {
-  props.history.push(`/datafield/${clientCode}`);
+  props.history.push(`/datafield?client_code=${clientCode}`);
   };
   return (
     <>
@@ -47,7 +47,7 @@ const ClientList = (props) => {
                   </Link>
                 )}
                 actions={(
-                  <Link iconLeft="layers" url={`/datafield/${item.clientCode}`}>
+                  <Link iconLeft="layers" url={`/datafield?client_code=${clientCode}`}>
                     {cmsData.viewDetails}
                   </Link>
                 )}

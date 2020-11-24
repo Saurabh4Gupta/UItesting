@@ -10,6 +10,7 @@ import {
   Box,
   Divider,
 } from '@dentsu-ui/components';
+import { useHistory } from 'react-router';
 import ActionBtn from './ActionBtn';
 
 const TableList = (props) => {
@@ -23,8 +24,11 @@ const TableList = (props) => {
     clientCode,
   } = props;
 
+  const history = useHistory()
+  console.log('[history]', history)
+
   const showDataRequestDetails = (id) => {
-    props.history.push(`/viewDetails/${clientCode}?id=${id}`);
+    history.push(`/viewDetails?client_code=${clientCode}&request_id=${id}`);
   };
 
   return (
@@ -152,13 +156,11 @@ TableList.propTypes = {
   actionName: PropTypes.string.isRequired,
   showStatus: PropTypes.string,
   handleDeleteModel: PropTypes.func.isRequired,
-  history: PropTypes.object,
   clientCode: PropTypes.string,
 };
 TableList.defaultProps = {
   cmsData: {},
   showStatus: '',
-  history: {},
   clientCode: '',
 };
 

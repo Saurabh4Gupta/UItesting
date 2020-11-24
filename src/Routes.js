@@ -14,8 +14,8 @@ const Routes = (props) => (
   <Router {...props}>
     <Frame>
       <Switch>
-        <Route exact path="/datafield/:clientCode" component={DataField} />
-        <Route path="/viewDetails/:id" component={ViewProdDataRequest} />
+        <Route exact path="/datafield" component={DataField} />
+        <Route path="/viewDetails" component={ViewProdDataRequest} />
         <Route path="/" component={ViewClientList} />
         <Redirect to="/" />
       </Switch>
