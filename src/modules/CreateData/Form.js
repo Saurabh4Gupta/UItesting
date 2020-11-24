@@ -20,7 +20,6 @@ const Form = (props) => {
   const handleInit = () => {
     console.log('Dropzone instance has initialised', files);
   };
-
   return (
     <>
       <FormField
@@ -34,9 +33,8 @@ const Form = (props) => {
           options={options}
           onChange={(selected, event) => handleSelectField(selected, event)}
           value={
-            options.find(key => key.value === values.localMarket)
+            options.find(key => key.value === values.localMarket.value)
           }
-          defaultValue={values.localMarket}
         />
       </FormField>
       <FormField
@@ -82,6 +80,8 @@ const Form = (props) => {
           maxFileSize={MAX_FILE_SIZE}
           server="./"
           acceptedFileTypes={ALLOWED_FILE_TYPES}
+          labelMaxFileSizeExceeded={cmsData.uploadFileLargeMessage}
+          labelFileTypeNotAllowed={cmsData.labelFileTypeNotAllowed}
         />
 
       </FormField>
@@ -133,7 +133,8 @@ const Form = (props) => {
           parseDate={(date) => new Date(date)}
           formatDate={(date) => date.toLocaleDateString()}
           onChange={(date) => handleSelectField(date, { name: 'dueDate' })}
-          defaultValue={new Date(values.dueDate)}
+          minDate={new Date()}
+          value={values.dueDate}
         />
       </FormField>
 
@@ -149,9 +150,8 @@ const Form = (props) => {
           placeholder={cmsData.selectPlaceHolder}
           onChange={(selected, event) => handleSelectField(selected, event)}
           value={
-            options.find(key => key.value === values.localMarket)
+            options.find(key => key.value === values.localMarket.value)
           }
-          defaultValue={values.assignTo}
         />
       </FormField>
     </>
