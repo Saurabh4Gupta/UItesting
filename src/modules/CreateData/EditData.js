@@ -56,6 +56,7 @@ const EditData = (props) => {
             cmsData={cmsData}
             options={options}
             monthOptions={monthOptions}
+            dueDate={values.dueDate}
           />
         </Modal.Body>
         <Modal.Footer>
