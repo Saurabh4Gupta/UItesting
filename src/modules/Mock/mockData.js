@@ -183,5 +183,4 @@ const clientList = [
   { title: 'Microsoft Corporation', avatar: 'abc.ico', clientCode: 'MC' },
   { title: 'Procter & Gamble', avatar: '', clientCode: 'PG' },
 ];
-
 export { assignToOptions, monthOptions, options, clientList };

@@ -25,10 +25,14 @@ const TableList = (props) => {
   } = props;
 
   const history = useHistory()
-  console.log('[history]', history)
 
   const showDataRequestDetails = (id) => {
-    history.push(`/viewDetails?client_code=${clientCode}&request_id=${id}`);
+    const queryString = `client_code=${clientCode}&request_id=${id}`
+    history.push({
+      pathname: '/viewDetails',
+      search: `?${queryString}`,
+    })
+   // history.push(`/viewDetails?client_code=${clientCode}&request_id=${id}`);
   };
 
   return (
