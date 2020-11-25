@@ -184,4 +184,19 @@ const clientList = [
   { title: 'Procter & Gamble', avatar: '', clientCode: 'PG' },
 ];
 
-export { assignToOptions, monthOptions, options, clientList };
+const reportingYear = [
+  {
+    value: 'ARG',
+    label: 'April 2021 - March 2022',
+  },
+  {
+    value: 'AUS',
+    label: 'April 2020 - March 2021',
+  },
+  {
+    value: 'BEL',
+    label: 'April 2019 - March 2020',
+  },
+]
+
+export { assignToOptions, monthOptions, options, clientList, reportingYear };

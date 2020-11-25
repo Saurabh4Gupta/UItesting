@@ -15,7 +15,7 @@ import constant from '../../utils/constant';
 
 const Form = (props) => {
   const { MAX_FILE_SIZE, ALLOWED_FILE_TYPES } = constant;
-  const { values, handleChange, handleSelectField, errors, cmsData, options, monthOptions, dueDate } = props;
+  const { values, handleChange, handleSelectField, errors, cmsData, options, monthOptions, dueDate, reportingYear } = props;
   const [files, setFiles] = useState([]);
   const handleInit = () => {
     console.log('Dropzone instance has initialised', files);
@@ -85,6 +85,25 @@ const Form = (props) => {
         />
 
       </FormField>
+      <Stack flex="row">
+        <Box mr="30px" mb="20px">
+          <FormField
+            label={cmsData.reportingYearLabel}
+            {...(errors.actualData ? { error: errors.actualData } : {})}
+            hint={cmsData.reportingYearHint}
+          >
+            <Select
+              name="reportingYear"
+              options={reportingYear}
+              value={values.actualData}
+              placeholder={cmsData.selectPlaceHolder}
+              onChange={(selected, event) => {
+                handleSelectField(selected, event)
+              }}
+            />
+          </FormField>
+        </Box>
+      </Stack>
       <Stack flex="row">
         <Box mr="30px">
           <FormField
