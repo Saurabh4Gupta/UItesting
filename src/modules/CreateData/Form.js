@@ -15,7 +15,7 @@ import constant from '../../utils/constant';
 
 const Form = (props) => {
   const { MAX_FILE_SIZE, ALLOWED_FILE_TYPES } = constant;
-  const { values, handleChange, handleSelectField, errors, cmsData, options, monthOptions } = props;
+  const { values, handleChange, handleSelectField, errors, cmsData, options, monthOptions, dueDate } = props;
   const [files, setFiles] = useState([]);
   const handleInit = () => {
     console.log('Dropzone instance has initialised', files);
@@ -134,7 +134,7 @@ const Form = (props) => {
           formatDate={(date) => date.toLocaleDateString()}
           onChange={(date) => handleSelectField(date, { name: 'dueDate' })}
           minDate={new Date()}
-          value={values.dueDate}
+          value={dueDate}
         />
       </FormField>
 
@@ -150,7 +150,7 @@ const Form = (props) => {
           placeholder={cmsData.selectPlaceHolder}
           onChange={(selected, event) => handleSelectField(selected, event)}
           value={
-            options.find(key => key.value === values.localMarket.value)
+            options.find(key => key.value === values.assignTo.value)
           }
         />
       </FormField>
