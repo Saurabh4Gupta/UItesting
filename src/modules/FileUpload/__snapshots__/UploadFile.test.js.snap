@@ -45,6 +45,7 @@ exports[`Success test cases for: UploadFile component Snapshot test for  UploadF
             "localMarketHint": "Choose the market you wish to create this data request for",
             "localMarketLabel": "Local Market",
             "moveToComplete": "Move to Complete",
+            "moveToOnGoing": "Move to Ongoing",
             "nameHint": "Make sure it's clear to help others identify it.Max 255 characters",
             "nameLabel": "Data request name",
             "ongoing": "Ongoing",
