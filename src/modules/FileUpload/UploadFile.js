@@ -15,7 +15,7 @@ const UploadFile = (props) => {
       return false;
     }
 
-    setError({});
+    //setError({});
     return true;
   }
 
@@ -24,8 +24,8 @@ const UploadFile = (props) => {
     console.log('++', isValid)
     if (isValid) {
       setModalOpen(false)
-      setFiles([])
-      setError({})
+      // setFiles([])
+      // setError({})
     }
   };
 
