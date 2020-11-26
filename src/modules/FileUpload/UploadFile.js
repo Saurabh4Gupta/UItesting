@@ -63,9 +63,9 @@ const UploadFile = (props) => {
             variant="secondary"
             onClick={onCloseModal}
           >
-            Cancel
+            {cmsData.cancel}
           </Button>
-          <Button onClick={() => onSubmit()}>Upload</Button>
+  <Button onClick={() => onSubmit()}>{cmsData.upload}</Button>
         </Modal.Footer>
       </Modal>
     </>
