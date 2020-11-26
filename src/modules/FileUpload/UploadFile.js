@@ -15,7 +15,7 @@ const UploadFile = (props) => {
       return false;
     }
 
-    //setError({});
+    // setError({});
     return true;
   }
 

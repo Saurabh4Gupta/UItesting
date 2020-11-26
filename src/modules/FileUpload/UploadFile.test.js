@@ -13,15 +13,15 @@ describe('Success test cases for: UploadFile component', () => {
     });
 
     it('Test Upload click event', () => {
-      wrapper.find({ children: 'Upload'}).simulate('click');
+      wrapper.find({ children: 'Upload' }).simulate('click');
     });
     it('Test Cancel click event', () => {
       wrapper.find({ children: 'Cancel' }).simulate('click');
     });
 
-   it('invoking handleFileChange functions',()=>{
+   it('invoking handleFileChange functions', () => {
     const pageControls = wrapper.find('ForwardRef').at(2).find('Form');
-    expect(pageControls.prop('handleFileChange')() );
+    expect(pageControls.prop('handleFileChange')());
    })
 
     it('Test to match the snapsot', () => {
