@@ -4,6 +4,7 @@ import { Box, Link } from '@dentsu-ui/components';
 import PageController from '../PageController/PageController';
 import EditData from '../CreateData/EditData'
 import { dataFieldCms as PageContent } from '../../cms';
+import  VersionHistory  from '../VersionHistory/VersionHistory';
 
 const ViewProdDataRequest = (props) => {
   const { match } = props;
@@ -36,6 +37,7 @@ const ViewProdDataRequest = (props) => {
         isModalOpen={isModalOpen}
         handleModal={handleModal}
       />
+      <VersionHistory />
     </>
   );
 };
