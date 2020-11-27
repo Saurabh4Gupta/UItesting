@@ -48,4 +48,6 @@ export const dataFieldCms = {
   emptyCompletedProductivityDatarequestCaption: 'No Productivity data requests have been moved to this section yet.',
   editRequest: 'Edit request details',
   save: 'Save',
+  reportingYearLabel: 'Reporting year',
+  reportingYearHint: 'The reporting year this data request is for',
 }
