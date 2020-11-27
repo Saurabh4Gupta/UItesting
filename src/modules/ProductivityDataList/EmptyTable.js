@@ -28,4 +28,5 @@ const { defaultText } = props;
   );
 };
 
+export { EmptyTable }
 export default withRouter(EmptyTable);
