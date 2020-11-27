@@ -183,4 +183,37 @@ const clientList = [
   { title: 'Microsoft Corporation', avatar: 'abc.ico', clientCode: 'MC' },
   { title: 'Procter & Gamble', avatar: '', clientCode: 'PG' },
 ];
-export { assignToOptions, monthOptions, options, clientList };
+
+const versionHistory = {
+  data: [
+    {
+      id: 1,
+      name: 'Microsoft Uk - productivity Report ',
+      type: 'XLS',
+      size: '242KB',
+      version: 'V8.0',
+      dataRequest: '',
+      blobId: '',
+    },
+    {
+      id: 1,
+      name: 'Microsoft Uk - productivity Report ',
+      type: 'XLS',
+      size: '242KB',
+      version: 'V7.0',
+      dataRequest: '',
+      blobId: '',
+    },
+    {
+      id: 1,
+      name: 'Microsoft Uk - productivity Report ',
+      type: 'XLS',
+      size: '242KB',
+      version: 'V6.0',
+      dataRequest: '',
+      blobId: '',
+    },
+  ],
+}
+
+export { assignToOptions, monthOptions, options, clientList, versionHistory };
