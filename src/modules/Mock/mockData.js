@@ -183,4 +183,12 @@ const clientList = [
   { title: 'Microsoft Corporation', avatar: 'abc.ico', clientCode: 'MC' },
   { title: 'Procter & Gamble', avatar: '', clientCode: 'PG' },
 ];
-export { assignToOptions, monthOptions, options, clientList };
+
+const year = [{}];
+
+const currency = [
+  { value: 'gbp', label: 'GBP(Default)' },
+  { value: 'usd', label: 'USD' },
+  { value: 'euro', label: 'EUR' },
+]
+export { assignToOptions, monthOptions, options, clientList, year, currency };

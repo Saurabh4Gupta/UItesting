@@ -8,7 +8,6 @@ const ActionBtn = (props) => {
     actionName,
     deleteBtn,
     showStatus,
-    objId,
     handleDeleteModel,
   } = props;
   return (
@@ -20,10 +19,10 @@ const ActionBtn = (props) => {
           {showStatus === false ? (
             ''
           ) : (
-            <Menu.Item onClick={() => handleDeleteModel(objId)}>
+            <Menu.Item onClick={handleDeleteModel}>
               {deleteBtn}
             </Menu.Item>
-          )}
+            )}
         </Menu.List>
       </Menu>
     </>
