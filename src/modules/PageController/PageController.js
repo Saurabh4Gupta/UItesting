@@ -11,10 +11,16 @@ import {
   Link,
 } from '@dentsu-ui/components';
 import PropTypes from 'prop-types';
+import { useHistory, useLocation } from 'react-router';
 import { clientList } from '../Mock/mockData';
 
 const PageController = (props) => {
-  const { isToShowDataRequest, history, clientCode } = props;
+  const history = useHistory();
+  const location = useLocation();
+  const query = new URLSearchParams(location.search);
+  const clientCode = query.get('client_code')
+
+  const { isToShowDataRequest } = props;
   const { title } = clientList.find(
     (client) => client.clientCode === clientCode,
   );
@@ -22,12 +28,12 @@ const PageController = (props) => {
     ? `Back to ${title}`
     : 'Back to Clients';
   const clientNavigationHandler = () => (isToShowDataRequest
-      ? history.replace(`/datafield/${clientCode}`)
+      ? history.replace(`/datafield?client_code=${clientCode}`)
       : history.replace('/'));
   return (
     <Box bg="rgba(220,220,220,0.4)" className="main">
       <Page
-        metadata={<Title onBack={clientNavigationHandler} {...props} />}
+        metadata={<Title {...props} onBack={clientNavigationHandler} clientCode={clientCode}  />}
         primaryAction={{
           content: 'Upload new File',
           icon: 'upload',

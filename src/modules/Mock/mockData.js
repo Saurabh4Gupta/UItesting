@@ -186,17 +186,16 @@ const clientList = [
 
 const reportingYear = [
   {
-    value: 'ARG',
+    value: 'April 2021 - March 2022',
     label: 'April 2021 - March 2022',
   },
   {
-    value: 'AUS',
+    value: '2020-2021',
     label: 'April 2020 - March 2021',
   },
   {
-    value: 'BEL',
+    value: '2019-2020',
     label: 'April 2019 - March 2020',
   },
 ]
-
 export { assignToOptions, monthOptions, options, clientList, reportingYear };

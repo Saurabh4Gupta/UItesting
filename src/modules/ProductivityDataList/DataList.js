@@ -2,6 +2,7 @@
 import React from 'react';
 import { Box, Tabs } from '@dentsu-ui/components';
 import PropTypes from 'prop-types';
+import { useHistory } from 'react-router';
 import EmptyTable from './EmptyTable';
 import TableList from './TableList';
 
@@ -58,7 +59,7 @@ const DataList = (props) => {
                 handleToggleData={handleToggleData}
                 showStatus={false}
                 clientCode={clientCode}
-                {...props}
+
               />
             ) : (
               <EmptyTable

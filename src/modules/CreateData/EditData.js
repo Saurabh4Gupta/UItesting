@@ -5,7 +5,7 @@ import { withRouter } from 'react-router';
 import Form from './Form'
 import useCustomForm from '../../hooks/useCustomForm';
 import validationRule from '../../utils/validate';
-import { options, updateData, monthOptions } from '../Mock/mockData'
+import { options, updateData, monthOptions, reportingYear } from '../Mock/mockData'
 
 const EditData = (props) => {
   const { cmsData, isModalOpen, handleModal } = props;
@@ -14,6 +14,7 @@ const EditData = (props) => {
     localMarket: { value: 'UK', label: 'United Kingdom' },
     name: 'Productivity Q2 2020',
     briefing: 'Give some details about this quarter',
+    reportingYear:{ value: 'April 2021 - March 2022', label: 'April 2021 - March 2022' },
     actualData: { value: 0, label: '0' },
     forecastData: { value: 12, label: '12' },
     dueDate: new Date(),
@@ -26,9 +27,9 @@ const EditData = (props) => {
   useEffect(() => {
     const isAnyValidationError = errors && !!(errors.localMarket || errors.name
       || errors.briefing || errors.dueDate || errors.assignTo || errors.forecastData
-      || errors.forecastData);
+      || errors.forecastData || errors.reportingYear);
     const isAllValuesFilled = values.localMarket && values.name && values.assignTo
-      && values.dueDate && values.forecastData && values.actualData && values.briefing;
+      && values.dueDate && values.forecastData && values.actualData && values.briefing && values.reportingYear;
     setIsReadyToSubmit(isAllValuesFilled && !isAnyValidationError);
   }, [errors, values]);
   const closeModalHandler = () => {
@@ -57,6 +58,7 @@ const EditData = (props) => {
             options={options}
             monthOptions={monthOptions}
             dueDate={values.dueDate}
+            reportingYear={reportingYear}
           />
         </Modal.Body>
         <Modal.Footer>

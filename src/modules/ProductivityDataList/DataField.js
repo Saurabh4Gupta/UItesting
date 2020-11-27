@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import React, { useState, useEffect } from 'react';
 import { Box } from '@dentsu-ui/components';
+import { useLocation } from 'react-router';
 import CreateData from '../CreateData/CreateData';
 import Overview from '../Overview/Overview';
 import PageController from '../PageController/PageController';
@@ -10,10 +11,10 @@ import { getData, getCompletedData } from '../Mock/mockData';
 import UploadFile from '../FileUpload/UploadFile';
 import DeleteData from '../CreateData/DeleteData';
 
-const DataField = (props) => {
-  const { match } = props;
-  const { params } = match;
-  const { clientCode } = params;
+const DataField = () => {
+  const location = useLocation();
+  const query = new URLSearchParams(location.search);
+  const clientCode = query.get('client_code')
   const [market] = useState('');
   const [ongoingData, setDataList] = useState(getData);
   const [completeData, setCompleteData] = useState(getCompletedData);
@@ -91,10 +92,9 @@ const DataField = (props) => {
   return (
     <>
       <PageController
-        clientCode={clientCode}
         isToShowDataRequest={false}
         setIsUploadModal={setIsUploadModal}
-        {...props}
+
       />
       <Box m="45px" mb="200px">
         <Overview />
@@ -125,7 +125,7 @@ const DataField = (props) => {
           handleTabIndex={handleTabIndex}
           handleDeleteModel={handleDeleteModel}
           clientCode={clientCode}
-          {...props}
+
         />
       </Box>
     </>
