@@ -23,6 +23,7 @@ export const dataFieldCms = {
   assignToHint: `Only the person or team you assign this to will have access. Once you click 'Create' ,
   they will be sent email notifications asking them to fill in the data request.`,
   create: 'Create',
+  upload:'Upload',
   cancel: 'Cancel',
   productivityDatarequestHeading: 'Productivity data requests',
   productivityDatarequestCaption: ' The ongoing and complete productivity data requests created for this client',
