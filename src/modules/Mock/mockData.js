@@ -184,6 +184,22 @@ const clientList = [
   { title: 'Procter & Gamble', avatar: '', clientCode: 'PG' },
 ];
 
+const reportingYear = [
+  {
+    value: 'April 2021 - March 2022',
+    label: 'April 2021 - March 2022',
+  },
+  {
+    value: '2020-2021',
+    label: 'April 2020 - March 2021',
+  },
+  {
+    value: '2019-2020',
+    label: 'April 2019 - March 2020',
+  },
+]
+
+
 const versionHistory = {
   data: [
     {
@@ -213,7 +229,16 @@ const versionHistory = {
       dataRequest: '',
       blobId: '',
     },
+    {
+      id: 1,
+      name: 'Microsoft Uk - productivity Report ',
+      type: 'XLS',
+      size: '242KB',
+      version: 'V5.0',
+      dataRequest: '',
+      blobId: '',
+    },
   ],
 }
 
-export { assignToOptions, monthOptions, options, clientList, versionHistory };
+export { assignToOptions, monthOptions, options, clientList, reportingYear ,versionHistory};

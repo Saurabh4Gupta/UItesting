@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<EmptyState /> should match snapshot 1`] = `
+<ForwardRef
+  actions={
+    Object {
+      "secondary": Object {
+        "iconLeft": "add",
+        "iconRight": null,
+        "isDisabled": false,
+        "isExternal": true,
+        "isLoading": false,
+        "label": "Create new data request",
+        "onClick": [Function],
+      },
+    }
+  }
+  image="create"
+  layout="horizontal"
+  size="small"
+>
+  <ForwardRef>
+    Test
+  </ForwardRef>
+</ForwardRef>
+`;

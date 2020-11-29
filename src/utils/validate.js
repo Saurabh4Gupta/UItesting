@@ -28,6 +28,10 @@ function validationRule(field, value) {
       return !value
         ? 'This field cannot be blank'
         : '';
+    case 'reportingYear':
+      return (value === '')
+        ? 'This field cannot be blank'
+        : '';
     case 'actualData':
       return (value === '')
         ? 'This field cannot be blank'
