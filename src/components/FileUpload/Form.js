@@ -18,7 +18,7 @@ const Form = (props) => {
   return (
     <>
       <FormField
-        label={cmsData.templateFileLabel}
+        label={cmsData.uploadFileLabel}
         hint={cmsData.templateFileHint}
         {...errors}
       >
@@ -31,6 +31,8 @@ const Form = (props) => {
           }}
           maxFiles={1}
           maxFileSize={MAX_FILE_SIZE}
+          labelMaxFileSizeExceeded={cmsData.uploadFileLargeMessage}
+          labelFileTypeNotAllowed={cmsData.labelFileTypeNotAllowed}
           server="./"
           acceptedFileTypes={ALLOWED_FILE_TYPES}
         />
