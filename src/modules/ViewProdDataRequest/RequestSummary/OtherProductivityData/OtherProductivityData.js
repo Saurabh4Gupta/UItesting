@@ -6,11 +6,19 @@ import Box from '@dentsu-ui/components/dist/cjs/components/Box';
 import Link from '@dentsu-ui/components/dist/cjs/components/Link';
 import Divider from '@dentsu-ui/components/dist/cjs/components/Divider';
 import Chip from '@dentsu-ui/components/dist/cjs/components/Chip';
+import PropTypes from 'prop-types';
 import { dataFieldCms as PageContent } from '../../../../cms/dataFieldCms';
 import EditData from '../../../CreateData/EditData';
 import TrackerTemplate from './TrackerTemplate';
 
-const OtherProductivityData = () => {
+const OtherProductivityData = ({ prodRequest }) => {
+  const {
+    dueDate,
+    actualData,
+    forecastData,
+    assignTo,
+    reportingYear,
+  } = prodRequest;
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [market] = useState('');
 
@@ -41,7 +49,7 @@ const OtherProductivityData = () => {
               {PageContent.reportingYear}
             </Caption>
           </Box>
-          April 2020 - March 2021
+          {reportingYear}
           <br />
           <br />
           <Box mt="20px" mb="10px">
@@ -52,12 +60,14 @@ const OtherProductivityData = () => {
           <Stack flexDirection="row">
             <Box mr="10px">
               {PageContent.actualCapitalized}
-              : 6 months
+              :
+              {actualData.label}
             </Box>
             <Divider orientation="vertical" isFlexChild />
             <Box ml="10px">
               {PageContent.forecastCapitalized}
-              : 6 months
+              :
+              {forecastData.label}
             </Box>
           </Stack>
           <br />
@@ -65,12 +75,9 @@ const OtherProductivityData = () => {
           <Stack flexDirection="row">
             <Stack flexDirection="column" mr="40px">
               <Box mr="10px" mb="10px">
-                <Caption style={{ color: 'gray' }}>
-                  {' '}
-                  {PageContent.dueBy}
-                </Caption>
+                <Caption style={{ color: 'gray' }}>{PageContent.dueBy}</Caption>
               </Box>
-              13/07/2020
+              {dueDate}
             </Stack>
             <Stack flexDirection="column">
               <Box mb="7px" ml="8px">
@@ -84,7 +91,7 @@ const OtherProductivityData = () => {
                   name: 'John Paul Green',
                 }}
               >
-                Ryan Killick
+                {assignTo}
               </Chip>
             </Stack>
           </Stack>
@@ -99,6 +106,13 @@ const OtherProductivityData = () => {
       />
     </>
   );
+};
+
+OtherProductivityData.propTypes = {
+  prodRequest: PropTypes.object,
+};
+OtherProductivityData.defaultProps = {
+  prodRequest: PropTypes.object,
 };
 
 export default OtherProductivityData;
