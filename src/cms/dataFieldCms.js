@@ -66,4 +66,6 @@ export const dataFieldCms = {
   assignedTo: 'Assign to',
   trackerTemplate: 'Tracker template',
   close: 'Close',
-};
+  reportingYearLabel: 'Reporting year',
+  reportingYearHint: 'The reporting year this data request is for',
+}
