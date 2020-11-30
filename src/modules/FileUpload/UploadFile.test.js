@@ -18,7 +18,12 @@ describe('Success test cases for: UploadFile component', () => {
     it('Test Cancel click event', () => {
       wrapper.find({ children: 'Cancel' }).simulate('click');
     });
+    it('Test Cancel click event', () => {
+      wrapper.debug().handleFileChange([]);
+      console.log('[TESTING]', wrapper.debug())
 
+     // wrapper.find({ children: 'Cancel' }).simulate('click');
+    });
 
   //   it('on submitting, a submit handler function should be triggered on click event', () => {
   //     const fn = jest.fn();

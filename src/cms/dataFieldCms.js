@@ -4,15 +4,20 @@ export const dataFieldCms = {
   localMarketLabel: 'Local Market',
   localMarketHint: 'Choose the market you wish to create this data request for',
   nameLabel: 'Data request name',
-  nameHint: "Make sure it's clear to help others identify it.Max 255 characters",
+  nameHint:
+    "Make sure it's clear to help others identify it.Max 255 characters",
   briefLabel: 'Briefing',
-  briefHint: 'Tell us in detail what this data request is for, max 4000 characters',
+  briefHint:
+    'Tell us in detail what this data request is for, max 4000 characters',
   templateFileLabel: 'Add tracker template file',
-  templateFileHint: 'Only .xls, .xlsx, .csv, .xlsb, .xlsm, .xlt, .xltm, .xltx files in 20mb or less',
-  uploadFileLabel: 'To upload a new file,drag and drop you file below or browse using the link',
+  templateFileHint:
+    'Only .xls, .xlsx, .csv, .xlsb, .xlsm, .xlt, .xltm, .xltx files in 20mb or less',
+  uploadFileLabel:
+    'To upload a new file,drag and drop you file below or browse using the link',
   uploadFileLargeMessage: 'File must be less than 20MB',
-  labelFileTypeNotAllowed:'File must be of type .xls, .xlsx, .csv, .xlsb, .xlsm, .xlt, .xltm, .xltx',
-  uploadButtonText:'Upload new file',
+  labelFileTypeNotAllowed:
+    'File must be of type .xls, .xlsx, .csv, .xlsb, .xlsm, .xlt, .xltm, .xltx',
+  uploadButtonText: 'Upload new file',
   actualDataLabel: 'Actual Productivity Data',
   actualDataHint: 'Select the number of months data required',
   forecastDataLabel: 'Forecast Productivity Data',
@@ -25,7 +30,8 @@ export const dataFieldCms = {
   create: 'Create',
   cancel: 'Cancel',
   productivityDatarequestHeading: 'Productivity data requests',
-  productivityDatarequestCaption: ' The ongoing and complete productivity data requests created for this client',
+  productivityDatarequestCaption:
+    ' The ongoing and complete productivity data requests created for this client',
   selectPlaceHolder: 'Please Select',
   datePlaceHolder: 'Date',
   viewDetails: 'View Details',
@@ -33,7 +39,8 @@ export const dataFieldCms = {
   viewClientsCaption: 'Choose the client you wish to view',
   completeLabel: 'Complete',
   ongoingLabel: 'Ongoing',
-  emptyProductivityDatarequestCaption: 'There are currently no active Productivity data requests',
+  emptyProductivityDatarequestCaption:
+    'There are currently no active Productivity data requests',
   emptyLabel: 'Create new data request',
   edit: 'Edit',
   actual: 'actuals',
@@ -45,7 +52,18 @@ export const dataFieldCms = {
   moveToComplete: 'Move to Complete',
   moveToOnGoing: 'Move to Ongoing',
   delete: 'Delete',
-  emptyCompletedProductivityDatarequestCaption: 'No Productivity data requests have been moved to this section yet.',
-  editRequest: 'Edit request details',
+  emptyCompletedProductivityDatarequestCaption:
+    'No Productivity data requests have been moved to this section yet.',
+  editRequest: 'Edit request',
   save: 'Save',
-}
+  productivityRequest: 'Productivity Request',
+  showMore: 'Show more',
+  reportingYear: 'Reporting year',
+  productivityDataRequested: 'Productivity data requested',
+  actualCapitalized: 'Actual',
+  forecastCapitalized: 'Forecast',
+  dueBy: 'Due by',
+  assignedTo: 'Assign to',
+  trackerTemplate: 'Tracker template',
+  close: 'Close',
+};
