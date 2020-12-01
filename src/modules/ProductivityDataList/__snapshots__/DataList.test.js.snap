@@ -1,0 +1,100 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<EmptyState /> should match snapshot 1`] = `
+<Box
+  mt="30px"
+>
+  <Tabs
+    index={1}
+    onChange={[MockFunction]}
+  >
+    <ForwardRef>
+      <ForwardRef
+        count={3}
+      />
+      <ForwardRef
+        count={2}
+      />
+    </ForwardRef>
+    <ForwardRef>
+      <ForwardRef>
+        <TableList
+          clientCode="MC"
+          cmsData="data"
+          completeDataList={
+            Object {
+              "completedCount": 0,
+              "completedData": Array [
+                "data1",
+                "data2",
+              ],
+            }
+          }
+          data={
+            Array [
+              "testData1",
+              "testData2",
+              "testData3",
+            ]
+          }
+          handleDeleteModel={[MockFunction]}
+          handleModal={[MockFunction]}
+          handleTabIndex={[MockFunction]}
+          handleToggleData={[MockFunction]}
+          history={Object {}}
+          ongoingDataList={
+            Object {
+              "data": Array [
+                "testData1",
+                "testData2",
+                "testData3",
+              ],
+              "totalCount": 3,
+            }
+          }
+          showStatus=""
+          tabIndex={1}
+        />
+      </ForwardRef>
+      <ForwardRef>
+        <TableList
+          clientCode="MC"
+          cmsData="data"
+          completeDataList={
+            Object {
+              "completedCount": 0,
+              "completedData": Array [
+                "data1",
+                "data2",
+              ],
+            }
+          }
+          data={
+            Array [
+              "data1",
+              "data2",
+            ]
+          }
+          handleDeleteModel={[MockFunction]}
+          handleModal={[MockFunction]}
+          handleTabIndex={[MockFunction]}
+          handleToggleData={[MockFunction]}
+          history={Object {}}
+          ongoingDataList={
+            Object {
+              "data": Array [
+                "testData1",
+                "testData2",
+                "testData3",
+              ],
+              "totalCount": 3,
+            }
+          }
+          showStatus={false}
+          tabIndex={1}
+        />
+      </ForwardRef>
+    </ForwardRef>
+  </Tabs>
+</Box>
+`;

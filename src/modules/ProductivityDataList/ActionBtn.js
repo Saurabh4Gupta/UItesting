@@ -32,7 +32,7 @@ ActionBtn.propTypes = {
   handleToggleData: PropTypes.func.isRequired,
   actionName: PropTypes.string.isRequired,
   deleteBtn: PropTypes.string.isRequired,
-  showStatus: PropTypes.string.isRequired,
+  showStatus: PropTypes.bool.isRequired,
   handleDeleteModel: PropTypes.func,
 };
 ActionBtn.defaultProps = {
