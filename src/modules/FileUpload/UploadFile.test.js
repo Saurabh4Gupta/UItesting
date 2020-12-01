@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { shallow } from 'enzyme';
 import UploadFile from './UploadFile';
@@ -13,45 +12,17 @@ describe('Success test cases for: UploadFile component', () => {
     });
 
     it('Test Upload click event', () => {
-      wrapper.find({ children: 'Upload' }).simulate('click');
+      wrapper.find({ children: PageContent.upload }).simulate('click');
     });
     it('Test Cancel click event', () => {
-      wrapper.find({ children: 'Cancel' }).simulate('click');
+      wrapper.find({ children: PageContent.cancel }).simulate('click');
     });
 
 
-  //   it('on submitting, a submit handler function should be triggered on click event', () => {
-  //     const fn = jest.fn();
-  //     //wrapper = shallow(<UploadFile cmsData={PageContent} />);
-  //     let tree = create(<UploadFile onClick={fn} />);
-  //     const button = tree.root.findByType('Modal.Modal.Footer.Button')
-  //       button.onClick()
-  //       // Verify callback is invoked
-  //  expect(fn.mock.calls.length).toBe(1);
-  //     // wrapper.find('Modal.Modal.Footer.Button').simulate('change', {
-  //     //   target: {
-  //     //     value: fn,
-  //     //   },
-  //     // });
-  //     //wrapper.find('Button').simulate('click');
-  //    // expect(fn).toHaveBeenCalled();
-  //   });
-
-  //  it('file upload',()=>{
-  //   const setFiles = jest.fn();
-  //   const handleClick = jest.spyOn(React, "useState");
-  //   handleClick.mockImplementation(files => [files, setFiles]);
-    // wrapper.find("Form").simulate('change',{
-    //   target: {
-    //     value: {setFiles(files)}
-    //           },
-    // });
-    // const [error, setError] = useState({});
-    // const [files, setFiles] = useState([]);
-
-    // expect(setFiles).toBeTruthy();
-    // })
-
+   it('invoking handleFileChange functions', () => {
+    const pageControls = wrapper.find('ForwardRef').at(2).find('Form');
+    expect(pageControls.prop('handleFileChange')());
+   })
 
     it('Test to match the snapsot', () => {
       expect(wrapper).toMatchSnapshot();

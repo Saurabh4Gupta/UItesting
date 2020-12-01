@@ -14,8 +14,6 @@ const UploadFile = (props) => {
       setError({ error: 'Upload tracker template' })
       return false;
     }
-
-    setError({});
     return true;
   }
 
@@ -23,8 +21,6 @@ const UploadFile = (props) => {
     const isValid = validate();
     if (isValid) {
       setModalOpen(false)
-      setFiles([])
-      setError({})
     }
   };
 
@@ -62,9 +58,9 @@ const UploadFile = (props) => {
             variant="secondary"
             onClick={onCloseModal}
           >
-            Cancel
+            {cmsData.cancel}
           </Button>
-          <Button onClick={() => onSubmit()}>Upload</Button>
+          <Button onClick={() => onSubmit()}>{cmsData.upload}</Button>
         </Modal.Footer>
       </Modal>
     </>
