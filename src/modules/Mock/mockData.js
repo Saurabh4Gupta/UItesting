@@ -110,10 +110,13 @@ export const getCompletedData = () => ({
   completedCount: completedData.data.length,
   completedData: completedData.data,
 });
-export const getData = () => ({
-  totalCount: data.data.length,
-  data: data.data,
-});
+export const getData = (value) => {
+  if (value === '') {
+    return { totalCount: data.data.length, data: data.data }
+  }
+  const filerData = data.data.filter(key => key.localMarket.value === value);
+  return { totalCount: filerData.length, data: filerData };
+};
 
 export function updateData(values) {
   values.createdAt = new Date();
@@ -144,6 +147,12 @@ const options = [
     value: 'UK',
     label: 'United Kingdom',
   },
+  { value: 'USA', label: 'USA' },
+  { value: 'FR', label: 'France' },
+  { value: 'NZ', label: 'New Zealand' },
+  { value: 'SGP', label: 'Singapore' },
+  { value: 'Tk', label: 'Turkey' },
+  { value: 'IT', label: 'Italy' },
 ];
 
 const monthOptions = [
@@ -217,6 +226,7 @@ const assignToOptions = [
     value: 'UK',
     label: 'United Kingdom',
   },
+
 ];
 
 const clientList = [
@@ -230,7 +240,31 @@ const clientList = [
   { title: 'The Kraft Heinz Company', avatar: '', clientCode: 'KHC' },
 ];
 
-const year = [{}];
+const market = [
+  { value: '', label: 'All Markets' },
+  {
+    value: 'ARG',
+    label: 'Argentina',
+  },
+  {
+    value: 'AUS',
+    label: 'Australia',
+  },
+  {
+    value: 'BEL',
+    label: 'Belgium',
+  },
+  {
+    value: 'UK',
+    label: 'United Kingdom',
+  },
+  { value: 'USA', label: 'USA' },
+  { value: 'FR', label: 'France' },
+  { value: 'NZ', label: 'New Zealand' },
+  { value: 'SGP', label: 'Singapore' },
+  { value: 'Tk', label: 'Turkey' },
+  { value: 'IT', label: 'Italy' },
+];
 
 const currency = [
   { value: 'gbp', label: 'GBP(Default)' },
@@ -256,7 +290,7 @@ export {
   monthOptions,
   options,
   clientList,
-  year,
+  market,
   currency,
   reportingYear,
   data,

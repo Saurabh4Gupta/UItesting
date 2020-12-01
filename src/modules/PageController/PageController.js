@@ -2,7 +2,7 @@ import React from 'react';
 import { Page, Select, FormField } from '@dentsu-ui/components';
 import PropTypes from 'prop-types';
 import { useHistory, useLocation } from 'react-router';
-import { clientList, year, currency, assignToOptions } from '../Mock/mockData';
+import { clientList, market } from '../Mock/mockData';
 
 const PageController = (props) => {
   const history = useHistory();
@@ -24,8 +24,8 @@ const PageController = (props) => {
   );
   const contentToShow = isViewProduct ? `Back to ${title}` : 'Back to Clients';
   const clientNavigationHandler = () => (isViewProduct
-      ? history.replace(`/datafield?client_code=${clientCode}`)
-      : history.replace('/'));
+    ? history.replace(`/datafield?client_code=${clientCode}`)
+    : history.replace('/'));
 
   return (
     <>
@@ -43,11 +43,11 @@ const PageController = (props) => {
         primaryAction={
           isViewProduct
             ? {
-                content: 'Upload new file',
-                onClick: () => handleUploadModal(),
-                isDisabled: false,
-                icon: 'upload',
-              }
+              content: 'Upload new file',
+              onClick: () => handleUploadModal(),
+              isDisabled: false,
+              icon: 'upload',
+            }
             : false
         }
         controls={(
@@ -56,26 +56,12 @@ const PageController = (props) => {
               <FormField>
                 <Select
                   width={200}
-                  options={currency}
-                  value={filterDataBy.currency}
-                />
-              </FormField>
-            )}
-            {!isViewProduct && (
-              <FormField>
-                <Select
-                  width={200}
-                  options={assignToOptions}
+                  options={market}
                   value={filterDataBy.market}
                   onChange={(selected, event) => {
                     handleMarket(selected, event);
                   }}
                 />
-              </FormField>
-            )}
-            {!isViewProduct && (
-              <FormField>
-                <Select width={200} options={year} value={filterDataBy.year} />
               </FormField>
             )}
           </>
@@ -103,8 +89,8 @@ PageController.defaultProps = {
     year: { value: '', label: 'Year to date' },
   },
   children: '',
-  handleMarket: () => {},
-  handleUploadModal: () => {},
+  handleMarket: () => { },
+  handleUploadModal: () => { },
   pageTitle: '',
 };
 export default PageController;
