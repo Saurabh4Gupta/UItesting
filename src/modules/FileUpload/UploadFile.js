@@ -21,7 +21,6 @@ const UploadFile = (props) => {
 
   const onSubmit = () => {
     const isValid = validate();
-    console.log('++', isValid)
     if (isValid) {
       setModalOpen(false)
       setFiles([])

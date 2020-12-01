@@ -1,130 +1,109 @@
 import React from 'react';
-import {
-  Page,
-  Select,
-  Image,
-  TextContainer,
-  Box,
-  Stack,
-  Caption,
-  Heading,
-  Link,
-} from '@dentsu-ui/components';
+import { Page, Select, FormField } from '@dentsu-ui/components';
 import PropTypes from 'prop-types';
 import { useHistory, useLocation } from 'react-router';
-import { clientList } from '../Mock/mockData';
+import { clientList, year, currency, assignToOptions } from '../Mock/mockData';
 
 const PageController = (props) => {
   const history = useHistory();
   const location = useLocation();
   const query = new URLSearchParams(location.search);
-  const clientCode = query.get('client_code')
+  const clientCode = query.get('client_code');
 
-  const { isToShowDataRequest } = props;
-  const { title } = clientList.find(
+  const {
+    param,
+    filterDataBy,
+    handleMarket,
+    children,
+    handleUploadModal,
+    pageTitle,
+  } = props;
+  const { isViewProduct } = param;
+  const { title, avatar } = clientList.find(
     (client) => client.clientCode === clientCode,
   );
-  const contentToShow = isToShowDataRequest
-    ? `Back to ${title}`
-    : 'Back to Clients';
-  const clientNavigationHandler = () => (isToShowDataRequest
+  const contentToShow = isViewProduct ? `Back to ${title}` : 'Back to Clients';
+  const clientNavigationHandler = () => (isViewProduct
       ? history.replace(`/datafield?client_code=${clientCode}`)
       : history.replace('/'));
+
   return (
-    <Box bg="rgba(220,220,220,0.4)" className="main">
+    <>
       <Page
-        metadata={<Title {...props} onBack={clientNavigationHandler} clientCode={clientCode}  />}
-        primaryAction={{
-          content: 'Upload new File',
-          icon: 'upload',
-          onClick: () => props.setIsUploadModal(true),
-          isDisabled: false,
-        }}
+        metadata={isViewProduct ? title : 'Client Overview'}
+        title={!isViewProduct ? title : pageTitle}
+        thumbnail={`/${avatar}`}
         breadcrumbs={[
           {
             content: contentToShow,
             onClick: clientNavigationHandler,
           },
         ]}
-      />
-    </Box>
+        primaryAction={
+          isViewProduct
+            ? {
+                content: 'Upload new file',
+                onClick: () => handleUploadModal(),
+                isDisabled: false,
+                icon: 'upload',
+              }
+            : false
+        }
+        controls={(
+          <>
+            {isViewProduct && (
+              <FormField>
+                <Select
+                  width={200}
+                  options={currency}
+                  value={filterDataBy.currency}
+                />
+              </FormField>
+            )}
+            {!isViewProduct && (
+              <FormField>
+                <Select
+                  width={200}
+                  options={assignToOptions}
+                  value={filterDataBy.market}
+                  onChange={(selected, event) => {
+                    handleMarket(selected, event);
+                  }}
+                />
+              </FormField>
+            )}
+            {isViewProduct && (
+              <FormField>
+                <Select width={200} options={year} value={filterDataBy.year} />
+              </FormField>
+            )}
+          </>
+        )}
+      >
+        {children}
+      </Page>
+    </>
   );
 };
 
-const HeaderContent = () => (
-  <Stack flex="row" mt="30px">
-    <Box mr="10px">
-      <Select placeholder="Currency GBP(Default)" width={200} />
-    </Box>
-    <Box width={150} mr="10px">
-      <Select placeholder="All Markets" />
-    </Box>
-    <Box width={160} mr="10px">
-      <Select placeholder="Year to Date" style={{ backgound: 'none' }} />
-    </Box>
-  </Stack>
-);
-
-const Title = (props) => {
-  const { onBack, isToShowDataRequest, clientCode } = props;
-  const { title, avatar } = clientList.find(
-    (client) => client.clientCode === clientCode,
-  );
-  const clientLogo = (
-    <Image
-      src={`/${avatar}`}
-      fallbackSrc="https://via.placeholder.com/150"
-      isRounded
-      htmlWidth="110"
-      htmlHeight="110"
-      onClick={isToShowDataRequest && onBack}
-    />
-  );
-  return (
-    <Stack>
-      {isToShowDataRequest ? <Link>{clientLogo}</Link> : clientLogo}
-
-      <Stack flexDirection="column" ml="20px">
-        <div>
-          <TextContainer>
-            <Caption>Client Overview</Caption>
-          </TextContainer>
-        </div>
-        <div>
-          <TextContainer>
-            <h1>
-              {' '}
-              <Heading>{title}</Heading>
-            </h1>
-          </TextContainer>
-        </div>
-        <HeaderContent />
-      </Stack>
-    </Stack>
-  );
-};
-
-Title.propTypes = {
-  isToShowDataRequest: PropTypes.bool,
-  clientCode: PropTypes.string,
-  onBack: PropTypes.func,
-};
-
-Title.defaultProps = {
-  isToShowDataRequest: false,
-  clientCode: '',
-  onBack: () => {},
-};
 PageController.propTypes = {
-  setIsUploadModal: PropTypes.func,
-  isToShowDataRequest: PropTypes.bool,
-  clientCode: PropTypes.string,
-  history: PropTypes.object,
+  param: PropTypes.object,
+  filterDataBy: PropTypes.object,
+  handleMarket: PropTypes.func,
+  children: PropTypes.node,
+  handleUploadModal: PropTypes.func,
+  pageTitle: PropTypes.string,
 };
 PageController.defaultProps = {
-  setIsUploadModal: () => {},
-  isToShowDataRequest: false,
-  clientCode: '',
-  history: {},
+  param: { isViewProduct: false },
+  filterDataBy: {
+    market: { label: 'All Markets', value: '' },
+    currency: { value: 'gbp', label: 'Currency GBP (default' },
+    year: { value: '', label: 'Year to date' },
+  },
+  children: '',
+  handleMarket: () => {},
+  handleUploadModal: () => {},
+  pageTitle: '',
 };
 export default PageController;
