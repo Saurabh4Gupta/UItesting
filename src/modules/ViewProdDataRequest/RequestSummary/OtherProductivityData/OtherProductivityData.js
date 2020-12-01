@@ -59,7 +59,7 @@ const OtherProductivityData = ({ prodRequest }) => {
             </Caption>
           </Box>
           <Stack flexDirection="row">
-            <Box mr="10px">
+            <Box mr="3px">
               <Paragraph>
                 {PageContent.actualCapitalized}
                 :
@@ -67,7 +67,7 @@ const OtherProductivityData = ({ prodRequest }) => {
               </Paragraph>
             </Box>
             <Divider orientation="vertical" isFlexChild />
-            <Box ml="10px">
+            <Box ml="3px">
               <Paragraph>
                 {PageContent.forecastCapitalized}
                 :

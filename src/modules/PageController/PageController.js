@@ -52,7 +52,7 @@ const PageController = (props) => {
         }
         controls={(
           <>
-            {isViewProduct && (
+            {!isViewProduct && (
               <FormField>
                 <Select
                   width={200}
@@ -73,7 +73,7 @@ const PageController = (props) => {
                 />
               </FormField>
             )}
-            {isViewProduct && (
+            {!isViewProduct && (
               <FormField>
                 <Select width={200} options={year} value={filterDataBy.year} />
               </FormField>
