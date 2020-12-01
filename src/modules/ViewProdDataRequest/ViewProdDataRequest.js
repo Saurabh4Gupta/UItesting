@@ -4,47 +4,50 @@ import { Box, Link } from '@dentsu-ui/components';
 import PageController from '../PageController/PageController';
 import EditData from '../CreateData/EditData'
 import { dataFieldCms as PageContent } from '../../cms';
-import  VersionHistory  from '../VersionHistory/VersionHistory';
+import withPageController from '../../hoc/withPageController';
+import UploadFile from '../FileUpload/UploadFile';
 
 const ViewProdDataRequest = (props) => {
-  const { match } = props;
-  const { params } = match;
-  const { id } = params;
+  const { param } = props;
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [market] = useState('');
+  const [isUploadModal, setIsUploadModeal] = useState(false);
+  const [filterDataBy] = useState({
+    currency: { label: 'GBP (Default)', value: 'gbp' },
+    year: { label: 'Year to date', value: '' },
+  });
   const handleModal = (value) => {
     setIsModalOpen(value);
   };
+
   const handleCreateData = () => {
     handleModal(true);
   };
+  const handleUploadModal = () => {
+    setIsUploadModeal(true)
+  }
   return (
     <>
-      <PageController
-        isToShowDataRequest
-        clientCode={id}
-        setIsUploadModal={false}
-        {...props}
-      />
-      <Box m="45px" mb="200px">
-        <Link iconLeft="edit" onClick={handleCreateData}>
-          {PageContent.editRequest}
-        </Link>
-      </Box>
-      <EditData
-        cmsData={PageContent}
-        market={market}
-        isModalOpen={isModalOpen}
-        handleModal={handleModal}
-      />
-      <VersionHistory />
+      {isUploadModal && <UploadFile modalOpen={isUploadModal} setModalOpen={setIsUploadModeal} cmsData={PageContent} />}
+      <PageController param={param} filterDataBy={filterDataBy} handleUploadModal={handleUploadModal}>
+        <Box mb="200px">
+          <Link iconLeft="edit" onClick={handleCreateData}>
+            {PageContent.editRequest}
+          </Link>
+        </Box>
+        <EditData
+          cmsData={PageContent}
+          market={filterDataBy.market}
+          isModalOpen={isModalOpen}
+          handleModal={handleModal}
+        />
+      </PageController>
     </>
   );
 };
 ViewProdDataRequest.propTypes = {
-  match: PropTypes.object,
+  param: PropTypes.object,
 };
 ViewProdDataRequest.defaultProps = {
-  match: {},
+  param: {},
 };
-export default ViewProdDataRequest;
+export default withPageController(ViewProdDataRequest, { isViewProduct: true });

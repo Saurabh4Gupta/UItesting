@@ -184,6 +184,13 @@ const clientList = [
   { title: 'Procter & Gamble', avatar: '', clientCode: 'PG' },
 ];
 
+const year = [{}];
+
+const currency = [
+  { value: 'gbp', label: 'GBP(Default)' },
+  { value: 'usd', label: 'USD' },
+  { value: 'euro', label: 'EUR' },
+]
 const reportingYear = [
   {
     value: 'April 2021 - March 2022',
@@ -199,46 +206,48 @@ const reportingYear = [
   },
 ]
 
-
 const versionHistory = {
   data: [
     {
       id: 1,
-      name: 'Microsoft Uk - productivity Report ',
+      name: 'Microsoft Uk-Productivity Report ',
       type: 'XLS',
       size: '242KB',
       version: 'V8.0',
       dataRequest: '',
       blobId: '',
+      createdAt: '2020-12-01',
     },
     {
       id: 1,
-      name: 'Microsoft Uk - productivity Report ',
+      name: 'Microsoft Uk-Productivity Report ',
       type: 'XLS',
       size: '242KB',
       version: 'V7.0',
       dataRequest: '',
       blobId: '',
+      createdAt: '2020-12-01',
     },
     {
       id: 1,
-      name: 'Microsoft Uk - productivity Report ',
+      name: 'Microsoft Uk-Productivity Report ',
       type: 'XLS',
       size: '242KB',
       version: 'V6.0',
       dataRequest: '',
       blobId: '',
+      createdAt: '2020-12-01',
     },
     {
       id: 1,
-      name: 'Microsoft Uk - productivity Report ',
+      name: 'Microsoft Uk-Productivity Report ',
       type: 'XLS',
       size: '242KB',
       version: 'V5.0',
       dataRequest: '',
       blobId: '',
+      createdAt: '2020-12-01',
     },
   ],
 }
-
-export { assignToOptions, monthOptions, options, clientList, reportingYear ,versionHistory};
+export { assignToOptions, monthOptions, options, clientList, year, currency, reportingYear,versionHistory };
