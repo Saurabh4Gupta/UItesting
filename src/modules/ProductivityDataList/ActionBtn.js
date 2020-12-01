@@ -34,7 +34,6 @@ ActionBtn.propTypes = {
   deleteBtn: PropTypes.string.isRequired,
   showStatus: PropTypes.string.isRequired,
   handleDeleteModel: PropTypes.func,
-  objId: PropTypes.number.isRequired,
 };
 ActionBtn.defaultProps = {
   handleDeleteModel: true,

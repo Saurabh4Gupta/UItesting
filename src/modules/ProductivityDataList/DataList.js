@@ -164,20 +164,16 @@ const DataList = (props) => {
 
 DataList.propTypes = {
   cmsData: PropTypes.object,
-  handleModal: PropTypes.func,
-  ongoingDataList: PropTypes.object,
-  completeDataList: PropTypes.object,
-  handleToggleData: PropTypes.func.isRequired,
-  tabIndex: PropTypes.number.isRequired,
-  handleTabIndex: PropTypes.func.isRequired,
-  handleDeleteModel: PropTypes.func.isRequired,
   clientCode: PropTypes.string,
+  market: PropTypes.object || PropTypes.string,
+  dataList: PropTypes.array,
+  setDataList: PropTypes.func,
 };
 DataList.defaultProps = {
   cmsData: {},
-  handleModal: () => { },
-  ongoingDataList: {},
-  completeDataList: [],
+  market: { value: '' },
+  dataList: [{}],
   clientCode: '',
+  setDataList: () => { },
 };
 export default DataList;

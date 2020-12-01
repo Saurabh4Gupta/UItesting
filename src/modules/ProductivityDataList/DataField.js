@@ -11,6 +11,7 @@ import withPageController from '../../hoc/withPageController';
 
 const DataField = (props) => {
   const location = useLocation();
+  const { param } = props;
   const query = new URLSearchParams(location.search);
   const clientCode = query.get('client_code');
   const [filterDataBy, setFilterDataBy] = useState({
@@ -31,7 +32,7 @@ const DataField = (props) => {
 
   return (
     <>
-      <PageController param={props.param} filterDataBy={filterDataBy} handleMarket={handleMarket}>
+      <PageController param={param} filterDataBy={filterDataBy} handleMarket={handleMarket}>
         <Box mb="200px">
           <UploadFile
             cmsData={PageContent}

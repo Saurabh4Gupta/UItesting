@@ -29,12 +29,12 @@ const DeleteData = (props) => {
 DeleteData.propTypes = {
   modalOpen: PropTypes.bool,
   setModalOpen: PropTypes.func,
-  deleteRequest: PropTypes.func,
+  handleDelete: PropTypes.func,
 };
 
 DeleteData.defaultProps = {
   modalOpen: false,
   setModalOpen: () => { },
-  deleteRequest: () => { },
+  handleDelete: () => { },
 };
 export default DeleteData;

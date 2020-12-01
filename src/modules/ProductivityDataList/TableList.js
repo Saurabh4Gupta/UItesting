@@ -169,7 +169,9 @@ TableList.propTypes = {
   handleToggleData: PropTypes.func.isRequired,
   actionName: PropTypes.string.isRequired,
   showStatus: PropTypes.string,
-  handleDeleteModel: PropTypes.func.isRequired,
+  isDeleteModal: PropTypes.bool.isRequired,
+  setIsDeleteModal: PropTypes.func.isRequired,
+  handleDeletItem: PropTypes.func.isRequired,
   clientCode: PropTypes.string,
 };
 TableList.defaultProps = {

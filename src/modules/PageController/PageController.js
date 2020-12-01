@@ -46,13 +46,15 @@ const PageController = (props) => {
         } : false}
         controls={(
           <>
-            <FormField>
-              <Select
-                width={200}
-                options={currency}
-                value={filterDataBy.currency}
-              />
-            </FormField>
+            {isViewProduct && (
+              <FormField>
+                <Select
+                  width={200}
+                  options={currency}
+                  value={filterDataBy.currency}
+                />
+              </FormField>
+            )}
             {!isViewProduct && (
               <FormField>
                 <Select
@@ -63,13 +65,15 @@ const PageController = (props) => {
                 />
               </FormField>
             )}
-            <FormField>
-              <Select
-                width={200}
-                options={year}
-                value={filterDataBy.year}
-              />
-            </FormField>
+            {isViewProduct && (
+              <FormField>
+                <Select
+                  width={200}
+                  options={year}
+                  value={filterDataBy.year}
+                />
+              </FormField>
+            )}
           </>
         )}
       >
