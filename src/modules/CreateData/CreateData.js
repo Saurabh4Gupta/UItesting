@@ -4,15 +4,16 @@ import PropTypes from 'prop-types';
 import Form from './Form'
 import useCustomForm from '../../hooks/useCustomForm';
 import validationRule from '../../utils/validate';
-import { options, monthOptions, updateData } from '../Mock/mockData'
+import { options, monthOptions, reportingYear } from '../Mock/mockData'
 
 const CreateData = (props) => {
-  const { cmsData, market, isModalOpen, handleModal, setDataCreated } = props;
+  const { cmsData, market, isModalOpen, handleModal, addRequest } = props;
   const [isReadyToSubmit, setIsReadyToSubmit] = useState(false);
   const initialValues = {
     localMarket: market,
     name: '',
     briefing: '',
+    reportingYear: '',
     actualData: '',
     forecastData: '',
     dueDate: '',
@@ -25,12 +26,15 @@ const CreateData = (props) => {
   useEffect(() => {
     const isAnyValidationError = errors && !!(errors.localMarket || errors.name
       || errors.briefing || errors.dueDate || errors.assignTo || errors.forecastData
-      || errors.forecastData);
+      || errors.forecastData || errors.reportingYear);
     const isAllValuesFilled = values.localMarket && values.name && values.assignTo
-      && values.dueDate && values.forecastData && values.actualData && values.briefing;
+      && values.dueDate && values.forecastData && values.actualData && values.briefing && values.reportingYear;
     setIsReadyToSubmit(isAllValuesFilled && !isAnyValidationError);
   }, [errors, values]);
 
+  useEffect(() => {
+    handleChange({ target: { name: 'localMarket', value: market } });
+  }, [market])
   const closeModalHandler = () => {
     handleModal(false)
     handleCancel();
@@ -40,9 +44,7 @@ const CreateData = (props) => {
     if (isReadyToSubmit) {
       // mutation will be done here
       closeModalHandler();
-
-      updateData(values)
-      setDataCreated(true)
+      addRequest(values)
     }
   }
   const handleCreateData = () => {
@@ -62,6 +64,7 @@ const CreateData = (props) => {
             cmsData={cmsData}
             options={options}
             monthOptions={monthOptions}
+            reportingYear={reportingYear}
           />
         </Modal.Body>
         <Modal.Footer>
@@ -92,14 +95,14 @@ CreateData.propTypes = {
   market: PropTypes.string,
   isModalOpen: PropTypes.bool,
   handleModal: PropTypes.func,
-  setDataCreated: PropTypes.func,
+  addRequest: PropTypes.func,
 }
 CreateData.defaultProps = {
   cmsData: {},
   market: 'UK',
   isModalOpen: false,
   handleModal: () => { },
-  setDataCreated: () => false,
+  addRequest: () => { },
 }
 
 export default CreateData;

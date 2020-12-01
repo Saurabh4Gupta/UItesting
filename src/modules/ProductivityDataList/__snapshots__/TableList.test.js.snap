@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`test cases for Table list should match snapshot 1`] = `
+<Box
+  mt="30px"
+>
+  <List
+    filteredText=""
+    filters={
+      Array [
+        Object {
+          "defaultText": "All",
+          "key": "enabled",
+          "label": "Show",
+          "options": Array [
+            Object {
+              "label": "2020 Q1",
+              "value": "2020 Q1",
+            },
+            Object {
+              "label": "2020 Q2",
+              "value": "2020 Q2",
+            },
+            Object {
+              "label": "2020 Q3",
+              "value": "2020 Q3",
+            },
+            Object {
+              "label": "2020 Q4",
+              "value": "2020 Q4",
+            },
+          ],
+          "type": "choice",
+        },
+      ]
+    }
+    isSearchable={true}
+    items={
+      Array [
+        "test1",
+        "test2",
+        "test3",
+      ]
+    }
+    renderItem={[Function]}
+    rowText="result in total"
+    rowsText="results in total"
+    searchBy="client"
+  />
+</Box>
+`;

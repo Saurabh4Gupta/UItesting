@@ -15,12 +15,11 @@ import constant from '../../utils/constant';
 
 const Form = (props) => {
   const { MAX_FILE_SIZE, ALLOWED_FILE_TYPES } = constant;
-  const { values, handleChange, handleSelectField, errors, cmsData, options, monthOptions } = props;
+  const { values, handleChange, handleSelectField, errors, cmsData, options, monthOptions, dueDate, reportingYear } = props;
   const [files, setFiles] = useState([]);
   const handleInit = () => {
     console.log('Dropzone instance has initialised', files);
   };
-
   return (
     <>
       <FormField
@@ -34,7 +33,7 @@ const Form = (props) => {
           options={options}
           onChange={(selected, event) => handleSelectField(selected, event)}
           value={
-            options.find(key => key.value === values.localMarket)
+            options.find(key => key.value === values.localMarket.value)
           }
         />
       </FormField>
@@ -64,28 +63,27 @@ const Form = (props) => {
           onChange={handleChange}
         />
       </FormField>
-
-      <FormField
-        label={cmsData.templateFileLabel}
-        hint={cmsData.templateFileHint}
-        {...(errors.actualData ? { error: errors.actualData } : {})}
-      >
-        <Dropzone
-          allowMultiple={false}
-          allowReorder
-          onInit={() => handleInit()}
-          onUpdateFiles={(fileItems) => {
-            setFiles(fileItems);
-          }}
-          maxFiles={1}
-          maxFileSize={MAX_FILE_SIZE}
-          server="./"
-          acceptedFileTypes={ALLOWED_FILE_TYPES}
-        />
-
-      </FormField>
       <Stack flex="row">
-        <Box mr="30px">
+        <Box width="350px">
+          <FormField
+            label={cmsData.reportingYearLabel}
+            {...(errors.reportingYear ? { error: errors.reportingYear } : {})}
+            hint={cmsData.reportingYearHint}
+          >
+            <Select
+              name="reportingYear"
+              options={reportingYear}
+              value={values.reportingYear}
+              placeholder={cmsData.selectPlaceHolder}
+              onChange={(selected, event) => {
+                handleSelectField(selected, event)
+              }}
+            />
+          </FormField>
+        </Box>
+      </Stack>
+      <Stack flex="row">
+        <Box mr="30px" width="50%">
           <FormField
             label={cmsData.actualDataLabel}
             {...(errors.actualData ? { error: errors.actualData } : {})}
@@ -102,7 +100,7 @@ const Form = (props) => {
             />
           </FormField>
         </Box>
-        <Box>
+        <Box width="50%">
           <FormField
             label={cmsData.forecastDataLabel}
             {...(errors.forecastData ? { error: errors.forecastData } : {})}
@@ -122,6 +120,27 @@ const Form = (props) => {
         </Box>
       </Stack>
       <FormField
+        label={cmsData.templateFileLabel}
+        hint={cmsData.templateFileHint}
+        {...(errors.actualData ? { error: errors.actualData } : {})}
+      >
+        <Dropzone
+          allowMultiple={false}
+          allowReorder
+          onInit={() => handleInit()}
+          onUpdateFiles={(fileItems) => {
+            setFiles(fileItems);
+          }}
+          maxFiles={1}
+          maxFileSize={MAX_FILE_SIZE}
+          server="./"
+          acceptedFileTypes={ALLOWED_FILE_TYPES}
+          labelMaxFileSizeExceeded={cmsData.uploadFileLargeMessage}
+          labelFileTypeNotAllowed={cmsData.labelFileTypeNotAllowed}
+        />
+
+      </FormField>
+      <FormField
         {...(errors.dueDate ? { error: errors.dueDate } : {})}
         label={cmsData.dueDateLabel}
         hint={cmsData.dueDateHint}
@@ -132,6 +151,8 @@ const Form = (props) => {
           parseDate={(date) => new Date(date)}
           formatDate={(date) => date.toLocaleDateString()}
           onChange={(date) => handleSelectField(date, { name: 'dueDate' })}
+          minDate={new Date()}
+          value={dueDate}
         />
       </FormField>
 
@@ -147,7 +168,7 @@ const Form = (props) => {
           placeholder={cmsData.selectPlaceHolder}
           onChange={(selected, event) => handleSelectField(selected, event)}
           value={
-            options.find(key => key.value === values.localMarket)
+            options.find(key => key.value === values.assignTo.value)
           }
         />
       </FormField>

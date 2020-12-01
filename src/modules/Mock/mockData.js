@@ -55,12 +55,19 @@ const data = {
       quarter: 'Q2',
     },
   ],
-}
+};
 
+const completedData = {
+  data: [],
+};
+export const getCompletedData = () => ({
+  completedCount: completedData.data.length,
+  completedData: completedData.data,
+});
 export const getData = () => ({
-    totalCount: data.data.length,
-    data: data.data,
-  })
+  totalCount: data.data.length,
+  data: data.data,
+});
 
 export function updateData(values) {
   values.createdAt = new Date();
@@ -146,7 +153,7 @@ const monthOptions = [
     value: 12,
     label: '12 months',
   },
-]
+];
 const assignToOptions = [
   {
     value: 'ARG',
@@ -175,6 +182,27 @@ const clientList = [
   { title: 'The Kraft Heinz Company', avatar: '', clientCode: 'KHC' },
   { title: 'Microsoft Corporation', avatar: 'abc.ico', clientCode: 'MC' },
   { title: 'Procter & Gamble', avatar: '', clientCode: 'PG' },
-]
+];
 
-export { data, assignToOptions, monthOptions, options, clientList };
+const year = [{}];
+
+const currency = [
+  { value: 'gbp', label: 'GBP(Default)' },
+  { value: 'usd', label: 'USD' },
+  { value: 'euro', label: 'EUR' },
+]
+const reportingYear = [
+  {
+    value: 'April 2021 - March 2022',
+    label: 'April 2021 - March 2022',
+  },
+  {
+    value: '2020-2021',
+    label: 'April 2020 - March 2021',
+  },
+  {
+    value: '2019-2020',
+    label: 'April 2019 - March 2020',
+  },
+]
+export { assignToOptions, monthOptions, options, clientList, year, currency, reportingYear };

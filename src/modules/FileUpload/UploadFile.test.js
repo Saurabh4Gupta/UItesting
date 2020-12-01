@@ -12,14 +12,14 @@ describe('Success test cases for: UploadFile component', () => {
     });
 
     it('Test Upload click event', () => {
-      wrapper.find({ children: PageContent.upload}).simulate('click');
+      wrapper.find({ children: PageContent.upload }).simulate('click');
     });
     it('Test Cancel click event', () => {
       wrapper.find({ children: PageContent.cancel }).simulate('click');
     });
 
 
-   it('invoking handleFileChange functions',()=>{
+   it('invoking handleFileChange functions', () => {
     const pageControls = wrapper.find('ForwardRef').at(2).find('Form');
     expect(pageControls.prop('handleFileChange')());
    })

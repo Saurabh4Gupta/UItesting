@@ -1,31 +1,40 @@
-import React, { useState } from 'react';
-import { Modal, Button } from '@dentsu-ui/components/dist/cjs/components/Modal';
+import React from 'react';
+import { Modal, Button } from '@dentsu-ui/components';
+import PropTypes from 'prop-types';
 
-const [modalOpen, setModalOpen] = useState(false);
-const DeleteData = () => {
-  const handleDelete = () => {
-    console.log('Hello deleted');
-    setModalOpen(false);
-  }
+const DeleteData = (props) => {
+  const { modalOpen, setModalOpen, handleDelete } = props;
   return (
     <>
-      <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)}>
-        <Modal.Header hasCloseButton title="Delete this data requests" />
+      <Modal
+        isFullHeight={false}
+        width="500px"
+        isOpen={modalOpen}
+        onClose={() => setModalOpen({ value: false })}
+      >
+        <Modal.Header hasCloseButton title="Are you sure you want to delete?" />
         <Modal.Body>
-          <p>
-            Are you sure want to delete this request?
-          </p>
+          <p>Once deleted, this data request will no longer be available. </p>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={() => setModalOpen(false)}>
-            cancel
+          <Button variant="secondary" onClick={() => setModalOpen({ value: false })}>
+            No, cancel
           </Button>
-          <Button onClick={handleDelete}>
-            Send
-          </Button>
+          <Button onClick={handleDelete}>Yes, delete</Button>
         </Modal.Footer>
       </Modal>
     </>
-  )
-}
+  );
+};
+DeleteData.propTypes = {
+  modalOpen: PropTypes.bool,
+  setModalOpen: PropTypes.func,
+  handleDelete: PropTypes.func,
+};
+
+DeleteData.defaultProps = {
+  modalOpen: false,
+  setModalOpen: () => { },
+  handleDelete: () => { },
+};
 export default DeleteData;

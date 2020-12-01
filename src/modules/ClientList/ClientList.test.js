@@ -15,11 +15,12 @@ describe('Success test cases for: ViewClientList component', () => {
 
     it('Test to find List row', () => {
      // expect(wrapper).toMatchSnapshot();
-    //  let listComponent = wrapper.find('List');
-    //  expect(listComponent.find('List.Row').exists()).toBe(true);
+     const listComponent = wrapper.find('List');
+
+      expect(listComponent.children().length)
+      console.log(listComponent.children())
 
     // expect(description.text()).toEqual(product.description);
-
     });
 
     it('Renders correctly', () => {
