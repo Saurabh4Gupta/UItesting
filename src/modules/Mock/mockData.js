@@ -107,7 +107,7 @@ const monthOptions = [
   },
   {
     value: 1,
-    label: '1 months',
+    label: '1 month',
   },
   {
     value: 2,
@@ -193,6 +193,13 @@ const currentEndDate = newDate.getFullYear() + 1;
 const prevStartDate = newDate.getFullYear() - 1;
 const prevEndDate =  newDate.getFullYear();
 
+const year = [{}];
+
+const currency = [
+  { value: 'gbp', label: 'GBP(Default)' },
+  { value: 'usd', label: 'USD' },
+  { value: 'euro', label: 'EUR' },
+]
 const reportingYear = [
   {
     value: `April ${nexStartDate}  -  March ${nextEndDate}`,
@@ -208,4 +215,4 @@ const reportingYear = [
   },
 ]
 
-export { assignToOptions, monthOptions, options, clientList, reportingYear };
+export { assignToOptions, monthOptions, options, clientList, year, currency, reportingYear };

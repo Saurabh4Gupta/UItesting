@@ -12,31 +12,42 @@ import {
 } from '@dentsu-ui/components';
 import { useHistory } from 'react-router';
 import ActionBtn from './ActionBtn';
+import DeleteData from '../CreateData/DeleteData';
 
 const TableList = (props) => {
   const {
     cmsData,
     data,
     handleToggleData,
+    isDeleteModal,
+    setIsDeleteModal,
     actionName,
     showStatus,
-    handleDeleteModel,
+    handleDeletItem,
     clientCode,
   } = props;
 
   const history = useHistory()
 
+  const handleModal = (id) => {
+    setIsDeleteModal({ value: true, id })
+  }
   const showDataRequestDetails = (id) => {
     const queryString = `client_code=${clientCode}&request_id=${id}`
     history.push({
       pathname: '/viewDetails',
       search: `?${queryString}`,
     })
-   // history.push(`/viewDetails?client_code=${clientCode}&request_id=${id}`);
+    // history.push(`/viewDetails?client_code=${clientCode}&request_id=${id}`);
   };
 
   return (
     <Box mt="30px">
+      <DeleteData
+        modalOpen={isDeleteModal.value}
+        setModalOpen={setIsDeleteModal}
+        handleDelete={handleDeletItem}
+      />
       <List
         items={data}
         searchBy="client"
@@ -109,11 +120,11 @@ const TableList = (props) => {
                         <Chip variant="status" status="warning" hasStatusLight>
                           {cmsData.overdue}
                         </Chip>
-                      ) : (
-                        ''
-                      )}
+                        ) : (
+                            ''
+                          )}
                     </Box>
-                  )}
+                    )}
                   <Box width="30%">{`${cmsData.lastUpdate}: ${updatedAt}`}</Box>
                 </Stack>
                 <Stack
@@ -139,8 +150,7 @@ const TableList = (props) => {
                       handleToggleData={() => handleToggleData(id)}
                       deleteBtn={cmsData.delete}
                       showStatus={showStatus}
-                      objId={id}
-                      handleDeleteModel={handleDeleteModel}
+                      handleDeleteModel={() => handleModal(id)}
                     />
                   </Box>
                 </Stack>
@@ -159,7 +169,9 @@ TableList.propTypes = {
   handleToggleData: PropTypes.func.isRequired,
   actionName: PropTypes.string.isRequired,
   showStatus: PropTypes.string,
-  handleDeleteModel: PropTypes.func.isRequired,
+  isDeleteModal: PropTypes.bool.isRequired,
+  setIsDeleteModal: PropTypes.func.isRequired,
+  handleDeletItem: PropTypes.func.isRequired,
   clientCode: PropTypes.string,
 };
 TableList.defaultProps = {

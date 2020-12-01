@@ -22,7 +22,6 @@ const useCustomForm = ({
     handleValidation(name, value);
     setValues({ ...values, [name]: value });
   };
-  const forcastOptionsData = [];
   const handleSelectField = (value, event) => {
     const { name } = event;
     if (name === 'actualData') {
@@ -30,10 +29,8 @@ const useCustomForm = ({
       const label = monthOptions.find(key => key.value === forecast)
       const data = { value: label.value, label: label.label };
       handleValidation('forecastData', forecast);
-      setValues(values.forecastData = data)
-      for (let i = 0; i <= forecast; i += 1) {
-        forcastOptionsData.push({ value: i, label: `${i} months` });
-      }
+      setValues(values.forecastData = data);
+      const forcastOptionsData = monthOptions.filter(m =>  m.value <= forecast)
       setforecastOptions(forcastOptionsData)
     }
     // if (name === 'forecastData') {
@@ -47,10 +44,10 @@ const useCustomForm = ({
     setValues({ ...values, [name]: value });
   }
 
-  // console.log('forecastDisable----------', forecastDisable);
   const handleCancel = () => {
     setErrors({});
     setValues(initialValues);
+    setforecastOptions()
   }
   const handleSubmit = async (event) => {
     if (event) event.preventDefault();

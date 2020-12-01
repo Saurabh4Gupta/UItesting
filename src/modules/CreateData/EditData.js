@@ -15,8 +15,8 @@ const EditData = (props) => {
     name: 'Productivity Q2 2020',
     briefing: 'Give some details about this quarter',
     reportingYear:{ value: 'April 2021 - March 2022', label: 'April 2021 - March 2022' },
-    actualData: { value: 0, label: '0' },
-    forecastData: { value: 12, label: '12' },
+    actualData: { value: 0, label: '0 months' },
+    forecastData: { value: 12, label: '12 months' },
     dueDate: new Date(),
     assignTo: { value: 'UK', label: 'United Kingdom' },
   };
