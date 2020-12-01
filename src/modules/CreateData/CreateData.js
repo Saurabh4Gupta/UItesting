@@ -31,6 +31,9 @@ const CreateData = (props) => {
     setIsReadyToSubmit(isAllValuesFilled && !isAnyValidationError);
   }, [errors, values]);
 
+  useEffect(() => {
+    handleChange({ target: { name: 'localMarket', value: market } });
+  }, [market])
   const closeModalHandler = () => {
     handleModal(false)
     handleCancel();
