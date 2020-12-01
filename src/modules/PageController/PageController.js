@@ -1,49 +1,55 @@
 import React from 'react';
-import {
-  Page,
-  Select,
-  FormField,
-} from '@dentsu-ui/components';
+import { Page, Select, FormField } from '@dentsu-ui/components';
 import PropTypes from 'prop-types';
 import { useHistory, useLocation } from 'react-router';
 import { clientList, market } from '../Mock/mockData';
-
 
 const PageController = (props) => {
   const history = useHistory();
   const location = useLocation();
   const query = new URLSearchParams(location.search);
-  const clientCode = query.get('client_code')
+  const clientCode = query.get('client_code');
 
-  const { param, filterDataBy, handleMarket, children, handleUploadModal } = props;
+  const {
+    param,
+    filterDataBy,
+    handleMarket,
+    children,
+    handleUploadModal,
+    pageTitle,
+  } = props;
   const { isViewProduct } = param;
-  const { title } = clientList.find(
+  const { title, avatar } = clientList.find(
     (client) => client.clientCode === clientCode,
   );
-  const contentToShow = isViewProduct
-    ? `Back to ${title}`
-    : 'Back to Clients';
+  const contentToShow = isViewProduct ? `Back to ${title}` : 'Back to Clients';
   const clientNavigationHandler = () => (isViewProduct
     ? history.replace(`/datafield?client_code=${clientCode}`)
     : history.replace('/'));
+
   return (
     <>
       <Page
-        metadata={isViewProduct ? title : 'Client Overview'}
-        title={!isViewProduct ? title : 'Productivity Q2 2020'}
-        thumbnail="/logo.png"
+        metadata={isViewProduct ? 'Microsoft United Kingdom' : 'Client Overview'}
+        title={!isViewProduct ? title : pageTitle}
+        thumbnail={`/${avatar}`}
+
         breadcrumbs={[
           {
             content: contentToShow,
             onClick: clientNavigationHandler,
           },
         ]}
-        primaryAction={isViewProduct ? {
-          content: 'Upload new file',
-          onClick: () => handleUploadModal(),
-          isDisabled: false,
-          icon: 'upload',
-        } : false}
+        primaryAction={
+          isViewProduct
+            ? {
+              content: 'Upload new file',
+              onClick: () => handleUploadModal(),
+              isDisabled: false,
+              icon: 'upload',
+            }
+            : false
+        }
         controls={(
           <>
             {!isViewProduct && (
@@ -52,7 +58,9 @@ const PageController = (props) => {
                   width={200}
                   options={market}
                   value={filterDataBy.market}
-                  onChange={(selected, event) => { handleMarket(selected, event) }}
+                  onChange={(selected, event) => {
+                    handleMarket(selected, event);
+                  }}
                 />
               </FormField>
             )}
@@ -62,8 +70,8 @@ const PageController = (props) => {
         {children}
       </Page>
     </>
-  )
-}
+  );
+};
 
 PageController.propTypes = {
   param: PropTypes.object,
@@ -71,7 +79,8 @@ PageController.propTypes = {
   handleMarket: PropTypes.func,
   children: PropTypes.node,
   handleUploadModal: PropTypes.func,
-}
+  pageTitle: PropTypes.string,
+};
 PageController.defaultProps = {
   param: { isViewProduct: false },
   filterDataBy: {
@@ -82,5 +91,6 @@ PageController.defaultProps = {
   children: '',
   handleMarket: () => { },
   handleUploadModal: () => { },
-}
+  pageTitle: '',
+};
 export default PageController;
