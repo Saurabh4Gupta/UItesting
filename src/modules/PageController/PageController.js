@@ -6,7 +6,7 @@ import {
 } from '@dentsu-ui/components';
 import PropTypes from 'prop-types';
 import { useHistory, useLocation } from 'react-router';
-import { clientList, year, currency, assignToOptions } from '../Mock/mockData';
+import { clientList, market } from '../Mock/mockData';
 
 
 const PageController = (props) => {
@@ -46,31 +46,13 @@ const PageController = (props) => {
         } : false}
         controls={(
           <>
-            {isViewProduct && (
-              <FormField>
-                <Select
-                  width={200}
-                  options={currency}
-                  value={filterDataBy.currency}
-                />
-              </FormField>
-            )}
             {!isViewProduct && (
               <FormField>
                 <Select
                   width={200}
-                  options={assignToOptions}
+                  options={market}
                   value={filterDataBy.market}
                   onChange={(selected, event) => { handleMarket(selected, event) }}
-                />
-              </FormField>
-            )}
-            {isViewProduct && (
-              <FormField>
-                <Select
-                  width={200}
-                  options={year}
-                  value={filterDataBy.year}
                 />
               </FormField>
             )}

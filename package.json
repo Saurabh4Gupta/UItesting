@@ -5,7 +5,7 @@
   "dependencies": {
     "@apollo/client": "^3.1.5",
     "@apollo/react-hooks": "^3.1.5",
-    "@dentsu-ui/components": "0.36.2",
+    "@dentsu-ui/components": "0.36.4",
     "@gdo-global-client-reporting/dentsu-platform-bridge": "^1.3.4",
     "@gdo-global-client-reporting/dentsu-platform-shell": "3.0.5",
     "@okta/okta-auth-js": "3.2.5",
