@@ -17,6 +17,18 @@ const data = {
       including versions of Lorem Ipsum. Lorem Ipsum is simply dummy text of
       the printing industry.Lorem Ipsum is simply dummy text of the printing
       and typesetting industry. Lorem Ipsum has been the industrys standard
+      dummy text ever since the 1500s and it still is.
+      Lorem Ipsum is simply dummy text of the printing and typesetting
+      industry. Lorem Ipsum has been the industrys standard dummy text ever
+      since the 1500s, when an unknown printer took a galley of type and
+      scrambled it to make a type specimen book. It has survived not only
+      five centuries, but also the leap into electronic typesetting,
+      remaining essentially unchanged. It was popularised in the 1960s with
+      the release of Letraset sheets containing Lorem Ipsum passages, and
+      more recently with desktop publishing software like Aldus PageMaker
+      including versions of Lorem Ipsum. Lorem Ipsum is simply dummy text of
+      the printing industry.Lorem Ipsum is simply dummy text of the printing
+      and typesetting industry. Lorem Ipsum has been the industrys standard
       dummy text ever since the 1500s and it still is.`,
       dueDate: '13/07/2020',
       updatedAt: '29/10/20 at 14:32',
@@ -32,7 +44,7 @@ const data = {
     },
     {
       id: 2,
-      client: 'GM',
+      client: 'Microsoft',
       localMarket: { value: 'USA', label: 'USA' },
       status: '',
       name: 'Productivity Q3 2020',
@@ -64,10 +76,11 @@ const data = {
       status: 'Overdue',
       name: 'Productivity Q2 2020',
       briefing: 'Need Data for the Q2 2020',
-      dueDate: '2020-08-25',
+      dueDate: '23/07/2020',
       updatedAt: '29/10/20 at 14:32',
       createdAt: '2020-08-14',
-      assignTo: 'UK Team',
+      assignTo: 'Ryan Killick',
+      reportingYear: 'April 2020 - March 2021',
       actualData: { value: 4, label: '4 months' },
       forecastData: { value: 8, label: '8 months' },
       isActive: true,
@@ -200,9 +213,9 @@ const clientList = [
   { title: 'Burger King', avatar: '', clientCode: 'BK' },
   { title: 'General Motors', avatar: '', clientCode: 'GM' },
   { title: "Kellogg's Company", avatar: '', clientCode: 'KC' },
-  { title: 'The Kraft Heinz Company', avatar: '', clientCode: 'KHC' },
   { title: 'Microsoft Corporation', avatar: 'abc.ico', clientCode: 'MC' },
   { title: 'Procter & Gamble', avatar: '', clientCode: 'PG' },
+  { title: 'The Kraft Heinz Company', avatar: '', clientCode: 'KHC' },
 ];
 
 const year = [{}];
@@ -211,7 +224,7 @@ const currency = [
   { value: 'gbp', label: 'GBP(Default)' },
   { value: 'usd', label: 'USD' },
   { value: 'euro', label: 'EUR' },
-]
+];
 const reportingYear = [
   {
     value: 'April 2021 - March 2022',
@@ -225,5 +238,14 @@ const reportingYear = [
     value: '2019-2020',
     label: 'April 2019 - March 2020',
   },
-]
-export { assignToOptions, monthOptions, options, clientList, year, currency, reportingYear, data };
+];
+export {
+  assignToOptions,
+  monthOptions,
+  options,
+  clientList,
+  year,
+  currency,
+  reportingYear,
+  data,
+};

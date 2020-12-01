@@ -30,9 +30,10 @@ const PageController = (props) => {
   return (
     <>
       <Page
-        metadata={isViewProduct ? title : 'Client Overview'}
+        metadata={isViewProduct ? 'Microsoft United Kingdom' : 'Client Overview'}
         title={!isViewProduct ? title : pageTitle}
         thumbnail={`/${avatar}`}
+
         breadcrumbs={[
           {
             content: contentToShow,
