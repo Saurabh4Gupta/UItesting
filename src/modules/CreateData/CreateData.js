@@ -19,7 +19,7 @@ const CreateData = (props) => {
     dueDate: '',
     assignTo: '',
   };
-  const { handleChange, values,
+  const { handleChange, values, forecastOptions,
     handleSelectField, handleSubmit,
     errors, handleCancel } = useCustomForm({ initialValues, validate: validationRule });
 
@@ -64,6 +64,7 @@ const CreateData = (props) => {
             options={options}
             monthOptions={monthOptions}
             reportingYear={reportingYear}
+            forecastOptions={forecastOptions}
           />
         </Modal.Body>
         <Modal.Footer>

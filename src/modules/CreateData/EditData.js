@@ -5,7 +5,7 @@ import { withRouter } from 'react-router';
 import Form from './Form'
 import useCustomForm from '../../hooks/useCustomForm';
 import validationRule from '../../utils/validate';
-import { options, updateData, monthOptions, reportingYear } from '../Mock/mockData'
+import { options, monthOptions, reportingYear } from '../Mock/mockData'
 
 const EditData = (props) => {
   const { cmsData, isModalOpen, handleModal } = props;
@@ -20,7 +20,7 @@ const EditData = (props) => {
     dueDate: new Date(),
     assignTo: { value: 'UK', label: 'United Kingdom' },
   };
-  const { handleChange, values,
+  const { handleChange, values, forecastOptions,
     handleSelectField, handleSubmit,
     errors, handleCancel } = useCustomForm({ initialValues, validate: validationRule });
 
@@ -41,7 +41,7 @@ const EditData = (props) => {
     if (isReadyToSubmit) {
       // console.log('??????????', values);
     closeModalHandler()
-    updateData(values)
+    // updateData(values)
     }
   }
   return (
@@ -59,6 +59,7 @@ const EditData = (props) => {
             monthOptions={monthOptions}
             dueDate={values.dueDate}
             reportingYear={reportingYear}
+            forecastOptions={forecastOptions}
           />
         </Modal.Body>
         <Modal.Footer>
