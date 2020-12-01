@@ -7,10 +7,10 @@ import Link from '@dentsu-ui/components/dist/cjs/components/Link';
 import Divider from '@dentsu-ui/components/dist/cjs/components/Divider';
 import Chip from '@dentsu-ui/components/dist/cjs/components/Chip';
 import PropTypes from 'prop-types';
+import Paragraph from '@dentsu-ui/components/dist/cjs/components/Paragraph/Paragraph';
 import { dataFieldCms as PageContent } from '../../../../cms/dataFieldCms';
 import EditData from '../../../CreateData/EditData';
 import TrackerTemplate from './TrackerTemplate';
-import Paragraph from '@dentsu-ui/components/dist/cjs/components/Paragraph/Paragraph';
 
 const OtherProductivityData = ({ prodRequest }) => {
   const {
@@ -39,7 +39,8 @@ const OtherProductivityData = ({ prodRequest }) => {
               <Link
                 style={{ float: 'right' }}
                 iconLeft="edit"
-                onClick={handleCreateData}>
+                onClick={handleCreateData}
+              >
                 {PageContent.editRequest}
               </Link>
             </Subheading>
@@ -60,13 +61,17 @@ const OtherProductivityData = ({ prodRequest }) => {
           <Stack flexDirection="row">
             <Box mr="10px">
               <Paragraph>
-                {PageContent.actualCapitalized}:<strong>{` ${actualData.label}`}</strong>
+                {PageContent.actualCapitalized}
+                :
+                <strong>{` ${actualData.label}`}</strong>
               </Paragraph>
             </Box>
             <Divider orientation="vertical" isFlexChild />
             <Box ml="10px">
-            <Paragraph>
-              {PageContent.forecastCapitalized}:<strong>{` ${forecastData.label}`}</strong>
+              <Paragraph>
+                {PageContent.forecastCapitalized}
+                :
+                <strong>{` ${forecastData.label}`}</strong>
               </Paragraph>
             </Box>
           </Stack>
@@ -89,7 +94,8 @@ const OtherProductivityData = ({ prodRequest }) => {
                 avatar={{
                   src: 'https://bit.ly/code-beast',
                   name: 'John Paul Green',
-                }}>
+                }}
+              >
                 {assignTo}
               </Chip>
             </Stack>
