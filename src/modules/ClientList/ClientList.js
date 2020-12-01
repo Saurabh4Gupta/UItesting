@@ -51,7 +51,7 @@ const ClientList = (props) => {
                   actions={(
                     <Link
                       iconLeft="layers"
-                      url={`/datafield?client_code=${clientCode}`}
+                      onClick={() => showClientDetails(clientCode)}
                     >
                       {cmsData.viewDetails}
                     </Link>
