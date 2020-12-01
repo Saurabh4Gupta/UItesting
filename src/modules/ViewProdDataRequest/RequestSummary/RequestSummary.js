@@ -7,7 +7,7 @@ import Briefing from './Briefing/Briefing';
 import OtherProductivityData from './OtherProductivityData/OtherProductivityData';
 
 const RequestSummary = ({ prodRequest }) => (
-  <Box m="5px 55px">
+  <Box ml="65px" mr="65px" mt="-50px">
     <Card>
       <Stack flexDirection="row">
         <Briefing briefing={prodRequest.briefing} />
