@@ -10,6 +10,7 @@ import { options, updateData, monthOptions, reportingYear } from '../Mock/mockDa
 const EditData = (props) => {
   const { cmsData, isModalOpen, handleModal } = props;
   const [isReadyToSubmit, setIsReadyToSubmit] = useState(false);
+  const [loading, setLoading] = useState(false);
   const initialValues = {
     localMarket: { value: 'UK', label: 'United Kingdom' },
     name: 'Productivity Q2 2020',
@@ -39,9 +40,13 @@ const EditData = (props) => {
   const onSubmit = () => {
     handleSubmit();
     if (isReadyToSubmit) {
+      setLoading(true);
       // console.log('??????????', values);
-    closeModalHandler()
-    updateData(values)
+      setTimeout(() => {
+        setLoading(false);
+        closeModalHandler()
+        updateData(values)
+      }, 1000);
     }
   }
   return (
@@ -65,7 +70,7 @@ const EditData = (props) => {
           <Button variant="secondary" onClick={closeModalHandler}>
             {cmsData.cancel}
           </Button>
-          <Button onClick={onSubmit}>{cmsData.save}</Button>
+          <Button isLoading={loading} onClick={onSubmit}>{cmsData.save}</Button>
         </Modal.Footer>
       </Modal>
     </>
