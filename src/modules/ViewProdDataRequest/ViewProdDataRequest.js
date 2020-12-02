@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useLocation } from 'react-router';
 import PageController from '../PageController/PageController';
@@ -7,6 +7,7 @@ import withPageController from '../../hoc/withPageController';
 import UploadFile from '../FileUpload/UploadFile';
 import RequestSummary from './RequestSummary/RequestSummary';
 import { data as prodRequests } from '../Mock/mockData';
+import Loader from '../../components/loading';
 import VersionHistory from '../VersionHistory/VersionHistory';
 
 const ViewProdDataRequest = (props) => {
@@ -19,6 +20,7 @@ const ViewProdDataRequest = (props) => {
   const prodRequest = data.find((request) => request.id === +requestId);
 
   const [isUploadModal, setIsUploadModeal] = useState(false);
+  const [isLoading, setLoading] = useState(true);
   const [filterDataBy] = useState({
     currency: { label: 'GBP (Default)', value: 'gbp' },
     year: { label: 'Year to date', value: '' },
@@ -27,23 +29,35 @@ const ViewProdDataRequest = (props) => {
   const handleUploadModal = () => {
     setIsUploadModeal(true);
   };
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+  }, [])
+
   return (
     <>
-      {isUploadModal && (
-        <UploadFile
-          modalOpen={isUploadModal}
-          setModalOpen={setIsUploadModeal}
-          cmsData={PageContent}
-        />
+      {
+      isLoading ? <Loader /> : (
+        <>
+          {isUploadModal && (
+          <UploadFile
+            modalOpen={isUploadModal}
+            setModalOpen={setIsUploadModeal}
+            cmsData={PageContent}
+          />
       )}
-      <PageController
-        param={param}
-        filterDataBy={filterDataBy}
-        pageTitle={prodRequest.name}
-        handleUploadModal={handleUploadModal}
-      />
-      <RequestSummary prodRequest={prodRequest} />
-      <VersionHistory />
+          <PageController
+            param={param}
+            filterDataBy={filterDataBy}
+            pageTitle={prodRequest.name}
+            handleUploadModal={handleUploadModal}
+          />
+          <RequestSummary prodRequest={prodRequest} />
+          <VersionHistory />
+        </>
+)
+    }
     </>
   );
 };
