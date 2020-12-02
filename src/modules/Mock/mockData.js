@@ -53,6 +53,7 @@ const data = {
       isDeleted: false,
       year: '2020',
       quarter: 'Q2',
+      isCompleted:false,
     },
     {
       id: 2,
@@ -80,6 +81,7 @@ const data = {
       reportingYear: 'April 2020 - March 2021',
       year: '2020',
       quarter: 'Q3',
+      isCompleted:false,
     },
     {
       id: 3,
@@ -99,6 +101,7 @@ const data = {
       isDeleted: false,
       year: '2020',
       quarter: 'Q2',
+      isCompleted:false,
     },
   ],
 };

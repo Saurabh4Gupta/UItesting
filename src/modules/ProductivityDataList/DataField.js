@@ -29,7 +29,7 @@ const DataField = (props) => {
 
   return (
     <>
-      <PageController param={param} filterDataBy={filterDataBy} handleMarket={handleMarket} pageTitle="">
+      <PageController param={param} filterDataBy={filterDataBy} handleMarket={handleMarket} pageTitle="" isCompleted="">
         <Box mb="200px">
           <UploadFile
             cmsData={PageContent}

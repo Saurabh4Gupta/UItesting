@@ -39,6 +39,7 @@ const ViewProdDataRequest = (props) => {
         param={param}
         filterDataBy={filterDataBy}
         pageTitle={prodRequest.name}
+        isCompleted={prodRequest.isCompleted}
         handleUploadModal={handleUploadModal}
       />
       <RequestSummary prodRequest={prodRequest} />

@@ -19,6 +19,7 @@ const OtherProductivityData = ({ prodRequest }) => {
     forecastData,
     assignTo,
     reportingYear,
+    isCompleted,
   } = prodRequest;
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [market] = useState('');
@@ -36,13 +37,16 @@ const OtherProductivityData = ({ prodRequest }) => {
         <Stack flexDirection="column">
           <Box>
             <Subheading>
-              <Link
-                style={{ float: 'right' }}
-                iconLeft="edit"
-                onClick={handleCreateData}
-              >
-                {PageContent.editRequest}
-              </Link>
+              {isCompleted ? (
+                ''
+              ) : (
+                <Link
+                  style={{ float: 'right' }}
+                  iconLeft="edit"
+                  onClick={handleCreateData}>
+                  {PageContent.editRequest}
+                </Link>
+              )}
             </Subheading>
           </Box>
           <Box mt="20px" mb="10px">
@@ -61,16 +65,14 @@ const OtherProductivityData = ({ prodRequest }) => {
           <Stack flexDirection="row">
             <Box mr="3px">
               <Paragraph>
-                {PageContent.actualCapitalized}
-                :
+                {PageContent.actualCapitalized}:
                 <strong>{` ${actualData.label}`}</strong>
               </Paragraph>
             </Box>
             <Divider orientation="vertical" isFlexChild />
             <Box ml="3px">
               <Paragraph>
-                {PageContent.forecastCapitalized}
-                :
+                {PageContent.forecastCapitalized}:
                 <strong>{` ${forecastData.label}`}</strong>
               </Paragraph>
             </Box>
@@ -94,8 +96,7 @@ const OtherProductivityData = ({ prodRequest }) => {
                 avatar={{
                   src: 'https://bit.ly/code-beast',
                   name: 'John Paul Green',
-                }}
-              >
+                }}>
                 {assignTo}
               </Chip>
             </Stack>
