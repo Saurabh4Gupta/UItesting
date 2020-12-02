@@ -9,8 +9,9 @@ import { options, monthOptions, reportingYear } from '../Mock/mockData'
 const CreateData = (props) => {
   const { cmsData, market, isModalOpen, handleModal, addRequest } = props;
   const [isReadyToSubmit, setIsReadyToSubmit] = useState(false);
+  const [loading, setLoading] = useState(false);
   const initialValues = {
-    localMarket: market,
+   localMarket: '',
     name: '',
     briefing: '',
     reportingYear: '',
@@ -19,7 +20,7 @@ const CreateData = (props) => {
     dueDate: '',
     assignTo: '',
   };
-  const { handleChange, values,
+  const { handleChange, values, forecastOptions,
     handleSelectField, handleSubmit,
     errors, handleCancel } = useCustomForm({ initialValues, validate: validationRule });
 
@@ -33,6 +34,7 @@ const CreateData = (props) => {
   }, [errors, values]);
 
   useEffect(() => {
+    if (market.value === '') return
     handleChange({ target: { name: 'localMarket', value: market } });
   }, [market])
   const closeModalHandler = () => {
@@ -42,9 +44,13 @@ const CreateData = (props) => {
   const onSubmit = () => {
     handleSubmit();
     if (isReadyToSubmit) {
+      setLoading(true);
       // mutation will be done here
-      closeModalHandler();
-      addRequest(values)
+      setTimeout(() => {
+        setLoading(false);
+        closeModalHandler();
+        addRequest(values)
+      }, 1000);
     }
   }
   const handleCreateData = () => {
@@ -65,13 +71,14 @@ const CreateData = (props) => {
             options={options}
             monthOptions={monthOptions}
             reportingYear={reportingYear}
+            forecastOptions={forecastOptions}
           />
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={closeModalHandler}>
             {cmsData.cancel}
           </Button>
-          <Button onClick={onSubmit}>{cmsData.create}</Button>
+          <Button isLoading={loading} onClick={onSubmit}>{cmsData.create}</Button>
         </Modal.Footer>
       </Modal>
       <Stack flexDirection="row" justifyContent="space-between">
@@ -92,7 +99,7 @@ const CreateData = (props) => {
 };
 CreateData.propTypes = {
   cmsData: PropTypes.object,
-  market: PropTypes.string,
+ market: PropTypes.string,
   isModalOpen: PropTypes.bool,
   handleModal: PropTypes.func,
   addRequest: PropTypes.func,

@@ -6,6 +6,7 @@ import EmptyTable from './EmptyTable';
 import TableList from './TableList';
 import CreateData from '../CreateData/CreateData';
 import { getCompletedData } from '../Mock/mockData';
+import Loader from '../../components/loading';
 
 const DataList = (props) => {
   const {
@@ -14,6 +15,7 @@ const DataList = (props) => {
     market,
     dataList,
     setDataList,
+    loading,
   } = props;
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [completeData, setCompleteData] = useState(getCompletedData);
@@ -120,45 +122,46 @@ const DataList = (props) => {
       <Box mt="30px">
         <Tabs onChange={handleTabIndex} index={tabIndex}>
           <Tabs.List>
-            <Tabs.Tab label={cmsData.ongoingLabel} count={data.length} />
+            <Tabs.Tab label={cmsData.ongoingLabel} count={data ? data.length : 0} />
             <Tabs.Tab
               label={cmsData.completeLabel}
-              count={completedData.length}
+              count={completedData ? completedData.length : 0}
             />
           </Tabs.List>
-          <Tabs.Panels>
-            <Tabs.Panel>
-              {data.length > 0 ? (
-                <TableList
-                  data={data}
-                  cmsData={cmsData}
-                  isDeleteModal={isDeleteModal}
-                  setIsDeleteModal={setIsDeleteModal}
-                  handleToggleData={handleToggleData}
-                  actionName={cmsData.moveToComplete}
-                  handleDeletItem={handleDeletItem}
-                  clientCode={clientCode}
-
-                />
+          {
+            loading ? <Loader /> : (
+              <Tabs.Panels>
+                <Tabs.Panel>
+                  {data.length > 0 ? (
+                    <TableList
+                      data={data}
+                      cmsData={cmsData}
+                      isDeleteModal={isDeleteModal}
+                      setIsDeleteModal={setIsDeleteModal}
+                      handleToggleData={handleToggleData}
+                      actionName={cmsData.moveToComplete}
+                      handleDeletItem={handleDeletItem}
+                      clientCode={clientCode}
+                    />
               ) : (
                 <EmptyTable
                   defaultText={cmsData.emptyProductivityDatarequestCaption}
                   handleModal={handleModal}
                 />
                 )}
-            </Tabs.Panel>
-            <Tabs.Panel>
-              {completedData.length > 0 ? (
-                <TableList
-                  data={completedData}
-                  cmsData={cmsData}
-                  isDeleteModal={isDeleteModal}
-                  setIsDeleteModal={setIsDeleteModal}
-                  actionName={cmsData.moveToOnGoing}
-                  handleToggleData={handleToggleData}
-                  showStatus={false}
-                  clientCode={clientCode}
-                />
+                </Tabs.Panel>
+                <Tabs.Panel>
+                  {completedData.length > 0 ? (
+                    <TableList
+                      data={completedData}
+                      cmsData={cmsData}
+                      isDeleteModal={isDeleteModal}
+                      setIsDeleteModal={setIsDeleteModal}
+                      actionName={cmsData.moveToOnGoing}
+                      handleToggleData={handleToggleData}
+                      showStatus={false}
+                      clientCode={clientCode}
+                    />
               ) : (
                 <EmptyTable
                   defaultText={
@@ -167,8 +170,11 @@ const DataList = (props) => {
                   handleModal={handleModal}
                 />
                 )}
-            </Tabs.Panel>
-          </Tabs.Panels>
+                </Tabs.Panel>
+              </Tabs.Panels>
+
+            )
+          }
         </Tabs>
       </Box>
     </>
@@ -181,6 +187,7 @@ DataList.propTypes = {
   market: PropTypes.object || PropTypes.string,
   dataList: PropTypes.array,
   setDataList: PropTypes.func,
+  loading: PropTypes.bool,
 };
 DataList.defaultProps = {
   cmsData: {},
@@ -188,5 +195,6 @@ DataList.defaultProps = {
   dataList: [{}],
   clientCode: '',
   setDataList: () => { },
+  loading: true,
 };
 export default DataList;

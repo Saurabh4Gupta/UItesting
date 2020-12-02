@@ -165,7 +165,7 @@ const monthOptions = [
   },
   {
     value: 1,
-    label: '1 months',
+    label: '1 month',
   },
   {
     value: 2,
@@ -242,6 +242,15 @@ const clientList = [
   { title: 'Procter & Gamble', avatar: '', clientCode: 'PG' },
   { title: 'The Kraft Heinz Company', avatar: '', clientCode: 'KHC' },
 ];
+const newDate = new Date();
+const nexStartDate =  newDate.getFullYear() + 1;
+const nextEndDate = newDate.getFullYear() + 2;
+
+const currentStartDate = newDate.getFullYear();
+const currentEndDate = newDate.getFullYear() + 1;
+
+const prevStartDate = newDate.getFullYear() - 1;
+const prevEndDate =  newDate.getFullYear();
 
 const market = [
   { value: '', label: 'All Markets' },
@@ -276,18 +285,20 @@ const currency = [
 ];
 const reportingYear = [
   {
-    value: 'April 2021 - March 2022',
-    label: 'April 2021 - March 2022',
+    value: `April ${nexStartDate}  -  March ${nextEndDate}`,
+    label: `April ${nexStartDate}  -  March ${nextEndDate}`,
   },
   {
-    value: '2020-2021',
-    label: 'April 2020 - March 2021',
+    value:  `April ${currentStartDate}  -  March ${currentEndDate}`,
+    label:  `April ${currentStartDate}  -  March ${currentEndDate}`,
   },
   {
-    value: '2019-2020',
-    label: 'April 2019 - March 2020',
+    value: `April ${prevStartDate}  -  March ${prevEndDate}`,
+    label: `April ${prevStartDate}  -  March ${prevEndDate}`,
   },
-];
+]
+
+
 export {
   assignToOptions,
   monthOptions,

@@ -1,3 +1,3 @@
-import Loading from './Loading';
+import Loader from './Loader';
 
-export default Loading;
+export default Loader;

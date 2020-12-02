@@ -17,14 +17,19 @@ const DataField = (props) => {
   const [filterDataBy, setFilterDataBy] = useState({
     market: { label: 'All Markets', value: '' },
   });
-  const [ongoingData, setDataList] = useState(getData(filterDataBy.market.value));
+  const [ongoingData, setDataList] = useState({ data:[], totalCount:0 });
   const [isUploadModal, setIsUploadModal] = useState(false);
+  const [isLoading, setLoading] = useState(true);
 
   const handleMarket = (selected) => {
+    setLoading(true);
     setFilterDataBy({ market: selected })
   }
   useEffect(() => {
-    setDataList(getData(filterDataBy.market.value));
+    setTimeout(() => {
+      setLoading(false);
+      setDataList(getData(filterDataBy.market.value));
+    }, 2000);
   }, [filterDataBy])
 
   return (
@@ -42,6 +47,7 @@ const DataField = (props) => {
             clientCode={clientCode}
             dataList={ongoingData}
             setDataList={setDataList}
+            loading={isLoading}
           />
         </Box>
       </PageController>
