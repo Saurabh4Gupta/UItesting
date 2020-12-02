@@ -9,6 +9,7 @@ import { options, monthOptions, reportingYear } from '../Mock/mockData'
 const CreateData = (props) => {
   const { cmsData, market, isModalOpen, handleModal, addRequest } = props;
   const [isReadyToSubmit, setIsReadyToSubmit] = useState(false);
+  const [loading, setLoading] = useState(false);
   const initialValues = {
    localMarket: '',
     name: '',
@@ -43,9 +44,13 @@ const CreateData = (props) => {
   const onSubmit = () => {
     handleSubmit();
     if (isReadyToSubmit) {
+      setLoading(true);
       // mutation will be done here
-      closeModalHandler();
-      addRequest(values)
+      setTimeout(() => {
+        setLoading(false);
+        closeModalHandler();
+        addRequest(values)
+      }, 1000);
     }
   }
   const handleCreateData = () => {
@@ -73,7 +78,7 @@ const CreateData = (props) => {
           <Button variant="secondary" onClick={closeModalHandler}>
             {cmsData.cancel}
           </Button>
-          <Button onClick={onSubmit}>{cmsData.create}</Button>
+          <Button isLoading={loading} onClick={onSubmit}>{cmsData.create}</Button>
         </Modal.Footer>
       </Modal>
       <Stack flexDirection="row" justifyContent="space-between">
