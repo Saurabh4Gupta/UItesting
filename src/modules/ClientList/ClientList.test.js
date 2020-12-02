@@ -1,9 +1,7 @@
-
 import React from 'react';
 import { shallow } from 'enzyme';
 import ClientList from './ClientList';
 import { dataFieldCms as PageContent } from '../../cms';
-
 
 describe('Success test cases for: ViewClientList component', () => {
   let wrapper;
@@ -14,13 +12,26 @@ describe('Success test cases for: ViewClientList component', () => {
     });
 
     it('Test to find List row', () => {
-     // expect(wrapper).toMatchSnapshot();
-     const listComponent = wrapper.find('List');
+      // expect(wrapper).toMatchSnapshot();
+      //  const listComponent = wrapper.find('List').props()
+      //  .renderItem({item:  { title: 'American Express', avatar: '', clientCode: 'AE' }});
+      console.log(wrapper.debug());
+      wrapper.showClientDetails('AB');
+      // setProps
+      // listComponent.setProps({ items: clientList });
 
-      expect(listComponent.children().length)
-      console.log(listComponent.children())
+      //  const key = wrapper
+      //          .find('List')
+      //          .props()
+      //          .renderItem({id: 3});
 
-    // expect(description.text()).toEqual(product.description);
+      // expect(listComponent.children().length)
+      // console.log('children', listComponent)
+      // console.log('children', listComponent.dive())
+
+      // wrapper.find('List').simulate('click')
+
+      // expect(description.text()).toEqual(product.description);
     });
 
     it('Renders correctly', () => {
@@ -29,4 +40,4 @@ describe('Success test cases for: ViewClientList component', () => {
   });
 });
 
-describe('Failure test cases for: Duplicate data page', () => { });
+describe('Failure test cases for: Duplicate data page', () => {});

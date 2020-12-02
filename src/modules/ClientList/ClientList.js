@@ -19,7 +19,7 @@ const ClientList = (props) => {
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
-    }, 5000);
+    }, 3000);
   }, []);
   return (
     <>
@@ -61,11 +61,11 @@ const ClientList = (props) => {
                     actions={(
                       <Link
                         iconLeft="layers"
-                        url={`/datafield?client_code=${clientCode}`}
+                        onClick={() => showClientDetails(clientCode)}
                       >
                         {cmsData.viewDetails}
                       </Link>
-                    )}
+                  )}
                   />
                 );
               }}

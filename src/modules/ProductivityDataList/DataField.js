@@ -16,31 +16,25 @@ const DataField = (props) => {
   const clientCode = query.get('client_code');
   const [filterDataBy, setFilterDataBy] = useState({
     market: { label: 'All Markets', value: '' },
-    currency: { label: 'GBP (Default)', value: 'gbp' },
-    year: { label: 'Year to date', value: '' },
   });
   const [ongoingData, setDataList] = useState({ data:[], totalCount:0 });
   const [isUploadModal, setIsUploadModal] = useState(false);
   const [isLoading, setLoading] = useState(true);
 
   const handleMarket = (selected) => {
+    setLoading(true);
     setFilterDataBy({ market: selected })
   }
-
-  useEffect(() => {
-    // fetch data list according to market
-  }, [filterDataBy]);
-
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
-      setDataList(getData);
-    }, 5000);
-  }, []);
+      setDataList(getData(filterDataBy.market.value));
+    }, 2000);
+  }, [filterDataBy])
 
   return (
     <>
-      <PageController param={param} filterDataBy={filterDataBy} handleMarket={handleMarket}>
+      <PageController param={param} filterDataBy={filterDataBy} handleMarket={handleMarket} pageTitle="">
         <Box mb="200px">
           <UploadFile
             cmsData={PageContent}
