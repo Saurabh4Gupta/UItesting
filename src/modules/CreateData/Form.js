@@ -15,16 +15,19 @@ import constant from '../../utils/constant';
 
 const Form = (props) => {
   const { MAX_FILE_SIZE, ALLOWED_FILE_TYPES } = constant;
-  const { values, handleChange, handleSelectField, errors, cmsData, options, monthOptions, dueDate, reportingYear } = props;
+  const { values, handleChange, handleSelectField, errors, cmsData, options, monthOptions, dueDate, reportingYear,
+    forecastOptions } = props;
   const [files, setFiles] = useState([]);
   const handleInit = () => {
     console.log('Dropzone instance has initialised', files);
   };
+
+  console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>', values.localMarket.value)
   return (
     <>
       <FormField
-        {...(errors.localMarket ? { error: errors.localMarket } : {})}
         label={cmsData.localMarketLabel}
+        {...(errors.localMarket ? { error: errors.localMarket } : {})}
         hint={cmsData.localMarketHint}
       >
         <Select
@@ -102,18 +105,17 @@ const Form = (props) => {
         </Box>
         <Box width="50%">
           <FormField
+            isDisabled={!forecastOptions}
             label={cmsData.forecastDataLabel}
             {...(errors.forecastData ? { error: errors.forecastData } : {})}
-            hint={cmsData.actualDataHint}
+            hint={cmsData.forecastDataHint}
           >
             <Select
               name="forecastData"
               placeholder={cmsData.selectPlaceHolder}
               value={values.forecastData}
-              options={monthOptions}
-              onChange={(selected, event) => {
-                handleSelectField(selected, event)
-              }}
+              options={forecastOptions}
+              onChange={(selected, event) => handleSelectField(selected, event)}
             />
 
           </FormField>
