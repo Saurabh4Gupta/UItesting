@@ -1,14 +1,33 @@
 /* eslint-disable radix */
-import React from 'react';
+import React, { useState } from 'react';
 import { List, Link, Image, Stack, Icon, Divider, Chip, Button } from '@dentsu-ui/components';
 import Box from '@dentsu-ui/components/dist/cjs/components/Box';
 import Card from '@dentsu-ui/components/dist/cjs/components/Card';
+import {
+  slice, concat,
+} from 'lodash';
 import { versionHistory } from '../Mock/mockData';
 // import { dataFieldCms as PageContent } from '../../cms';
 
 
-const VersionHistory = (props) => {
-  console.log('versionHistory', versionHistory.data.length);
+const VersionHistory = () => {
+  const len = versionHistory.data.length;
+  const LIMIT = 10;
+  const [showMore, setShowMore] = useState(true);
+  const [list, setList] = useState(slice(versionHistory.data, 0, LIMIT));
+  const [index, setIndex] = useState(LIMIT);
+
+  const loadMore = () => {
+    const newIndex = index + LIMIT;
+    const newShowMore = newIndex < (len - 1);
+    const newList = concat(list, slice(versionHistory.data, index, newIndex));
+    setIndex(newIndex);
+    setList(newList);
+    setShowMore(newShowMore);
+    // console.log('newIndex', newIndex);
+  }
+  // console.log('listdata', list)
+  // console.log('Index', index);
   return (
     <>
       <Box ml="60%" mr="65px" mt="20px" mb="100px">
@@ -19,9 +38,9 @@ const VersionHistory = (props) => {
           <List
             hasTotal={false}
             isSearchable={false}
-            items={versionHistory.data}
+            items={list}
             total={versionHistory.data.length}
-            renderItem={(item, index) => {
+            renderItem={(item) => {
               const { name, size, type, version } = item;
               const dataLength = versionHistory.data.length;
               return (
@@ -94,15 +113,16 @@ const VersionHistory = (props) => {
 
 
           />
-          <Button variant="ghost" size="small" marginTop="50px" style={{ color: 'black' }}>
-            Load more
-            <Icon
-              style={{ marginTop: '15px', marginLeft: '10px' }}
-              icon="refresh"
-              color="blue"
-              size="14"
-            />
-          </Button>
+          {len >= 10 ? (
+            <Box style={{ margin: '10px auto' }}>
+              <Button variant="ghost" size="small" iconRight="refresh" style={{ color: 'black' }} onClick={loadMore}>
+                Load more
+
+              </Button>
+            </Box>
+
+          ) : false}
+
 
         </Card>
 

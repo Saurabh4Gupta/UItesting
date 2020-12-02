@@ -289,7 +289,17 @@ const reportingYear = [
 const versionHistory = {
   data: [
     {
-      id: 8,
+      id: 13,
+      name: 'Microsoft Uk - Productivity Report - ',
+      type: 'XLS',
+      size: '242KB',
+      version: 'V12.0',
+      dataRequest: '',
+      blobId: '',
+      createdAt: '2020-12-01',
+    },
+    {
+      id: 12,
       name: 'Microsoft Uk - Productivity Report - ',
       type: 'XLS',
       size: '242KB',
@@ -299,7 +309,7 @@ const versionHistory = {
       createdAt: '2020-12-01',
     },
     {
-      id: 8,
+      id: 11,
       name: 'Microsoft Uk - Productivity Report - ',
       type: 'XLS',
       size: '242KB',
@@ -309,7 +319,7 @@ const versionHistory = {
       createdAt: '2020-12-01',
     },
     {
-      id: 8,
+      id: 10,
       name: 'Microsoft Uk - Productivity Report - ',
       type: 'XLS',
       size: '242KB',
@@ -319,7 +329,7 @@ const versionHistory = {
       createdAt: '2020-12-01',
     },
     {
-      id: 1,
+      id: 9,
       name: 'Microsoft Uk - Productivity Report - ',
       type: 'XLS',
       size: '242KB',
@@ -329,7 +339,7 @@ const versionHistory = {
       createdAt: '2020-12-01',
     },
     {
-      id: 2,
+      id: 8,
       name: 'Microsoft Uk - Productivity Report - ',
       type: 'XLS',
       size: '242KB',
@@ -339,7 +349,7 @@ const versionHistory = {
       createdAt: '2020-12-01',
     },
     {
-      id: 3,
+      id: 7,
       name: 'Microsoft Uk - Productivity Report - ',
       type: 'XLS',
       size: '242KB',
@@ -349,7 +359,7 @@ const versionHistory = {
       createdAt: '2020-12-01',
     },
     {
-      id: 4,
+      id: 6,
       name: 'Microsoft Uk - Productivity Report - ',
       type: 'XLS',
       size: '242KB',
@@ -369,7 +379,7 @@ const versionHistory = {
       createdAt: '2020-12-01',
     },
     {
-      id: 6,
+      id: 4,
       name: 'Microsoft Uk - Productivity Report - ',
       type: 'XLS',
       size: '242KB',
@@ -379,7 +389,7 @@ const versionHistory = {
       createdAt: '2020-12-01',
     },
     {
-      id: 7,
+      id: 3,
       name: 'Microsoft Uk - Productivity Report - ',
       type: 'XLS',
       size: '242KB',
@@ -389,7 +399,7 @@ const versionHistory = {
       createdAt: '2020-12-01',
     },
     {
-      id: 8,
+      id: 2,
       name: 'Microsoft Uk - Productivity Report - ',
       type: 'XLS',
       size: '242KB',
@@ -399,7 +409,7 @@ const versionHistory = {
       createdAt: '2020-12-01',
     },
     {
-      id: 9,
+      id: 1,
       name: 'Microsoft Uk - Productivity Report - ',
       type: 'XLS',
       size: '242KB',
