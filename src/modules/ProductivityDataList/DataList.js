@@ -29,7 +29,7 @@ const DataList = (props) => {
     values.year = '2020';
     values.quarter = 'Q3';
     values.isDeleted = false;
-    values.id = dataList.data.length + 1;
+    values.id = dataList.data.length + completeData.completedData.length + 1;
     values.client = 'Microsoft';
     values.updatedAt = '30/11/20 at 14:32';
     const tempData = [...dataList.data, values];
