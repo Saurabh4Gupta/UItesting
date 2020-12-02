@@ -11,7 +11,7 @@ const CreateData = (props) => {
   const [isReadyToSubmit, setIsReadyToSubmit] = useState(false);
   const [loading, setLoading] = useState(false);
   const initialValues = {
-    localMarket: market,
+   localMarket: '',
     name: '',
     briefing: '',
     reportingYear: '',
@@ -20,7 +20,7 @@ const CreateData = (props) => {
     dueDate: '',
     assignTo: '',
   };
-  const { handleChange, values,
+  const { handleChange, values, forecastOptions,
     handleSelectField, handleSubmit,
     errors, handleCancel } = useCustomForm({ initialValues, validate: validationRule });
 
@@ -34,6 +34,7 @@ const CreateData = (props) => {
   }, [errors, values]);
 
   useEffect(() => {
+    if (market.value === '') return
     handleChange({ target: { name: 'localMarket', value: market } });
   }, [market])
   const closeModalHandler = () => {
@@ -70,6 +71,7 @@ const CreateData = (props) => {
             options={options}
             monthOptions={monthOptions}
             reportingYear={reportingYear}
+            forecastOptions={forecastOptions}
           />
         </Modal.Body>
         <Modal.Footer>
@@ -97,7 +99,7 @@ const CreateData = (props) => {
 };
 CreateData.propTypes = {
   cmsData: PropTypes.object,
-  market: PropTypes.string,
+ market: PropTypes.string,
   isModalOpen: PropTypes.bool,
   handleModal: PropTypes.func,
   addRequest: PropTypes.func,

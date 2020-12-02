@@ -5,7 +5,7 @@ import { withRouter } from 'react-router';
 import Form from './Form'
 import useCustomForm from '../../hooks/useCustomForm';
 import validationRule from '../../utils/validate';
-import { options, updateData, monthOptions, reportingYear } from '../Mock/mockData'
+import { options, monthOptions, reportingYear } from '../Mock/mockData'
 
 const EditData = (props) => {
   const { cmsData, isModalOpen, handleModal } = props;
@@ -16,12 +16,12 @@ const EditData = (props) => {
     name: 'Productivity Q2 2020',
     briefing: 'Give some details about this quarter',
     reportingYear:{ value: 'April 2021 - March 2022', label: 'April 2021 - March 2022' },
-    actualData: { value: 0, label: '0' },
-    forecastData: { value: 12, label: '12' },
+    actualData: { value: 0, label: '0 months' },
+    forecastData: { value: 12, label: '12 months' },
     dueDate: new Date(),
     assignTo: { value: 'UK', label: 'United Kingdom' },
   };
-  const { handleChange, values,
+  const { handleChange, values, forecastOptions,
     handleSelectField, handleSubmit,
     errors, handleCancel } = useCustomForm({ initialValues, validate: validationRule });
 
@@ -41,11 +41,10 @@ const EditData = (props) => {
     handleSubmit();
     if (isReadyToSubmit) {
       setLoading(true);
-      // console.log('??????????', values);
       setTimeout(() => {
         setLoading(false);
         closeModalHandler()
-        updateData(values)
+        // updateData(values)
       }, 1000);
     }
   }
@@ -64,6 +63,7 @@ const EditData = (props) => {
             monthOptions={monthOptions}
             dueDate={values.dueDate}
             reportingYear={reportingYear}
+            forecastOptions={forecastOptions}
           />
         </Modal.Body>
         <Modal.Footer>

@@ -21,9 +21,7 @@ function validationRule(field, value) {
     case 'dueDate':
       return !value
         ? 'This field cannot be blank'
-        : value < date.setDate(date.getDate() + 1)
-          ? 'Provide date greater than day after today date'
-          : '';
+        : '';
     case 'assignTo':
       return !value
         ? 'This field cannot be blank'
