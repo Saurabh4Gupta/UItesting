@@ -19,8 +19,9 @@ const DataField = (props) => {
     currency: { label: 'GBP (Default)', value: 'gbp' },
     year: { label: 'Year to date', value: '' },
   });
-  const [ongoingData, setDataList] = useState(getData);
+  const [ongoingData, setDataList] = useState({ data:[], totalCount:0 });
   const [isUploadModal, setIsUploadModal] = useState(false);
+  const [isLoading, setLoading] = useState(true);
 
   const handleMarket = (selected) => {
     setFilterDataBy({ market: selected })
@@ -28,7 +29,14 @@ const DataField = (props) => {
 
   useEffect(() => {
     // fetch data list according to market
-  }, [filterDataBy])
+  }, [filterDataBy]);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+      setDataList(getData);
+    }, 5000);
+  }, []);
 
   return (
     <>
@@ -45,6 +53,7 @@ const DataField = (props) => {
             clientCode={clientCode}
             dataList={ongoingData}
             setDataList={setDataList}
+            loading={isLoading}
           />
         </Box>
       </PageController>
