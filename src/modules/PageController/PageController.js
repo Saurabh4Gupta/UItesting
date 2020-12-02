@@ -42,7 +42,7 @@ const PageController = (props) => {
           },
         ]}
         primaryAction={
-          isViewProduct
+          isViewProduct && !isCompleted
             ? {
               content: 'Upload new file',
               onClick: () => handleUploadModal(),
