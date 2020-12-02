@@ -11,7 +11,7 @@ exports[`<EmptyState /> should match snapshot 1`] = `
         test1
       </MenuItem>
       <MenuItem
-        onClick={[Function]}
+        onClick={[MockFunction]}
       >
         test2
       </MenuItem>
