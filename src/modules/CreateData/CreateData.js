@@ -7,10 +7,9 @@ import validationRule from '../../utils/validate';
 import { options, monthOptions, reportingYear } from '../Mock/mockData'
 
 const CreateData = (props) => {
-  const { cmsData, isModalOpen, handleModal, addRequest } = props;
+  const { cmsData, market, isModalOpen, handleModal, addRequest } = props;
   const [isReadyToSubmit, setIsReadyToSubmit] = useState(false);
   const initialValues = {
-   // localMarket: market,
    localMarket: '',
     name: '',
     briefing: '',
@@ -33,9 +32,10 @@ const CreateData = (props) => {
     setIsReadyToSubmit(isAllValuesFilled && !isAnyValidationError);
   }, [errors, values]);
 
-  // useEffect(() => {
-  //   handleChange({ target: { name: 'localMarket', value: market } });
-  // }, [market])
+  useEffect(() => {
+    if (market.value === '') return
+    handleChange({ target: { name: 'localMarket', value: market } });
+  }, [market])
   const closeModalHandler = () => {
     handleModal(false)
     handleCancel();
@@ -94,14 +94,14 @@ const CreateData = (props) => {
 };
 CreateData.propTypes = {
   cmsData: PropTypes.object,
- // market: PropTypes.string,
+ market: PropTypes.string,
   isModalOpen: PropTypes.bool,
   handleModal: PropTypes.func,
   addRequest: PropTypes.func,
 }
 CreateData.defaultProps = {
   cmsData: {},
-//  market: 'UK',
+  market: 'UK',
   isModalOpen: false,
   handleModal: () => { },
   addRequest: () => { },

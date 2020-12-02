@@ -9,6 +9,7 @@ const constant = {
     'text/csv',
   ],
   MAX_FILE_SIZE: '20MB',
+  BRIEFING_SUMMARY_CHAR_LIMIT: 800,
 
 }
 export default constant;
