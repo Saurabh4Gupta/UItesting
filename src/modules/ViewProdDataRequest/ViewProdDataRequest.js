@@ -8,6 +8,7 @@ import UploadFile from '../FileUpload/UploadFile';
 import RequestSummary from './RequestSummary/RequestSummary';
 import { data as prodRequests } from '../Mock/mockData';
 import Loader from '../../components/loading';
+import VersionHistory from '../VersionHistory/VersionHistory';
 
 const ViewProdDataRequest = (props) => {
   const { param } = props;
@@ -54,6 +55,7 @@ const ViewProdDataRequest = (props) => {
             isCompleted={prodRequest.isCompleted}
           />
           <RequestSummary prodRequest={prodRequest} />
+          <VersionHistory />
         </>
 )
     }

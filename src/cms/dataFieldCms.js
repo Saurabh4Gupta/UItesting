@@ -62,7 +62,7 @@ export const dataFieldCms = {
   actualCapitalized: 'Actual',
   forecastCapitalized: 'Forecast',
   dueBy: 'Due by',
-  assignedTo: 'Assign to',
+  assignedTo: 'Assigned to',
   trackerTemplate: 'Tracker template',
   close: 'Close',
   reportingYearLabel: 'Reporting year',
