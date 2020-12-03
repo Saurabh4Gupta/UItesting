@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import {
@@ -27,18 +27,27 @@ const TableList = (props) => {
     clientCode,
   } = props;
 
-  const history = useHistory()
+  const history = useHistory();
+
+  const [ongoingList, setOngoingList] = useState(data);
 
   const handleModal = (id) => {
-    setIsDeleteModal({ value: true, id })
-  }
+    setIsDeleteModal({ value: true, id });
+  };
   const showDataRequestDetails = (id) => {
-    const queryString = `client_code=${clientCode}&request_id=${id}`
+    const queryString = `client_code=${clientCode}&request_id=${id}`;
     history.push({
       pathname: '/viewDetails',
       search: `?${queryString}`,
-    })
-    // history.push(`/viewDetails?client_code=${clientCode}&request_id=${id}`);
+    });
+  };
+
+  const searchChangeHandler = (input) => {
+    const updatedList = data.filter(
+      (d) => d.clientMarket.includes(input) || d.name.includes(input),
+    );
+
+    setOngoingList(updatedList);
   };
 
   return (
@@ -49,16 +58,17 @@ const TableList = (props) => {
         handleDelete={handleDeletItem}
       />
       <List
-        items={data}
+        items={ongoingList}
         searchBy="client"
         isSearchable
         rowsText="results in total"
         filteredText=""
         rowText="result in total"
+        onSearchChange={(input) => searchChangeHandler(input)}
         filters={[
           {
-            key: 'enabled',
-            label: 'Show',
+            key: 'totalTenure',
+            label: 'Status',
             type: 'choice',
             defaultText: 'All',
             options: [
@@ -81,6 +91,32 @@ const TableList = (props) => {
             ],
           },
         ]}
+        // filters={[
+        //   {
+        //     key: 'enabled',
+        //     label: 'Show',
+        //     type: 'choice',
+        //     defaultText: 'All',
+        //     options: [
+        //       {
+        //         label: '2020 Q1',
+        //         value: '2020 Q1',
+        //       },
+        //       {
+        //         label: '2020 Q2',
+        //         value: '2020 Q2',
+        //       },
+        //       {
+        //         label: '2020 Q3',
+        //         value: '2020 Q3',
+        //       },
+        //       {
+        //         label: '2020 Q4',
+        //         value: '2020 Q4',
+        //       },
+        //     ],
+        //   },
+        // ]}
         renderItem={(item, index) => {
           const {
             client,
@@ -120,11 +156,11 @@ const TableList = (props) => {
                         <Chip variant="status" status="warning" hasStatusLight>
                           {cmsData.overdue}
                         </Chip>
-                        ) : (
-                            ''
-                          )}
+                      ) : (
+                        ''
+                      )}
                     </Box>
-                    )}
+                  )}
                   <Box width="30%">{`${cmsData.lastUpdate}: ${updatedAt}`}</Box>
                 </Stack>
                 <Stack
