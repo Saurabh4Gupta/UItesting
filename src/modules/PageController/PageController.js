@@ -51,22 +51,19 @@ const PageController = (props) => {
             }
             : false
         }
-        controls={(
-          <>
-            {!isViewProduct && (
-              <FormField>
-                <Select
-                  width={200}
-                  options={market}
-                  value={filterDataBy.market}
-                  onChange={(selected, event) => {
-                    handleMarket(selected, event);
-                  }}
-                />
-              </FormField>
-            )}
-          </>
-        )}
+       controls={
+          !isViewProduct && (
+            <FormField>
+              <Select
+                width={200}
+                options={market}
+                value={filterDataBy.market}
+                onChange={(selected, event) => {
+                  handleMarket(selected, event);
+                }}
+              />
+            </FormField>
+          )}
         status={isCompleted ? { type:'neutral', label:'Complete', hasStatusLight:true } : ''}
       >
         {children}
