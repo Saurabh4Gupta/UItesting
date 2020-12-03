@@ -43,7 +43,8 @@ const OtherProductivityData = ({ prodRequest }) => {
                 <Link
                   style={{ float: 'right' }}
                   iconLeft="edit"
-                  onClick={handleCreateData}>
+                  onClick={handleCreateData}
+                >
                   {PageContent.editRequest}
                 </Link>
               )}
@@ -65,14 +66,16 @@ const OtherProductivityData = ({ prodRequest }) => {
           <Stack flexDirection="row">
             <Box mr="3px">
               <Paragraph>
-                {PageContent.actualCapitalized}:
+                {PageContent.actualCapitalized}
+                :
                 <strong>{` ${actualData.label}`}</strong>
               </Paragraph>
             </Box>
             <Divider orientation="vertical" isFlexChild />
             <Box ml="3px">
               <Paragraph>
-                {PageContent.forecastCapitalized}:
+                {PageContent.forecastCapitalized}
+                :
                 <strong>{` ${forecastData.label}`}</strong>
               </Paragraph>
             </Box>
@@ -96,7 +99,8 @@ const OtherProductivityData = ({ prodRequest }) => {
                 avatar={{
                   src: 'https://bit.ly/code-beast',
                   name: 'John Paul Green',
-                }}>
+                }}
+              >
                 {assignTo}
               </Chip>
             </Stack>

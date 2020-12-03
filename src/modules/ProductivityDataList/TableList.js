@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import {
@@ -29,6 +29,8 @@ const TableList = (props) => {
 
   const history = useHistory();
 
+  const [ongoingList, setOngoingList] = useState(data);
+
   const handleModal = (id) => {
     setIsDeleteModal({ value: true, id });
   };
@@ -38,7 +40,14 @@ const TableList = (props) => {
       pathname: '/viewDetails',
       search: `?${queryString}`,
     });
-    // history.push(`/viewDetails?client_code=${clientCode}&request_id=${id}`);
+  };
+
+  const searchChangeHandler = (input) => {
+    const updatedList = data.filter(
+      (d) => d.clientMarket.includes(input) || d.name.includes(input),
+    );
+
+    setOngoingList(updatedList);
   };
 
   return (
@@ -49,16 +58,17 @@ const TableList = (props) => {
         handleDelete={handleDeletItem}
       />
       <List
-        items={data}
+        items={ongoingList}
         searchBy="client"
         isSearchable
         rowsText="results in total"
         filteredText=""
         rowText="result in total"
+        onSearchChange={(input) => searchChangeHandler(input)}
         filters={[
           {
-            key: 'enabled',
-            label: 'Show',
+            key: 'totalTenure',
+            label: 'Status',
             type: 'choice',
             defaultText: 'All',
             options: [
@@ -81,6 +91,32 @@ const TableList = (props) => {
             ],
           },
         ]}
+        // filters={[
+        //   {
+        //     key: 'enabled',
+        //     label: 'Show',
+        //     type: 'choice',
+        //     defaultText: 'All',
+        //     options: [
+        //       {
+        //         label: '2020 Q1',
+        //         value: '2020 Q1',
+        //       },
+        //       {
+        //         label: '2020 Q2',
+        //         value: '2020 Q2',
+        //       },
+        //       {
+        //         label: '2020 Q3',
+        //         value: '2020 Q3',
+        //       },
+        //       {
+        //         label: '2020 Q4',
+        //         value: '2020 Q4',
+        //       },
+        //     ],
+        //   },
+        // ]}
         renderItem={(item, index) => {
           const {
             client,
@@ -101,7 +137,8 @@ const TableList = (props) => {
                   alignItems="center"
                   flexDirection="row"
                   justifyContent="space-between"
-                  width="80%">
+                  width="80%"
+                >
                   <Box width="25%">
                     <b>{`${client} ${localMarket.label}`}</b>
                   </Box>
@@ -130,13 +167,15 @@ const TableList = (props) => {
                   alignItems="center"
                   flexDirection="row"
                   justifyContent="flex-end"
-                  width="20%">
+                  width="20%"
+                >
                   <Box>
                     <Button
                       variant="ghost"
                       size="small"
                       iconLeft="layers"
-                      onClick={() => showDataRequestDetails(id)}>
+                      onClick={() => showDataRequestDetails(id)}
+                    >
                       {cmsData.viewDetails}
                     </Button>
                   </Box>
