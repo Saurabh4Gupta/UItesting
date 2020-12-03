@@ -67,7 +67,7 @@ const PageController = (props) => {
             )}
           </>
         )}
-        status={isCompleted ? 'Complete' : ''}
+        status={isCompleted ? { type:'neutral', label:'Complete', hasStatusLight:true } : ''}
       >
         {children}
       </Page>
