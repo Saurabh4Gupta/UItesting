@@ -21,8 +21,9 @@ const Form = (props) => {
   const handleInit = () => {
     console.log('Dropzone instance has initialised', files);
   };
-
-  console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>', values.localMarket.value)
+  const now = new Date();
+  const maxDate = new Date();
+  maxDate.setFullYear(now.getFullYear() + 1);
   return (
     <>
       <FormField
@@ -154,6 +155,7 @@ const Form = (props) => {
           formatDate={(date) => date.toLocaleDateString()}
           onChange={(date) => handleSelectField(date, { name: 'dueDate' })}
           minDate={new Date()}
+          maxDate={new Date(maxDate)}
           value={dueDate}
         />
       </FormField>
