@@ -56,8 +56,8 @@ const ViewProdDataRequest = (props) => {
             handleUploadModal={handleUploadModal}
             isCompleted={prodRequest.isCompleted}
           >
-            <Box>
-              <RequestSummary prodRequest={prodRequest} />
+            <RequestSummary prodRequest={prodRequest} />
+            <Box mt="30px">
               <VersionHistory />
             </Box>
           </PageController>

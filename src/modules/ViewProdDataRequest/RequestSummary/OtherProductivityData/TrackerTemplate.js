@@ -11,12 +11,13 @@ import { dataFieldCms as PageContent } from '../../../../cms/dataFieldCms';
 
 const TrackerTemplate = () => (
   <Stack flexDirection="column">
+
+    <Box mt="20px" mb="10px">
+      <Caption style={{ color: 'gray' }}>
+        {PageContent.trackerTemplate}
+      </Caption>
+    </Box>
     <Link url="/DataMappings.xlsx">
-      <Box mt="20px" mb="10px">
-        <Caption style={{ color: 'gray' }}>
-          {PageContent.trackerTemplate}
-        </Caption>
-      </Box>
       <Box>
         <Stack flexDirection="row">
           <Image
