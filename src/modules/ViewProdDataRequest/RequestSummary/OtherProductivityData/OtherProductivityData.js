@@ -19,6 +19,7 @@ const OtherProductivityData = ({ prodRequest }) => {
     forecastData,
     assignTo,
     reportingYear,
+    isCompleted,
   } = prodRequest;
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [market] = useState('');
@@ -36,13 +37,17 @@ const OtherProductivityData = ({ prodRequest }) => {
         <Stack flexDirection="column">
           <Box>
             <Subheading>
-              <Link
-                style={{ float: 'right' }}
-                iconLeft="edit"
-                onClick={handleCreateData}
-              >
-                {PageContent.editRequest}
-              </Link>
+              {isCompleted ? (
+                ''
+              ) : (
+                <Link
+                  style={{ float: 'right' }}
+                  iconLeft="edit"
+                  onClick={handleCreateData}
+                >
+                  {PageContent.editRequest}
+                </Link>
+              )}
             </Subheading>
           </Box>
           <Box mt="20px" mb="10px">

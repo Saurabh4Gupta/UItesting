@@ -191,7 +191,7 @@ const TableList = (props) => {
                   </Box>
                 </Stack>
               </Stack>
-              <Divider />
+              {index === data.length - 1 ? '' : <Divider />}
             </div>
           );
         }}
