@@ -27,17 +27,17 @@ const TableList = (props) => {
     clientCode,
   } = props;
 
-  const history = useHistory()
+  const history = useHistory();
 
   const handleModal = (id) => {
-    setIsDeleteModal({ value: true, id })
-  }
+    setIsDeleteModal({ value: true, id });
+  };
   const showDataRequestDetails = (id) => {
-    const queryString = `client_code=${clientCode}&request_id=${id}`
+    const queryString = `client_code=${clientCode}&request_id=${id}`;
     history.push({
       pathname: '/viewDetails',
       search: `?${queryString}`,
-    })
+    });
     // history.push(`/viewDetails?client_code=${clientCode}&request_id=${id}`);
   };
 
@@ -101,8 +101,7 @@ const TableList = (props) => {
                   alignItems="center"
                   flexDirection="row"
                   justifyContent="space-between"
-                  width="80%"
-                >
+                  width="80%">
                   <Box width="25%">
                     <b>{`${client} ${localMarket.label}`}</b>
                   </Box>
@@ -120,26 +119,24 @@ const TableList = (props) => {
                         <Chip variant="status" status="warning" hasStatusLight>
                           {cmsData.overdue}
                         </Chip>
-                        ) : (
-                            ''
-                          )}
+                      ) : (
+                        ''
+                      )}
                     </Box>
-                    )}
+                  )}
                   <Box width="30%">{`${cmsData.lastUpdate}: ${updatedAt}`}</Box>
                 </Stack>
                 <Stack
                   alignItems="center"
                   flexDirection="row"
                   justifyContent="flex-end"
-                  width="20%"
-                >
+                  width="20%">
                   <Box>
                     <Button
                       variant="ghost"
                       size="small"
                       iconLeft="layers"
-                      onClick={() => showDataRequestDetails(id)}
-                    >
+                      onClick={() => showDataRequestDetails(id)}>
                       {cmsData.viewDetails}
                     </Button>
                   </Box>
@@ -155,7 +152,7 @@ const TableList = (props) => {
                   </Box>
                 </Stack>
               </Stack>
-              <Divider />
+              {index === data.length - 1 ? '' : <Divider />}
             </div>
           );
         }}

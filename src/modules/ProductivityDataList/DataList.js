@@ -28,10 +28,11 @@ const DataList = (props) => {
   const addRequest = (values) => {
     values.createdAt = new Date();
     values.isActive = true;
+    values.isCompleted = false;
     values.year = '2020';
     values.quarter = 'Q3';
     values.isDeleted = false;
-    values.id = dataList.data.length + 1;
+    values.id = dataList.data.length + completeData.completedData.length + 1;
     values.client = 'Microsoft';
     values.updatedAt = '30/11/20 at 14:32';
     const tempData = [...dataList.data, values];
@@ -44,7 +45,13 @@ const DataList = (props) => {
   const handleToggleData = (id) => {
     if (tabIndex === 0) {
       const filterCompleteList = data.filter(
-        (item) => item.id === id,
+        (item) => {
+          if (item.id === id) {
+            item.isCompleted = true;
+            return true;
+        }
+        return false;
+      },
       );
       const tempData = [...completedData, ...filterCompleteList];
       const finalCompletedList = {
@@ -60,7 +67,13 @@ const DataList = (props) => {
       setCompleteData(finalCompletedList);
     } else {
       const filterOngoingList = completedData.filter(
-        (item) => item.id === id,
+        (item) => {
+          if (item.id === id) {
+            item.isCompleted = false;
+            return true;
+        }
+        return false;
+      },
       );
       const tempData = [...data, ...filterOngoingList];
       const finalOngoingList = { totalCount: tempData.length, data: tempData };

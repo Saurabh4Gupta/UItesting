@@ -17,6 +17,7 @@ const PageController = (props) => {
     children,
     handleUploadModal,
     pageTitle,
+    isCompleted,
   } = props;
   const { isViewProduct } = param;
   const { title, avatar } = clientList.find(
@@ -41,7 +42,7 @@ const PageController = (props) => {
           },
         ]}
         primaryAction={
-          isViewProduct
+          isViewProduct && !isCompleted
             ? {
               content: 'Upload new file',
               onClick: () => handleUploadModal(),
@@ -66,6 +67,7 @@ const PageController = (props) => {
             )}
           </>
         )}
+        status={isCompleted ? 'Complete' : ''}
       >
         {children}
       </Page>
@@ -80,6 +82,7 @@ PageController.propTypes = {
   children: PropTypes.node,
   handleUploadModal: PropTypes.func,
   pageTitle: PropTypes.string,
+  isCompleted: PropTypes.bool,
 };
 PageController.defaultProps = {
   param: { isViewProduct: false },
@@ -92,5 +95,6 @@ PageController.defaultProps = {
   handleMarket: () => { },
   handleUploadModal: () => { },
   pageTitle: '',
+  isCompleted: false,
 };
 export default PageController;
