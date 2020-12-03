@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useLocation } from 'react-router';
+import Box from '@dentsu-ui/components/dist/cjs/components/Box';
 import PageController from '../PageController/PageController';
 import { dataFieldCms as PageContent } from '../../cms';
 import withPageController from '../../hoc/withPageController';
@@ -33,32 +34,35 @@ const ViewProdDataRequest = (props) => {
     setTimeout(() => {
       setLoading(false);
     }, 2000);
-  }, [])
+  }, []);
 
   return (
     <>
-      {
-      isLoading ? <Loader /> : (
+      {isLoading ? (
+        <Loader />
+      ) : (
         <>
           {isUploadModal && (
-          <UploadFile
-            modalOpen={isUploadModal}
-            setModalOpen={setIsUploadModeal}
-            cmsData={PageContent}
-          />
-      )}
+            <UploadFile
+              modalOpen={isUploadModal}
+              setModalOpen={setIsUploadModeal}
+              cmsData={PageContent}
+            />
+          )}
           <PageController
             param={param}
             filterDataBy={filterDataBy}
             pageTitle={prodRequest.name}
             handleUploadModal={handleUploadModal}
             isCompleted={prodRequest.isCompleted}
-          />
-          <RequestSummary prodRequest={prodRequest} />
-          <VersionHistory />
+          >
+            <Box>
+              <RequestSummary prodRequest={prodRequest} />
+              <VersionHistory />
+            </Box>
+          </PageController>
         </>
-)
-    }
+      )}
     </>
   );
 };
