@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import {
@@ -11,6 +11,8 @@ import {
   Divider,
 } from '@dentsu-ui/components';
 import { useHistory } from 'react-router';
+import Card from '@dentsu-ui/components/dist/cjs/components/Card';
+import Paragraph from '@dentsu-ui/components/dist/cjs/components/Paragraph';
 import ActionBtn from './ActionBtn';
 import DeleteData from '../CreateData/DeleteData';
 
@@ -25,11 +27,10 @@ const TableList = (props) => {
     showStatus,
     handleDeletItem,
     clientCode,
+    search,
   } = props;
 
   const history = useHistory();
-
-  const [ongoingList, setOngoingList] = useState(data);
 
   const handleModal = (id) => {
     setIsDeleteModal({ value: true, id });
@@ -42,14 +43,6 @@ const TableList = (props) => {
     });
   };
 
-  const searchChangeHandler = (input) => {
-    const updatedList = data.filter(
-      (d) => d.clientMarket.includes(input) || d.name.includes(input),
-    );
-
-    setOngoingList(updatedList);
-  };
-
   return (
     <Box mt="30px">
       <DeleteData
@@ -58,13 +51,13 @@ const TableList = (props) => {
         handleDelete={handleDeletItem}
       />
       <List
-        items={ongoingList}
+        items={data}
         searchBy="client"
         isSearchable
         rowsText="results in total"
         filteredText=""
         rowText="result in total"
-        onSearchChange={(input) => searchChangeHandler(input)}
+        onSearchChange={(input) => search(input)}
         filters={[
           {
             key: 'totalTenure',
@@ -91,32 +84,6 @@ const TableList = (props) => {
             ],
           },
         ]}
-        // filters={[
-        //   {
-        //     key: 'enabled',
-        //     label: 'Show',
-        //     type: 'choice',
-        //     defaultText: 'All',
-        //     options: [
-        //       {
-        //         label: '2020 Q1',
-        //         value: '2020 Q1',
-        //       },
-        //       {
-        //         label: '2020 Q2',
-        //         value: '2020 Q2',
-        //       },
-        //       {
-        //         label: '2020 Q3',
-        //         value: '2020 Q3',
-        //       },
-        //       {
-        //         label: '2020 Q4',
-        //         value: '2020 Q4',
-        //       },
-        //     ],
-        //   },
-        // ]}
         renderItem={(item, index) => {
           const {
             client,
@@ -196,6 +163,13 @@ const TableList = (props) => {
           );
         }}
       />
+      {data.length < 1 && (
+        <Card style={{ border : '0px', height: '300px' }}>
+          <Paragraph style={{ margin: 'auto' }}>
+            Sorry, no results found
+          </Paragraph>
+        </Card>
+      )}
     </Box>
   );
 };
@@ -209,11 +183,13 @@ TableList.propTypes = {
   setIsDeleteModal: PropTypes.func.isRequired,
   handleDeletItem: PropTypes.func.isRequired,
   clientCode: PropTypes.string,
+  search: PropTypes.func,
 };
 TableList.defaultProps = {
   cmsData: {},
   showStatus: '',
   clientCode: '',
+  search: {},
 };
 
 export default TableList;
