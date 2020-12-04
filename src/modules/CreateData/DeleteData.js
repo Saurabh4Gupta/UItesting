@@ -11,6 +11,7 @@ const DeleteData = (props) => {
         width="500px"
         isOpen={modalOpen}
         onClose={() => setModalOpen({ value: false })}
+        onOpened={(event) => console.log(event)}
       >
         <Modal.Header hasCloseButton title="Are you sure you want to delete?" />
         <Modal.Body>
