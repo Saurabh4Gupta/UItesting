@@ -22,7 +22,6 @@ const Form = (props) => {
     console.log('Dropzone instance has initialised', files);
   };
 
-  console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>', values.localMarket.value)
   return (
     <>
       <FormField

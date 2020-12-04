@@ -34,7 +34,17 @@ const ViewProdDataRequest = (props) => {
       setLoading(false);
     }, 2000);
   }, [])
-
+  const handleEditData = (values) => {
+    prodRequest.localMarket = values.localMarket;
+    prodRequest.dueDate = '01/01/2021';
+    prodRequest.name = values.name;
+    prodRequest.briefing = values.briefing;
+    prodRequest.actualData = values.actualData;
+    prodRequest.forecastData = values.forecastData;
+    prodRequest.reportingYear = 'April 2021 - March 2022';
+    prodRequest.assignTo = 'Ryan Manton';
+    console.log('valueuueue', prodRequest.name)
+  }
   return (
     <>
       {
@@ -54,7 +64,7 @@ const ViewProdDataRequest = (props) => {
             handleUploadModal={handleUploadModal}
             isCompleted={prodRequest.isCompleted}
           />
-          <RequestSummary prodRequest={prodRequest} />
+          <RequestSummary prodRequest={prodRequest} handleEditData={handleEditData} />
           <VersionHistory />
         </>
 )

@@ -1,15 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Success test cases for: UploadFile component Snapshot test for  UploadFile component Test to match the snapsot 1`] = `
+exports[`Success test cases for: Loader component Snapshot test for Loader component Test to match the snapsot 1`] = `
 <Fragment>
   <ForwardRef
-    isFullHeight={false}
     isOpen={false}
     onClose={[Function]}
-    width="650px"
   >
     <ForwardRef
-      title="Upload new file"
+      hasCloseButton={true}
+      title="Create new data request"
     />
     <ForwardRef>
       <Form
@@ -80,8 +79,136 @@ exports[`Success test cases for: UploadFile component Snapshot test for  UploadF
           }
         }
         errors={Object {}}
-        files={Array []}
-        handleFileChange={[Function]}
+        handleChange={[Function]}
+        handleSelectField={[Function]}
+        monthOptions={
+          Array [
+            Object {
+              "label": "0 months",
+              "value": 0,
+            },
+            Object {
+              "label": "1 month",
+              "value": 1,
+            },
+            Object {
+              "label": "2 months",
+              "value": 2,
+            },
+            Object {
+              "label": "3 months",
+              "value": 3,
+            },
+            Object {
+              "label": "4 months",
+              "value": 4,
+            },
+            Object {
+              "label": "5 months",
+              "value": 5,
+            },
+            Object {
+              "label": "6 months",
+              "value": 6,
+            },
+            Object {
+              "label": "7 months",
+              "value": 7,
+            },
+            Object {
+              "label": "8 months",
+              "value": 8,
+            },
+            Object {
+              "label": "9 months",
+              "value": 9,
+            },
+            Object {
+              "label": "10 months",
+              "value": 10,
+            },
+            Object {
+              "label": "11 months",
+              "value": 11,
+            },
+            Object {
+              "label": "12 months",
+              "value": 12,
+            },
+          ]
+        }
+        options={
+          Array [
+            Object {
+              "label": "Argentina",
+              "value": "ARG",
+            },
+            Object {
+              "label": "Australia",
+              "value": "AUS",
+            },
+            Object {
+              "label": "Belgium",
+              "value": "BEL",
+            },
+            Object {
+              "label": "United Kingdom",
+              "value": "UK",
+            },
+            Object {
+              "label": "USA",
+              "value": "USA",
+            },
+            Object {
+              "label": "France",
+              "value": "FR",
+            },
+            Object {
+              "label": "New Zealand",
+              "value": "NZ",
+            },
+            Object {
+              "label": "Singapore",
+              "value": "SGP",
+            },
+            Object {
+              "label": "Turkey",
+              "value": "Tk",
+            },
+            Object {
+              "label": "Italy",
+              "value": "IT",
+            },
+          ]
+        }
+        reportingYear={
+          Array [
+            Object {
+              "label": "April 2021  -  March 2022",
+              "value": "April 2021  -  March 2022",
+            },
+            Object {
+              "label": "April 2020  -  March 2021",
+              "value": "April 2020  -  March 2021",
+            },
+            Object {
+              "label": "April 2019  -  March 2020",
+              "value": "April 2019  -  March 2020",
+            },
+          ]
+        }
+        values={
+          Object {
+            "actualData": "",
+            "assignTo": "",
+            "briefing": "",
+            "dueDate": "",
+            "forecastData": "",
+            "localMarket": "",
+            "name": "",
+            "reportingYear": "",
+          }
+        }
       />
     </ForwardRef>
     <ForwardRef>
@@ -92,11 +219,36 @@ exports[`Success test cases for: UploadFile component Snapshot test for  UploadF
         Cancel
       </ForwardRef>
       <ForwardRef
+        isLoading={false}
         onClick={[Function]}
       >
-        Upload
+        Create
       </ForwardRef>
     </ForwardRef>
   </ForwardRef>
+  <Stack
+    flexDirection="row"
+    justifyContent="space-between"
+  >
+    <Stack>
+      <ForwardRef>
+        <Subheading>
+          Productivity data requests
+        </Subheading>
+        <ForwardRef
+          isAssistive={true}
+        >
+           The ongoing and complete productivity data requests created for this client
+        </ForwardRef>
+      </ForwardRef>
+    </Stack>
+    <ForwardRef
+      iconLeft="add"
+      onClick={[Function]}
+      variant="secondary"
+    >
+      Create new data request
+    </ForwardRef>
+  </Stack>
 </Fragment>
 `;

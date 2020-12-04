@@ -51,7 +51,7 @@ const PageController = (props) => {
             }
             : false
         }
-       controls={
+        controls={
           !isViewProduct && (
             <FormField>
               <Select
