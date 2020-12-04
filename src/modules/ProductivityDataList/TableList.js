@@ -43,7 +43,6 @@ const TableList = (props) => {
   };
 
   const searchChangeHandler = (input) => {
-    console.log(data)
     const updatedList = data.filter(
       (d) => d.clientMarket.includes(input) || d.name.includes(input),
     );
