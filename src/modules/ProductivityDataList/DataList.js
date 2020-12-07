@@ -69,7 +69,7 @@ const DataList = (props) => {
       totalCount: tempData.length,
       data: tempData,
     };
-    updateOngoingList(finalOngoingList);
+    // updateOngoingList(finalOngoingList);
     setDataList(finalOngoingList);
   };
   const handleToggleData = (id) => {
@@ -92,7 +92,7 @@ const DataList = (props) => {
         data: OngoingRequest,
       };
       setDataList(filterOngoinglist);
-      updateOngoingList(filterOngoinglist);
+      updateOngoingList(id, false);
       setCompleteData(finalCompletedList);
       setOriginalCompleteData(finalCompletedList);
     } else {
@@ -111,7 +111,7 @@ const DataList = (props) => {
         completedData: completedRequest,
       };
       setDataList(finalOngoingList);
-      updateOngoingList(finalOngoingList);
+      updateOngoingList(id, true);
       setCompleteData(filterCompletedlist);
       setOriginalCompleteData(filterCompletedlist);
     }
@@ -123,8 +123,9 @@ const DataList = (props) => {
       totalCount: OngoingRequest.length,
       data: OngoingRequest,
     };
+    updateOngoingList(id, false);
     setDataList(filterOngoinglist);
-    updateOngoingList(filterOngoinglist);
+    // updateOngoingList(filterOngoinglist);
     setIsDeleteModal({ isDeleteModal:false, requestId:undefined });
   };
 
@@ -163,7 +164,7 @@ const DataList = (props) => {
           ) : (
             <Tabs.Panels>
               <Tabs.Panel>
-                {dataList.totalCount > 0  ? (
+                {originalOngingList.data.length > 0  ? (
                   <TableList
                     data={data}
                     cmsData={cmsData}
