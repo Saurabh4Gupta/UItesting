@@ -20,14 +20,32 @@ const DataField = (props) => {
   const [ongoingData, setDataList] = useState({ data: [], totalCount: 0 });
   const [isUploadModal, setIsUploadModal] = useState(false);
   const [isLoading, setLoading] = useState(true);
-  const [originalOngingList, setOriginalOngoingList] = useState(getData(
-    filterDataBy.market.value,
-  ));
+  const [originalOngingList, setOriginalOngoingList] = useState(
+    getData(filterDataBy.market.value),
+  );
 
-  const updateOngoingList = (list) => {
-    setOriginalOngoingList(list)
+  const updateOngoingList = (id, isToAdd) => {
+    let filteredArray = [];
+
+    const orignalArray = getData(filterDataBy.market.value).data;
+
+    if (isToAdd) {
+      const newArray = orignalArray.find((a) => a.id === id);
+
+      filteredArray = [...originalOngingList.data];
+      filteredArray.push(newArray)
+    } else {
+      filteredArray = originalOngingList.data.filter((value) => value.id !== id);
+    }
+
+    setOriginalOngoingList({
+      data: filteredArray,
+      totalCount: ongoingData.totalCount,
+    });
+
+
+    // setDataList({data: filteredArray, totalCount: ongoingData.totalCount,})
   };
-
 
   const handleMarket = (selected) => {
     setLoading(true);
@@ -37,7 +55,7 @@ const DataField = (props) => {
     setTimeout(() => {
       setLoading(false);
       setDataList(getData(filterDataBy.market.value));
-      setOriginalOngoingList(getData(filterDataBy.market.value))
+      setOriginalOngoingList(getData(filterDataBy.market.value));
     }, 2000);
   }, [filterDataBy]);
 
