@@ -5,21 +5,24 @@ import { withRouter } from 'react-router';
 import Form from './Form'
 import useCustomForm from '../../hooks/useCustomForm';
 import validationRule from '../../utils/validate';
-import { options, monthOptions, reportingYear } from '../Mock/mockData'
+import { options, monthOptions, reportingYear, data } from '../Mock/mockData'
 
 const EditData = (props) => {
-  const { cmsData, isModalOpen, handleModal } = props;
+  const { cmsData, isModalOpen, handleModal, requestId, handleEditData } = props;
   const [isReadyToSubmit, setIsReadyToSubmit] = useState(false);
   const [loading, setLoading] = useState(false);
+  const filterCompleteList = data.data.filter(
+    (item) => item.id === requestId,
+  );
   const initialValues = {
-    localMarket: { value: 'UK', label: 'United Kingdom' },
-    name: 'Productivity Q2 2020',
-    briefing: 'Give some details about this quarter',
-    reportingYear:{ value: 'April 2021 - March 2022', label: 'April 2021 - March 2022' },
-    actualData: { value: 0, label: '0 months' },
-    forecastData: { value: 12, label: '12 months' },
+    localMarket: filterCompleteList[0].localMarket,
+    name: filterCompleteList[0].name,
+    briefing: filterCompleteList[0].briefing,
+    reportingYear:{ value: filterCompleteList[0].reportingYear, label: filterCompleteList[0].reportingYear },
+    actualData:filterCompleteList[0].actualData,
+    forecastData: filterCompleteList[0].forecastData,
     dueDate: new Date(),
-    assignTo: { value: 'UK', label: 'United Kingdom' },
+    assignTo: { value: 'UK', label: 'Ryan Killick' },
   };
   const { handleChange, values, forecastOptions,
     handleSelectField, handleSubmit,
@@ -41,6 +44,7 @@ const EditData = (props) => {
     handleSubmit();
     if (isReadyToSubmit) {
       setLoading(true);
+      handleEditData(values)
       setTimeout(() => {
         setLoading(false);
         closeModalHandler()
@@ -80,10 +84,14 @@ EditData.propTypes = {
     cmsData: PropTypes.object,
     isModalOpen: PropTypes.bool,
     handleModal: PropTypes.func,
+    requestId:PropTypes.string,
+    handleEditData: PropTypes.func,
   }
   EditData.defaultProps = {
     cmsData: {},
     isModalOpen: false,
     handleModal: () => { },
+    requestId:PropTypes.string,
+    handleEditData: PropTypes.func,
   }
 export default withRouter(EditData);

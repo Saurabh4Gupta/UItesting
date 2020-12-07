@@ -11,7 +11,7 @@ const CreateData = (props) => {
   const [isReadyToSubmit, setIsReadyToSubmit] = useState(false);
   const [loading, setLoading] = useState(false);
   const initialValues = {
-   localMarket: '',
+   localMarket: market,
     name: '',
     briefing: '',
     reportingYear: '',

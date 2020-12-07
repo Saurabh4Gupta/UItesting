@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Success test cases for: Loader component Snapshot test for Loader component Test to match the snapsot 1`] = `
+<ContextConsumer>
+  <Component />
+</ContextConsumer>
+`;
