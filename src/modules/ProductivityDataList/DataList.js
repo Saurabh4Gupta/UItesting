@@ -25,7 +25,9 @@ const DataList = (props) => {
   } = props;
 
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [completeData, setCompleteData] = useState(getCompletedData);
+  const [completeData, setCompleteData] = useState({ completedCount: 0,
+    completedData: [] });
+  const [originalCompleteData, setOriginalCompleteData] = useState(getCompletedData);
   const [deleteModalData, setIsDeleteModal] = useState({ isDeleteModal:false, requestId:undefined });
   const [tabIndex, setTabIndex] = useState(0);
   const { completedData } = completeData;
@@ -42,7 +44,7 @@ const DataList = (props) => {
 
     setDataList({ data: updatedList, totalCount: copyList.totalCount });
     } else {
-      const originalList = completeData.completedData;
+      const originalList = originalCompleteData.completedData;
       const updatedList = originalList.filter(
         (d) => d.clientMarket.toLowerCase().includes(input.toLowerCase()) || d.name.toLowerCase().includes(input.toLowerCase()),
       );
@@ -67,9 +69,7 @@ const DataList = (props) => {
       totalCount: tempData.length,
       data: tempData,
     };
-    updateOngoingList(finalOngoingList);
-    updateOngoingList(finalOngoingList);
-
+    // updateOngoingList(finalOngoingList);
     setDataList(finalOngoingList);
   };
   const handleToggleData = (id) => {
@@ -92,8 +92,9 @@ const DataList = (props) => {
         data: OngoingRequest,
       };
       setDataList(filterOngoinglist);
-      updateOngoingList(filterOngoinglist);
+      updateOngoingList(id, false);
       setCompleteData(finalCompletedList);
+      setOriginalCompleteData(finalCompletedList);
     } else {
       const filterOngoingList = completedData.filter((item) => {
         if (item.id === id) {
@@ -110,8 +111,9 @@ const DataList = (props) => {
         completedData: completedRequest,
       };
       setDataList(finalOngoingList);
-      updateOngoingList(finalOngoingList);
+      updateOngoingList(id, true);
       setCompleteData(filterCompletedlist);
+      setOriginalCompleteData(filterCompletedlist);
     }
   };
 
@@ -121,8 +123,9 @@ const DataList = (props) => {
       totalCount: OngoingRequest.length,
       data: OngoingRequest,
     };
+    updateOngoingList(id, false);
     setDataList(filterOngoinglist);
-    updateOngoingList(filterOngoinglist);
+    // updateOngoingList(filterOngoinglist);
     setIsDeleteModal({ isDeleteModal:false, requestId:undefined });
   };
 
@@ -161,7 +164,7 @@ const DataList = (props) => {
           ) : (
             <Tabs.Panels>
               <Tabs.Panel>
-                {dataList.totalCount > 0  ? (
+                {originalOngingList.data.length > 0  ? (
                   <TableList
                     data={data}
                     cmsData={cmsData}

@@ -13,12 +13,12 @@ import VersionHistory from '../VersionHistory/VersionHistory';
 
 const ViewProdDataRequest = (props) => {
   const { param } = props;
-  const { data } = prodRequests;
 
+  const { data } = prodRequests;
   const location = useLocation();
   const query = new URLSearchParams(location.search);
   const requestId = query.get('request_id');
-  const prodRequest = data.find((request) => request.id === +requestId);
+  const [prodRequest, setProdRequest] = useState(data.find((request) => request.id === +requestId));
 
   const [isUploadModal, setIsUploadModeal] = useState(false);
   const [isLoading, setLoading] = useState(true);
@@ -30,11 +30,24 @@ const ViewProdDataRequest = (props) => {
   const handleUploadModal = () => {
     setIsUploadModeal(true);
   };
+
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
     }, 2000);
   }, []);
+
+  const handleEditData = (values) => {
+    setProdRequest({ ...prodRequest,
+      localMarket : values.localMarket,
+      dueDate : values.dueDate.toLocaleDateString(),
+      name : values.name,
+      briefing : values.briefing,
+      actualData : values.actualData,
+      forecastData : values.forecastData,
+      reportingYear : 'April 2021 - March 2022',
+      assignTo : 'Ryan Manton' });
+  };
 
   return (
     <>
@@ -51,12 +64,13 @@ const ViewProdDataRequest = (props) => {
           )}
           <PageController
             param={param}
+            localMarket={prodRequest.localMarket.label}
             filterDataBy={filterDataBy}
             pageTitle={prodRequest.name}
             handleUploadModal={handleUploadModal}
             isCompleted={prodRequest.isCompleted}
           >
-            <RequestSummary prodRequest={prodRequest} />
+            <RequestSummary prodRequest={prodRequest} handleEditData={handleEditData} />
             <Box mt="30px">
               <VersionHistory />
             </Box>

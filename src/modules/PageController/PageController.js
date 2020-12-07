@@ -18,6 +18,7 @@ const PageController = (props) => {
     handleUploadModal,
     pageTitle,
     isCompleted,
+    localMarket,
   } = props;
   const { isViewProduct } = param;
   const { title, avatar } = clientList.find(
@@ -31,7 +32,7 @@ const PageController = (props) => {
   return (
     <>
       <Page
-        metadata={isViewProduct ? 'Microsoft United Kingdom' : 'Client Overview'}
+        metadata={isViewProduct ? `${title} ${localMarket}` : 'Client Overview'}
         title={!isViewProduct ? title : pageTitle}
         thumbnail={`/${avatar}`}
 
@@ -80,7 +81,9 @@ PageController.propTypes = {
   handleUploadModal: PropTypes.func,
   pageTitle: PropTypes.string,
   isCompleted: PropTypes.bool,
+  localMarket: PropTypes.string,
 };
+
 PageController.defaultProps = {
   param: { isViewProduct: false },
   filterDataBy: {
@@ -93,5 +96,6 @@ PageController.defaultProps = {
   handleUploadModal: () => { },
   pageTitle: '',
   isCompleted: false,
+  localMarket: '',
 };
 export default PageController;
