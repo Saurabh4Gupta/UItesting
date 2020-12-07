@@ -25,7 +25,9 @@ const DataList = (props) => {
   } = props;
 
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [completeData, setCompleteData] = useState(getCompletedData);
+  const [completeData, setCompleteData] = useState({ completedCount: 0,
+    completedData: [] });
+  const [originalCompleteData, setOriginalCompleteData] = useState(getCompletedData);
   const [deleteModalData, setIsDeleteModal] = useState({ isDeleteModal:false, requestId:undefined });
   const [tabIndex, setTabIndex] = useState(0);
   const { completedData } = completeData;
@@ -42,7 +44,7 @@ const DataList = (props) => {
 
     setDataList({ data: updatedList, totalCount: copyList.totalCount });
     } else {
-      const originalList = completeData.completedData;
+      const originalList = originalCompleteData.completedData;
       const updatedList = originalList.filter(
         (d) => d.clientMarket.toLowerCase().includes(input.toLowerCase()) || d.name.toLowerCase().includes(input.toLowerCase()),
       );
@@ -68,8 +70,6 @@ const DataList = (props) => {
       data: tempData,
     };
     updateOngoingList(finalOngoingList);
-    updateOngoingList(finalOngoingList);
-
     setDataList(finalOngoingList);
   };
   const handleToggleData = (id) => {
@@ -94,6 +94,7 @@ const DataList = (props) => {
       setDataList(filterOngoinglist);
       updateOngoingList(filterOngoinglist);
       setCompleteData(finalCompletedList);
+      setOriginalCompleteData(finalCompletedList);
     } else {
       const filterOngoingList = completedData.filter((item) => {
         if (item.id === id) {
@@ -112,6 +113,7 @@ const DataList = (props) => {
       setDataList(finalOngoingList);
       updateOngoingList(finalOngoingList);
       setCompleteData(filterCompletedlist);
+      setOriginalCompleteData(filterCompletedlist);
     }
   };
 
