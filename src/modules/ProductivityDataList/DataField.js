@@ -28,6 +28,7 @@ const DataField = (props) => {
     setOriginalOngoingList(list)
   };
 
+
   const handleMarket = (selected) => {
     setLoading(true);
     setFilterDataBy({ market: selected });
@@ -36,6 +37,7 @@ const DataField = (props) => {
     setTimeout(() => {
       setLoading(false);
       setDataList(getData(filterDataBy.market.value));
+      setOriginalOngoingList(getData(filterDataBy.market.value))
     }, 2000);
   }, [filterDataBy]);
 
