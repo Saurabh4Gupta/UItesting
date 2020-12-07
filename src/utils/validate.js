@@ -1,6 +1,6 @@
 /* eslint-disable consistent-return */
 function validationRule(field, value) {
-  const date = new Date();
+  // const date = new Date();
   switch (field) {
     case 'localMarket':
       return !value

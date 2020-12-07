@@ -11,9 +11,13 @@ const props = {
 cmsData: {},
 market: 'UK',
 isModalOpen: false,
-handleModal: () => { },
-setDataCreated: () => false,
-handleChange: () => {},
+addRequest: jest.fn(),
+handleModal: jest.fn(),
+setDataCreated: jest.fn(false),
+handleChange: jest.fn(),
+setLoading: jest.fn(),
+closeModalHandler: jest.fn(),
+onSubmit: jest.fn(),
 }
 
 describe('Snapshot test for Loader component', () => {
@@ -22,6 +26,9 @@ wrapper = shallow(<CreateData {...props} cmsData={PageContent} />);
 });
 it('Test to match the snapsot', () => {
 expect(wrapper).toMatchSnapshot();
+
+
+console.log(wrapper.props());
 });
 
 it('Test click event', () => {
@@ -33,9 +40,10 @@ wrapper.find({ children: PageContent.cancel }).simulate('click');
 it('Test click event', () => {
 wrapper.find({ children: PageContent.create }).simulate('click');
 });
-it('find locak market field', () => {
-  wrapper.find('label.localMarket').find('select');
-});
+it('handleModal to be defined', () => {
+  const handler = wrapper.find('false').simulate('handleModal');
+  expect(handler()).not.toBeNull();
+})
 it('Renders correctly', () => {
 expect(wrapper.exists()).toBe(true);
 });

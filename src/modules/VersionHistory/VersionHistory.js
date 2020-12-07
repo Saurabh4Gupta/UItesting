@@ -28,6 +28,7 @@ const VersionHistory = () => {
   }
   // console.log('listdata', list)
   // console.log('Index', index);
+  console.log(showMore)
   return (
     <>
       <Box ml="60%" mr="65px" mt="20px" mb="100px">

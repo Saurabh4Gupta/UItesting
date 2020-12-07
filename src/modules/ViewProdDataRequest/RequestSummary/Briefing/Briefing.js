@@ -31,7 +31,6 @@ const Briefing = (props) => {
   const showMoreLink = (
     <Link onClick={() => showMoreHandler(true)}>{PageContent.showMore}</Link>
   );
-  console.log('valueuueue on briefingggggggggggggggggggggggggg', briefing)
   return (
     <Box width="70%" mr="40px">
       <Stack flexDirection="column">

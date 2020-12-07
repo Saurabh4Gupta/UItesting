@@ -204,7 +204,7 @@ exports[`Success test cases for: Loader component Snapshot test for Loader compo
             "briefing": "",
             "dueDate": "",
             "forecastData": "",
-            "localMarket": "",
+            "localMarket": "UK",
             "name": "",
             "reportingYear": "",
           }
