@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useLocation } from 'react-router';
+import Box from '@dentsu-ui/components/dist/cjs/components/Box';
 import PageController from '../PageController/PageController';
 import { dataFieldCms as PageContent } from '../../cms';
 import withPageController from '../../hoc/withPageController';
@@ -68,12 +69,12 @@ const ViewProdDataRequest = (props) => {
             pageTitle={prodRequest.name}
             handleUploadModal={handleUploadModal}
             isCompleted={prodRequest.isCompleted}
-          />
-          <RequestSummary
-            prodRequest={prodRequest}
-            handleEditData={handleEditData}
-          />
-          <VersionHistory />
+          >
+            <RequestSummary prodRequest={prodRequest} handleEditData={handleEditData} />
+            <Box mt="30px">
+              <VersionHistory />
+            </Box>
+          </PageController>
         </>
       )}
     </>

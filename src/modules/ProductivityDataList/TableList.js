@@ -11,6 +11,8 @@ import {
   Divider,
 } from '@dentsu-ui/components';
 import { useHistory } from 'react-router';
+import Card from '@dentsu-ui/components/dist/cjs/components/Card';
+import Paragraph from '@dentsu-ui/components/dist/cjs/components/Paragraph';
 import ActionBtn from './ActionBtn';
 import DeleteData from '../CreateData/DeleteData';
 
@@ -19,34 +21,32 @@ const TableList = (props) => {
     cmsData,
     data,
     handleToggleData,
-    isDeleteModal,
+    deleteModalData,
     setIsDeleteModal,
     actionName,
     showStatus,
-    handleDeletItem,
+    handleDeleteModel,
     clientCode,
+    deleteRequest,
+    search,
   } = props;
 
   const history = useHistory();
 
-  const handleModal = (id) => {
-    setIsDeleteModal({ value: true, id });
-  };
   const showDataRequestDetails = (id) => {
     const queryString = `client_code=${clientCode}&request_id=${id}`;
     history.push({
       pathname: '/viewDetails',
       search: `?${queryString}`,
     });
-    // history.push(`/viewDetails?client_code=${clientCode}&request_id=${id}`);
   };
 
   return (
     <Box mt="30px">
       <DeleteData
-        modalOpen={isDeleteModal.value}
+        deleteModalData={deleteModalData}
         setModalOpen={setIsDeleteModal}
-        handleDelete={handleDeletItem}
+        deleteRequest={deleteRequest}
       />
       <List
         items={data}
@@ -55,10 +55,11 @@ const TableList = (props) => {
         rowsText="results in total"
         filteredText=""
         rowText="result in total"
+        onSearchChange={(input) => search(input)}
         filters={[
           {
-            key: 'enabled',
-            label: 'Show',
+            key: 'totalTenure',
+            label: 'Status',
             type: 'choice',
             defaultText: 'All',
             options: [
@@ -150,7 +151,7 @@ const TableList = (props) => {
                       handleToggleData={() => handleToggleData(id)}
                       deleteBtn={cmsData.delete}
                       showStatus={showStatus}
-                      handleDeleteModel={() => handleModal(id)}
+                      handleDeleteModel={() => handleDeleteModel(id)}
                     />
                   </Box>
                 </Stack>
@@ -160,6 +161,13 @@ const TableList = (props) => {
           );
         }}
       />
+      {data.length < 1 && (
+        <Card style={{ border : '0px', height: '300px' }}>
+          <Paragraph style={{ margin: 'auto' }}>
+            Sorry, no results found
+          </Paragraph>
+        </Card>
+      )}
     </Box>
   );
 };
@@ -169,15 +177,20 @@ TableList.propTypes = {
   handleToggleData: PropTypes.func.isRequired,
   actionName: PropTypes.string.isRequired,
   showStatus: PropTypes.string,
-  isDeleteModal: PropTypes.bool.isRequired,
+  deleteModalData: PropTypes.object,
   setIsDeleteModal: PropTypes.func.isRequired,
-  handleDeletItem: PropTypes.func.isRequired,
+  handleDeleteModel: PropTypes.func.isRequired,
   clientCode: PropTypes.string,
+  search: PropTypes.func,
+  deleteRequest: PropTypes.func,
 };
 TableList.defaultProps = {
   cmsData: {},
   showStatus: '',
   clientCode: '',
+  search: {},
+  deleteModalData:{},
+  deleteRequest:() => {},
 };
 
 export default TableList;

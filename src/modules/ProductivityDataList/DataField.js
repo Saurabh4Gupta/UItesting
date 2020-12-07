@@ -17,24 +17,37 @@ const DataField = (props) => {
   const [filterDataBy, setFilterDataBy] = useState({
     market: { label: 'All Markets', value: '' },
   });
-  const [ongoingData, setDataList] = useState({ data:[], totalCount:0 });
+  const [ongoingData, setDataList] = useState({ data: [], totalCount: 0 });
   const [isUploadModal, setIsUploadModal] = useState(false);
   const [isLoading, setLoading] = useState(true);
+  const [originalOngingList, setOriginalOngoingList] = useState(getData(
+    filterDataBy.market.value,
+  ));
+
+  const updateOngoingList = (list) => {
+    setOriginalOngoingList(list)
+  };
 
   const handleMarket = (selected) => {
     setLoading(true);
-    setFilterDataBy({ market: selected })
-  }
+    setFilterDataBy({ market: selected });
+  };
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
       setDataList(getData(filterDataBy.market.value));
     }, 2000);
-  }, [filterDataBy])
+  }, [filterDataBy]);
 
   return (
     <>
-      <PageController param={param} filterDataBy={filterDataBy} handleMarket={handleMarket} pageTitle="" isCompleted="">
+      <PageController
+        param={param}
+        filterDataBy={filterDataBy}
+        handleMarket={handleMarket}
+        pageTitle=""
+        isCompleted=""
+      >
         <Box mb="200px">
           <UploadFile
             cmsData={PageContent}
@@ -48,6 +61,9 @@ const DataField = (props) => {
             dataList={ongoingData}
             setDataList={setDataList}
             loading={isLoading}
+            updateOngoingList={updateOngoingList}
+            originalOngingList={originalOngingList}
+            setOriginalOngoingList={setOriginalOngoingList}
           />
         </Box>
       </PageController>
