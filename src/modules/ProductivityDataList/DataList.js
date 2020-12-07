@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
 import { Box, Tabs } from '@dentsu-ui/components';
@@ -16,20 +17,39 @@ const DataList = (props) => {
     dataList,
     setDataList,
     loading,
-    search,
     updateOngoingList,
-
+    // eslint-disable-next-line react/prop-types
+    originalOngingList,
+    // eslint-disable-next-line react/prop-types
+    setOriginalOngoingList,
   } = props;
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [completeData, setCompleteData] = useState(getCompletedData);
-  const [isDeleteModal, setIsDeleteModal] = useState({
-    value: false,
-    id: undefined,
-  });
+  const [deleteModalData, setIsDeleteModal] = useState({ isDeleteModal:false, requestId:undefined });
   const [tabIndex, setTabIndex] = useState(0);
   const { completedData } = completeData;
   const { data } = dataList;
+
+  const searchChangeHandler = (input) => {
+    if (tabIndex === 0) {
+    const originalList = originalOngingList.data;
+    const updatedList = originalList.filter(
+      (d) => d.clientMarket.toLowerCase().includes(input.toLowerCase()) || d.name.toLowerCase().includes(input.toLowerCase()),
+    );
+
+    const copyList = { ...dataList }
+
+    setDataList({ data: updatedList, totalCount: copyList.totalCount });
+    } else {
+      const originalList = completeData.completedData;
+      const updatedList = originalList.filter(
+        (d) => d.clientMarket.toLowerCase().includes(input.toLowerCase()) || d.name.toLowerCase().includes(input.toLowerCase()),
+      );
+      const copyList = { ...completeData }
+      setCompleteData({ completedData: updatedList, completedCount: copyList.completedCount });
+    }
+  };
 
 
   const addRequest = (values) => {
@@ -103,10 +123,7 @@ const DataList = (props) => {
     };
     setDataList(filterOngoinglist);
     updateOngoingList(filterOngoinglist);
-    setIsDeleteModal({ value: false });
-  };
-  const handleDeletItem = () => {
-    deleteRequest(isDeleteModal.id);
+    setIsDeleteModal({ isDeleteModal:false, requestId:undefined });
   };
 
   const handleModal = (value) => {
@@ -115,6 +132,9 @@ const DataList = (props) => {
   const handleTabIndex = (index) => {
     setTabIndex(index);
   };
+  const handleDeleteModel = (value) => {
+        setIsDeleteModal({ isDeleteModal:true, requestId:value });
+     };
   return (
     <>
       <CreateData
@@ -145,13 +165,14 @@ const DataList = (props) => {
                   <TableList
                     data={data}
                     cmsData={cmsData}
-                    isDeleteModal={isDeleteModal}
+                    deleteModalData={deleteModalData}
                     setIsDeleteModal={setIsDeleteModal}
                     handleToggleData={handleToggleData}
                     actionName={cmsData.moveToComplete}
-                    handleDeletItem={handleDeletItem}
+                    deleteRequest={deleteRequest}
                     clientCode={clientCode}
-                    search={search}
+                    search={searchChangeHandler}
+                    handleDeleteModel={handleDeleteModel}
                   />
                 ) : (
                   <EmptyTable
@@ -161,17 +182,15 @@ const DataList = (props) => {
                 )}
               </Tabs.Panel>
               <Tabs.Panel>
-                {completedData.length > 0 ? (
+                {completeData.completedCount > 0 ? (
                   <TableList
                     data={completedData}
                     cmsData={cmsData}
-                    isDeleteModal={isDeleteModal}
-                    setIsDeleteModal={setIsDeleteModal}
                     actionName={cmsData.moveToOnGoing}
                     handleToggleData={handleToggleData}
                     showStatus={false}
                     clientCode={clientCode}
-                    search={search}
+                    search={searchChangeHandler}
                   />
                 ) : (
                   <EmptyTable
@@ -197,7 +216,6 @@ DataList.propTypes = {
   dataList: PropTypes.array,
   setDataList: PropTypes.func,
   loading: PropTypes.bool,
-  search: PropTypes.func,
   updateOngoingList: PropTypes.func,
 };
 DataList.defaultProps = {
@@ -207,7 +225,6 @@ DataList.defaultProps = {
   clientCode: '',
   setDataList: () => {},
   loading: true,
-  search: {},
   updateOngoingList: {},
 };
 export default DataList;

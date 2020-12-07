@@ -21,20 +21,18 @@ const TableList = (props) => {
     cmsData,
     data,
     handleToggleData,
-    isDeleteModal,
+    deleteModalData,
     setIsDeleteModal,
     actionName,
     showStatus,
-    handleDeletItem,
+    handleDeleteModel,
     clientCode,
+    deleteRequest,
     search,
   } = props;
 
   const history = useHistory();
 
-  const handleModal = (id) => {
-    setIsDeleteModal({ value: true, id });
-  };
   const showDataRequestDetails = (id) => {
     const queryString = `client_code=${clientCode}&request_id=${id}`;
     history.push({
@@ -46,9 +44,9 @@ const TableList = (props) => {
   return (
     <Box mt="30px">
       <DeleteData
-        modalOpen={isDeleteModal.value}
+        deleteModalData={deleteModalData}
         setModalOpen={setIsDeleteModal}
-        handleDelete={handleDeletItem}
+        deleteRequest={deleteRequest}
       />
       <List
         items={data}
@@ -153,7 +151,7 @@ const TableList = (props) => {
                       handleToggleData={() => handleToggleData(id)}
                       deleteBtn={cmsData.delete}
                       showStatus={showStatus}
-                      handleDeleteModel={() => handleModal(id)}
+                      handleDeleteModel={() => handleDeleteModel(id)}
                     />
                   </Box>
                 </Stack>
@@ -179,17 +177,20 @@ TableList.propTypes = {
   handleToggleData: PropTypes.func.isRequired,
   actionName: PropTypes.string.isRequired,
   showStatus: PropTypes.string,
-  isDeleteModal: PropTypes.bool.isRequired,
+  deleteModalData: PropTypes.object,
   setIsDeleteModal: PropTypes.func.isRequired,
-  handleDeletItem: PropTypes.func.isRequired,
+  handleDeleteModel: PropTypes.func.isRequired,
   clientCode: PropTypes.string,
   search: PropTypes.func,
+  deleteRequest: PropTypes.func,
 };
 TableList.defaultProps = {
   cmsData: {},
   showStatus: '',
   clientCode: '',
   search: {},
+  deleteModalData:{},
+  deleteRequest:() => {},
 };
 
 export default TableList;
