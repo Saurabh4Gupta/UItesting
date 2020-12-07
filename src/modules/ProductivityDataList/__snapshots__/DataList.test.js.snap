@@ -1,3 +1,35 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<EmptyState /> should match snapshot 1`] = `undefined`;
+exports[`<EmptyState /> should match snapshot 1`] = `
+<Fragment>
+  <CreateData
+    addRequest={[Function]}
+    cmsData="data"
+    handleModal={[Function]}
+    isModalOpen={false}
+    market={
+      Object {
+        "value": "",
+      }
+    }
+  />
+  <Box
+    mt="30px"
+  >
+    <Tabs
+      index={0}
+      onChange={[Function]}
+    >
+      <ForwardRef>
+        <ForwardRef
+          count={0}
+        />
+        <ForwardRef
+          count={0}
+        />
+      </ForwardRef>
+      <Loader />
+    </Tabs>
+  </Box>
+</Fragment>
+`;

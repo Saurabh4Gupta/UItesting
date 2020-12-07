@@ -12,7 +12,8 @@ import { dataFieldCms as PageContent } from '../../../../cms/dataFieldCms';
 import EditData from '../../../CreateData/EditData';
 import TrackerTemplate from './TrackerTemplate';
 
-const OtherProductivityData = ({ prodRequest }) => {
+const OtherProductivityData = (props) => {
+  const { handleEditData, prodRequest } = props;
   const {
     dueDate,
     actualData,
@@ -20,6 +21,7 @@ const OtherProductivityData = ({ prodRequest }) => {
     assignTo,
     reportingYear,
     isCompleted,
+    id,
   } = prodRequest;
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [market] = useState('');
@@ -30,7 +32,17 @@ const OtherProductivityData = ({ prodRequest }) => {
   const handleCreateData = () => {
     handleModal(true);
   };
-
+  // const handleEditData = (values) => {
+  //   prodRequest.localMarket = values.localMarket;
+  //   prodRequest.dueDate = '01/01/2021';
+  //   prodRequest.name = values.name;
+  //   prodRequest.briefing = values.briefing;
+  //   prodRequest.actualData = values.actualData;
+  //   prodRequest.forecastData = values.forecastData;
+  //   prodRequest.reportingYear = 'April 2021 - March 2022';
+  //   prodRequest.assignTo = 'Ryan Manton';
+  //   console.log('valueuueue', prodRequest.forecastData)
+  // }
   return (
     <>
       <Box width="30%" ml="20px">
@@ -113,6 +125,8 @@ const OtherProductivityData = ({ prodRequest }) => {
         market={market}
         isModalOpen={isModalOpen}
         handleModal={handleModal}
+        requestId={id}
+        handleEditData={handleEditData}
       />
     </>
   );
@@ -120,9 +134,11 @@ const OtherProductivityData = ({ prodRequest }) => {
 
 OtherProductivityData.propTypes = {
   prodRequest: PropTypes.object,
+  handleEditData: PropTypes.func,
 };
 OtherProductivityData.defaultProps = {
   prodRequest: PropTypes.object,
+  handleEditData: PropTypes.func,
 };
 
 export default OtherProductivityData;
