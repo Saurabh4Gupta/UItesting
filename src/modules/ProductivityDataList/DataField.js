@@ -25,8 +25,6 @@ const DataField = (props) => {
   );
 
   const updateOngoingList = (id, isToAdd) => {
-     console.log('[ORIGINAL]', originalOngingList);
-    // console.log('[ONGOING]', id);
     let filteredArray = [];
 
     const orignalArray = getData(filterDataBy.market.value).data;
@@ -36,14 +34,9 @@ const DataField = (props) => {
 
       filteredArray = [...originalOngingList.data];
       filteredArray.push(newArray)
-
-      // filteredArray.push([...originalOngingList.data, newArray]);
     } else {
       filteredArray = originalOngingList.data.filter((value) => value.id !== id);
     }
-
-
-    // console.log(ongoingData.totalCount);
 
     setOriginalOngoingList({
       data: filteredArray,
