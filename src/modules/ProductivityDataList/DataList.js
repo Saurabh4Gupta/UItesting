@@ -48,6 +48,7 @@ const DataList = (props) => {
       data: tempData,
     };
     updateOngoingList(finalOngoingList);
+    updateOngoingList(finalOngoingList);
 
     setDataList(finalOngoingList);
   };
@@ -89,6 +90,7 @@ const DataList = (props) => {
         completedData: completedRequest,
       };
       setDataList(finalOngoingList);
+      updateOngoingList(finalOngoingList);
       setCompleteData(filterCompletedlist);
     }
   };
