@@ -24,17 +24,6 @@ const DataField = (props) => {
     filterDataBy.market.value,
   ));
 
-  const searchChangeHandler = (input) => {
-    const originalList = originalOngingList.data;
-    const updatedList = originalList.filter(
-      (d) => d.clientMarket.toLowerCase().includes(input.toLowerCase()) || d.name.toLowerCase().includes(input.toLowerCase()),
-    );
-
-    const copyList = { ...ongoingData }
-
-    setDataList({ data: updatedList, totalCount: copyList.totalCount });
-  };
-
   const updateOngoingList = (list) => {
     setOriginalOngoingList(list)
   };
@@ -72,8 +61,9 @@ const DataField = (props) => {
             dataList={ongoingData}
             setDataList={setDataList}
             loading={isLoading}
-            search={searchChangeHandler}
             updateOngoingList={updateOngoingList}
+            originalOngingList={originalOngingList}
+            setOriginalOngoingList={setOriginalOngoingList}
           />
         </Box>
       </PageController>
