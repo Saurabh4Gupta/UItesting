@@ -68,8 +68,6 @@ const DataList = (props) => {
       data: tempData,
     };
     updateOngoingList(finalOngoingList);
-    updateOngoingList(finalOngoingList);
-
     setDataList(finalOngoingList);
   };
   const handleToggleData = (id) => {
