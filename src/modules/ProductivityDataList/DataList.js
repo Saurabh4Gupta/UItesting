@@ -32,6 +32,7 @@ const DataList = (props) => {
   const [tabIndex, setTabIndex] = useState(0);
   const { completedData } = completeData;
   const { data } = dataList;
+  const originalCompletedData  = originalCompleteData.completedData;
 
   const searchChangeHandler = (input) => {
     if (tabIndex === 0) {
@@ -96,7 +97,7 @@ const DataList = (props) => {
       setCompleteData(finalCompletedList);
       setOriginalCompleteData(finalCompletedList);
     } else {
-      const filterOngoingList = completedData.filter((item) => {
+      const filterOngoingList = originalCompletedData.filter((item) => {
         if (item.id === id) {
           item.isCompleted = false;
           return true;
@@ -105,7 +106,7 @@ const DataList = (props) => {
       });
       const tempData = [...data, ...filterOngoingList];
       const finalOngoingList = { totalCount: tempData.length, data: tempData };
-      const completedRequest = completedData.filter((item) => item.id !== id);
+      const completedRequest = originalCompletedData.filter((item) => item.id !== id);
       const filterCompletedlist = {
         completedCount: completedRequest.length,
         completedData: completedRequest,
@@ -185,7 +186,7 @@ const DataList = (props) => {
                 )}
               </Tabs.Panel>
               <Tabs.Panel>
-                {completeData.completedCount > 0 ? (
+                {originalCompleteData.completedData.length > 0 ? (
                   <TableList
                     data={completedData}
                     cmsData={cmsData}
