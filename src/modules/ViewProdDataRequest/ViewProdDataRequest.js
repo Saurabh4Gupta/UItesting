@@ -12,12 +12,12 @@ import VersionHistory from '../VersionHistory/VersionHistory';
 
 const ViewProdDataRequest = (props) => {
   const { param } = props;
-  const { data } = prodRequests;
 
+  const { data } = prodRequests;
   const location = useLocation();
   const query = new URLSearchParams(location.search);
   const requestId = query.get('request_id');
-  const prodRequest = data.find((request) => request.id === +requestId);
+  const [prodRequest, setProdRequest] = useState(data.find((request) => request.id === +requestId));
 
   const [isUploadModal, setIsUploadModeal] = useState(false);
   const [isLoading, setLoading] = useState(true);
@@ -29,46 +29,53 @@ const ViewProdDataRequest = (props) => {
   const handleUploadModal = () => {
     setIsUploadModeal(true);
   };
+
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
     }, 2000);
-  }, [])
+  }, []);
+
   const handleEditData = (values) => {
-    prodRequest.localMarket = values.localMarket;
-    prodRequest.dueDate = '01/01/2021';
-    prodRequest.name = values.name;
-    prodRequest.briefing = values.briefing;
-    prodRequest.actualData = values.actualData;
-    prodRequest.forecastData = values.forecastData;
-    prodRequest.reportingYear = 'April 2021 - March 2022';
-    prodRequest.assignTo = 'Ryan Manton';
-    console.log('valueuueue', prodRequest.name)
-  }
+    setProdRequest({ ...prodRequest,
+      localMarket : values.localMarket,
+      dueDate : values.dueDate.toLocaleDateString(),
+      name : values.name,
+      briefing : values.briefing,
+      actualData : values.actualData,
+      forecastData : values.forecastData,
+      reportingYear : 'April 2021 - March 2022',
+      assignTo : 'Ryan Manton' });
+  };
+
   return (
     <>
-      {
-      isLoading ? <Loader /> : (
+      {isLoading ? (
+        <Loader />
+      ) : (
         <>
           {isUploadModal && (
-          <UploadFile
-            modalOpen={isUploadModal}
-            setModalOpen={setIsUploadModeal}
-            cmsData={PageContent}
-          />
-      )}
+            <UploadFile
+              modalOpen={isUploadModal}
+              setModalOpen={setIsUploadModeal}
+              cmsData={PageContent}
+            />
+          )}
           <PageController
             param={param}
+            localMarket={prodRequest.localMarket.label}
             filterDataBy={filterDataBy}
             pageTitle={prodRequest.name}
             handleUploadModal={handleUploadModal}
             isCompleted={prodRequest.isCompleted}
           />
-          <RequestSummary prodRequest={prodRequest} handleEditData={handleEditData} />
+          <RequestSummary
+            prodRequest={prodRequest}
+            handleEditData={handleEditData}
+          />
           <VersionHistory />
         </>
-)
-    }
+      )}
     </>
   );
 };
