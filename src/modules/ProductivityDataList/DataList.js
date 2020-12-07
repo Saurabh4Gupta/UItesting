@@ -26,10 +26,7 @@ const DataList = (props) => {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [completeData, setCompleteData] = useState(getCompletedData);
-  const [isDeleteModal, setIsDeleteModal] = useState({
-    value: false,
-    id: undefined,
-  });
+  const [deleteModalData, setIsDeleteModal] = useState({ isDeleteModal:false, requestId:undefined });
   const [tabIndex, setTabIndex] = useState(0);
   const { completedData } = completeData;
   const { data } = dataList;
@@ -124,10 +121,7 @@ const DataList = (props) => {
     };
     setDataList(filterOngoinglist);
     updateOngoingList(filterOngoinglist);
-    setIsDeleteModal({ value: false });
-  };
-  const handleDeletItem = () => {
-    deleteRequest(isDeleteModal.id);
+    setIsDeleteModal({ isDeleteModal:false, requestId:undefined });
   };
 
   const handleModal = (value) => {
@@ -136,6 +130,9 @@ const DataList = (props) => {
   const handleTabIndex = (index) => {
     setTabIndex(index);
   };
+  const handleDeleteModel = (value) => {
+        setIsDeleteModal({ isDeleteModal:true, requestId:value });
+     };
   return (
     <>
       <CreateData
@@ -166,13 +163,14 @@ const DataList = (props) => {
                   <TableList
                     data={data}
                     cmsData={cmsData}
-                    isDeleteModal={isDeleteModal}
+                    deleteModalData={deleteModalData}
                     setIsDeleteModal={setIsDeleteModal}
                     handleToggleData={handleToggleData}
                     actionName={cmsData.moveToComplete}
-                    handleDeletItem={handleDeletItem}
+                    deleteRequest={deleteRequest}
                     clientCode={clientCode}
                     search={searchChangeHandler}
+                    handleDeleteModel={handleDeleteModel}
                   />
                 ) : (
                   <EmptyTable
@@ -186,8 +184,6 @@ const DataList = (props) => {
                   <TableList
                     data={completedData}
                     cmsData={cmsData}
-                    isDeleteModal={isDeleteModal}
-                    setIsDeleteModal={setIsDeleteModal}
                     actionName={cmsData.moveToOnGoing}
                     handleToggleData={handleToggleData}
                     showStatus={false}
