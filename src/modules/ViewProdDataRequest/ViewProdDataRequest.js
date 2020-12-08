@@ -67,6 +67,7 @@ const ViewProdDataRequest = (props) => {
             localMarket={prodRequest.localMarket.label}
             filterDataBy={filterDataBy}
             pageTitle={prodRequest.name}
+            pageMetadata={prodRequest.clientMarket}
             handleUploadModal={handleUploadModal}
             isCompleted={prodRequest.isCompleted}
           >
