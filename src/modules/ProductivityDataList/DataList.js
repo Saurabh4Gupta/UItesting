@@ -92,12 +92,15 @@ const DataList = (props) => {
         totalCount: OngoingRequest.length,
         data: OngoingRequest,
       };
+      const originaltempData = [...originalCompletedData, ...filterCompleteList]
       setDataList(filterOngoinglist);
       updateOngoingList(id, false);
       setCompleteData(finalCompletedList);
-      setOriginalCompleteData(finalCompletedList);
+      setOriginalCompleteData({ completedCount: originaltempData.length,
+        completedData: originaltempData });
     } else {
-      const filterOngoingList = originalCompletedData.filter((item) => {
+      let filteredArray = [];
+      const filterOngoingList = completedData.filter((item) => {
         if (item.id === id) {
           item.isCompleted = false;
           return true;
@@ -106,7 +109,7 @@ const DataList = (props) => {
       });
       const tempData = [...data, ...filterOngoingList];
       const finalOngoingList = { totalCount: tempData.length, data: tempData };
-      const completedRequest = originalCompletedData.filter((item) => item.id !== id);
+      const completedRequest = completedData.filter((item) => item.id !== id);
       const filterCompletedlist = {
         completedCount: completedRequest.length,
         completedData: completedRequest,
@@ -114,7 +117,9 @@ const DataList = (props) => {
       setDataList(finalOngoingList);
       updateOngoingList(id, true);
       setCompleteData(filterCompletedlist);
-      setOriginalCompleteData(filterCompletedlist);
+      filteredArray = originalCompleteData.completedData.filter((value) => value.id !== id);
+      setOriginalCompleteData({ completedCount: originalCompleteData.completedCount,
+        completedData: filteredArray });
     }
   };
 
