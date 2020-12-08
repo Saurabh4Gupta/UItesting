@@ -59,7 +59,7 @@ const TableList = (props) => {
         filters={[
           {
             key: 'totalTenure',
-            label: 'Status',
+            label: 'Show',
             type: 'choice',
             defaultText: 'All',
             options: [
