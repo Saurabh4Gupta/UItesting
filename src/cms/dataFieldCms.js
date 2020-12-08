@@ -67,4 +67,11 @@ export const dataFieldCms = {
   close: 'Close',
   reportingYearLabel: 'Reporting year',
   reportingYearHint: 'The reporting year this data request is for',
+  toastRequestCreated: 'Data request created',
+  toastRequestEdited: 'Data request edited',
+  toastRequestDeleted: 'Data request deleted',
+  toastFileUploaded: 'File uploaded',
+  toastMovedToOngoing: 'Data request moved to Ongoing',
+  toastMovedToComplete: 'Data request moved to Complete',
+
 }
