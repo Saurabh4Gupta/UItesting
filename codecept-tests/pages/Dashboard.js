@@ -10,6 +10,7 @@ var id;
 module.exports = {
 
     fields: {
+
         menuButton: '//button[starts-with(@class,"styled__AppSwitcherButton")]',
         languageButton: '//select[@name="language"]',
         logoutButton: '//button[starts-with(@class,"ChromeHeader__ChromeHeaderButton")]/svg',
@@ -17,36 +18,13 @@ module.exports = {
 
     login() {
         I.amOnPage('');
-        I.see('Sign In')
-        oktaPage.login('CommercialOwner@dentsuaegis.com', ibrp_pass);
+        I.wait(5);
+        I.see('Sign In');
+        oktaPage.login('global.admin1', 'Sh@kazu!u1');
     },
 
     verifyLandingPage() {
-      I.waitForText('Welcome to Integrated BRP');
-     },
+      I.waitForText('Welcome to the Media Ecosystem');
+     }
 
-  verifyMenu() {
-    I.waitForElement(this.fields.menuButton)
-  },
-
-  verifyLanguageSwitcher() {
-    I.waitForElement(this.fields.languageButton)
-  },
-
-  verifyLogoutButton() {
-    I.waitForElement(this.fields.logoutButton)
-  },
-
-  clickOnApp(app){
-    I.click("//ul/li[contains(span, '"+app+"')]")
-  },
-
-  verifyAppHomePage(app) {
-    I.waitForText(app);
-   },
-
-  goToHomePage(){
-    I.amOnPage('');
-    this.verifyLandingPage();
-  }
 };

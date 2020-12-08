@@ -21,7 +21,7 @@ const WebDriver = {
     browser: 'chrome',
     "desiredCapabilities": {
         "chromeOptions": {
-             "args": ["--headless", "--disable-gpu", "--window-size=1325x744", "--no-sandbox", "--disable-dev-shm-usage"],
+           //  "args": ["--headless", "--disable-gpu", "--window-size=1325x744", "--no-sandbox", "--disable-dev-shm-usage"],
             "useAutomationExtension": true,
             "prefs": {
                 'download.default_directory': downloadDir,

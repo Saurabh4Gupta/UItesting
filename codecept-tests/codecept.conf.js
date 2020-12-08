@@ -1,48 +1,36 @@
-const HOST_URL = process.env.HOST_URL || 'http://gdp-client01-int-dentsu-platform-client.az.gdpintegration.gdpdentsu.net';
+const HOST_URL = process.env.HOST_URL || 'https://gdp-client01-brp-g1ga-media-ecosystem.az.brp.gdpdentsu.net/';
+
+const {include, gherkin} = require('./config/BddConfig');
+const {WebDriver, REST, GraphQL} = require('./config/WebHelpersConfig');
+const browser = ["chrome", "chrome", "chrome", "chrome"];
+// const hooks = require('./config/Hooks');
 
 exports.config = {
   output: './output',
-  helpers: {
 
-    Puppeteer: {
-      url: HOST_URL,
-      restart: false,
-      waitForNavigation: "networkidle0",
-      waitForTimeout: 20000,
-      show: false,
-      windowSize: '640x480',
-      "chrome":{
-        "args": ["--no-sandbox"]
-      }
-    }
+  multiple: {
+    default: {grep: '@Sm3', browsers: browser[0]},
+    group1: {grep: '@Sm1', browsers: browser[1]},
+    group2: {grep: '@Sm2', browsers: browser[2]},
+    group3: {grep: '@Sm4', browsers: browser[3]},
   },
-  include: {
-    Admin:'./pages/Dashboard.js',
-    Okta:'./pages/Okta.js',
+
+  helpers: {
+    WebDriver, REST, GraphQL,
+    customHelper: {require: './factories/MyHelper.js'}
   },
-  mocha: {
-    "reporterOptions": {
-      "reportDir": "codecept-tests/reports",
-      "inlineAssets": true,
-      "reportPageTitle": "iBRP Test Reports",
-      "reportTitle": "iBRP Test Reports",
-      "reportFilename": "index"
-    }
-  },
-  bootstrap: null,
-  teardown: null,
-  hooks: [],
-  gherkin: {
-    features: './features/*.feature',
-    steps: ['./step_definitions/steps.js']
-  },
+
+  // bootstrapAll: hooks.setBootstrap,
+  // teardownAll: hooks.setTeardown,
+  // bootstrap: hooks.setBootstrap,
+  // teardown: hooks.setTeardown,
+
+  include,
+  gherkin,
   plugins: {
-    screenshotOnFail: {
-      enabled: true
-    },
-    allure: {
-      enabled: true
-    }
+    screenshotOnFail: {enabled: true},
+    wdio: {enabled: true, services: ['selenium-standalone']},
+    allure: {enabled: true},
   },
-  name: 'dentsu-bdd-js'
-}
+  name: 'Codeceptjs-Skeleton'
+};

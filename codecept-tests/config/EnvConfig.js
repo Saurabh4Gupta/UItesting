@@ -19,40 +19,40 @@ const envConfig = {
 
   dev: {
     web: {
-      HOST_URL: 'https://platform.wal.int.az.eu.mediaecosystem.io/',
+      HOST_URL: 'https://gdp-client01-brp-g1ga-media-ecosystem.az.brp.gdpdentsu.net/productivity-manager',
     },
     server: {
-      serverURL: 'http://mappingui01-dev-dan-mapping-svr.az.mapping.gdpdentsu.net/graphql',
+      serverURL: 'https://gdp-client01-brp-g1ga-media-ecosystem.az.brp.gdpdentsu.net/productivity-manager',
     },
   },
 
   test: {
     web: {
-      HOST_URL: 'https://platform.wal.int.az.eu.mediaecosystem.io/',
+      HOST_URL: 'https://gdp-client01-brp-g1ga-media-ecosystem.az.brp.gdpdentsu.net/productivity-manager',
     },
     server: {
-      serverURL: 'http://mappingui01-test-dan-mapping-svr.az.mapping.gdpdentsu.net/graphql',
+      serverURL: 'https://gdp-client01-brp-g1ga-media-ecosystem.az.brp.gdpdentsu.net/productivity-manager',
     },
   },
 
   'int-g1ds': {
     web: {
-      HOST_URL: 'https://platform.wal.int.az.eu.mediaecosystem.io/',
+      HOST_URL: 'https://gdp-client01-brp-g1ga-media-ecosystem.az.brp.gdpdentsu.net/productivity-manager',
     },
     server: {
-      serverURL: 'https://shared01-int-g1ds-kong-proxy.az.eu-az-int-wal.gdpdentsu.net/mapping/graphql',
+      serverURL: 'https://gdp-client01-brp-g1ga-media-ecosystem.az.brp.gdpdentsu.net/productivity-manager',
     },
-    appName: 'Client Portal',
+    appName: 'Productivity Manager',
     market: 'United States of America (the)',
     client: 'Abbott',
   },
 
   'stg-g1ds': {
     web: {
-      HOST_URL: 'https://platform.wal.stg.az.eu.mediaecosystem.io/',
+      HOST_URL: 'https://gdp-client01-brp-g1ga-media-ecosystem.az.brp.gdpdentsu.net/productivity-manager',
     },
     server: {
-      serverURL: 'https://shared01-stg-g1ds-kong-proxy.az.eu-az-stg-wal.gdpdentsu.net/mapping/graphql',
+      serverURL: 'https://gdp-client01-brp-g1ga-media-ecosystem.az.brp.gdpdentsu.net/productivity-manager',
     },
     appName: 'Client Portal',
     market: 'France',
@@ -61,10 +61,10 @@ const envConfig = {
 
   'hint-g1ds': {
     web: {
-      HOST_URL: 'https://gdp-client01-hint-g1ga-media-ecosystem.az.hint.gdpdentsu.net/',
+      HOST_URL: 'https://gdp-client01-brp-g1ga-media-ecosystem.az.brp.gdpdentsu.net/productivity-manager',
     },
     server: {
-      serverURL: 'https://shared01-int-g1ds-kong-proxy.az.eu-az-int-wal.gdpdentsu.net/mapping/graphql',
+      serverURL: 'https://gdp-client01-brp-g1ga-media-ecosystem.az.brp.gdpdentsu.net/productivity-manager',
     },
     appName: 'Client Portal',
     market: 'France',
