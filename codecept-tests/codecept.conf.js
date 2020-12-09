@@ -1,4 +1,4 @@
-const HOST_URL = process.env.HOST_URL || 'http://gdp-client01-int-dentsu-platform-client.az.gdpintegration.gdpdentsu.net';
+const HOST_URL = process.env.HOST_URL || 'https://gdp-client01-brp-g1ga-media-ecosystem.az.brp.gdpdentsu.net/productivity-manager';
 
 exports.config = {
   output: './output',
@@ -17,8 +17,8 @@ exports.config = {
     }
   },
   include: {
-    Admin:'./pages/Dashboard.js',
-    Okta:'./pages/Okta.js',
+    Admin:'./pages/loginPage.js',
+    Okta:'./pages/Login.js',
   },
   mocha: {
     "reporterOptions": {
@@ -34,7 +34,7 @@ exports.config = {
   hooks: [],
   gherkin: {
     features: './features/*.feature',
-    steps: ['./step_definitions/steps.js']
+    steps: ['./step_definitions/loginSteps.js']
   },
   plugins: {
     screenshotOnFail: {

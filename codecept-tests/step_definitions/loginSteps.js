@@ -1,9 +1,11 @@
-const Dash = require('../pages/Dashboard');
+const Dash = require('../pages/loginPage');
+const Okta= require('../pages/Login');
 
 const I = actor();
 
-Given('I am admin user and login into ibrp dashboard', () => {
+Given('I am admin user and login into PM dashboard', () => {
   Dash.login();
+  Okta.login('global.admin1', 'Sh@kazu!u1');
 });
 
 Then('the dashboard the visible', () => {
@@ -11,6 +13,7 @@ Then('the dashboard the visible', () => {
   Dash.verifyLandingPage();
 });
 
+/*
 Then('the menu button is present', () => {
   Dash.verifyMenu()
 });
@@ -31,3 +34,4 @@ When('I click on {string} app from menu pane', (app) => {
 Then('{string} home page is displayed', (app) => {
   Dash.verifyAppHomePage(app);
 });
+*/
