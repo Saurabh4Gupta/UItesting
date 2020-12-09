@@ -66,6 +66,7 @@ const DataField = (props) => {
         filterDataBy={filterDataBy}
         handleMarket={handleMarket}
         pageTitle=""
+        pageMetadata="Client Overview"
         isCompleted=""
       >
         <Box mb="200px">

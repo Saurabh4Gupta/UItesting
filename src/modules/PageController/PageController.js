@@ -18,7 +18,7 @@ const PageController = (props) => {
     handleUploadModal,
     pageTitle,
     isCompleted,
-    localMarket,
+    pageMetadata,
   } = props;
   const { isViewProduct } = param;
   const { title, avatar } = clientList.find(
@@ -32,7 +32,7 @@ const PageController = (props) => {
   return (
     <>
       <Page
-        metadata={isViewProduct ? `${title} ${localMarket}` : 'Client Overview'}
+        metadata={pageMetadata}
         title={!isViewProduct ? title : pageTitle}
         thumbnail={`/${avatar}`}
 
@@ -81,7 +81,7 @@ PageController.propTypes = {
   handleUploadModal: PropTypes.func,
   pageTitle: PropTypes.string,
   isCompleted: PropTypes.bool,
-  localMarket: PropTypes.string,
+  pageMetadata: PropTypes.string,
 };
 
 PageController.defaultProps = {
@@ -96,6 +96,6 @@ PageController.defaultProps = {
   handleUploadModal: () => { },
   pageTitle: '',
   isCompleted: false,
-  localMarket: '',
+  pageMetadata: '',
 };
 export default PageController;
