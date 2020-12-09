@@ -3,11 +3,14 @@
 import React, { useState, useEffect } from 'react';
 import { Box, Tabs } from '@dentsu-ui/components';
 import PropTypes from 'prop-types';
+import Toast from '@dentsu-ui/components/dist/cjs/components/Toast';
 import EmptyTable from './EmptyTable';
 import TableList from './TableList';
 import CreateData from '../CreateData/CreateData';
 import { getCompletedData } from '../Mock/mockData';
 import Loader from '../../components/loading';
+import { dataFieldCms as PageContent } from '../../cms';
+
 
 const DataList = (props) => {
   const {
@@ -25,53 +28,76 @@ const DataList = (props) => {
   } = props;
 
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [completeData, setCompleteData] = useState({ completedCount: 0,
-    completedData: [] });
-  const [originalCompleteData, setOriginalCompleteData] = useState(getCompletedData);
-  const [deleteModalData, setIsDeleteModal] = useState({ isDeleteModal:false, requestId:undefined });
+  const [completeData, setCompleteData] = useState({
+    completedCount: 0,
+    completedData: [],
+  });
+  const [originalCompleteData, setOriginalCompleteData] = useState(
+    getCompletedData,
+  );
+  const [deleteModalData, setIsDeleteModal] = useState({
+    isDeleteModal: false,
+    requestId: undefined,
+  });
   const [tabIndex, setTabIndex] = useState(0);
   const { completedData } = completeData;
   const { data } = dataList;
-  const originalCompletedData  = originalCompleteData.completedData;
+  const originalCompletedData = originalCompleteData.completedData;
+
+  const toast = Toast();
 
   const searchChangeHandler = (input) => {
     if (tabIndex === 0) {
-    const originalList = originalOngingList.data;
-    const updatedList = originalList.filter(
-      (d) => d.clientMarket.toLowerCase().includes(input.toLowerCase()) || d.name.toLowerCase().includes(input.toLowerCase()),
-    );
+      const originalList = originalOngingList.data;
+      const updatedList = originalList.filter(
+        (d) => d.clientMarket.toLowerCase().includes(input.toLowerCase())
+          || d.name.toLowerCase().includes(input.toLowerCase()),
+      );
 
-    const copyList = { ...dataList }
+      const copyList = { ...dataList };
 
-    setDataList({ data: updatedList, totalCount: copyList.totalCount });
+      setDataList({ data: updatedList, totalCount: copyList.totalCount });
     } else {
       const originalList = originalCompleteData.completedData;
       const updatedList = originalList.filter(
-        (d) => d.clientMarket.toLowerCase().includes(input.toLowerCase()) || d.name.toLowerCase().includes(input.toLowerCase()),
+        (d) => d.clientMarket.toLowerCase().includes(input.toLowerCase())
+          || d.name.toLowerCase().includes(input.toLowerCase()),
       );
-      const copyList = { ...completeData }
-      setCompleteData({ completedData: updatedList, completedCount: copyList.completedCount });
+      const copyList = { ...completeData };
+      setCompleteData({
+        completedData: updatedList,
+        completedCount: copyList.completedCount,
+      });
     }
   };
 
-
   const addRequest = (values) => {
-    values.createdAt = new Date();
-    values.isActive = true;
-    values.isCompleted = false;
-    values.year = '2020';
-    values.quarter = 'Q3';
-    values.isDeleted = false;
-    values.id = dataList.data.length + completeData.completedData.length + 1;
-    values.client = 'Microsoft';
-    values.updatedAt = '30/11/20 at 14:32';
-    const tempData = [...dataList.data, values];
-    const finalOngoingList = {
-      totalCount: tempData.length,
-      data: tempData,
-    };
-    // updateOngoingList(finalOngoingList);
-    setDataList(finalOngoingList);
+    try {
+      values.createdAt = new Date();
+      values.isActive = true;
+      values.isCompleted = false;
+      values.year = '2020';
+      values.quarter = 'Q3';
+      values.isDeleted = false;
+      values.id = dataList.data.length + completeData.completedData.length + 1;
+      values.client = 'Microsoft';
+      values.updatedAt = '30/11/20 at 14:32';
+      const tempData = [...dataList.data, values];
+      const finalOngoingList = {
+        totalCount: tempData.length,
+        data: tempData,
+      };
+
+      setDataList(finalOngoingList);
+
+      return toast({
+        title: '',
+        content: PageContent.toastRequestCreated,
+        status: 'success',
+      });
+    } catch (error) {
+      return null;
+    }
   };
   const handleToggleData = (id) => {
     if (tabIndex === 0) {
@@ -92,13 +118,24 @@ const DataList = (props) => {
         totalCount: OngoingRequest.length,
         data: OngoingRequest,
       };
-      const originaltempData = [...originalCompletedData, ...filterCompleteList]
+      const originaltempData = [
+        ...originalCompletedData,
+        ...filterCompleteList,
+      ];
       setDataList(filterOngoinglist);
       updateOngoingList(id, false);
       setCompleteData(finalCompletedList);
-      setOriginalCompleteData({ completedCount: originaltempData.length,
-        completedData: originaltempData });
-    } else {
+      setOriginalCompleteData({
+        completedCount: originaltempData.length,
+        completedData: originaltempData,
+      });
+
+      return toast({
+        title: '',
+        content: PageContent.toastMovedToComplete,
+        status: 'success',
+      });
+    }
       let filteredArray = [];
       const filterOngoingList = completedData.filter((item) => {
         if (item.id === id) {
@@ -117,22 +154,39 @@ const DataList = (props) => {
       setDataList(finalOngoingList);
       updateOngoingList(id, true);
       setCompleteData(filterCompletedlist);
-      filteredArray = originalCompleteData.completedData.filter((value) => value.id !== id);
-      setOriginalCompleteData({ completedCount: originalCompleteData.completedCount,
-        completedData: filteredArray });
-    }
+      filteredArray = originalCompleteData.completedData.filter(
+        (value) => value.id !== id,
+      );
+      setOriginalCompleteData({
+        completedCount: originalCompleteData.completedCount,
+        completedData: filteredArray,
+      });
+
+      return toast({
+        title: '',
+        content: PageContent.toastMovedToOngoing,
+        status: 'success',
+      });
   };
 
   const deleteRequest = (id) => {
-    const OngoingRequest = data.filter((item) => item.id !== id);
-    const filterOngoinglist = {
-      totalCount: OngoingRequest.length,
-      data: OngoingRequest,
-    };
-    updateOngoingList(id, false);
-    setDataList(filterOngoinglist);
-    // updateOngoingList(filterOngoinglist);
-    setIsDeleteModal({ isDeleteModal:false, requestId:undefined });
+    try {
+      const OngoingRequest = data.filter((item) => item.id !== id);
+      const filterOngoinglist = {
+        totalCount: OngoingRequest.length,
+        data: OngoingRequest,
+      };
+      updateOngoingList(id, false);
+      setDataList(filterOngoinglist);
+      setIsDeleteModal({ isDeleteModal: false, requestId: undefined });
+      return toast({
+        title: '',
+        content: PageContent.toastRequestDeleted,
+        status: 'success',
+      });
+    } catch (error) {
+      return null;
+    }
   };
 
   const handleModal = (value) => {
@@ -142,8 +196,8 @@ const DataList = (props) => {
     setTabIndex(index);
   };
   const handleDeleteModel = (value) => {
-        setIsDeleteModal({ isDeleteModal:true, requestId:value });
-     };
+    setIsDeleteModal({ isDeleteModal: true, requestId: value });
+  };
   return (
     <>
       <CreateData
@@ -170,7 +224,7 @@ const DataList = (props) => {
           ) : (
             <Tabs.Panels>
               <Tabs.Panel>
-                {originalOngingList.data.length > 0  ? (
+                {originalOngingList.data.length > 0 ? (
                   <TableList
                     data={data}
                     cmsData={cmsData}
