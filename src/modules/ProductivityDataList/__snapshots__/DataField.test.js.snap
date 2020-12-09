@@ -1,14 +1,356 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<EmptyState /> should match snapshot 1`] = `
-<DataField
-  match={
-    Object {
-      "params": Object {
-        "clientCode": "MC",
-      },
-      "path": "./url",
+<Fragment>
+  <PageController
+    filterDataBy={
+      Object {
+        "market": Object {
+          "label": "All Markets",
+          "value": "",
+        },
+      }
     }
-  }
-/>
+    handleMarket={[Function]}
+    handleUploadModal={[Function]}
+    isCompleted=""
+    localMarket=""
+    pageTitle=""
+    param={Array []}
+  >
+    <Box
+      mb="200px"
+    >
+      <UploadFile
+        cmsData={
+          Object {
+            "actual": "actuals",
+            "actualCapitalized": "Actual",
+            "actualDataHint": "Number of months of actual productivity data",
+            "actualDataLabel": "Actual Data",
+            "assignToHint": "Only the person or team you assign this to will have access. Once you click 'Create' ,
+  they will be sent email notifications asking them to fill in the data request.",
+            "assignToLabel": "Assign To",
+            "assignedTo": "Assigned to",
+            "briefHint": "Tell us in detail what this data request is for, max 4000 characters",
+            "briefLabel": "Briefing",
+            "cancel": "Cancel",
+            "close": "Close",
+            "complete": "Complete",
+            "completeLabel": "Complete",
+            "create": "Create",
+            "createNewDataRequest": "Create new data request",
+            "datePlaceHolder": "Date",
+            "delete": "Delete",
+            "dueBy": "Due by",
+            "dueDateHint": "Enter the date that you need this data request by",
+            "dueDateLabel": "Due Date",
+            "edit": "Edit",
+            "editDataRequest": "Edit data request",
+            "editRequest": "Edit request",
+            "emptyCompletedProductivityDatarequestCaption": "No Productivity data requests have been moved to this section yet.",
+            "emptyLabel": "Create new data request",
+            "emptyProductivityDatarequestCaption": "There are currently no active Productivity data requests",
+            "forecast": "forecast",
+            "forecastCapitalized": "Forecast",
+            "forecastDataHint": "Number of months of forecasted productivity data",
+            "forecastDataLabel": "Forecast Data",
+            "labelFileTypeNotAllowed": "File must be of type .xls, .xlsx, .csv, .xlsb, .xlsm, .xlt, .xltm, .xltx",
+            "lastUpdate": "Last Update",
+            "localMarketHint": "Choose the market you wish to create this data request for",
+            "localMarketLabel": "Local Market",
+            "moveToComplete": "Move to Complete",
+            "moveToOnGoing": "Move to Ongoing",
+            "nameHint": "Make sure it's clear to help others identify it.Max 255 characters",
+            "nameLabel": "Data request name",
+            "ongoing": "Ongoing",
+            "ongoingLabel": "Ongoing",
+            "overdue": "Overdue",
+            "productivityDataRequested": "Productivity data requested",
+            "productivityDatarequestCaption": " The ongoing and complete productivity data requests created for this client",
+            "productivityDatarequestHeading": "Productivity data requests",
+            "productivityRequest": "Productivity Request",
+            "reportingYear": "Reporting year",
+            "reportingYearHint": "The reporting year this data request is for",
+            "reportingYearLabel": "Reporting year",
+            "save": "Save",
+            "selectPlaceHolder": "Please select",
+            "showMore": "Show more",
+            "templateFileHint": "Only .xls, .xlsx, .csv, .xlsb, .xlsm, .xlt, .xltm, .xltx files in 20mb or less",
+            "templateFileLabel": "Add tracker template file",
+            "trackerTemplate": "Tracker template",
+            "upload": "Upload",
+            "uploadButtonText": "Upload new file",
+            "uploadFileLabel": "To upload a new file,drag and drop you file below or browse using the link",
+            "uploadFileLargeMessage": "File must be less than 20MB",
+            "viewClientsCaption": "Choose the client you wish to view",
+            "viewClientsHeading": "My clients",
+            "viewDetails": "View Details",
+          }
+        }
+        modalOpen={false}
+        setModalOpen={[Function]}
+      />
+      <DataList
+        clientCode="MC"
+        cmsData={
+          Object {
+            "actual": "actuals",
+            "actualCapitalized": "Actual",
+            "actualDataHint": "Number of months of actual productivity data",
+            "actualDataLabel": "Actual Data",
+            "assignToHint": "Only the person or team you assign this to will have access. Once you click 'Create' ,
+  they will be sent email notifications asking them to fill in the data request.",
+            "assignToLabel": "Assign To",
+            "assignedTo": "Assigned to",
+            "briefHint": "Tell us in detail what this data request is for, max 4000 characters",
+            "briefLabel": "Briefing",
+            "cancel": "Cancel",
+            "close": "Close",
+            "complete": "Complete",
+            "completeLabel": "Complete",
+            "create": "Create",
+            "createNewDataRequest": "Create new data request",
+            "datePlaceHolder": "Date",
+            "delete": "Delete",
+            "dueBy": "Due by",
+            "dueDateHint": "Enter the date that you need this data request by",
+            "dueDateLabel": "Due Date",
+            "edit": "Edit",
+            "editDataRequest": "Edit data request",
+            "editRequest": "Edit request",
+            "emptyCompletedProductivityDatarequestCaption": "No Productivity data requests have been moved to this section yet.",
+            "emptyLabel": "Create new data request",
+            "emptyProductivityDatarequestCaption": "There are currently no active Productivity data requests",
+            "forecast": "forecast",
+            "forecastCapitalized": "Forecast",
+            "forecastDataHint": "Number of months of forecasted productivity data",
+            "forecastDataLabel": "Forecast Data",
+            "labelFileTypeNotAllowed": "File must be of type .xls, .xlsx, .csv, .xlsb, .xlsm, .xlt, .xltm, .xltx",
+            "lastUpdate": "Last Update",
+            "localMarketHint": "Choose the market you wish to create this data request for",
+            "localMarketLabel": "Local Market",
+            "moveToComplete": "Move to Complete",
+            "moveToOnGoing": "Move to Ongoing",
+            "nameHint": "Make sure it's clear to help others identify it.Max 255 characters",
+            "nameLabel": "Data request name",
+            "ongoing": "Ongoing",
+            "ongoingLabel": "Ongoing",
+            "overdue": "Overdue",
+            "productivityDataRequested": "Productivity data requested",
+            "productivityDatarequestCaption": " The ongoing and complete productivity data requests created for this client",
+            "productivityDatarequestHeading": "Productivity data requests",
+            "productivityRequest": "Productivity Request",
+            "reportingYear": "Reporting year",
+            "reportingYearHint": "The reporting year this data request is for",
+            "reportingYearLabel": "Reporting year",
+            "save": "Save",
+            "selectPlaceHolder": "Please select",
+            "showMore": "Show more",
+            "templateFileHint": "Only .xls, .xlsx, .csv, .xlsb, .xlsm, .xlt, .xltm, .xltx files in 20mb or less",
+            "templateFileLabel": "Add tracker template file",
+            "trackerTemplate": "Tracker template",
+            "upload": "Upload",
+            "uploadButtonText": "Upload new file",
+            "uploadFileLabel": "To upload a new file,drag and drop you file below or browse using the link",
+            "uploadFileLargeMessage": "File must be less than 20MB",
+            "viewClientsCaption": "Choose the client you wish to view",
+            "viewClientsHeading": "My clients",
+            "viewDetails": "View Details",
+          }
+        }
+        dataList={
+          Object {
+            "data": Array [],
+            "totalCount": 0,
+          }
+        }
+        loading={true}
+        market={
+          Object {
+            "label": "All Markets",
+            "value": "",
+          }
+        }
+        originalOngingList={
+          Object {
+            "data": Array [
+              Object {
+                "actualData": Object {
+                  "label": "4 months",
+                  "value": 4,
+                },
+                "assignTo": "Ryan Killick",
+                "briefing": "Lorem Ipsum is simply dummy text of the printing and typesetting
+      industry. Lorem Ipsum has been the industrys standard dummy text ever
+      since the 1500s, when an unknown printer took a galley of type and
+      scrambled it to make a type specimen book. It has survived not only
+      five centuries, but also the leap into electronic typesetting,
+      remaining essentially unchanged. It was popularised in the 1960s with
+      the release of Letraset sheets containing Lorem Ipsum passages, and
+      more recently with desktop publishing software like Aldus PageMaker
+      including versions of Lorem Ipsum. Lorem Ipsum is simply dummy text of
+      the printing industry.Lorem Ipsum is simply dummy text of the printing
+      and typesetting industry. Lorem Ipsum has been the industrys standard
+      dummy text ever since the 1500s and it still is.
+      Lorem Ipsum is simply dummy text of the printing and typesetting
+      industry. Lorem Ipsum has been the industrys standard dummy text ever
+      since the 1500s, when an unknown printer took a galley of type and
+      scrambled it to make a type specimen book. It has survived not only
+      five centuries, but also the leap into electronic typesetting,
+      remaining essentially unchanged. It was popularised in the 1960s with
+      the release of Letraset sheets containing Lorem Ipsum passages, and
+      more recently with desktop publishing software like Aldus PageMaker
+      including versions of Lorem Ipsum. Lorem Ipsum is simply dummy text of
+      the printing industry.Lorem Ipsum is simply dummy text of the printing
+      and typesetting industry. Lorem Ipsum has been the industrys standard
+      dummy text ever since the 1500s and it still is.
+      Lorem Ipsum is simply dummy text of the printing and typesetting
+      industry. Lorem Ipsum has been the industrys standard dummy text ever
+      since the 1500s, when an unknown printer took a galley of type and
+      scrambled it to make a type specimen book. It has survived not only
+      five centuries, but also the leap into electronic typesetting,
+      remaining essentially unchanged. It was popularised in the 1960s with
+      the release of Letraset sheets containing Lorem Ipsum passages, and
+      more recently with desktop publishing software like Aldus PageMaker
+      including versions of Lorem Ipsum. Lorem Ipsum is simply dummy text of
+      the printing industry.Lorem Ipsum is simply dummy text of the printing
+      and typesetting industry. Lorem Ipsum has been the industrys standard
+      dummy text ever since the 1500s and it still is.",
+                "client": "Microsoft",
+                "clientMarket": "Microsoft United Kingdom",
+                "createdAt": "2020-08-14",
+                "dueDate": "13/07/2020",
+                "forecastData": Object {
+                  "label": "8 months",
+                  "value": 8,
+                },
+                "id": 1,
+                "isActive": true,
+                "isCompleted": false,
+                "isDeleted": false,
+                "localMarket": Object {
+                  "label": "United Kingdom",
+                  "value": "UK",
+                },
+                "name": "Productivity Q2 2020",
+                "quarter": "Q2",
+                "reportingYear": "April 2020 - March 2021",
+                "status": "Overdue",
+                "totalTenure": "2020 Q2",
+                "updatedAt": "29/10/20 at 14:32",
+                "year": "2020",
+              },
+              Object {
+                "actualData": Object {
+                  "label": "7 months",
+                  "value": 7,
+                },
+                "assignTo": "Ryan Killick",
+                "briefing": "Lorem Ipsum is simply dummy text of the printing and typesetting
+      industry. Lorem Ipsum has been the industrys standard dummy text ever
+      since the 1500s, when an unknown printer took a galley of type and
+      scrambled it to make a type specimen book. It has survived not only
+      five centuries, but also the leap into electronic typesetting,
+      remaining essentially unchanged. It was popularised in the 1960s with
+      the release of Letraset sheets containing Lorem Ipsum passages, and
+      more recently with desktop publishing software like Aldus PageMaker
+      including versions of Lorem Ipsum.",
+                "client": "Microsoft",
+                "clientMarket": "Microsoft USA",
+                "createdAt": "2020-08-14",
+                "dueDate": "13/07/2020",
+                "forecastData": Object {
+                  "label": "5 months",
+                  "value": 5,
+                },
+                "id": 2,
+                "isActive": true,
+                "isCompleted": false,
+                "isDeleted": false,
+                "localMarket": Object {
+                  "label": "USA",
+                  "value": "USA",
+                },
+                "name": "Productivity Q3 2020",
+                "quarter": "Q3",
+                "reportingYear": "April 2020 - March 2021",
+                "status": "",
+                "totalTenure": "2020 Q3",
+                "updatedAt": "30/10/20 at 14:32",
+                "year": "2020",
+              },
+              Object {
+                "actualData": Object {
+                  "label": "2 months",
+                  "value": 2,
+                },
+                "assignTo": "Ryan Killick",
+                "briefing": "Need Data for the Q2 2020",
+                "client": "Microsoft",
+                "clientMarket": "Microsoft United Kingdom",
+                "createdAt": "2020-08-14",
+                "dueDate": "23/07/2020",
+                "forecastData": Object {
+                  "label": "10 months",
+                  "value": 10,
+                },
+                "id": 3,
+                "isActive": true,
+                "isCompleted": false,
+                "isDeleted": false,
+                "localMarket": Object {
+                  "label": "United Kingdom",
+                  "value": "UK",
+                },
+                "name": "Productivity Q1 2020",
+                "quarter": "Q1",
+                "reportingYear": "April 2020 - March 2021",
+                "status": "Overdue",
+                "totalTenure": "2020 Q1",
+                "updatedAt": "29/10/20 at 14:32",
+                "year": "2020",
+              },
+              Object {
+                "actualData": Object {
+                  "label": "3 months",
+                  "value": 3,
+                },
+                "assignTo": "Ryan Killick",
+                "briefing": "Need Data for the Q2 2020",
+                "client": "Microsoft",
+                "clientMarket": "Microsoft United Kingdom",
+                "createdAt": "2020-08-14",
+                "dueDate": "23/12/2020",
+                "forecastData": Object {
+                  "label": "9 months",
+                  "value": 9,
+                },
+                "id": 4,
+                "isActive": true,
+                "isCompleted": false,
+                "isDeleted": false,
+                "localMarket": Object {
+                  "label": "United Kingdom",
+                  "value": "UK",
+                },
+                "name": "Productivity Q1 2020",
+                "quarter": "Q1",
+                "reportingYear": "April 2020 - March 2021",
+                "status": "Overdue",
+                "totalTenure": "2020 Q1",
+                "updatedAt": "29/10/20 at 14:32",
+                "year": "2020",
+              },
+            ],
+            "totalCount": 4,
+          }
+        }
+        setDataList={[Function]}
+        setOriginalOngoingList={[Function]}
+        updateOngoingList={[Function]}
+      />
+    </Box>
+  </PageController>
+</Fragment>
 `;

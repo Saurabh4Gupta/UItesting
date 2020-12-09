@@ -9,6 +9,7 @@ exports[`<EmptyState /> should match snapshot 1`] = `
     isModalOpen={false}
     market={
       Object {
+        "label": "All Market",
         "value": "",
       }
     }
@@ -22,7 +23,119 @@ exports[`<EmptyState /> should match snapshot 1`] = `
     >
       <ForwardRef>
         <ForwardRef
+          count={3}
+        />
+        <ForwardRef
           count={0}
+        />
+      </ForwardRef>
+      <ForwardRef>
+        <ForwardRef>
+          <TableList
+            clientCode="MC"
+            cmsData="data"
+            data={
+              Array [
+                "testData1",
+                "testData2",
+                "testData3",
+              ]
+            }
+            deleteModalData={
+              Object {
+                "isDeleteModal": false,
+                "requestId": undefined,
+              }
+            }
+            deleteRequest={[Function]}
+            handleDeleteModel={[Function]}
+            handleToggleData={[Function]}
+            search={[Function]}
+            setIsDeleteModal={[Function]}
+            showStatus=""
+          />
+        </ForwardRef>
+        <ForwardRef>
+          <withRouter(EmptyTable)
+            handleModal={[Function]}
+          />
+        </ForwardRef>
+      </ForwardRef>
+    </Tabs>
+  </Box>
+</Fragment>
+`;
+
+exports[`<EmptyState /> should match snapshot 2`] = `
+<Fragment>
+  <CreateData
+    addRequest={[Function]}
+    cmsData="data"
+    handleModal={[Function]}
+    isModalOpen={false}
+    market={
+      Object {
+        "label": "All Market",
+        "value": "",
+      }
+    }
+  />
+  <Box
+    mt="30px"
+  >
+    <Tabs
+      index={0}
+      onChange={[Function]}
+    >
+      <ForwardRef>
+        <ForwardRef
+          count={1}
+        />
+        <ForwardRef
+          count={0}
+        />
+      </ForwardRef>
+      <ForwardRef>
+        <ForwardRef>
+          <withRouter(EmptyTable)
+            handleModal={[Function]}
+          />
+        </ForwardRef>
+        <ForwardRef>
+          <withRouter(EmptyTable)
+            handleModal={[Function]}
+          />
+        </ForwardRef>
+      </ForwardRef>
+    </Tabs>
+  </Box>
+</Fragment>
+`;
+
+exports[`<EmptyState /> should match snapshot 3`] = `
+<Fragment>
+  <CreateData
+    addRequest={[Function]}
+    cmsData="data"
+    handleModal={[Function]}
+    isModalOpen={false}
+    market={
+      Object {
+        "label": "All Market",
+        "value": "",
+      }
+    }
+  />
+  <Box
+    mt="30px"
+  >
+    <Tabs
+      index={0}
+      onChange={[Function]}
+    >
+      <ForwardRef>
+        <ForwardRef
+          count={1}
         />
         <ForwardRef
           count={0}

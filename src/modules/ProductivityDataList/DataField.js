@@ -91,4 +91,5 @@ const DataField = (props) => {
   );
 };
 
+export { DataField }
 export default withPageController(DataField);
