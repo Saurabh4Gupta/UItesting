@@ -3,8 +3,8 @@ const Okta= require('../pages/Login');
 
 const I = actor();
 
-Given('I am admin user and login into PM dashboard', () => {
-  Dash.login();
+Given('I am admin user and login into PM dashboard', async () => {
+ await Dash.login();
   Okta.login('global.admin1', 'Sh@kazu!u1');
 });
 
