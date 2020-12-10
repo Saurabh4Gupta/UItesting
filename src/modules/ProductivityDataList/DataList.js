@@ -25,6 +25,7 @@ const DataList = (props) => {
     originalOngingList,
     // eslint-disable-next-line react/prop-types
     setOriginalOngoingList,
+    addNewRequest,
   } = props;
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -87,6 +88,8 @@ const DataList = (props) => {
         totalCount: tempData.length,
         data: tempData,
       };
+
+      addNewRequest(tempData[0]);
 
       setDataList(finalOngoingList);
 
