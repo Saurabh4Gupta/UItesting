@@ -3,35 +3,33 @@ const Okta= require('../pages/Login');
 
 const I = actor();
 
-Given('I am admin user and login into PM dashboard', async () => {
+Given('User logged into landing page', async () => {
  await Dash.login();
-  Okta.login('global.admin1', 'Sh@kazu!u1');
+  await Okta.login('global.admin1', 'Sh@kazu!u1');
 });
 
-Then('the dashboard the visible', () => {
+Then('User is on landing page', async () => {
 
-  Dash.verifyLandingPage();
+  await Dash.verifyLandingPage();
 });
 
-/*
-Then('the menu button is present', () => {
-  Dash.verifyMenu()
-});
 
-Then('logout option is present', () => {
-  Dash.verifyLanguageSwitcher()
-});
+Given(/^User logs in PM application$/, async()=> {
+  await Dash.loginToPM();
 
-Then('language switcher is present', () => {
-  Dash.verifyLogoutButton()
-});
 
-When('I click on {string} app from menu pane', (app) => {
-  Dash.goToHomePage();
-  Dash.clickOnApp(app);
-});
+  });
 
-Then('{string} home page is displayed', (app) => {
-  Dash.verifyAppHomePage(app);
-});
-*/
+
+Given(/^Client List page will be displayed$/,  async()=>{
+    await Dash.verifyClientPage();
+  });
+
+  Given(/^User will go to Microsoft Client homepage$/, async()=> {
+    await Dash.clientHomepage();
+  });
+
+  Given(/^User can see Microsoft Client homepage and will logout from system$/, async()=> {
+    await Dash.logOut();
+  });
+

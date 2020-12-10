@@ -12,8 +12,10 @@ module.exports = {
     I.fillField(this.fields.okta_username, username);
     I.fillField(this.fields.okta_passwd, password);
     I.waitForVisible(this.okta_login_button,10);
-    I.click(this.okta_login_button);
+    //I.click(this.fields.okta_login_button);
+    I.click(this.fields.okta_login_button);
   }
 
 
 };
+
