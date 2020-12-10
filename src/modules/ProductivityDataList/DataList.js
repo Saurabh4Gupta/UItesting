@@ -48,7 +48,6 @@ const DataList = (props) => {
   const toast = Toast();
 
   const searchChangeHandler = (input) => {
-    console.log(originalOngingList)
     if (tabIndex === 0) {
       const originalList = originalOngingList.data;
       const updatedList = originalList.filter(
