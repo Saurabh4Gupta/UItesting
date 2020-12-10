@@ -1,4 +1,4 @@
-Feature: Login to Productivity Manager with user having multiple client permissions
+Feature: Login to Productivity Manager
 
   Scenario: User with multiple client permissions
     Given User logged into landing page
@@ -9,6 +9,10 @@ Feature: Login to Productivity Manager with user having multiple client permissi
     Then User can see Microsoft Client homepage and will logout from system
 
 
-
+  Scenario: User with single client permissions
+    Given User logged into landing page
+    And User is on landing page
+    And User logs in PM application
+    Then User can see Microsoft Client homepage and will logout from system
 
 
