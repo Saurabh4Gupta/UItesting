@@ -12,7 +12,7 @@ const UploadFile = (props) => {
 
   const validate = () => {
     if (!files.length) {
-      setError({ error: 'Upload tracker template' });
+      setError({ error: `${PageContent.uploadFileErrorMessage}` });
       return false;
     }
     return true;
@@ -52,7 +52,7 @@ const UploadFile = (props) => {
         isOpen={modalOpen}
         onClose={onCloseModal}
       >
-        <Modal.Header title="Upload new file" />
+        <Modal.Header title={PageContent.uploadButtonText} />
         <Modal.Body>
           <Form
             handleFileChange={handleFileChange}

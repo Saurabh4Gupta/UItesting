@@ -1,6 +1,7 @@
 import React from 'react';
 import { Modal, Button } from '@dentsu-ui/components';
 import PropTypes from 'prop-types';
+import { dataFieldCms as PageContent } from '../../cms';
 
 const DeleteData = (props) => {
   const { deleteModalData, setModalOpen, deleteRequest } = props;
@@ -13,15 +14,15 @@ const DeleteData = (props) => {
         isOpen={isDeleteModal}
         onClose={() => setModalOpen({ isDeleteModal:false, requestId:'' })}
       >
-        <Modal.Header hasCloseButton title="Are you sure you want to delete?" />
+        <Modal.Header hasCloseButton title={PageContent.popUpTitle} />
         <Modal.Body>
-          <p>Once deleted, this data request will no longer be available. </p>
+          <p>{PageContent.deletePopConfimationMessage}</p>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={() => setModalOpen({ isDeleteModal:false, requestId:'' })}>
-            No, cancel
+            {PageContent.deleteButtonCancelMessage}
           </Button>
-          <Button onClick={() => deleteRequest(requestId)}>Yes, delete</Button>
+          <Button onClick={() => deleteRequest(requestId)}>{PageContent.deleteButtonDeleteMessage}</Button>
         </Modal.Footer>
       </Modal>
     </>

@@ -16,6 +16,7 @@ import { slice, concat } from 'lodash';
 import Layout from '@dentsu-ui/components/dist/cjs/components/Layout';
 import Paragraph from '@dentsu-ui/components/dist/cjs/components/Paragraph';
 import { versionHistory } from '../Mock/mockData';
+import { dataFieldCms as PageContent } from '../../cms';
 
 const VersionHistory = () => {
   const len = versionHistory.data.length;
@@ -36,7 +37,7 @@ const VersionHistory = () => {
       </Layout.Section>
       <Layout.Section size="1/3">
         <Card>
-          <Card.Title>Version history</Card.Title>
+          <Card.Title>{PageContent.versionHistoryTitle}</Card.Title>
           <List
             hasTotal={false}
             isSearchable={false}
@@ -87,7 +88,7 @@ const VersionHistory = () => {
                                   status="neutral"
                                   style={{ fontSize: '8px' }}
                                 >
-                                  current version
+                                  {PageContent.currentVersionText}
                                 </Chip>
                               </>
                             )}
@@ -121,7 +122,7 @@ const VersionHistory = () => {
                 style={{ color: 'black' }}
                 onClick={loadMore}
               >
-                Load more
+                {PageContent.loadMoreText}
               </Button>
             </Box>
           ) : (
