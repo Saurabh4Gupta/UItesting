@@ -1,10 +1,7 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 
-import {
-  FormField,
-  Dropzone,
-} from '@dentsu-ui/components';
+import { FormField, Dropzone } from '@dentsu-ui/components';
 import constant from '../../utils/constant';
 
 const Form = (props) => {
@@ -24,6 +21,9 @@ const Form = (props) => {
           onUpdateFiles={(fileItems) => {
             handleFileChange(fileItems);
           }}
+          onError={(error) => {
+            console.log('[FORM]', error);
+          }}
           maxFiles={1}
           maxFileSize={MAX_FILE_SIZE}
           labelMaxFileSizeExceeded={cmsData.uploadFileLargeMessage}
@@ -33,7 +33,7 @@ const Form = (props) => {
         />
       </FormField>
     </>
-  )
+  );
 };
 
 export default Form;
