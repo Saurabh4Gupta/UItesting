@@ -84,7 +84,6 @@ const DataList = (props) => {
       values.client = 'Microsoft';
       values.updatedAt = '30/11/20 at 14:32';
       values.clientMarket = `Microsoft ${values.assignTo.label}`;
-      values.name = values.name
       const tempData = [...dataList.data, values];
       const finalOngoingList = {
         totalCount: tempData.length,
