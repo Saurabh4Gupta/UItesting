@@ -25,6 +25,7 @@ const DataList = (props) => {
     originalOngingList,
     // eslint-disable-next-line react/prop-types
     setOriginalOngoingList,
+    addNewRequest,
   } = props;
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -82,11 +83,14 @@ const DataList = (props) => {
       values.id = dataList.data.length + completeData.completedData.length + 1;
       values.client = 'Microsoft';
       values.updatedAt = '30/11/20 at 14:32';
+      values.clientMarket = `Microsoft ${values.assignTo.label}`;
       const tempData = [...dataList.data, values];
       const finalOngoingList = {
         totalCount: tempData.length,
         data: tempData,
       };
+
+      addNewRequest(tempData[0]);
 
       setDataList(finalOngoingList);
 
