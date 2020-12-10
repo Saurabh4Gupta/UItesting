@@ -3,6 +3,7 @@ import { Page, Select, FormField } from '@dentsu-ui/components';
 import PropTypes from 'prop-types';
 import { useHistory, useLocation } from 'react-router';
 import { clientList, market } from '../Mock/mockData';
+import { dataFieldCms as PageContent } from '../../cms';
 
 const PageController = (props) => {
   const history = useHistory();
@@ -24,7 +25,7 @@ const PageController = (props) => {
   const { title, avatar } = clientList.find(
     (client) => client.clientCode === clientCode,
   );
-  const contentToShow = isViewProduct ? `Back to ${title}` : 'Back to Clients';
+  const contentToShow = isViewProduct ? `Back To ${title}` : `${PageContent.backLabel}`;
   const clientNavigationHandler = () => (isViewProduct
     ? history.replace(`/datafield?client_code=${clientCode}`)
     : history.replace('/'));
@@ -45,7 +46,7 @@ const PageController = (props) => {
         primaryAction={
           isViewProduct && !isCompleted
             ? {
-              content: 'Upload new file',
+              content: `${PageContent.uploadButtonText}`,
               onClick: () => handleUploadModal(),
               isDisabled: false,
               icon: 'upload',
