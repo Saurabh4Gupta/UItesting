@@ -50,11 +50,9 @@ const DataField = (props) => {
     const orignalArray = getData(filterDataBy.market.value).data;
     const filteredArray = [...orignalArray, request];
 
-    setDataList({ data: filteredArray, totalCount: filteredArray.length });
-
     setOriginalOngoingList({
       data: filteredArray,
-      totalCount: ongoingData.totalCount,
+      totalCount: filteredArray.length,
     });
   };
 
