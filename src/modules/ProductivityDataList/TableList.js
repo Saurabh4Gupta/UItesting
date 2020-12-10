@@ -29,6 +29,9 @@ const TableList = (props) => {
     clientCode,
     deleteRequest,
     search,
+    handleMoveToCompleteModel,
+    setISMoveTOCompleteModel,
+    moveToCompleteModelData,
   } = props;
 
   const history = useHistory();
@@ -47,7 +50,15 @@ const TableList = (props) => {
         deleteModalData={deleteModalData}
         setModalOpen={setIsDeleteModal}
         deleteRequest={deleteRequest}
+        moveToCompleteModelData={moveToCompleteModelData}
+        setISMoveTOCompleteModel={setISMoveTOCompleteModel}
+        handleToggleData={handleToggleData}
       />
+      {/* <MoveToComplete
+        deleteModalData={moveToCompleteModelData}
+        setModalOpen={setISMoveTOCompleteModel}
+        deleteRequest={handleToggleData}
+      /> */}
       <List
         items={data}
         searchBy="client"
@@ -121,11 +132,11 @@ const TableList = (props) => {
                         <Chip variant="status" status="warning" hasStatusLight>
                           {cmsData.overdue}
                         </Chip>
-                      ) : (
-                        ''
-                      )}
+                        ) : (
+                            ''
+                          )}
                     </Box>
-                  )}
+                    )}
                   <Box width="30%">{`${cmsData.lastUpdate}: ${updatedAt}`}</Box>
                 </Stack>
                 <Stack
@@ -148,7 +159,7 @@ const TableList = (props) => {
                   <Box>
                     <ActionBtn
                       actionName={actionName}
-                      handleToggleData={() => handleToggleData(id)}
+                      handleToggleData={() => handleMoveToCompleteModel(id)}
                       deleteBtn={cmsData.delete}
                       showStatus={showStatus}
                       handleDeleteModel={() => handleDeleteModel(id)}
@@ -162,7 +173,7 @@ const TableList = (props) => {
         }}
       />
       {data.length < 1 && (
-        <Card style={{ border : '0px', height: '300px' }}>
+        <Card style={{ border: '0px', height: '300px' }}>
           <Paragraph style={{ margin: 'auto' }}>
             Sorry, no results found
           </Paragraph>
@@ -183,14 +194,18 @@ TableList.propTypes = {
   clientCode: PropTypes.string,
   search: PropTypes.func,
   deleteRequest: PropTypes.func,
+  handleMoveToCompleteModel: PropTypes.object,
+  setISMoveTOCompleteModel: PropTypes.func.isRequired,
+  moveToCompleteModelData: PropTypes.func.isRequired,
 };
 TableList.defaultProps = {
   cmsData: {},
   showStatus: '',
   clientCode: '',
   search: {},
-  deleteModalData:{},
-  deleteRequest:() => {},
+  deleteModalData: {},
+  deleteRequest: () => { },
+  handleMoveToCompleteModel: () => { },
 };
 
 export default TableList;
