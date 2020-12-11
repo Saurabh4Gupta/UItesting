@@ -8,7 +8,7 @@ const DeleteData = (props) => {
     handleToggleData, setIsMoveToCompleteModel, moveToCompleteModelData } = props;
   const { isDeleteModal, requestId } = deleteModalData;
   const { isMoveToComplete, requestID } = moveToCompleteModelData;
-  const requestChangeHandlerOnCancel = () => {
+  const requestChangeHandler = () => {
     if (!isDeleteModal) {
       setIsMoveToCompleteModel({ isMoveToComplete: false, requestID: '' })
     } else {
@@ -22,7 +22,6 @@ const DeleteData = (props) => {
       deleteRequest(requestId)
     }
   }
-
 
   return (
     <>
@@ -42,7 +41,7 @@ const DeleteData = (props) => {
           <Button
             variant="secondary"
             onClick={
-              requestChangeHandlerOnCancel
+              requestChangeHandler
             }
           >
             {dataFieldCms.noCancel}
