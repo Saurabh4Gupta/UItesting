@@ -30,7 +30,7 @@ const TableList = (props) => {
     deleteRequest,
     search,
     handleMoveToCompleteModel,
-    setISMoveTOCompleteModel,
+    setIsMoveToCompleteModel,
     moveToCompleteModelData,
   } = props;
 
@@ -51,14 +51,9 @@ const TableList = (props) => {
         setModalOpen={setIsDeleteModal}
         deleteRequest={deleteRequest}
         moveToCompleteModelData={moveToCompleteModelData}
-        setISMoveTOCompleteModel={setISMoveTOCompleteModel}
+        setIsMoveToCompleteModel={setIsMoveToCompleteModel}
         handleToggleData={handleToggleData}
       />
-      {/* <MoveToComplete
-        deleteModalData={moveToCompleteModelData}
-        setModalOpen={setISMoveTOCompleteModel}
-        deleteRequest={handleToggleData}
-      /> */}
       <List
         items={data}
         searchBy="client"
@@ -159,10 +154,11 @@ const TableList = (props) => {
                   <Box>
                     <ActionBtn
                       actionName={actionName}
-                      handleToggleData={() => handleMoveToCompleteModel(id)}
+                      handleToggleData={() => handleToggleData(id)}
                       deleteBtn={cmsData.delete}
                       showStatus={showStatus}
                       handleDeleteModel={() => handleDeleteModel(id)}
+                      handleMoveToCompleteModel={() => handleMoveToCompleteModel(id)}
                     />
                   </Box>
                 </Stack>
@@ -195,7 +191,7 @@ TableList.propTypes = {
   search: PropTypes.func,
   deleteRequest: PropTypes.func,
   handleMoveToCompleteModel: PropTypes.object,
-  setISMoveTOCompleteModel: PropTypes.func.isRequired,
+  setIsMoveToCompleteModel: PropTypes.func.isRequired,
   moveToCompleteModelData: PropTypes.func.isRequired,
 };
 TableList.defaultProps = {

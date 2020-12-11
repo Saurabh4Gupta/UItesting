@@ -43,7 +43,7 @@ const DataList = (props) => {
   const { completedData } = completeData;
   const { data } = dataList;
   const originalCompletedData = originalCompleteData.completedData;
-  const [moveToCompleteModelData, setISMoveTOCompleteModel] = useState({ isMoveToComplete: false, requestID: undefined })
+  const [moveToCompleteModelData, setIsMoveToCompleteModel] = useState({ isMoveToComplete: false, requestID: undefined })
 
   const toast = Toast();
 
@@ -130,7 +130,7 @@ const DataList = (props) => {
         completedCount: originaltempData.length,
         completedData: originaltempData,
       });
-      setISMoveTOCompleteModel({ isMoveToComplete: false, requestID: undefined })
+      setIsMoveToCompleteModel({ isMoveToComplete: false, requestID: undefined })
       return toast({
         title: '',
         content: PageContent.toastMovedToComplete,
@@ -162,7 +162,6 @@ const DataList = (props) => {
       completedCount: originalCompleteData.completedCount,
       completedData: filteredArray,
     });
-    // setISMoveTOCompleteModel({ isMoveToComplete: false, requestID: undefined })
     return toast({
       title: '',
       content: PageContent.toastMovedToOngoing,
@@ -200,8 +199,7 @@ const DataList = (props) => {
     setIsDeleteModal({ isDeleteModal: true, requestId: value });
   };
   const handleMoveToCompleteModel = (value) => {
-    setISMoveTOCompleteModel({ isMoveToComplete: true, requestID: value });
-    // setIsDeleteModal({ isDeleteModal: true, requestId: value });
+    setIsMoveToCompleteModel({ isMoveToComplete: true, requestID: value });
   };
   return (
     <>
@@ -235,7 +233,7 @@ const DataList = (props) => {
                     cmsData={cmsData}
                     deleteModalData={deleteModalData}
                     setIsDeleteModal={setIsDeleteModal}
-                    setISMoveTOCompleteModel={setISMoveTOCompleteModel}
+                    setIsMoveToCompleteModel={setIsMoveToCompleteModel}
                     moveToCompleteModelData={moveToCompleteModelData}
                     handleToggleData={handleToggleData}
                     actionName={cmsData.moveToComplete}

@@ -5,16 +5,32 @@ import { dataFieldCms } from '../../cms/dataFieldCms'
 
 const DeleteData = (props) => {
   const { deleteModalData, setModalOpen, deleteRequest,
-    handleToggleData, setISMoveTOCompleteModel, moveToCompleteModelData } = props;
+    handleToggleData, setIsMoveToCompleteModel, moveToCompleteModelData } = props;
   const { isDeleteModal, requestId } = deleteModalData;
   const { isMoveToComplete, requestID } = moveToCompleteModelData;
+  const requestChangeHandlerOnCancel = () => {
+    if (!isDeleteModal) {
+      setIsMoveToCompleteModel({ isMoveToComplete: false, requestID: '' })
+    } else {
+      setModalOpen({ isDeleteModal: false, requestId: '' })
+    }
+  }
+  const requestChangeHandlerOnSubmit = () => {
+    if (!isDeleteModal) {
+      handleToggleData(requestID)
+    } else {
+      deleteRequest(requestId)
+    }
+  }
+
+
   return (
     <>
       <Modal
         isFullHeight={false}
         width="500px"
         isOpen={isDeleteModal || isMoveToComplete}
-        onClose={() => setModalOpen({ isDeleteModal: false, requestId: '' }) || setISMoveTOCompleteModel({ isDeleteModal: false, requestID: '' })}
+        onClose={() => setModalOpen({ isDeleteModal: false, requestId: '' }) || setIsMoveToCompleteModel({ isDeleteModal: false, requestID: '' })}
       >
         <Modal.Header hasCloseButton title={!isDeleteModal ? dataFieldCms.moveToCompleteConfirmation : dataFieldCms.deletePopUpConfirmation} />
         <Modal.Body>
@@ -25,20 +41,18 @@ const DeleteData = (props) => {
         <Modal.Footer>
           <Button
             variant="secondary"
-            onClick={() => {
-              // eslint-disable-next-line no-unused-expressions
-              !isDeleteModal ? setISMoveTOCompleteModel({ isDeleteModal: false, requestID: '' })
-                : setModalOpen({ isDeleteModal: false, requestId: '' })
-            }
+            onClick={
+              requestChangeHandlerOnCancel
             }
           >
-            No, cancel
+            {dataFieldCms.noCancel}
           </Button>
           <Button
-            // eslint-disable-next-line no-unused-expressions
-            onClick={() => { !isDeleteModal ? handleToggleData(requestID) : deleteRequest(requestId) }}
+            onClick={
+              requestChangeHandlerOnSubmit
+            }
           >
-            {!isDeleteModal ? 'Yes, continue' : 'Yes, delete'}
+            {!isDeleteModal ? dataFieldCms.yesContinue : dataFieldCms.yesDelete}
           </Button>
         </Modal.Footer>
       </Modal>
@@ -50,7 +64,7 @@ DeleteData.propTypes = {
   deleteRequest: PropTypes.func,
   deleteModalData: PropTypes.object,
   handleToggleData: PropTypes.func,
-  setISMoveTOCompleteModel: PropTypes.func,
+  setIsMoveToCompleteModel: PropTypes.func,
   moveToCompleteModelData: PropTypes.object,
 };
 
@@ -59,7 +73,7 @@ DeleteData.defaultProps = {
   deleteRequest: () => { },
   deleteModalData: {},
   handleToggleData: () => { },
-  setISMoveTOCompleteModel: () => { },
+  setIsMoveToCompleteModel: () => { },
   moveToCompleteModelData: {},
 };
 export default DeleteData;

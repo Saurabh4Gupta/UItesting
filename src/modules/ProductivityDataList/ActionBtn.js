@@ -1,10 +1,12 @@
 import React from 'react';
 import { Menu } from '@dentsu-ui/components';
 import PropTypes from 'prop-types';
+import { dataFieldCms } from '../../cms/dataFieldCms'
 
 const ActionBtn = (props) => {
   const {
     handleToggleData,
+    handleMoveToCompleteModel,
     actionName,
     deleteBtn,
     showStatus,
@@ -15,7 +17,11 @@ const ActionBtn = (props) => {
       <Menu>
         <Menu.Button />
         <Menu.List>
-          <Menu.Item onClick={handleToggleData}>{actionName}</Menu.Item>
+          <Menu.Item onClick={actionName === dataFieldCms.moveToComplete
+            ? handleMoveToCompleteModel : handleToggleData}
+          >
+            {actionName}
+          </Menu.Item>
           {showStatus === false ? (
             ''
           ) : (
@@ -34,6 +40,7 @@ ActionBtn.propTypes = {
   deleteBtn: PropTypes.string.isRequired,
   showStatus: PropTypes.bool.isRequired,
   handleDeleteModel: PropTypes.func,
+  handleMoveToCompleteModel: PropTypes.func.isRequired,
 };
 ActionBtn.defaultProps = {
   handleDeleteModel: true,

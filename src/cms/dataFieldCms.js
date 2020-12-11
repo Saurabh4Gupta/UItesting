@@ -77,4 +77,7 @@ export const dataFieldCms = {
   moveToCompleteDescription: 'You will not be abale to make any more edits to this request unless it is moved back to "Ongoing".',
   deletePopUpConfirmation: 'Are you sure you want to delete?',
   deletePopUpDescription: 'Once deleted, this data request will no longer be available.',
+  noCancel: 'No, cancel',
+  yesContinue: 'Yes, continue',
+  yesDelete: 'Yes, delete',
 }
