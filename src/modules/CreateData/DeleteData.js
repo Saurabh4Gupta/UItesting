@@ -1,28 +1,58 @@
 import React from 'react';
 import { Modal, Button } from '@dentsu-ui/components';
 import PropTypes from 'prop-types';
-import { dataFieldCms as PageContent } from '../../cms';
+import { dataFieldCms } from '../../cms/dataFieldCms'
 
 const DeleteData = (props) => {
-  const { deleteModalData, setModalOpen, deleteRequest } = props;
+  const { deleteModalData, setModalOpen, deleteRequest,
+    handleToggleData, setIsMoveToCompleteModel, moveToCompleteModelData } = props;
   const { isDeleteModal, requestId } = deleteModalData;
+  const { isMoveToComplete, requestID } = moveToCompleteModelData;
+  const requestChangeHandler = () => {
+    if (!isDeleteModal) {
+      setIsMoveToCompleteModel({ isMoveToComplete: false, requestID: '' })
+    } else {
+      setModalOpen({ isDeleteModal: false, requestId: '' })
+    }
+  }
+  const requestChangeHandlerOnSubmit = () => {
+    if (!isDeleteModal) {
+      handleToggleData(requestID)
+    } else {
+      deleteRequest(requestId)
+    }
+  }
+
   return (
     <>
       <Modal
         isFullHeight={false}
         width="500px"
-        isOpen={isDeleteModal}
-        onClose={() => setModalOpen({ isDeleteModal:false, requestId:'' })}
+        isOpen={isDeleteModal || isMoveToComplete}
+        onClose={() => setModalOpen({ isDeleteModal: false, requestId: '' }) || setIsMoveToCompleteModel({ isDeleteModal: false, requestID: '' })}
       >
-        <Modal.Header hasCloseButton title={PageContent.popUpTitle} />
+        <Modal.Header hasCloseButton title={!isDeleteModal ? dataFieldCms.moveToCompleteConfirmation : dataFieldCms.deletePopUpConfirmation} />
         <Modal.Body>
-          <p>{PageContent.deletePopConfimationMessage}</p>
+          <p>
+            {!isDeleteModal ? dataFieldCms.moveToCompleteDescription : dataFieldCms.deletePopUpDescription}
+          </p>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={() => setModalOpen({ isDeleteModal:false, requestId:'' })}>
-            {PageContent.deleteButtonCancelMessage}
+          <Button
+            variant="secondary"
+            onClick={
+              requestChangeHandler
+            }
+          >
+            {dataFieldCms.noCancel}
           </Button>
-          <Button onClick={() => deleteRequest(requestId)}>{PageContent.deleteButtonDeleteMessage}</Button>
+          <Button
+            onClick={
+              requestChangeHandlerOnSubmit
+            }
+          >
+            {!isDeleteModal ? dataFieldCms.yesContinue : dataFieldCms.yesDelete}
+          </Button>
         </Modal.Footer>
       </Modal>
     </>
@@ -32,11 +62,17 @@ DeleteData.propTypes = {
   setModalOpen: PropTypes.func,
   deleteRequest: PropTypes.func,
   deleteModalData: PropTypes.object,
+  handleToggleData: PropTypes.func,
+  setIsMoveToCompleteModel: PropTypes.func,
+  moveToCompleteModelData: PropTypes.object,
 };
 
 DeleteData.defaultProps = {
-  setModalOpen: () => {},
-  deleteRequest: () => {},
-  deleteModalData:{},
+  setModalOpen: () => { },
+  deleteRequest: () => { },
+  deleteModalData: {},
+  handleToggleData: () => { },
+  setIsMoveToCompleteModel: () => { },
+  moveToCompleteModelData: {},
 };
 export default DeleteData;

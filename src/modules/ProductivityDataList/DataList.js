@@ -41,6 +41,7 @@ const DataList = (props) => {
   const { completedData } = completeData;
   const { data } = dataList;
   const originalCompletedData = originalCompleteData.completedData;
+  const [moveToCompleteModelData, setIsMoveToCompleteModel] = useState({ isMoveToComplete: false, requestID: undefined })
 
   const toast = Toast();
 
@@ -130,44 +131,43 @@ const DataList = (props) => {
         completedCount: originaltempData.length,
         completedData: originaltempData,
       });
-
+      setIsMoveToCompleteModel({ isMoveToComplete: false, requestID: undefined })
       return toast({
         title: '',
         content: PageContent.toastMovedToComplete,
         status: 'success',
       });
     }
-      let filteredArray = [];
-      const filterOngoingList = completedData.filter((item) => {
-        if (item.id === id) {
-          item.isCompleted = false;
-          return true;
-        }
-        return false;
-      });
-      const tempData = [...data, ...filterOngoingList];
-      const finalOngoingList = { totalCount: tempData.length, data: tempData };
-      const completedRequest = completedData.filter((item) => item.id !== id);
-      const filterCompletedlist = {
-        completedCount: completedRequest.length,
-        completedData: completedRequest,
-      };
-      setDataList(finalOngoingList);
-      updateOngoingList(id, true);
-      setCompleteData(filterCompletedlist);
-      filteredArray = originalCompleteData.completedData.filter(
-        (value) => value.id !== id,
-      );
-      setOriginalCompleteData({
-        completedCount: originalCompleteData.completedCount,
-        completedData: filteredArray,
-      });
-
-      return toast({
-        title: '',
-        content: PageContent.toastMovedToOngoing,
-        status: 'success',
-      });
+    let filteredArray = [];
+    const filterOngoingList = completedData.filter((item) => {
+      if (item.id === id) {
+        item.isCompleted = false;
+        return true;
+      }
+      return false;
+    });
+    const tempData = [...data, ...filterOngoingList];
+    const finalOngoingList = { totalCount: tempData.length, data: tempData };
+    const completedRequest = completedData.filter((item) => item.id !== id);
+    const filterCompletedlist = {
+      completedCount: completedRequest.length,
+      completedData: completedRequest,
+    };
+    setDataList(finalOngoingList);
+    updateOngoingList(id, true);
+    setCompleteData(filterCompletedlist);
+    filteredArray = originalCompleteData.completedData.filter(
+      (value) => value.id !== id,
+    );
+    setOriginalCompleteData({
+      completedCount: originalCompleteData.completedCount,
+      completedData: filteredArray,
+    });
+    return toast({
+      title: '',
+      content: PageContent.toastMovedToOngoing,
+      status: 'success',
+    });
   };
 
   const deleteRequest = (id) => {
@@ -199,7 +199,9 @@ const DataList = (props) => {
   const handleDeleteModel = (value) => {
     setIsDeleteModal({ isDeleteModal: true, requestId: value });
   };
-
+  const handleMoveToCompleteModel = (value) => {
+    setIsMoveToCompleteModel({ isMoveToComplete: true, requestID: value });
+  };
   return (
     <>
       <CreateData
@@ -232,19 +234,22 @@ const DataList = (props) => {
                     cmsData={cmsData}
                     deleteModalData={deleteModalData}
                     setIsDeleteModal={setIsDeleteModal}
+                    setIsMoveToCompleteModel={setIsMoveToCompleteModel}
+                    moveToCompleteModelData={moveToCompleteModelData}
                     handleToggleData={handleToggleData}
                     actionName={cmsData.moveToComplete}
                     deleteRequest={deleteRequest}
                     clientCode={clientCode}
                     search={searchChangeHandler}
                     handleDeleteModel={handleDeleteModel}
+                    handleMoveToCompleteModel={handleMoveToCompleteModel}
                   />
-                ) : (
-                  <EmptyTable
-                    defaultText={cmsData.emptyProductivityDatarequestCaption}
-                    handleModal={handleModal}
-                  />
-                )}
+                  ) : (
+                    <EmptyTable
+                      defaultText={cmsData.emptyProductivityDatarequestCaption}
+                      handleModal={handleModal}
+                    />
+                    )}
               </Tabs.Panel>
               <Tabs.Panel>
                 {originalCompleteData.completedData.length > 0 ? (
@@ -257,17 +262,17 @@ const DataList = (props) => {
                     clientCode={clientCode}
                     search={searchChangeHandler}
                   />
-                ) : (
-                  <EmptyTable
-                    defaultText={
-                      cmsData.emptyCompletedProductivityDatarequestCaption
-                    }
-                    handleModal={handleModal}
-                  />
-                )}
+                  ) : (
+                    <EmptyTable
+                      defaultText={
+                          cmsData.emptyCompletedProductivityDatarequestCaption
+                        }
+                      handleModal={handleModal}
+                    />
+                    )}
               </Tabs.Panel>
             </Tabs.Panels>
-          )}
+            )}
         </Tabs>
       </Box>
     </>
@@ -288,7 +293,7 @@ DataList.defaultProps = {
   market: { value: '' },
   dataList: [{}],
   clientCode: '',
-  setDataList: () => {},
+  setDataList: () => { },
   loading: true,
   updateOngoingList: {},
 };

@@ -10,6 +10,11 @@ const UploadFile = (props) => {
   const [error, setError] = useState({});
   const [files, setFiles] = useState([]);
 
+  const errorHandler = (errorMsg) => {
+    if (!errorMsg) errorMsg = 'Invalid file type ';
+    setError({ error: `${errorMsg}` });
+  };
+
   const validate = () => {
     if (!files.length) {
       setError({ error: `${PageContent.uploadFileErrorMessage}` });
@@ -23,13 +28,15 @@ const UploadFile = (props) => {
     if (isValid) {
       setModalOpen(false);
 
-      const toast = new Toast();
+      if (!error.error) {
+        const toast = new Toast();
 
-      return toast({
-        title: '',
-        content: PageContent.toastFileUploaded,
-        status: 'success',
-      });
+        return toast({
+          title: '',
+          content: PageContent.toastFileUploaded,
+          status: 'success',
+        });
+      }
     }
     return null;
   };
@@ -42,7 +49,7 @@ const UploadFile = (props) => {
   const handleFileChange = (fileItems) => {
     validate();
     setFiles(fileItems);
-    setError({});
+    setError({ error: null });
   };
   return (
     <>
@@ -59,6 +66,7 @@ const UploadFile = (props) => {
             files={files}
             errors={error}
             cmsData={cmsData}
+            setError={errorHandler}
           />
         </Modal.Body>
         <Modal.Footer>

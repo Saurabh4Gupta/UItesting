@@ -29,6 +29,9 @@ const TableList = (props) => {
     clientCode,
     deleteRequest,
     search,
+    handleMoveToCompleteModel,
+    setIsMoveToCompleteModel,
+    moveToCompleteModelData,
   } = props;
 
   const history = useHistory();
@@ -47,6 +50,9 @@ const TableList = (props) => {
         deleteModalData={deleteModalData}
         setModalOpen={setIsDeleteModal}
         deleteRequest={deleteRequest}
+        moveToCompleteModelData={moveToCompleteModelData}
+        setIsMoveToCompleteModel={setIsMoveToCompleteModel}
+        handleToggleData={handleToggleData}
       />
       <List
         items={data}
@@ -121,11 +127,11 @@ const TableList = (props) => {
                         <Chip variant="status" status="warning" hasStatusLight>
                           {cmsData.overdue}
                         </Chip>
-                      ) : (
-                        ''
-                      )}
+                        ) : (
+                            ''
+                          )}
                     </Box>
-                  )}
+                    )}
                   <Box width="30%">{`${cmsData.lastUpdate}: ${updatedAt}`}</Box>
                 </Stack>
                 <Stack
@@ -152,6 +158,7 @@ const TableList = (props) => {
                       deleteBtn={cmsData.delete}
                       showStatus={showStatus}
                       handleDeleteModel={() => handleDeleteModel(id)}
+                      handleMoveToCompleteModel={() => handleMoveToCompleteModel(id)}
                     />
                   </Box>
                 </Stack>
@@ -162,7 +169,7 @@ const TableList = (props) => {
         }}
       />
       {data.length < 1 && (
-        <Card style={{ border : '0px', height: '300px' }}>
+        <Card style={{ border: '0px', height: '300px' }}>
           <Paragraph style={{ margin: 'auto' }}>
             Sorry, no results found
           </Paragraph>
@@ -183,14 +190,18 @@ TableList.propTypes = {
   clientCode: PropTypes.string,
   search: PropTypes.func,
   deleteRequest: PropTypes.func,
+  handleMoveToCompleteModel: PropTypes.object,
+  setIsMoveToCompleteModel: PropTypes.func.isRequired,
+  moveToCompleteModelData: PropTypes.func.isRequired,
 };
 TableList.defaultProps = {
   cmsData: {},
   showStatus: '',
   clientCode: '',
   search: {},
-  deleteModalData:{},
-  deleteRequest:() => {},
+  deleteModalData: {},
+  deleteRequest: () => { },
+  handleMoveToCompleteModel: () => { },
 };
 
 export default TableList;
