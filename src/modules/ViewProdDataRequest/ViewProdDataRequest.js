@@ -11,6 +11,7 @@ import RequestSummary from './RequestSummary/RequestSummary';
 import { data as prodRequests } from '../Mock/mockData';
 import Loader from '../../components/loading';
 import VersionHistory from '../VersionHistory/VersionHistory';
+import MoveToComplete from '../MoveToComplete/MoveToComplete'
 
 const ViewProdDataRequest = (props) => {
   const { param } = props;
@@ -24,6 +25,7 @@ const ViewProdDataRequest = (props) => {
   );
 
   const [isUploadModal, setIsUploadModeal] = useState(false);
+  const [isRequestModal, setIsRequestModal] = useState(false);
   const [isLoading, setLoading] = useState(true);
   const [filterDataBy] = useState({
     currency: { label: 'GBP (Default)', value: 'gbp' },
@@ -33,7 +35,9 @@ const ViewProdDataRequest = (props) => {
   const handleUploadModal = () => {
     setIsUploadModeal(true);
   };
-
+  const handleMoveToCompleteModal = () => {
+    setIsRequestModal(true);
+  };
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
@@ -80,6 +84,14 @@ const ViewProdDataRequest = (props) => {
               cmsData={PageContent}
             />
           )}
+          {isRequestModal && (
+          <MoveToComplete
+            modalOpen={isRequestModal}
+            setModalOpen={setIsRequestModal}
+            cmsData={PageContent}
+            requestId={requestId}
+          />
+          )}
           <PageController
             param={param}
             localMarket={prodRequest.localMarket.label}
@@ -88,6 +100,7 @@ const ViewProdDataRequest = (props) => {
             pageMetadata={prodRequest.clientMarket}
             handleUploadModal={handleUploadModal}
             isCompleted={prodRequest.isCompleted}
+            handleMoveToCompleteModal={handleMoveToCompleteModal}
           >
             <RequestSummary
               prodRequest={prodRequest}
