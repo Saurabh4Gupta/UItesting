@@ -5,7 +5,7 @@ import { useLocation } from 'react-router';
 import PageController from '../PageController/PageController';
 import DataList from './DataList';
 import { dataFieldCms as PageContent } from '../../cms';
-import { getData } from '../Mock/mockData';
+import { getData, getCompletedData } from '../Mock/mockData';
 import UploadFile from '../FileUpload/UploadFile';
 import withPageController from '../../hoc/withPageController';
 
@@ -17,7 +17,14 @@ const DataField = (props) => {
   const [filterDataBy, setFilterDataBy] = useState({
     market: { label: 'All Markets', value: '' },
   });
-  const [ongoingData, setDataList] = useState({ data: [], totalCount: 0 });
+  const [ongoingData, setDataList] = useState({ totalCount: 0, data: [] });
+  const [completeData, setCompleteData] = useState({
+    completedCount: 0,
+    completedData: [],
+  });
+  const [originalCompleteData, setOriginalCompleteData] = useState(
+    getCompletedData,
+  );
   const [isUploadModal, setIsUploadModal] = useState(false);
   const [isLoading, setLoading] = useState(true);
   const [originalOngingList, setOriginalOngoingList] = useState(
@@ -60,13 +67,44 @@ const DataField = (props) => {
     setLoading(true);
     setFilterDataBy({ market: selected });
   };
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+      if (filterDataBy.market.value === '') {
+        const filterOngoingMarket = originalOngingList.data.filter(key =>  key.isCompleted === false);
+        const filterCompleteMarket = originalCompleteData.completedData.filter(key =>  key.isCompleted === true);
+        setDataList({
+          totalCount: filterOngoingMarket.length,
+          data: filterOngoingMarket,
+        })
+        setCompleteData({
+          completedCount: filterCompleteMarket.length,
+          completedData: filterCompleteMarket,
+        })
+        setOriginalOngoingList(originalOngingList);
+      } else {
+        const filterOngoing = originalOngingList.data.filter(key => key.localMarket.value === filterDataBy.market.value);
+        const filerComplete = originalCompleteData.completedData.filter(key =>  key.localMarket.value === filterDataBy.market.value);
+        setDataList({
+          totalCount: filterOngoing.length,
+          data: filterOngoing,
+        })
+        setCompleteData({
+          completedCount: filerComplete.length,
+          completedData: filerComplete,
+         })
+      }
+    }, 2000);
+  }, [filterDataBy]);
+
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
       setDataList(getData(filterDataBy.market.value));
       setOriginalOngoingList(getData(filterDataBy.market.value));
-    }, 2000);
-  }, [filterDataBy]);
+    }, 1000);
+  }, []);
 
   return (
     <>
@@ -95,6 +133,11 @@ const DataField = (props) => {
             originalOngingList={originalOngingList}
             setOriginalOngoingList={setOriginalOngoingList}
             addNewRequest={addNewRequest}
+            filterDataBy={filterDataBy}
+            completeData={completeData}
+            setCompleteData={setCompleteData}
+            originalCompleteData={originalCompleteData}
+            setOriginalCompleteData={setOriginalCompleteData}
           />
         </Box>
       </PageController>

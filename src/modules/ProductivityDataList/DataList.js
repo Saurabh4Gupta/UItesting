@@ -7,7 +7,6 @@ import Toast from '@dentsu-ui/components/dist/cjs/components/Toast';
 import EmptyTable from './EmptyTable';
 import TableList from './TableList';
 import CreateData from '../CreateData/CreateData';
-import { getCompletedData } from '../Mock/mockData';
 import Loader from '../../components/loading';
 import { dataFieldCms as PageContent } from '../../cms';
 
@@ -26,16 +25,14 @@ const DataList = (props) => {
     // eslint-disable-next-line react/prop-types
     setOriginalOngoingList,
     addNewRequest,
+    filterDataBy,
+    completeData,
+    setCompleteData,
+    originalCompleteData,
+    setOriginalCompleteData,
   } = props;
 
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [completeData, setCompleteData] = useState({
-    completedCount: 0,
-    completedData: [],
-  });
-  const [originalCompleteData, setOriginalCompleteData] = useState(
-    getCompletedData,
-  );
   const [deleteModalData, setIsDeleteModal] = useState({
     isDeleteModal: false,
     requestId: undefined,
@@ -202,6 +199,7 @@ const DataList = (props) => {
   const handleDeleteModel = (value) => {
     setIsDeleteModal({ isDeleteModal: true, requestId: value });
   };
+
   return (
     <>
       <CreateData
