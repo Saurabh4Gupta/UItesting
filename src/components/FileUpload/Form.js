@@ -6,7 +6,7 @@ import constant from '../../utils/constant';
 
 const Form = (props) => {
   const { MAX_FILE_SIZE, ALLOWED_FILE_TYPES } = constant;
-  const { handleFileChange, errors, cmsData } = props;
+  const { handleFileChange, errors, cmsData, setError } = props;
 
   return (
     <>
@@ -22,7 +22,7 @@ const Form = (props) => {
             handleFileChange(fileItems);
           }}
           onError={(error) => {
-            console.log('[FORM]', error);
+            setError(error.main)
           }}
           maxFiles={1}
           maxFileSize={MAX_FILE_SIZE}
