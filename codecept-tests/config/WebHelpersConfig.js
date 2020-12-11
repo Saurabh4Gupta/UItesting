@@ -49,7 +49,7 @@ const WebDriver = {
 
 };
 
-/*const REST = {
+const REST = {
     headers: {
         'Content-Type': 'application/json',
         'accept': 'application/json'
@@ -64,9 +64,8 @@ const Puppeteer = {
     show: false,
     keepCookies: true,
     browser: 'chrome',
-};*/
+};
 
-/*
 const GraphQL = {
     endpoint: serverURL,
     timeout: 40000,
@@ -77,4 +76,3 @@ const GraphQL = {
     },
 };
 module.exports = {WebDriver, Puppeteer, REST, GraphQL};
-*/

@@ -4,10 +4,14 @@ const include = {
 };
 
 const gherkin = {
-    features: './src/features/*/*/*.feature',
+    features: './src/features/*.feature',
+
     steps: [
-        "./src/step_definitions/briefs_Steps.js",
-        "./src/step_definitions/login_step.js",
+
+
+      "./src/step_definitions/loginSteps.js",
+
+
     ],
 };
 

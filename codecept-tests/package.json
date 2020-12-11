@@ -8,7 +8,7 @@
     "test:sanity": "codeceptjs run --grep \"@sanity\" --plugins allure --config=./codecept.conf.js",
     "test:e2e": "codeceptjs run --plugins allure --config=./codecept.conf.js",
     "test:multiple": "codeceptjs run-multiple --all --config=./codecept.conf.js",
-    "test:smoke": "codeceptjs run --verbose --grep \"@smoke\" --plugins allure --config=./codecept.conf.js",
+    "test:smoke": "codeceptjs run --debug --grep \"@smoke\" --plugins allure --config=./codecept.conf.js",
     "test:report": "allure serve ./output",
     "test:report-gen": "allure generate ./output"
   },

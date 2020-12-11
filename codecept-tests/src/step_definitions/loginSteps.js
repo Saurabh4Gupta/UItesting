@@ -1,11 +1,15 @@
 const Dash = require('../pages/loginPage');
 const Okta= require('../pages/Login');
 
+
 const I = actor();
 
 Given('User logged into landing page', async () => {
- await Dash.login();
-  await Okta.login('global.admin1', 'Sh@kazu!u1');
+
+
+
+  await Dash.login(); //url call
+ await Okta.login('global.admin1', 'Sh@kazu!u1'); //credentials
 });
 
 Then('User is on landing page', async () => {

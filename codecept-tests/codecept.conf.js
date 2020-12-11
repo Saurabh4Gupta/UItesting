@@ -1,48 +1,31 @@
-const HOST_URL = process.env.HOST_URL || 'https://gdp-client01-brp-g1ga-media-ecosystem.az.brp.gdpdentsu.net/productivity-manager';
-
+require('import-export');
+//const hooks = require('./config/Hooks');
+const {include, gherkin} = require('./config/bddConfig');
+const {WebDriver, REST, GraphQL} = require('./config/webHelpersConfig');
+// const browser = ["chrome", "chrome", "chrome", "chrome"];
 exports.config = {
   output: './output',
+  // multiple: {
+  //     default: {grep: "@Sm3", browsers: browser[0]},
+  //     group1: {grep: "@Sm1", browsers: browser[1]},
+  //     group2: {grep: "@Sm2", browsers: browser[2]},
+  //     group3: {grep: "@Sm4", browsers: browser[3]}
+  // },
   helpers: {
-
-    Puppeteer: {
-      url: HOST_URL,
-      restart: false,
-      waitForNavigation: "networkidle0",
-      waitForTimeout: 20000,
-      show: false,
-      windowSize: '640x480',
-      "chrome":{
-        "args": ["--no-sandbox"]
-      }
-    }
+    WebDriver, REST,
+    customHelper: {require: './factories/MyHelper.js'}
   },
-  include: {
-    Admin:'./pages/loginPage.js',
-    Okta:'./pages/Login.js',
-  },
-  mocha: {
-    "reporterOptions": {
-      "reportDir": "codecept-tests/reports",
-      "inlineAssets": true,
-      "reportPageTitle": "iBRP Test Reports",
-      "reportTitle": "iBRP Test Reports",
-      "reportFilename": "index"
-    }
-  },
-  bootstrap: null,
-  teardown: null,
-  hooks: [],
-  gherkin: {
-    features: './features/*.feature',
-    steps: ['./step_definitions/loginSteps.js']
-  },
+  // bootstrapAll: hooks.setBootstrap,
+  // teardownAll: hooks.setTeardown,
+  // bootstrap: hooks.setBootstrap,
+  // teardown: hooks.setTeardown,
+  include,
+  gherkin,
   plugins: {
-    screenshotOnFail: {
-      enabled: true
+    screenshotOnFail: {enabled: true},
+    wdio: {
+      enabled: true, services: ['selenium-standalone']
     },
-    allure: {
-      enabled: true
-    }
+    allure: {enabled: true},
   },
-  name: 'dentsu-bdd-js'
-}
+  name: 'codecept-test'};

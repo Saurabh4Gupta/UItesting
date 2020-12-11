@@ -16,12 +16,14 @@ module.exports = {
 
   login() {
     I.amOnPage('');
+    I.wait(20);
     I.see('Sign In')
     //oktaPage.login('global.admin1', 'Sh@kazu!u1');
   },
 
   verifyLandingPage() {
-    I.waitForText('Welcome to the Media Ecosystem');
+    I.waitForVisible('//h1[text()=\'Welcome to the Media Ecosystem\']', 40);
+    I.seeElement('//h1[text()="Welcome to the Media Ecosystem"]');
   },
 
   loginToPM() {

@@ -3,7 +3,12 @@ const I = actor();
 module.exports = {
   fields: {
       createRequest:'//*[@class=\'dentsu-button__label\'][text()=\'Create new data request\']',
-      Market: '//*[@class=\'dentsu-select__value-container dentsu-select__value-container--has-value css-1rkr8u1\']',
+      marketFilter: '//*[@class=\'dentsu-select__value-container dentsu-select__value-container--has-value css-1rkr8u1\']',
+      ongoingTab: '//*[text()=\'Ongoing\']',
+      completeTab:'//*[text()=\'Complete\']',
+      clientLogo:'//*[@class=\'Pagestyles__StyledPageThumbnail-snr1bl-20 jLsJpE\']',
+      backToClients: '//*[contains(text(),\'Back to Clients\')]',
+    //*[text()='dentsu-icon-button__icon']
 
   },
 
@@ -19,6 +24,11 @@ module.exports = {
       browseArea:'//*[@id=\'filepond--browser-tsqcd8g4c\']',
       browserButton:'//*[@class="filepond--label-action"]',
       dueDate:'//*[@placeholder=\'Date\']',
+      assignTo:  '//*[@class=\'dentsu-select__input\']/input[@id=\'react-select-13-input\']',
+      cancelButton: '//*[text()="Cancel"]',
+      createButton: '//*[text()="Create"]',
+      crossButton: '//*[@data-icon=\'cross\']'
+
 
     },
 

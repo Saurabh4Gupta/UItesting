@@ -15,11 +15,11 @@ for pipeline :- "(e2e_env=test) && npm run test:e2e"
 
 const envConfig = {
 
-  env: process.env.E2E_ENV || 'hint-g1ds',
+  env: process.env.E2E_ENV || 'dev',
 
   dev: {
     web: {
-      HOST_URL: 'https://gdp-client01-brp-g1ga-media-ecosystem.az.brp.gdpdentsu.net/productivity-manager',
+      HOST_URL: 'https://gdp-client01-brp-g1ga-media-ecosystem.az.brp.gdpdentsu.net/',
     },
     server: {
       serverURL: 'http://mappingui01-dev-dan-mapping-svr.az.mapping.gdpdentsu.net/graphql',
@@ -28,7 +28,7 @@ const envConfig = {
 
   test: {
     web: {
-      HOST_URL: 'https://gdp-client01-brp-g1ga-media-ecosystem.az.brp.gdpdentsu.net/productivity-manager',
+      HOST_URL: 'https://gdp-client01-brp-g1ga-media-ecosystem.az.brp.gdpdentsu.net/',
     },
     server: {
       serverURL: 'http://mappingui01-test-dan-mapping-svr.az.mapping.gdpdentsu.net/graphql',
