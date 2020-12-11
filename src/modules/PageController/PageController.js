@@ -25,7 +25,7 @@ const PageController = (props) => {
   const { title, avatar } = clientList.find(
     (client) => client.clientCode === clientCode,
   );
-  const contentToShow = isViewProduct ? `Back To ${title}` : `${PageContent.backLabel}`;
+  const contentToShow = isViewProduct ? `Back to ${title}` : `${PageContent.backLabel}`;
   const clientNavigationHandler = () => (isViewProduct
     ? history.replace(`/datafield?client_code=${clientCode}`)
     : history.replace('/'));
