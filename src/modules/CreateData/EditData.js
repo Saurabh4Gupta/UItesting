@@ -2,10 +2,13 @@ import React, { useState, useEffect } from 'react'
 import { Button, Modal } from '@dentsu-ui/components';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
+import Toast from '@dentsu-ui/components/dist/cjs/components/Toast';
 import Form from './Form'
 import useCustomForm from '../../hooks/useCustomForm';
 import validationRule from '../../utils/validate';
 import { options, monthOptions, reportingYear, data } from '../Mock/mockData'
+import { dataFieldCms as PageContent } from '../../cms';
+
 
 const EditData = (props) => {
   const { cmsData, isModalOpen, handleModal, requestId, handleEditData } = props;
@@ -39,6 +42,13 @@ const EditData = (props) => {
   const closeModalHandler = () => {
     handleModal(false)
     handleCancel();
+    const toast = new Toast();
+
+    return toast({
+      title: '',
+      content: PageContent.toastRequestEdited,
+      status: 'success',
+    });
   }
   const onSubmit = () => {
     handleSubmit();
