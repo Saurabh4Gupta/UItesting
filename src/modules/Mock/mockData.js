@@ -461,6 +461,17 @@ const versionHistory = {
   ],
 }
 
+const userList = [
+  { value:'Ryan Killick',
+    label:'Ryan Killick' },
+  { value:'Ryan Manton',
+    label:'Ryan Manton' },
+  { value:'Howell Lee',
+    label:'Howell Lee' },
+  { value:'Boladale',
+    label:'Boladale' },
+  ];
+
 export {
   assignToOptions,
   monthOptions,
@@ -471,4 +482,5 @@ export {
   reportingYear,
   data,
   versionHistory,
+  userList,
 };

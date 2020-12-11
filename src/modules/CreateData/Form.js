@@ -10,13 +10,14 @@ import {
   Dropzone,
   Stack,
   Box,
+  ChipInput,
 } from '@dentsu-ui/components';
 import constant from '../../utils/constant';
 
 const Form = (props) => {
   const { MAX_FILE_SIZE, ALLOWED_FILE_TYPES } = constant;
   const { values, handleChange, handleSelectField, errors, cmsData, options, monthOptions, dueDate, reportingYear,
-    forecastOptions } = props;
+    forecastOptions, userList } = props;
   const [files, setFiles] = useState([]);
   const handleInit = () => {
     console.log('Dropzone instance has initialised', files);
@@ -165,15 +166,13 @@ const Form = (props) => {
         {...(errors.assignTo ? { error: errors.assignTo } : {})}
         hint={cmsData.assignToHint}
       >
-        <Select
-          menuPosition="fixed"
-          options={options}
+        <ChipInput
+          options={userList}
+          isMulti
           name="assignTo"
-          placeholder={cmsData.selectPlaceHolder}
-          onChange={(selected, event) => handleSelectField(selected, event)}
-          value={
-            options.find(key => key.value === values.assignTo.value)
-          }
+          onChange={(selected, event) => {
+            handleSelectField(selected, event)
+          }}
         />
       </FormField>
     </>
