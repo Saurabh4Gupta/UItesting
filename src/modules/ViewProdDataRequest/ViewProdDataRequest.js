@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useLocation } from 'react-router';
 import Box from '@dentsu-ui/components/dist/cjs/components/Box';
+import Toast from '@dentsu-ui/components/dist/cjs/components/Toast';
 import PageController from '../PageController/PageController';
 import { dataFieldCms as PageContent } from '../../cms';
 import withPageController from '../../hoc/withPageController';
@@ -18,7 +19,9 @@ const ViewProdDataRequest = (props) => {
   const location = useLocation();
   const query = new URLSearchParams(location.search);
   const requestId = query.get('request_id');
-  const [prodRequest, setProdRequest] = useState(data.find((request) => request.id === +requestId));
+  const [prodRequest, setProdRequest] = useState(
+    data.find((request) => request.id === +requestId),
+  );
 
   const [isUploadModal, setIsUploadModeal] = useState(false);
   const [isLoading, setLoading] = useState(true);
@@ -38,15 +41,30 @@ const ViewProdDataRequest = (props) => {
   }, []);
 
   const handleEditData = (values) => {
-    setProdRequest({ ...prodRequest,
-      localMarket : values.localMarket,
-      dueDate : values.dueDate.toLocaleDateString(),
-      name : values.name,
-      briefing : values.briefing,
-      actualData : values.actualData,
-      forecastData : values.forecastData,
-      reportingYear : 'April 2021 - March 2022',
-      assignTo : 'Ryan Manton' });
+    console.log(values)
+    try {
+      setProdRequest({
+        ...prodRequest,
+        localMarket: values.localMarket,
+        dueDate: values.dueDate.toLocaleDateString(),
+        name: values.name,
+        briefing: values.briefing,
+        actualData: values.actualData,
+        forecastData: values.forecastData,
+        reportingYear: values.reportingYear.value,
+        assignTo: 'Ryan Manton',
+      });
+
+      const toast = new Toast();
+
+      return toast({
+        title: '',
+        content: PageContent.toastRequestEdited,
+        status: 'success',
+      });
+    } catch (error) {
+      return null;
+    }
   };
 
   return (
@@ -71,7 +89,10 @@ const ViewProdDataRequest = (props) => {
             handleUploadModal={handleUploadModal}
             isCompleted={prodRequest.isCompleted}
           >
-            <RequestSummary prodRequest={prodRequest} handleEditData={handleEditData} />
+            <RequestSummary
+              prodRequest={prodRequest}
+              handleEditData={handleEditData}
+            />
             <Box mt="30px">
               <VersionHistory />
             </Box>
