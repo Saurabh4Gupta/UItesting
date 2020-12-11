@@ -76,7 +76,7 @@ export const dataFieldCms = {
   toastRequestCreated: 'Data request created',
   toastRequestEdited: 'Data request edited',
   toastRequestDeleted: 'Data request deleted',
-  toastFileUploaded: 'File Uploaded',
+  toastFileUploaded: 'File uploaded',
   toastMovedToOngoing: 'Data request moved to ongoing',
   toastMovedToComplete: 'Data request moved to complete',
   currentVersionText:'current version',
