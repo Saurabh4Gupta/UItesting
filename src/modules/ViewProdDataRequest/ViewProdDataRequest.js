@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useLocation } from 'react-router';
 import Box from '@dentsu-ui/components/dist/cjs/components/Box';
-import Toast from '@dentsu-ui/components/dist/cjs/components/Toast';
 import PageController from '../PageController/PageController';
 import { dataFieldCms as PageContent } from '../../cms';
 import withPageController from '../../hoc/withPageController';
@@ -45,30 +44,17 @@ const ViewProdDataRequest = (props) => {
   }, []);
 
   const handleEditData = (values) => {
-    console.log(values)
-    try {
-      setProdRequest({
-        ...prodRequest,
-        localMarket: values.localMarket,
-        dueDate: values.dueDate.toLocaleDateString(),
-        name: values.name,
-        briefing: values.briefing,
-        actualData: values.actualData,
-        forecastData: values.forecastData,
-        reportingYear: values.reportingYear.value,
-        assignTo: 'Ryan Manton',
-      });
-
-      const toast = new Toast();
-
-      return toast({
-        title: '',
-        content: PageContent.toastRequestEdited,
-        status: 'success',
-      });
-    } catch (error) {
-      return null;
-    }
+    setProdRequest({
+      ...prodRequest,
+      localMarket: values.localMarket,
+      dueDate: values.dueDate.toLocaleDateString(),
+      name: values.name,
+      briefing: values.briefing,
+      actualData: values.actualData,
+      forecastData: values.forecastData,
+      reportingYear: values.reportingYear.value,
+      assignTo: 'Ryan Manton',
+    });
   };
 
   return (
