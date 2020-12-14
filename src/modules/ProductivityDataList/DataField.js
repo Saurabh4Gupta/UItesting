@@ -11,7 +11,8 @@ import withPageController from '../../hoc/withPageController';
 
 const DataField = (props) => {
   const location = useLocation();
-  const { param } = props;
+  const state = { location }
+  const { param  } = props;
   const query = new URLSearchParams(location.search);
   const clientCode = query.get('client_code');
   const [filterDataBy, setFilterDataBy] = useState({
@@ -45,6 +46,12 @@ const DataField = (props) => {
       totalCount: ongoingData.totalCount,
     });
   };
+
+  if (state) {
+    const requestId = { state }
+    console.log('[REQUEST ID MOVED TO COMPLETE] =>', requestId)
+  }
+
 
   const addNewRequest = (request) => {
     const orignalArray = getData(filterDataBy.market.value).data;

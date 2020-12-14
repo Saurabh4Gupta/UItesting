@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { useLocation } from 'react-router';
+import { useLocation  } from 'react-router';
 import Box from '@dentsu-ui/components/dist/cjs/components/Box';
 import PageController from '../PageController/PageController';
 import { dataFieldCms as PageContent } from '../../cms';
@@ -17,13 +17,14 @@ const ViewProdDataRequest = (props) => {
 
   const { data } = prodRequests;
   const location = useLocation();
+
   const query = new URLSearchParams(location.search);
   const requestId = query.get('request_id');
   const [prodRequest, setProdRequest] = useState(
     data.find((request) => request.id === +requestId),
   );
 
-  const [isUploadModal, setIsUploadModeal] = useState(false);
+  const [isUploadModal, setIsUploadModal] = useState(false);
   const [isRequestModal, setIsRequestModal] = useState(false);
   const [isLoading, setLoading] = useState(true);
   const [filterDataBy] = useState({
@@ -32,7 +33,7 @@ const ViewProdDataRequest = (props) => {
   });
 
   const handleUploadModal = () => {
-    setIsUploadModeal(true);
+    setIsUploadModal(true);
   };
   const handleMoveToCompleteModal = () => {
     setIsRequestModal(true);
@@ -66,7 +67,7 @@ const ViewProdDataRequest = (props) => {
           {isUploadModal && (
             <UploadFile
               modalOpen={isUploadModal}
-              setModalOpen={setIsUploadModeal}
+              setModalOpen={setIsUploadModal}
               cmsData={PageContent}
             />
           )}
