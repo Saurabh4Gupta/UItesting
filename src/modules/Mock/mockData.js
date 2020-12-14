@@ -5,54 +5,131 @@ const data = {
       client: 'Microsoft',
       localMarket: { value: 'UK', label: 'United Kingdom' },
       status: 'Overdue',
+      clientMarket: 'Microsoft United Kingdom',
       name: 'Productivity Q2 2020',
-      briefing: 'Need Data for the Q2 2020',
-      dueDate: '2020-08-25',
+      briefing: `Lorem Ipsum is simply dummy text of the printing and typesetting
+      industry. Lorem Ipsum has been the industrys standard dummy text ever
+      since the 1500s, when an unknown printer took a galley of type and
+      scrambled it to make a type specimen book. It has survived not only
+      five centuries, but also the leap into electronic typesetting,
+      remaining essentially unchanged. It was popularised in the 1960s with
+      the release of Letraset sheets containing Lorem Ipsum passages, and
+      more recently with desktop publishing software like Aldus PageMaker
+      including versions of Lorem Ipsum. Lorem Ipsum is simply dummy text of
+      the printing industry.Lorem Ipsum is simply dummy text of the printing
+      and typesetting industry. Lorem Ipsum has been the industrys standard
+      dummy text ever since the 1500s and it still is.
+      Lorem Ipsum is simply dummy text of the printing and typesetting
+      industry. Lorem Ipsum has been the industrys standard dummy text ever
+      since the 1500s, when an unknown printer took a galley of type and
+      scrambled it to make a type specimen book. It has survived not only
+      five centuries, but also the leap into electronic typesetting,
+      remaining essentially unchanged. It was popularised in the 1960s with
+      the release of Letraset sheets containing Lorem Ipsum passages, and
+      more recently with desktop publishing software like Aldus PageMaker
+      including versions of Lorem Ipsum. Lorem Ipsum is simply dummy text of
+      the printing industry.Lorem Ipsum is simply dummy text of the printing
+      and typesetting industry. Lorem Ipsum has been the industrys standard
+      dummy text ever since the 1500s and it still is.
+      Lorem Ipsum is simply dummy text of the printing and typesetting
+      industry. Lorem Ipsum has been the industrys standard dummy text ever
+      since the 1500s, when an unknown printer took a galley of type and
+      scrambled it to make a type specimen book. It has survived not only
+      five centuries, but also the leap into electronic typesetting,
+      remaining essentially unchanged. It was popularised in the 1960s with
+      the release of Letraset sheets containing Lorem Ipsum passages, and
+      more recently with desktop publishing software like Aldus PageMaker
+      including versions of Lorem Ipsum. Lorem Ipsum is simply dummy text of
+      the printing industry.Lorem Ipsum is simply dummy text of the printing
+      and typesetting industry. Lorem Ipsum has been the industrys standard
+      dummy text ever since the 1500s and it still is.`,
+      dueDate: '13/07/2020',
       updatedAt: '29/10/20 at 14:32',
       createdAt: '2020-08-14',
-      assignTo: 'UK Team',
+      assignTo: 'Ryan Killick',
+      reportingYear: 'April 2020 - March 2021',
       actualData: { value: 4, label: '4 months' },
       forecastData: { value: 8, label: '8 months' },
       isActive: true,
       isDeleted: false,
       year: '2020',
       quarter: 'Q2',
+      totalTenure: '2020 Q2',
+      isCompleted:false,
     },
     {
       id: 2,
-      client: 'GM',
+      client: 'Microsoft',
       localMarket: { value: 'USA', label: 'USA' },
       status: '',
+      clientMarket: 'Microsoft USA',
       name: 'Productivity Q3 2020',
-      briefing: 'Need Data for the Q3 2020',
-      dueDate: '2020-12-30',
+      briefing: `Lorem Ipsum is simply dummy text of the printing and typesetting
+      industry. Lorem Ipsum has been the industrys standard dummy text ever
+      since the 1500s, when an unknown printer took a galley of type and
+      scrambled it to make a type specimen book. It has survived not only
+      five centuries, but also the leap into electronic typesetting,
+      remaining essentially unchanged. It was popularised in the 1960s with
+      the release of Letraset sheets containing Lorem Ipsum passages, and
+      more recently with desktop publishing software like Aldus PageMaker
+      including versions of Lorem Ipsum.`,
+      dueDate: '13/07/2020',
       updatedAt: '30/10/20 at 14:32',
       isActive: true,
       isDeleted: false,
-      actualData: { value: 10, label: '10 months' },
-      forecastData: { value: 2, label: '2 months' },
+      actualData: { value: 7, label: '7 months' },
+      forecastData: { value: 5, label: '5 months' },
       createdAt: '2020-08-14',
-      assignTo: 'UK Team',
+      assignTo: 'Ryan Killick',
+      reportingYear: 'April 2020 - March 2021',
       year: '2020',
       quarter: 'Q3',
+      totalTenure: '2020 Q3',
+      isCompleted:false,
     },
     {
       id: 3,
       client: 'Microsoft',
       localMarket: { value: 'UK', label: 'United Kingdom' },
       status: 'Overdue',
-      name: 'Productivity Q2 2020',
+      clientMarket: 'Microsoft United Kingdom',
+      name: 'Productivity Q1 2020',
       briefing: 'Need Data for the Q2 2020',
-      dueDate: '2020-08-25',
+      dueDate: '23/07/2020',
       updatedAt: '29/10/20 at 14:32',
       createdAt: '2020-08-14',
-      assignTo: 'UK Team',
-      actualData: { value: 4, label: '4 months' },
-      forecastData: { value: 8, label: '8 months' },
+      assignTo: 'Ryan Killick',
+      reportingYear: 'April 2020 - March 2021',
+      actualData: { value: 2, label: '2 months' },
+      forecastData: { value: 10, label: '10 months' },
       isActive: true,
       isDeleted: false,
       year: '2020',
-      quarter: 'Q2',
+      quarter: 'Q1',
+      totalTenure: '2020 Q1',
+      isCompleted:false,
+    },
+    {
+      id: 4,
+      client: 'Microsoft',
+      localMarket: { value: 'UK', label: 'United Kingdom' },
+      status: 'Overdue',
+      clientMarket: 'Microsoft United Kingdom',
+      name: 'Productivity Q1 2020',
+      briefing: 'Need Data for the Q2 2020',
+      dueDate: '23/12/2020',
+      updatedAt: '29/10/20 at 14:32',
+      createdAt: '2020-08-14',
+      assignTo: 'Ryan Killick',
+      reportingYear: 'April 2020 - March 2021',
+      actualData: { value: 3, label: '3 months' },
+      forecastData: { value: 9, label: '9 months' },
+      isActive: true,
+      isDeleted: false,
+      year: '2020',
+      quarter: 'Q1',
+      totalTenure: '2020 Q1',
+      isCompleted:false,
     },
   ],
 };
@@ -64,10 +141,13 @@ export const getCompletedData = () => ({
   completedCount: completedData.data.length,
   completedData: completedData.data,
 });
-export const getData = () => ({
-  totalCount: data.data.length,
-  data: data.data,
-});
+export const getData = (value) => {
+  if (value === '') {
+    return { totalCount: data.data.length, data: data.data }
+  }
+  const filerData = data.data.filter(key => key.localMarket.value === value);
+  return { totalCount: filerData.length, data: filerData };
+};
 
 export function updateData(values) {
   values.createdAt = new Date();
@@ -98,6 +178,12 @@ const options = [
     value: 'UK',
     label: 'United Kingdom',
   },
+  { value: 'USA', label: 'USA' },
+  { value: 'FR', label: 'France' },
+  { value: 'NZ', label: 'New Zealand' },
+  { value: 'SGP', label: 'Singapore' },
+  { value: 'Tk', label: 'Turkey' },
+  { value: 'IT', label: 'Italy' },
 ];
 
 const monthOptions = [
@@ -107,7 +193,7 @@ const monthOptions = [
   },
   {
     value: 1,
-    label: '1 months',
+    label: '1 month',
   },
   {
     value: 2,
@@ -171,6 +257,7 @@ const assignToOptions = [
     value: 'UK',
     label: 'United Kingdom',
   },
+
 ];
 
 const clientList = [
@@ -179,41 +266,209 @@ const clientList = [
   { title: 'Burger King', avatar: '', clientCode: 'BK' },
   { title: 'General Motors', avatar: '', clientCode: 'GM' },
   { title: "Kellogg's Company", avatar: '', clientCode: 'KC' },
-  { title: 'The Kraft Heinz Company', avatar: '', clientCode: 'KHC' },
   { title: 'Microsoft Corporation', avatar: 'abc.ico', clientCode: 'MC' },
   { title: 'Procter & Gamble', avatar: '', clientCode: 'PG' },
+  { title: 'The Kraft Heinz Company', avatar: '', clientCode: 'KHC' },
 ];
+const newDate = new Date();
+const nexStartDate =  newDate.getFullYear() + 1;
+const nextEndDate = newDate.getFullYear() + 2;
+
+const currentStartDate = newDate.getFullYear();
+const currentEndDate = newDate.getFullYear() + 1;
+
+const prevStartDate = newDate.getFullYear() - 1;
+const prevEndDate =  newDate.getFullYear();
+
+const market = [
+  { value: '', label: 'All Markets' },
+  {
+    value: 'ARG',
+    label: 'Argentina',
+  },
+  {
+    value: 'AUS',
+    label: 'Australia',
+  },
+  {
+    value: 'BEL',
+    label: 'Belgium',
+  },
+  {
+    value: 'UK',
+    label: 'United Kingdom',
+  },
+  { value: 'USA', label: 'USA' },
+  { value: 'FR', label: 'France' },
+  { value: 'NZ', label: 'New Zealand' },
+  { value: 'SGP', label: 'Singapore' },
+  { value: 'Tk', label: 'Turkey' },
+  { value: 'IT', label: 'Italy' },
+];
+
+const currency = [
+  { value: 'gbp', label: 'GBP(Default)' },
+  { value: 'usd', label: 'USD' },
+  { value: 'euro', label: 'EUR' },
+];
+const reportingYear = [
+  {
+    value: `April ${nexStartDate}  -  March ${nextEndDate}`,
+    label: `April ${nexStartDate}  -  March ${nextEndDate}`,
+  },
+  {
+    value:  `April ${currentStartDate}  -  March ${currentEndDate}`,
+    label:  `April ${currentStartDate}  -  March ${currentEndDate}`,
+  },
+  {
+    value: `April ${prevStartDate}  -  March ${prevEndDate}`,
+    label: `April ${prevStartDate}  -  March ${prevEndDate}`,
+  },
+]
 
 const versionHistory = {
   data: [
     {
-      id: 1,
-      name: 'Microsoft Uk - productivity Report ',
+      id: 13,
+      name: 'Microsoft Uk - Productivity Report - ',
+      type: 'XLS',
+      size: '242KB',
+      version: 'V12.0',
+      dataRequest: '',
+      blobId: '',
+      createdAt: '2020-12-01',
+    },
+    {
+      id: 12,
+      name: 'Microsoft Uk - Productivity Report - ',
+      type: 'XLS',
+      size: '242KB',
+      version: 'V11.0',
+      dataRequest: '',
+      blobId: '',
+      createdAt: '2020-12-01',
+    },
+    {
+      id: 11,
+      name: 'Microsoft Uk - Productivity Report - ',
+      type: 'XLS',
+      size: '242KB',
+      version: 'V10.0',
+      dataRequest: '',
+      blobId: '',
+      createdAt: '2020-12-01',
+    },
+    {
+      id: 10,
+      name: 'Microsoft Uk - Productivity Report - ',
+      type: 'XLS',
+      size: '242KB',
+      version: 'V9.0',
+      dataRequest: '',
+      blobId: '',
+      createdAt: '2020-12-01',
+    },
+    {
+      id: 9,
+      name: 'Microsoft Uk - Productivity Report - ',
       type: 'XLS',
       size: '242KB',
       version: 'V8.0',
       dataRequest: '',
       blobId: '',
+      createdAt: '2020-12-01',
     },
     {
-      id: 1,
-      name: 'Microsoft Uk - productivity Report ',
+      id: 8,
+      name: 'Microsoft Uk - Productivity Report - ',
       type: 'XLS',
       size: '242KB',
       version: 'V7.0',
       dataRequest: '',
       blobId: '',
+      createdAt: '2020-12-01',
     },
     {
-      id: 1,
-      name: 'Microsoft Uk - productivity Report ',
+      id: 7,
+      name: 'Microsoft Uk - Productivity Report - ',
       type: 'XLS',
       size: '242KB',
       version: 'V6.0',
       dataRequest: '',
       blobId: '',
+      createdAt: '2020-12-01',
+    },
+    {
+      id: 6,
+      name: 'Microsoft Uk - Productivity Report - ',
+      type: 'XLS',
+      size: '242KB',
+      version: 'V5.0',
+      dataRequest: '',
+      blobId: '',
+      createdAt: '2020-12-01',
+    },
+    {
+      id: 5,
+      name: 'Microsoft Uk - Productivity Report - ',
+      type: 'XLS',
+      size: '242KB',
+      version: 'V4.0',
+      dataRequest: '',
+      blobId: '',
+      createdAt: '2020-12-01',
+    },
+    {
+      id: 4,
+      name: 'Microsoft Uk - Productivity Report - ',
+      type: 'XLS',
+      size: '242KB',
+      version: 'V3.0',
+      dataRequest: '',
+      blobId: '',
+      createdAt: '2020-12-01',
+    },
+    {
+      id: 3,
+      name: 'Microsoft Uk - Productivity Report - ',
+      type: 'XLS',
+      size: '242KB',
+      version: 'V2.0',
+      dataRequest: '',
+      blobId: '',
+      createdAt: '2020-12-01',
+    },
+    {
+      id: 2,
+      name: 'Microsoft Uk - Productivity Report - ',
+      type: 'XLS',
+      size: '242KB',
+      version: 'V1.0',
+      dataRequest: '',
+      blobId: '',
+      createdAt: '2020-12-01',
+    },
+    {
+      id: 1,
+      name: 'Microsoft Uk - Productivity Report - ',
+      type: 'XLS',
+      size: '242KB',
+      version: 'Template',
+      dataRequest: '',
+      blobId: '',
+      createdAt: '2020-12-01',
     },
   ],
 }
 
-export { assignToOptions, monthOptions, options, clientList, versionHistory };
+export {
+  assignToOptions,
+  monthOptions,
+  options,
+  clientList,
+  market,
+  currency,
+  reportingYear,
+  data,
+  versionHistory,
+};

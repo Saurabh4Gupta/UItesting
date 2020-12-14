@@ -1,73 +1,137 @@
-import React from 'react';
-import { Layout, List, Link } from '@dentsu-ui/components';
+/* eslint-disable radix */
+import React, { useState } from 'react';
+import {
+  List,
+  Link,
+  Image,
+  Stack,
+  Icon,
+  Divider,
+  Chip,
+  Button,
+} from '@dentsu-ui/components';
+import Box from '@dentsu-ui/components/dist/cjs/components/Box';
+import Card from '@dentsu-ui/components/dist/cjs/components/Card';
+import { slice, concat } from 'lodash';
+import Layout from '@dentsu-ui/components/dist/cjs/components/Layout';
+import Paragraph from '@dentsu-ui/components/dist/cjs/components/Paragraph';
 import { versionHistory } from '../Mock/mockData';
-// import { dataFieldCms as PageContent } from '../../cms';
+import { dataFieldCms as PageContent } from '../../cms';
 
+const VersionHistory = () => {
+  const len = versionHistory.data.length;
+  const LIMIT = 10;
+  const [list, setList] = useState(slice(versionHistory.data, 0, LIMIT));
+  const [index, setIndex] = useState(LIMIT);
 
-const VersionHistory = (props) => {
-  console.log('versionHistory', versionHistory);
+  const loadMore = () => {
+    const newIndex = index + LIMIT;
+    const newList = concat(list, slice(versionHistory.data, index, newIndex));
+    setIndex(newIndex);
+    setList(newList);
+  };
   return (
-    <>
-      <Layout>
-        <Layout.Section size="4/6" offset="0" mr={0}>
-          {/* <Layout.Panel
-            metadata="App name"
-            title="Panel Title"
-            description="Panel Description"
-            actions={<IconButton icon="cog" variant="ghost" size="small" />}
-          >
-            Hello World
-          </Layout.Panel> */}
-        </Layout.Section>
-        <Layout.Section size="2/6" ml={0}>
-          <Layout.Panel
-            metadata="App name"
-            title="Version history"
-          />
+    <Layout>
+      <Layout.Section>
+        <Card>{/* <h1>Comments</h1> */}</Card>
+      </Layout.Section>
+      <Layout.Section size="1/3">
+        <Card>
+          <Card.Title>{PageContent.versionHistoryTitle}</Card.Title>
           <List
             hasTotal={false}
             isSearchable={false}
-            items={versionHistory}
-            renderItem={(item, index) => {
-              const { name, size, type } = item;
+            items={list}
+            total={versionHistory.data.length}
+            renderItem={(item) => {
+              const { name, size, type, version } = item;
+              const dataLength = versionHistory.data.length;
               return (
-                <List.Row
-                  key={index}
-                  metadata={(
-                    <Link
-                      style={{ color: 'black', textDecoration: 'none' }}
-                      onClick={() => showClientDetails(clientCode)}
-                    >
-                      {name}
-                    </Link>
-                  )}
-                  // media={(
-                  //   <Link>
-                  //     <Image
-                  //       src={avatar}
-                  //       size="30px"
-                  //       fallbackSrc="https://via.placeholder.com/150"
-                  //       onClick={() => showClientDetails(clientCode)}
-                  //     />
-                  //   </Link>
-                  // )}
-                  actions={(
-                    <Link
-                      iconLeft="layers"
-                      url={`/datafield?client_code=${clientCode}`}
-                    >
-                      {cmsData.viewDetails}
-                    </Link>
-                  )}
-                />
+                <Link url="/DataMappings.xlsx" style={{ color: 'black' }}>
+                  <Stack
+                    flexDirection="row"
+                    justifyContent="space-between"
+                    style={{ border: '1px solid #f6f6f6' }}
+                    mb="2"
+                    width="370px"
+                    mt="2"
+                  >
+                    <Box mt="12px" ml="12px">
+                      <Card.Thumbnail>
+                        <Image
+                          htmlWidth={40}
+                          height={40}
+                          objectFit="contain"
+                          src="/microsoft-excel-icon.png"
+                          fallbackSrc="https://via.placeholder.com/150"
+                        />
+                      </Card.Thumbnail>
+                    </Box>
+
+                    <Stack flexDirection="column" mb="20px">
+                      <Box mt="15px" ml="10px">
+                        <Paragraph style={{ fontSize: '12px' }} isBold>
+                          {`${name} ${version}`}
+                        </Paragraph>
+                      </Box>
+                      <Box style={{ fontSize: '12px' }} ml="10px" mt="7px">
+                        {size}
+                        <Divider orientation="vertical" />
+                        {type}
+                        {dataLength > 1 && (
+                          <>
+                            {version === `V${dataLength - 1}.0` && (
+                              <>
+                                <Divider orientation="vertical" />
+                                <Chip
+                                  variant="status"
+                                  status="neutral"
+                                  style={{ fontSize: '8px' }}
+                                >
+                                  {PageContent.currentVersionText}
+                                </Chip>
+                              </>
+                            )}
+                          </>
+                        )}
+                      </Box>
+                    </Stack>
+                    <Box>
+                      <Icon
+                        style={{
+                          marginTop: '15px',
+                          marginRight: '10px',
+                          marginLeft: '25px',
+                        }}
+                        icon="download"
+                        color="blue"
+                        size="14"
+                      />
+                    </Box>
+                  </Stack>
+                </Link>
               );
             }}
           />
-
-        </Layout.Section>
-      </Layout>
-    </>
-  )
-}
+          {len >= 10 && list.length < len ? (
+            <Box style={{ margin: '10px auto' }}>
+              <Button
+                variant="ghost"
+                size="small"
+                iconRight="refresh"
+                style={{ color: 'black' }}
+                onClick={loadMore}
+              >
+                {PageContent.loadMoreText}
+              </Button>
+            </Box>
+          ) : (
+            false
+          )}
+        </Card>
+      </Layout.Section>
+    </Layout>
+  );
+};
 
 export default VersionHistory;

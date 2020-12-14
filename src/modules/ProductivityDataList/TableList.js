@@ -11,32 +11,49 @@ import {
   Divider,
 } from '@dentsu-ui/components';
 import { useHistory } from 'react-router';
+import Card from '@dentsu-ui/components/dist/cjs/components/Card';
+import Paragraph from '@dentsu-ui/components/dist/cjs/components/Paragraph';
 import ActionBtn from './ActionBtn';
+import DeleteData from '../CreateData/DeleteData';
 
 const TableList = (props) => {
   const {
     cmsData,
     data,
     handleToggleData,
+    deleteModalData,
+    setIsDeleteModal,
     actionName,
     showStatus,
     handleDeleteModel,
     clientCode,
+    deleteRequest,
+    search,
+    handleMoveToCompleteModel,
+    setIsMoveToCompleteModel,
+    moveToCompleteModelData,
   } = props;
 
-  const history = useHistory()
+  const history = useHistory();
 
   const showDataRequestDetails = (id) => {
-    const queryString = `client_code=${clientCode}&request_id=${id}`
+    const queryString = `client_code=${clientCode}&request_id=${id}`;
     history.push({
       pathname: '/viewDetails',
       search: `?${queryString}`,
-    })
-   // history.push(`/viewDetails?client_code=${clientCode}&request_id=${id}`);
+    });
   };
 
   return (
     <Box mt="30px">
+      <DeleteData
+        deleteModalData={deleteModalData}
+        setModalOpen={setIsDeleteModal}
+        deleteRequest={deleteRequest}
+        moveToCompleteModelData={moveToCompleteModelData}
+        setIsMoveToCompleteModel={setIsMoveToCompleteModel}
+        handleToggleData={handleToggleData}
+      />
       <List
         items={data}
         searchBy="client"
@@ -44,9 +61,10 @@ const TableList = (props) => {
         rowsText="results in total"
         filteredText=""
         rowText="result in total"
+        onSearchChange={(input) => search(input)}
         filters={[
           {
-            key: 'enabled',
+            key: 'totalTenure',
             label: 'Show',
             type: 'choice',
             defaultText: 'All',
@@ -109,11 +127,11 @@ const TableList = (props) => {
                         <Chip variant="status" status="warning" hasStatusLight>
                           {cmsData.overdue}
                         </Chip>
-                      ) : (
-                        ''
-                      )}
+                        ) : (
+                            ''
+                          )}
                     </Box>
-                  )}
+                    )}
                   <Box width="30%">{`${cmsData.lastUpdate}: ${updatedAt}`}</Box>
                 </Stack>
                 <Stack
@@ -139,17 +157,24 @@ const TableList = (props) => {
                       handleToggleData={() => handleToggleData(id)}
                       deleteBtn={cmsData.delete}
                       showStatus={showStatus}
-                      objId={id}
-                      handleDeleteModel={handleDeleteModel}
+                      handleDeleteModel={() => handleDeleteModel(id)}
+                      handleMoveToCompleteModel={() => handleMoveToCompleteModel(id)}
                     />
                   </Box>
                 </Stack>
               </Stack>
-              <Divider />
+              {index === data.length - 1 ? '' : <Divider />}
             </div>
           );
         }}
       />
+      {data.length < 1 && (
+        <Card style={{ border: '0px', height: '300px' }}>
+          <Paragraph style={{ margin: 'auto' }}>
+            Sorry, no results found
+          </Paragraph>
+        </Card>
+      )}
     </Box>
   );
 };
@@ -159,13 +184,24 @@ TableList.propTypes = {
   handleToggleData: PropTypes.func.isRequired,
   actionName: PropTypes.string.isRequired,
   showStatus: PropTypes.string,
+  deleteModalData: PropTypes.object,
+  setIsDeleteModal: PropTypes.func.isRequired,
   handleDeleteModel: PropTypes.func.isRequired,
   clientCode: PropTypes.string,
+  search: PropTypes.func,
+  deleteRequest: PropTypes.func,
+  handleMoveToCompleteModel: PropTypes.object,
+  setIsMoveToCompleteModel: PropTypes.func.isRequired,
+  moveToCompleteModelData: PropTypes.func.isRequired,
 };
 TableList.defaultProps = {
   cmsData: {},
   showStatus: '',
   clientCode: '',
+  search: {},
+  deleteModalData: {},
+  deleteRequest: () => { },
+  handleMoveToCompleteModel: () => { },
 };
 
 export default TableList;

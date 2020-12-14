@@ -15,16 +15,20 @@ import constant from '../../utils/constant';
 
 const Form = (props) => {
   const { MAX_FILE_SIZE, ALLOWED_FILE_TYPES } = constant;
-  const { values, handleChange, handleSelectField, errors, cmsData, options, monthOptions, dueDate } = props;
+  const { values, handleChange, handleSelectField, errors, cmsData, options, monthOptions, dueDate, reportingYear,
+    forecastOptions } = props;
   const [files, setFiles] = useState([]);
   const handleInit = () => {
     console.log('Dropzone instance has initialised', files);
   };
+  const now = new Date();
+  const maxDate = new Date();
+  maxDate.setFullYear(now.getFullYear() + 1);
   return (
     <>
       <FormField
-        {...(errors.localMarket ? { error: errors.localMarket } : {})}
         label={cmsData.localMarketLabel}
+        {...(errors.localMarket ? { error: errors.localMarket } : {})}
         hint={cmsData.localMarketHint}
       >
         <Select
@@ -63,7 +67,61 @@ const Form = (props) => {
           onChange={handleChange}
         />
       </FormField>
+      <Stack flex="row">
+        <Box width="350px">
+          <FormField
+            label={cmsData.reportingYearLabel}
+            {...(errors.reportingYear ? { error: errors.reportingYear } : {})}
+            hint={cmsData.reportingYearHint}
+          >
+            <Select
+              name="reportingYear"
+              options={reportingYear}
+              value={values.reportingYear}
+              placeholder={cmsData.selectPlaceHolder}
+              onChange={(selected, event) => {
+                handleSelectField(selected, event)
+              }}
+            />
+          </FormField>
+        </Box>
+      </Stack>
+      <Stack flex="row">
+        <Box mr="30px" width="50%">
+          <FormField
+            label={cmsData.actualDataLabel}
+            {...(errors.actualData ? { error: errors.actualData } : {})}
+            hint={cmsData.actualDataHint}
+          >
+            <Select
+              name="actualData"
+              options={monthOptions}
+              value={values.actualData}
+              placeholder={cmsData.selectPlaceHolder}
+              onChange={(selected, event) => {
+                handleSelectField(selected, event)
+              }}
+            />
+          </FormField>
+        </Box>
+        <Box width="50%">
+          <FormField
+            isDisabled={!forecastOptions}
+            label={cmsData.forecastDataLabel}
+            {...(errors.forecastData ? { error: errors.forecastData } : {})}
+            hint={cmsData.forecastDataHint}
+          >
+            <Select
+              name="forecastData"
+              placeholder={cmsData.selectPlaceHolder}
+              value={values.forecastData}
+              options={forecastOptions}
+              onChange={(selected, event) => handleSelectField(selected, event)}
+            />
 
+          </FormField>
+        </Box>
+      </Stack>
       <FormField
         label={cmsData.templateFileLabel}
         hint={cmsData.templateFileHint}
@@ -85,43 +143,6 @@ const Form = (props) => {
         />
 
       </FormField>
-      <Stack flex="row">
-        <Box mr="30px">
-          <FormField
-            label={cmsData.actualDataLabel}
-            {...(errors.actualData ? { error: errors.actualData } : {})}
-            hint={cmsData.actualDataHint}
-          >
-            <Select
-              name="actualData"
-              options={monthOptions}
-              value={values.actualData}
-              placeholder={cmsData.selectPlaceHolder}
-              onChange={(selected, event) => {
-                handleSelectField(selected, event)
-              }}
-            />
-          </FormField>
-        </Box>
-        <Box>
-          <FormField
-            label={cmsData.forecastDataLabel}
-            {...(errors.forecastData ? { error: errors.forecastData } : {})}
-            hint={cmsData.actualDataHint}
-          >
-            <Select
-              name="forecastData"
-              placeholder={cmsData.selectPlaceHolder}
-              value={values.forecastData}
-              options={monthOptions}
-              onChange={(selected, event) => {
-                handleSelectField(selected, event)
-              }}
-            />
-
-          </FormField>
-        </Box>
-      </Stack>
       <FormField
         {...(errors.dueDate ? { error: errors.dueDate } : {})}
         label={cmsData.dueDateLabel}
@@ -134,6 +155,7 @@ const Form = (props) => {
           formatDate={(date) => date.toLocaleDateString()}
           onChange={(date) => handleSelectField(date, { name: 'dueDate' })}
           minDate={new Date()}
+          maxDate={new Date(maxDate)}
           value={dueDate}
         />
       </FormField>

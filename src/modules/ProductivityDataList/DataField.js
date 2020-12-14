@@ -2,134 +2,104 @@
 import React, { useState, useEffect } from 'react';
 import { Box } from '@dentsu-ui/components';
 import { useLocation } from 'react-router';
-import CreateData from '../CreateData/CreateData';
-import Overview from '../Overview/Overview';
 import PageController from '../PageController/PageController';
 import DataList from './DataList';
 import { dataFieldCms as PageContent } from '../../cms';
-import { getData, getCompletedData } from '../Mock/mockData';
+import { getData } from '../Mock/mockData';
 import UploadFile from '../FileUpload/UploadFile';
-import DeleteData from '../CreateData/DeleteData';
+import withPageController from '../../hoc/withPageController';
 
-const DataField = () => {
+const DataField = (props) => {
   const location = useLocation();
+  const { param } = props;
   const query = new URLSearchParams(location.search);
-  const clientCode = query.get('client_code')
-  const [market] = useState('');
-  const [ongoingData, setDataList] = useState(getData);
-  const [completeData, setCompleteData] = useState(getCompletedData);
-  const [isDataCreated, setDataCreated] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const clientCode = query.get('client_code');
+  const [filterDataBy, setFilterDataBy] = useState({
+    market: { label: 'All Markets', value: '' },
+  });
+  const [ongoingData, setDataList] = useState({ data: [], totalCount: 0 });
   const [isUploadModal, setIsUploadModal] = useState(false);
-  const [isDeleteModal, setIsDeleteModal] = useState(false);
-  const [tabIndex, setTabIndex] = useState(0);
-  const [idDelete, setID] = useState(0);
+  const [isLoading, setLoading] = useState(true);
+  const [originalOngingList, setOriginalOngoingList] = useState(
+    getData(filterDataBy.market.value),
+  );
 
-  const handleToggleData = (id) => {
-    if (tabIndex === 0) {
-      const filterCompleteList = ongoingData.data.filter(
-        (item) => item.id === id,
-      );
-      const tempData = [...completeData.completedData, ...filterCompleteList];
-      const finalCompletedList = {
-        completedCount: tempData.length,
-        completedData: tempData,
-      };
-      const OngoingRequest = ongoingData.data.filter((item) => item.id !== id);
-      const filterOngoinglist = {
-        totalCount: OngoingRequest.length,
-        data: OngoingRequest,
-      };
-      setDataList(filterOngoinglist);
-      setCompleteData(finalCompletedList);
+  const updateOngoingList = (id, isToAdd) => {
+    let filteredArray = [];
+
+    const orignalArray = getData(filterDataBy.market.value).data;
+
+    if (isToAdd) {
+      const newArray = orignalArray.find((a) => a.id === id);
+
+      filteredArray = [...originalOngingList.data];
+      filteredArray.push(newArray);
     } else {
-      const filterOngoingList = completeData.completedData.filter(
-        (item) => item.id === id,
+      filteredArray = originalOngingList.data.filter(
+        (value) => value.id !== id,
       );
-      const tempData = [...ongoingData.data, ...filterOngoingList];
-      const finalOngoingList = { totalCount: tempData.length, data: tempData };
-      const completedRequest = completeData.completedData.filter(
-        (item) => item.id !== id,
-      );
-      const filterCompletedlist = {
-        completedCount: completedRequest.length,
-        completedData: completedRequest,
-      };
-      setDataList(finalOngoingList);
-      setCompleteData(filterCompletedlist);
     }
+
+    setOriginalOngoingList({
+      data: filteredArray,
+      totalCount: ongoingData.totalCount,
+    });
   };
 
-  const deleteRequest = () => {
-    const OngoingRequest = ongoingData.data.filter(
-      (item) => item.id !== idDelete,
-    );
-    const filterOngoinglist = {
-      totalCount: OngoingRequest.length,
-      data: OngoingRequest,
-    };
-    setIsDeleteModal(false);
-    setDataList(filterOngoinglist);
+  const addNewRequest = (request) => {
+    const orignalArray = getData(filterDataBy.market.value).data;
+    const filteredArray = [...orignalArray, request];
+
+    setOriginalOngoingList({
+      data: filteredArray,
+      totalCount: filteredArray.length,
+    });
   };
 
-  const handleTabIndex = (index) => {
-    setTabIndex(index);
-  };
-
-  const handleModal = (value) => {
-    setIsModalOpen(value);
-  };
-
-  const handleDeleteModel = (value) => {
-    setIsDeleteModal(true);
-    setID(value);
+  const handleMarket = (selected) => {
+    setLoading(true);
+    setFilterDataBy({ market: selected });
   };
   useEffect(() => {
-    if (isDataCreated) {
-      setDataList(getData);
-    }
-  }, [isDataCreated]);
+    setTimeout(() => {
+      setLoading(false);
+      setDataList(getData(filterDataBy.market.value));
+      setOriginalOngoingList(getData(filterDataBy.market.value));
+    }, 2000);
+  }, [filterDataBy]);
+
   return (
     <>
       <PageController
-        isToShowDataRequest={false}
-        setIsUploadModal={setIsUploadModal}
-
-      />
-      <Box m="45px" mb="200px">
-        <Overview />
-        <CreateData
-          cmsData={PageContent}
-          market={market}
-          isModalOpen={isModalOpen}
-          handleModal={handleModal}
-          setDataCreated={setDataCreated}
-        />
-        <UploadFile
-          cmsData={PageContent}
-          modalOpen={isUploadModal}
-          setModalOpen={setIsUploadModal}
-        />
-        <DeleteData
-          modalOpen={isDeleteModal}
-          setModalOpen={setIsDeleteModal}
-          deleteRequest={deleteRequest}
-        />
-        <DataList
-          cmsData={PageContent}
-          handleModal={handleModal}
-          ongoingDataList={ongoingData}
-          completeDataList={completeData}
-          handleToggleData={handleToggleData}
-          tabIndex={tabIndex}
-          handleTabIndex={handleTabIndex}
-          handleDeleteModel={handleDeleteModel}
-          clientCode={clientCode}
-
-        />
-      </Box>
+        param={param}
+        filterDataBy={filterDataBy}
+        handleMarket={handleMarket}
+        pageTitle=""
+        pageMetadata="Client Overview"
+        isCompleted=""
+      >
+        <Box mb="200px">
+          <UploadFile
+            cmsData={PageContent}
+            modalOpen={isUploadModal}
+            setModalOpen={setIsUploadModal}
+          />
+          <DataList
+            cmsData={PageContent}
+            market={filterDataBy.market}
+            clientCode={clientCode}
+            dataList={ongoingData}
+            setDataList={setDataList}
+            loading={isLoading}
+            updateOngoingList={updateOngoingList}
+            originalOngingList={originalOngingList}
+            setOriginalOngoingList={setOriginalOngoingList}
+            addNewRequest={addNewRequest}
+          />
+        </Box>
+      </PageController>
     </>
   );
 };
 
-export default DataField;
+export default withPageController(DataField);

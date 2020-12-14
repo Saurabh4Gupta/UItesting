@@ -1,50 +1,110 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { Box, Link } from '@dentsu-ui/components';
+import { useLocation } from 'react-router';
+import Box from '@dentsu-ui/components/dist/cjs/components/Box';
 import PageController from '../PageController/PageController';
-import EditData from '../CreateData/EditData'
 import { dataFieldCms as PageContent } from '../../cms';
-import  VersionHistory  from '../VersionHistory/VersionHistory';
+import withPageController from '../../hoc/withPageController';
+import UploadFile from '../FileUpload/UploadFile';
+import RequestSummary from './RequestSummary/RequestSummary';
+import { data as prodRequests } from '../Mock/mockData';
+import Loader from '../../components/loading';
+import VersionHistory from '../VersionHistory/VersionHistory';
+import MoveToComplete from '../MoveToComplete/MoveToComplete'
 
 const ViewProdDataRequest = (props) => {
-  const { match } = props;
-  const { params } = match;
-  const { id } = params;
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [market] = useState('');
-  const handleModal = (value) => {
-    setIsModalOpen(value);
+  const { param } = props;
+
+  const { data } = prodRequests;
+  const location = useLocation();
+  const query = new URLSearchParams(location.search);
+  const requestId = query.get('request_id');
+  const [prodRequest, setProdRequest] = useState(
+    data.find((request) => request.id === +requestId),
+  );
+
+  const [isUploadModal, setIsUploadModeal] = useState(false);
+  const [isRequestModal, setIsRequestModal] = useState(false);
+  const [isLoading, setLoading] = useState(true);
+  const [filterDataBy] = useState({
+    currency: { label: 'GBP (Default)', value: 'gbp' },
+    year: { label: 'Year to date', value: '' },
+  });
+
+  const handleUploadModal = () => {
+    setIsUploadModeal(true);
   };
-  const handleCreateData = () => {
-    handleModal(true);
+  const handleMoveToCompleteModal = () => {
+    setIsRequestModal(true);
   };
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+  }, []);
+
+  const handleEditData = (values) => {
+    setProdRequest({
+      ...prodRequest,
+      localMarket: values.localMarket,
+      dueDate: values.dueDate.toLocaleDateString(),
+      name: values.name,
+      briefing: values.briefing,
+      actualData: values.actualData,
+      forecastData: values.forecastData,
+      reportingYear: values.reportingYear.value,
+      assignTo: 'Ryan Manton',
+    });
+  };
+
   return (
     <>
-      <PageController
-        isToShowDataRequest
-        clientCode={id}
-        setIsUploadModal={false}
-        {...props}
-      />
-      <Box m="45px" mb="200px">
-        <Link iconLeft="edit" onClick={handleCreateData}>
-          {PageContent.editRequest}
-        </Link>
-      </Box>
-      <EditData
-        cmsData={PageContent}
-        market={market}
-        isModalOpen={isModalOpen}
-        handleModal={handleModal}
-      />
-      <VersionHistory />
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <>
+          {isUploadModal && (
+            <UploadFile
+              modalOpen={isUploadModal}
+              setModalOpen={setIsUploadModeal}
+              cmsData={PageContent}
+            />
+          )}
+          {isRequestModal && (
+          <MoveToComplete
+            modalOpen={isRequestModal}
+            setModalOpen={setIsRequestModal}
+            cmsData={PageContent}
+            requestId={requestId}
+          />
+          )}
+          <PageController
+            param={param}
+            localMarket={prodRequest.localMarket.label}
+            filterDataBy={filterDataBy}
+            pageTitle={prodRequest.name}
+            pageMetadata={prodRequest.clientMarket}
+            handleUploadModal={handleUploadModal}
+            isCompleted={prodRequest.isCompleted}
+            handleMoveToCompleteModal={handleMoveToCompleteModal}
+          >
+            <RequestSummary
+              prodRequest={prodRequest}
+              handleEditData={handleEditData}
+            />
+            <Box mt="30px">
+              <VersionHistory />
+            </Box>
+          </PageController>
+        </>
+      )}
     </>
   );
 };
 ViewProdDataRequest.propTypes = {
-  match: PropTypes.object,
+  param: PropTypes.object,
 };
 ViewProdDataRequest.defaultProps = {
-  match: {},
+  param: {},
 };
-export default ViewProdDataRequest;
+export default withPageController(ViewProdDataRequest, { isViewProduct: true });

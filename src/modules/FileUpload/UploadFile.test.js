@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { shallow } from 'enzyme';
 import UploadFile from './UploadFile';
@@ -13,14 +12,19 @@ describe('Success test cases for: UploadFile component', () => {
     });
 
     it('Test Upload click event', () => {
-      wrapper.find({ children: PageContent.upload}).simulate('click');
+      wrapper.find({ children: PageContent.upload }).simulate('click');
     });
     it('Test Cancel click event', () => {
       wrapper.find({ children: PageContent.cancel }).simulate('click');
     });
+    it('Test Cancel click event', () => {
+      wrapper.debug().handleFileChange([]);
+      console.log('[TESTING]', wrapper.debug())
 
+     // wrapper.find({ children: 'Cancel' }).simulate('click');
+    });
 
-   it('invoking handleFileChange functions',()=>{
+   it('invoking handleFileChange functions', () => {
     const pageControls = wrapper.find('ForwardRef').at(2).find('Form');
     expect(pageControls.prop('handleFileChange')());
    })
