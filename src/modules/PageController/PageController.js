@@ -20,6 +20,7 @@ const PageController = (props) => {
     pageTitle,
     isCompleted,
     pageMetadata,
+    handleMoveToCompleteModal,
   } = props;
   const { isViewProduct } = param;
   const { title, avatar } = clientList.find(
@@ -53,6 +54,16 @@ const PageController = (props) => {
             }
             : false
         }
+        secondaryActions={
+          isViewProduct && !isCompleted
+            && [{
+          content: 'Move to complete',
+          onClick: () => handleMoveToCompleteModal(),
+          isDisabled: false,
+          variant: 'ghost',
+          icon: 'archive',
+        }]
+      }
         controls={
           !isViewProduct && (
             <FormField>
@@ -83,6 +94,7 @@ PageController.propTypes = {
   pageTitle: PropTypes.string,
   isCompleted: PropTypes.bool,
   pageMetadata: PropTypes.string,
+  handleMoveToCompleteModal: PropTypes.func,
 };
 
 PageController.defaultProps = {
@@ -98,5 +110,6 @@ PageController.defaultProps = {
   pageTitle: '',
   isCompleted: false,
   pageMetadata: '',
+  handleMoveToCompleteModal: () => { },
 };
 export default PageController;
