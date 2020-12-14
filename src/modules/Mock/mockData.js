@@ -55,7 +55,7 @@ const data = {
       year: '2020',
       quarter: 'Q2',
       totalTenure: '2020 Q2',
-      isCompleted:false,
+      isCompleted: false,
     },
     {
       id: 2,
@@ -85,7 +85,7 @@ const data = {
       year: '2020',
       quarter: 'Q3',
       totalTenure: '2020 Q3',
-      isCompleted:false,
+      isCompleted: false,
     },
     {
       id: 3,
@@ -107,7 +107,7 @@ const data = {
       year: '2020',
       quarter: 'Q1',
       totalTenure: '2020 Q1',
-      isCompleted:false,
+      isCompleted: false,
     },
     {
       id: 4,
@@ -129,7 +129,29 @@ const data = {
       year: '2020',
       quarter: 'Q1',
       totalTenure: '2020 Q1',
-      isCompleted:false,
+      isCompleted: false,
+    },
+    {
+      id: 5,
+      client: 'Microsoft',
+      localMarket: { value: 'UK', label: 'United Kingdom' },
+      status: 'Overdue',
+      clientMarket: 'Microsoft United Kingdom',
+      name: 'Productivity Q1 2020',
+      briefing: 'Need Data for the Q2 2020',
+      dueDate: '23/12/2020',
+      updatedAt: '29/10/20 at 14:32',
+      createdAt: '2020-08-14',
+      assignTo: 'Ryan Killick',
+      reportingYear: 'April 2020 - March 2021',
+      actualData: { value: 3, label: '3 months' },
+      forecastData: { value: 9, label: '9 months' },
+      isActive: true,
+      isDeleted: false,
+      year: '2020',
+      quarter: 'Q1',
+      totalTenure: '2020 Q1',
+      isCompleted: true,
     },
   ],
 };
@@ -141,12 +163,15 @@ export const getCompletedData = () => ({
   completedCount: completedData.data.length,
   completedData: completedData.data,
 });
-export const getData = (value) => {
-  if (value === '') {
-    return { totalCount: data.data.length, data: data.data }
+export const getData = (market, status) => {
+  if (market === '' || market === undefined) {
+    const filerData = data.data.filter(key => !key.isCompleted && !!key.isDeleted);
+    return { totalCount: data.data.length, data: filerData }
   }
-  const filerData = data.data.filter(key => key.localMarket.value === value);
-  return { totalCount: filerData.length, data: filerData };
+  if (status === 'ongoing') {
+    const filerData = data.data.filter(key => key.localMarket.value === market && !key.isCompleted);
+    return { totalCount: filerData.length, data: filerData };
+  }
 };
 
 export function updateData(values) {
@@ -271,14 +296,14 @@ const clientList = [
   { title: 'The Kraft Heinz Company', avatar: '', clientCode: 'KHC' },
 ];
 const newDate = new Date();
-const nexStartDate =  newDate.getFullYear() + 1;
+const nexStartDate = newDate.getFullYear() + 1;
 const nextEndDate = newDate.getFullYear() + 2;
 
 const currentStartDate = newDate.getFullYear();
 const currentEndDate = newDate.getFullYear() + 1;
 
 const prevStartDate = newDate.getFullYear() - 1;
-const prevEndDate =  newDate.getFullYear();
+const prevEndDate = newDate.getFullYear();
 
 const market = [
   { value: '', label: 'All Markets' },
@@ -317,8 +342,8 @@ const reportingYear = [
     label: `April ${nexStartDate}  -  March ${nextEndDate}`,
   },
   {
-    value:  `April ${currentStartDate}  -  March ${currentEndDate}`,
-    label:  `April ${currentStartDate}  -  March ${currentEndDate}`,
+    value: `April ${currentStartDate}  -  March ${currentEndDate}`,
+    label: `April ${currentStartDate}  -  March ${currentEndDate}`,
   },
   {
     value: `April ${prevStartDate}  -  March ${prevEndDate}`,

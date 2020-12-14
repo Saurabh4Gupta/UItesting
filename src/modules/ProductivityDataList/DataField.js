@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { Box } from '@dentsu-ui/components';
 import { useLocation } from 'react-router';
+import { useQuery } from '@apollo/react-hooks';
 import PageController from '../PageController/PageController';
 import DataList from './DataList';
 import { dataFieldCms as PageContent } from '../../cms';
@@ -17,13 +18,20 @@ const DataField = (props) => {
   const [filterDataBy, setFilterDataBy] = useState({
     market: { label: 'All Markets', value: '' },
   });
-  const [ongoingData, setDataList] = useState({ data: [], totalCount: 0 });
+  const [dataList, setDataList] = useState({ data: [], totalCount: 0 });
   const [isUploadModal, setIsUploadModal] = useState(false);
   const [isLoading, setLoading] = useState(true);
+
   const [originalOngingList, setOriginalOngoingList] = useState(
     getData(filterDataBy.market.value),
   );
 
+  // const [loading, error, data, refetch] = useQuery('getDataList');
+
+  useEffect(() => {
+    setLoading(false);
+    setDataList(getData(filterDataBy.market.value, 'ongoing'))
+  }, [])
   const updateOngoingList = (id, isToAdd) => {
     let filteredArray = [];
 
@@ -42,7 +50,7 @@ const DataField = (props) => {
 
     setOriginalOngoingList({
       data: filteredArray,
-      totalCount: ongoingData.totalCount,
+      totalCount: dataList.totalCount,
     });
   };
 
@@ -60,13 +68,14 @@ const DataField = (props) => {
     setLoading(true);
     setFilterDataBy({ market: selected });
   };
-  useEffect(() => {
-    setTimeout(() => {
-      setLoading(false);
-      setDataList(getData(filterDataBy.market.value));
-      setOriginalOngoingList(getData(filterDataBy.market.value));
-    }, 2000);
-  }, [filterDataBy]);
+  // useEffect(() => {
+  //   console.log('<dhkjashdjshajdhsajhdjashdhhashhsh');
+  //   setTimeout(() => {
+  //     setLoading(false);
+  //     setDataList(getData(filterDataBy.market.value, 'ongoing'));
+  //     // setOriginalOngoingList(getData(filterDataBy.market.value));
+  //   }, 2000);
+  // }, [filterDataBy]);
 
   return (
     <>
@@ -88,13 +97,14 @@ const DataField = (props) => {
             cmsData={PageContent}
             market={filterDataBy.market}
             clientCode={clientCode}
-            dataList={ongoingData}
+            dataList={dataList}
             setDataList={setDataList}
             loading={isLoading}
             updateOngoingList={updateOngoingList}
             originalOngingList={originalOngingList}
             setOriginalOngoingList={setOriginalOngoingList}
             addNewRequest={addNewRequest}
+          // refetch={refetch}
           />
         </Box>
       </PageController>
