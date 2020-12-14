@@ -3,6 +3,7 @@ import { Page, Select, FormField } from '@dentsu-ui/components';
 import PropTypes from 'prop-types';
 import { useHistory, useLocation } from 'react-router';
 import { clientList, market } from '../Mock/mockData';
+import { dataFieldCms as PageContent } from '../../cms';
 
 const PageController = (props) => {
   const history = useHistory();
@@ -19,12 +20,13 @@ const PageController = (props) => {
     pageTitle,
     isCompleted,
     pageMetadata,
+    handleMoveToCompleteModal,
   } = props;
   const { isViewProduct } = param;
   const { title, avatar } = clientList.find(
     (client) => client.clientCode === clientCode,
   );
-  const contentToShow = isViewProduct ? `Back to ${title}` : 'Back to Clients';
+  const contentToShow = isViewProduct ? `Back to ${title}` : `${PageContent.backLabel}`;
   const clientNavigationHandler = () => (isViewProduct
     ? history.replace(`/datafield?client_code=${clientCode}`)
     : history.replace('/'));
@@ -45,13 +47,23 @@ const PageController = (props) => {
         primaryAction={
           isViewProduct && !isCompleted
             ? {
-              content: 'Upload new file',
+              content: `${PageContent.uploadButtonText}`,
               onClick: () => handleUploadModal(),
               isDisabled: false,
               icon: 'upload',
             }
             : false
         }
+        secondaryActions={
+          isViewProduct && !isCompleted
+            && [{
+          content: 'Move to complete',
+          onClick: () => handleMoveToCompleteModal(),
+          isDisabled: false,
+          variant: 'ghost',
+          icon: 'archive',
+        }]
+      }
         controls={
           !isViewProduct && (
             <FormField>
@@ -82,6 +94,7 @@ PageController.propTypes = {
   pageTitle: PropTypes.string,
   isCompleted: PropTypes.bool,
   pageMetadata: PropTypes.string,
+  handleMoveToCompleteModal: PropTypes.func,
 };
 
 PageController.defaultProps = {
@@ -97,5 +110,6 @@ PageController.defaultProps = {
   pageTitle: '',
   isCompleted: false,
   pageMetadata: '',
+  handleMoveToCompleteModal: () => { },
 };
 export default PageController;

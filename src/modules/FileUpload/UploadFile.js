@@ -10,9 +10,14 @@ const UploadFile = (props) => {
   const [error, setError] = useState({});
   const [files, setFiles] = useState([]);
 
+  const errorHandler = (errorMsg) => {
+    if (!errorMsg) errorMsg = 'Invalid file type ';
+    setError({ error: `${errorMsg}` });
+  };
+
   const validate = () => {
     if (!files.length) {
-      setError({ error: 'Upload tracker template' });
+      setError({ error: `${PageContent.uploadFileErrorMessage}` });
       return false;
     }
     return true;
@@ -23,13 +28,15 @@ const UploadFile = (props) => {
     if (isValid) {
       setModalOpen(false);
 
-      const toast = new Toast();
+      if (!error.error) {
+        const toast = new Toast();
 
-      return toast({
-        title: '',
-        content: PageContent.toastFileUploaded,
-        status: 'success',
-      });
+        return toast({
+          title: '',
+          content: PageContent.toastFileUploaded,
+          status: 'success',
+        });
+      }
     }
     return null;
   };
@@ -42,7 +49,7 @@ const UploadFile = (props) => {
   const handleFileChange = (fileItems) => {
     validate();
     setFiles(fileItems);
-    setError({});
+    setError({ error: null });
   };
   return (
     <>
@@ -52,13 +59,14 @@ const UploadFile = (props) => {
         isOpen={modalOpen}
         onClose={onCloseModal}
       >
-        <Modal.Header title="Upload new file" />
+        <Modal.Header title={PageContent.uploadButtonText} />
         <Modal.Body>
           <Form
             handleFileChange={handleFileChange}
             files={files}
             errors={error}
             cmsData={cmsData}
+            setError={errorHandler}
           />
         </Modal.Body>
         <Modal.Footer>

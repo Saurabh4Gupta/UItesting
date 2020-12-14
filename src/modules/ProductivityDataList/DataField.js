@@ -33,18 +33,27 @@ const DataField = (props) => {
       const newArray = orignalArray.find((a) => a.id === id);
 
       filteredArray = [...originalOngingList.data];
-      filteredArray.push(newArray)
+      filteredArray.push(newArray);
     } else {
-      filteredArray = originalOngingList.data.filter((value) => value.id !== id);
+      filteredArray = originalOngingList.data.filter(
+        (value) => value.id !== id,
+      );
     }
 
     setOriginalOngoingList({
       data: filteredArray,
       totalCount: ongoingData.totalCount,
     });
+  };
 
+  const addNewRequest = (request) => {
+    const orignalArray = getData(filterDataBy.market.value).data;
+    const filteredArray = [...orignalArray, request];
 
-    // setDataList({data: filteredArray, totalCount: ongoingData.totalCount,})
+    setOriginalOngoingList({
+      data: filteredArray,
+      totalCount: filteredArray.length,
+    });
   };
 
   const handleMarket = (selected) => {
@@ -85,6 +94,7 @@ const DataField = (props) => {
             updateOngoingList={updateOngoingList}
             originalOngingList={originalOngingList}
             setOriginalOngoingList={setOriginalOngoingList}
+            addNewRequest={addNewRequest}
           />
         </Box>
       </PageController>

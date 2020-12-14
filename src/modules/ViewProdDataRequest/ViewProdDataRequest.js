@@ -10,6 +10,7 @@ import RequestSummary from './RequestSummary/RequestSummary';
 import { data as prodRequests } from '../Mock/mockData';
 import Loader from '../../components/loading';
 import VersionHistory from '../VersionHistory/VersionHistory';
+import MoveToComplete from '../MoveToComplete/MoveToComplete'
 
 const ViewProdDataRequest = (props) => {
   const { param } = props;
@@ -18,9 +19,12 @@ const ViewProdDataRequest = (props) => {
   const location = useLocation();
   const query = new URLSearchParams(location.search);
   const requestId = query.get('request_id');
-  const [prodRequest, setProdRequest] = useState(data.find((request) => request.id === +requestId));
+  const [prodRequest, setProdRequest] = useState(
+    data.find((request) => request.id === +requestId),
+  );
 
   const [isUploadModal, setIsUploadModeal] = useState(false);
+  const [isRequestModal, setIsRequestModal] = useState(false);
   const [isLoading, setLoading] = useState(true);
   const [filterDataBy] = useState({
     currency: { label: 'GBP (Default)', value: 'gbp' },
@@ -30,7 +34,9 @@ const ViewProdDataRequest = (props) => {
   const handleUploadModal = () => {
     setIsUploadModeal(true);
   };
-
+  const handleMoveToCompleteModal = () => {
+    setIsRequestModal(true);
+  };
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
@@ -38,15 +44,17 @@ const ViewProdDataRequest = (props) => {
   }, []);
 
   const handleEditData = (values) => {
-    setProdRequest({ ...prodRequest,
-      localMarket : values.localMarket,
-      dueDate : values.dueDate.toLocaleDateString(),
-      name : values.name,
-      briefing : values.briefing,
-      actualData : values.actualData,
-      forecastData : values.forecastData,
-      reportingYear : 'April 2021 - March 2022',
-      assignTo : 'Ryan Manton' });
+    setProdRequest({
+      ...prodRequest,
+      localMarket: values.localMarket,
+      dueDate: values.dueDate.toLocaleDateString(),
+      name: values.name,
+      briefing: values.briefing,
+      actualData: values.actualData,
+      forecastData: values.forecastData,
+      reportingYear: values.reportingYear.value,
+      assignTo: 'Ryan Manton',
+    });
   };
 
   return (
@@ -62,6 +70,14 @@ const ViewProdDataRequest = (props) => {
               cmsData={PageContent}
             />
           )}
+          {isRequestModal && (
+          <MoveToComplete
+            modalOpen={isRequestModal}
+            setModalOpen={setIsRequestModal}
+            cmsData={PageContent}
+            requestId={requestId}
+          />
+          )}
           <PageController
             param={param}
             localMarket={prodRequest.localMarket.label}
@@ -70,8 +86,12 @@ const ViewProdDataRequest = (props) => {
             pageMetadata={prodRequest.clientMarket}
             handleUploadModal={handleUploadModal}
             isCompleted={prodRequest.isCompleted}
+            handleMoveToCompleteModal={handleMoveToCompleteModal}
           >
-            <RequestSummary prodRequest={prodRequest} handleEditData={handleEditData} />
+            <RequestSummary
+              prodRequest={prodRequest}
+              handleEditData={handleEditData}
+            />
             <Box mt="30px">
               <VersionHistory />
             </Box>
