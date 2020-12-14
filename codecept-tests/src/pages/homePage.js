@@ -65,5 +65,9 @@ module.exports = {
 
       },
 
+  userViewDetails()
+  {
+
+  }
 
 }
