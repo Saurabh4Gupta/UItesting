@@ -74,28 +74,16 @@ const DataField = (props) => {
       if (filterDataBy.market.value === '') {
         const filterOngoingMarket = originalOngingList.data.filter(key =>  key.isCompleted === false);
         const filterCompleteMarket = originalCompleteData.completedData.filter(key =>  key.isCompleted === true);
-        setDataList({
-          totalCount: filterOngoingMarket.length,
-          data: filterOngoingMarket,
-        })
-        setCompleteData({
-          completedCount: filterCompleteMarket.length,
-          completedData: filterCompleteMarket,
-        })
-        setOriginalOngoingList(originalOngingList);
+        setDataList({ ...ongoingData, totalCount: filterOngoingMarket.length, data: filterOngoingMarket })
+        setCompleteData({ ...completeData, completedCount: filterCompleteMarket.length, completedData: filterCompleteMarket })
+        setOriginalCompleteData({ ...originalCompleteData, completedCount: filterCompleteMarket.length, completedData: filterCompleteMarket  });
       } else {
         const filterOngoing = originalOngingList.data.filter(key => key.localMarket.value === filterDataBy.market.value);
         const filerComplete = originalCompleteData.completedData.filter(key =>  key.localMarket.value === filterDataBy.market.value);
-        setDataList({
-          totalCount: filterOngoing.length,
-          data: filterOngoing,
-        })
-        setCompleteData({
-          completedCount: filerComplete.length,
-          completedData: filerComplete,
-         })
+        setDataList({ ...ongoingData, totalCount: filterOngoing.length, data: filterOngoing })
+        setCompleteData({ ...completeData, completedCount: filerComplete.length, completedData: filerComplete })
       }
-    }, 2000);
+    }, 1000);
   }, [filterDataBy]);
 
   useEffect(() => {
@@ -103,6 +91,7 @@ const DataField = (props) => {
       setLoading(false);
       setDataList(getData(filterDataBy.market.value));
       setOriginalOngoingList(getData(filterDataBy.market.value));
+      setOriginalCompleteData(getCompletedData);
     }, 1000);
   }, []);
 

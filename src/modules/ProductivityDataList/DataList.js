@@ -10,7 +10,6 @@ import CreateData from '../CreateData/CreateData';
 import Loader from '../../components/loading';
 import { dataFieldCms as PageContent } from '../../cms';
 
-
 const DataList = (props) => {
   const {
     cmsData,
@@ -41,7 +40,10 @@ const DataList = (props) => {
   const { completedData } = completeData;
   const { data } = dataList;
   const originalCompletedData = originalCompleteData.completedData;
-  const [moveToCompleteModelData, setIsMoveToCompleteModel] = useState({ isMoveToComplete: false, requestID: undefined })
+  const [moveToCompleteModelData, setIsMoveToCompleteModel] = useState({
+    isMoveToComplete: false,
+    requestID: undefined,
+  });
 
   const toast = Toast();
 
@@ -111,27 +113,29 @@ const DataList = (props) => {
         return false;
       });
       const tempData = [...completedData, ...filterCompleteList];
-      const finalCompletedList = {
+      setCompleteData({
+        ...completeData,
         completedCount: tempData.length,
         completedData: tempData,
-      };
+      });
       const OngoingRequest = data.filter((item) => item.id !== id);
-      const filterOngoinglist = {
+      setDataList({
+        ...dataList,
         totalCount: OngoingRequest.length,
         data: OngoingRequest,
-      };
+      });
       const originaltempData = [
         ...originalCompletedData,
         ...filterCompleteList,
       ];
-      setDataList(filterOngoinglist);
       updateOngoingList(id, false);
-      setCompleteData(finalCompletedList);
-      setOriginalCompleteData({
+      setOriginalCompleteData({ ...originalCompleteData,
         completedCount: originaltempData.length,
-        completedData: originaltempData,
+        completedData: originaltempData });
+      setIsMoveToCompleteModel({
+        isMoveToComplete: false,
+        requestID: undefined,
       });
-      setIsMoveToCompleteModel({ isMoveToComplete: false, requestID: undefined })
       return toast({
         title: '',
         content: PageContent.toastMovedToComplete,
@@ -147,22 +151,22 @@ const DataList = (props) => {
       return false;
     });
     const tempData = [...data, ...filterOngoingList];
-    const finalOngoingList = { totalCount: tempData.length, data: tempData };
+    setDataList({
+      ...dataList, totalCount: tempData.length, data: tempData,
+    });
     const completedRequest = completedData.filter((item) => item.id !== id);
-    const filterCompletedlist = {
+    setCompleteData({
+      ...completeData,
       completedCount: completedRequest.length,
       completedData: completedRequest,
-    };
-    setDataList(finalOngoingList);
+    });
     updateOngoingList(id, true);
-    setCompleteData(filterCompletedlist);
     filteredArray = originalCompleteData.completedData.filter(
       (value) => value.id !== id,
     );
-    setOriginalCompleteData({
+    setOriginalCompleteData({ ...originalCompleteData,
       completedCount: originalCompleteData.completedCount,
-      completedData: filteredArray,
-    });
+      completedData: filteredArray });
     return toast({
       title: '',
       content: PageContent.toastMovedToOngoing,
@@ -244,12 +248,12 @@ const DataList = (props) => {
                     handleDeleteModel={handleDeleteModel}
                     handleMoveToCompleteModel={handleMoveToCompleteModel}
                   />
-                  ) : (
-                    <EmptyTable
-                      defaultText={cmsData.emptyProductivityDatarequestCaption}
-                      handleModal={handleModal}
-                    />
-                    )}
+                ) : (
+                  <EmptyTable
+                    defaultText={cmsData.emptyProductivityDatarequestCaption}
+                    handleModal={handleModal}
+                  />
+                )}
               </Tabs.Panel>
               <Tabs.Panel>
                 {originalCompleteData.completedData.length > 0 ? (
@@ -262,17 +266,17 @@ const DataList = (props) => {
                     clientCode={clientCode}
                     search={searchChangeHandler}
                   />
-                  ) : (
-                    <EmptyTable
-                      defaultText={
-                          cmsData.emptyCompletedProductivityDatarequestCaption
-                        }
-                      handleModal={handleModal}
-                    />
-                    )}
+                ) : (
+                  <EmptyTable
+                    defaultText={
+                      cmsData.emptyCompletedProductivityDatarequestCaption
+                    }
+                    handleModal={handleModal}
+                  />
+                )}
               </Tabs.Panel>
             </Tabs.Panels>
-            )}
+          )}
         </Tabs>
       </Box>
     </>
@@ -293,7 +297,7 @@ DataList.defaultProps = {
   market: { value: '' },
   dataList: [{}],
   clientCode: '',
-  setDataList: () => { },
+  setDataList: () => {},
   loading: true,
   updateOngoingList: {},
 };
