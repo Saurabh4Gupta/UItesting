@@ -42,13 +42,6 @@ const EditData = (props) => {
   const closeModalHandler = () => {
     handleModal(false)
     handleCancel();
-    const toast = new Toast();
-
-    return toast({
-      title: '',
-      content: PageContent.toastRequestEdited,
-      status: 'success',
-    });
   }
   const onSubmit = () => {
     handleSubmit();
@@ -58,6 +51,13 @@ const EditData = (props) => {
       setTimeout(() => {
         setLoading(false);
         closeModalHandler()
+        const toast = new Toast();
+
+        return toast({
+          title: '',
+          content: PageContent.toastRequestEdited,
+          status: 'success',
+        });
         // updateData(values)
       }, 1000);
     }
