@@ -1,14 +1,13 @@
 const I = actor();
-const oktaPage = require('./Login');
 let faker = require('faker');
-var expect = require('chai').expect;
-//ensure you set IBRP_PASS environment variable with password on your local machine
+
+
 
 module.exports = {
 
   fields: {
     PMLogin: '//div[@class=\'sc-fzpdbB gZFNLC\'][text()=\'Productivity Manager\']',
-    ViewDetails: '//*[contains(text(),\'Microsoft Corporation\')]',
+    ViewDetails: `//*[@class='Imagestyles__StyledImage-a0fump-0 gTXNiP dentsu-image'][@src='abc.ico']`,
     BackToClients: '//*[contains(text(),\'Back to Clients\')]',
     menuButton: '//*[@class=\'dentsu-icon-button__icon\']/span[@icon=\'chevron-down\']',
     logoutButton: '//*[@class=\'Menustyles__StyledMenuLabel-sc-1e9kz8s-9 zbXAV\'][text()=\'Logout\']'
@@ -16,9 +15,9 @@ module.exports = {
 
   login() {
     I.amOnPage('');
-    I.wait(20);
+    I.wait(10);
     I.see('Sign In')
-    //oktaPage.login('global.admin1', 'Sh@kazu!u1');
+
   },
 
   verifyLandingPage() {
@@ -32,19 +31,29 @@ module.exports = {
   },
 
   verifyClientPage() {
-    I.waitForVisible(this.fields.ViewDetails, 10)
-    I.waitForText('My Clients');
+    I.wait(20);
+
+    I.waitForVisible('iframe', 200);
+    I.retry(3).switchTo('iframe');
+
   },
 
   clientHomepage() {
-    I.waitForVisible(this.fields.ViewDetails, 10);
+    I.wait(5);
     I.click(this.fields.ViewDetails);
+    I.wait(10);
+    I.waitForText('Productivity data requests');
   },
 
 
   logOut() {
-    I.withForVisible(this.fields.BackToClients, 10);
-    I.waitForText('Productivity data requests');
+
+
+   // I.waitForVisible('iframe', 200);
+   // I.retry(3).switchTo('iframe');
+
+    pause();
+
     I.click(this.fields.menuButton);
     I.waitForVisible(this.fields.logoutButton, 10);
     I.click(this.fields.logoutButton);

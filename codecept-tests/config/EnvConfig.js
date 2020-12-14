@@ -19,7 +19,7 @@ const envConfig = {
 
   dev: {
     web: {
-      HOST_URL: 'https://gdp-client01-brp-g1ga-media-ecosystem.az.brp.gdpdentsu.net/',
+      HOST_URL: 'https://gdp-client01-brp-g1ga-media-ecosystem.az.brp.gdpdentsu.net/productivity-manager',
     },
     server: {
       serverURL: 'http://mappingui01-dev-dan-mapping-svr.az.mapping.gdpdentsu.net/graphql',
@@ -28,7 +28,7 @@ const envConfig = {
 
   test: {
     web: {
-      HOST_URL: 'https://gdp-client01-brp-g1ga-media-ecosystem.az.brp.gdpdentsu.net/',
+      HOST_URL: 'https://gdp-client01-brp-g1ga-media-ecosystem.az.brp.gdpdentsu.net/productivity-manager',
     },
     server: {
       serverURL: 'http://mappingui01-test-dan-mapping-svr.az.mapping.gdpdentsu.net/graphql',

@@ -1,5 +1,6 @@
 const Dash = require('../pages/loginPage');
 const Okta= require('../pages/Login');
+const homepage= require('../pages/homePage');
 
 
 const I = actor();
@@ -7,7 +8,7 @@ const I = actor();
 Given('User logged into landing page', async () => {
 
   await Dash.login(); //url call
- await Okta.login('global.admin1', 'Sh@kazu!u1'); //credentials
+  await Okta.login('global.admin1', 'Sh@kazu!u1'); //credentials
 });
 
 /*Then('User is on landing page', async () => {
@@ -24,15 +25,14 @@ Given(/^User logs in PM application$/, async()=> {
 
 
 Given(/^Client List page will be displayed$/,  async()=>{
-    await Dash.verifyClientPage();
-  });
+  await Dash.verifyClientPage();
+});
 
-  Given(/^User will go to Microsoft Client homepage$/, async()=> {
-    await Dash.clientHomepage();
-  });
-
-  Given(/^User can see Microsoft Client homepage and will logout from system$/, async()=> {
-    await Dash.logOut();
-  });
+Given(/^User will go to Microsoft Client homepage$/, async()=> {
+  await Dash.clientHomepage();
+});
 
 
+  Then(/^User will create request and will enter all the details$/, async()=> {
+   await homepage.newCreateDataRequest();
+});

@@ -20,11 +20,11 @@ module.exports = {
    // pause();
     I.click(this.fields.okta_login_button);
 
-    I.wait(20);
+    I.wait(10);
     I.waitForVisible(this.fields.agree,20);
    // pause();
     I.click(this.fields.agree);
-    I.wait(20);
+    I.wait(5);
     I.waitForVisible(this.fields.acceptCookiesButton,20);
     I.click(this.fields.acceptCookiesButton);
 
