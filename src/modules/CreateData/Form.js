@@ -170,6 +170,7 @@ const Form = (props) => {
           options={userList}
           isMulti
           name="assignTo"
+          value={values.assignTo}
           onChange={(selected, event) => {
             handleSelectField(selected, event)
           }}

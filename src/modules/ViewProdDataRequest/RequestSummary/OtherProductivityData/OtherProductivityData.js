@@ -112,13 +112,13 @@ const OtherProductivityData = (props) => {
               ? (
                 <Chip
                   avatar={{
-                  src: 'https://bit.ly/code-beast',
-                  name: 'John Paul Green',
+                  src: assignTo[0].userImage ? assignTo[0].userImage : '',
+                  name: assignTo[0].value,
                 }}
                 >
                   {assignTo[0].value}
                 </Chip>
-) : (<AvatarGroup size="xlarge">{assignTo.map((value) => <Avatar name={value.value} src="https://bit.ly/code-beast" />)}</AvatarGroup>)
+) : (<AvatarGroup size="xlarge">{assignTo.map((value) => <Avatar name={value.value} src={value.userImage ? value.userImage : ''} />)}</AvatarGroup>)
 }
             </Stack>
           </Stack>
