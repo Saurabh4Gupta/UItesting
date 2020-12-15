@@ -100,7 +100,7 @@ PageController.propTypes = {
 PageController.defaultProps = {
   param: { isViewProduct: false },
   filterDataBy: {
-    market: { label: 'All Markets', value: '' },
+    market: { label: 'All markets', value: '' },
     currency: { value: 'gbp', label: 'Currency GBP (default' },
     year: { value: '', label: 'Year to date' },
   },

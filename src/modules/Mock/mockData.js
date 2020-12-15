@@ -285,7 +285,7 @@ const prevStartDate = newDate.getFullYear() - 1;
 const prevEndDate =  newDate.getFullYear();
 
 const market = [
-  { value: '', label: 'All Markets' },
+  { value: '', label: 'All markets' },
   {
     value: 'ARG',
     label: 'Argentina',
