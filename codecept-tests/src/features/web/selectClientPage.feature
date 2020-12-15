@@ -9,3 +9,4 @@ Feature: US TV rates manager overview - TRD-29
     When User login into the App as "Global Investment Management" user
     Then User is on "My clients" Page
     Then User able to see subHeading as "Choose the client you wish to view"
+    Then verify list of clients

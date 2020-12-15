@@ -11,6 +11,7 @@ module.exports = {
     pTextComp: text => `//p[text() = '${text}']`,
     bTextComp: text => `//b[text() = '${text}']`,
     buttonComp: text => `//span[text()='${text}']/..`,
+    spanTextComp: text => `//span[text()='${text}']`,
     clientDetail: client => `//span[text()="${client}"]/../../../..//span[text()="View details"]`,
     aTextComp: (text) => `//a[text() = '${text}']/..`,
     iconLabel: (icon) => `//span[@icon='${icon}']/..`,
@@ -60,6 +61,10 @@ module.exports = {
 
   clickOnViewDetails(client) {
     GenericMethods.waitAndClick(this.overviewFields.clientDetail(client), 20);
+  },
+
+  verifySpanText(text) {
+    GenericMethods.waitAndSee(this.overviewFields.spanTextComp(text), 20);
   },
 };
 
