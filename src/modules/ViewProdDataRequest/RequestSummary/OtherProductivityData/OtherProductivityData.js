@@ -113,10 +113,10 @@ const OtherProductivityData = (props) => {
                 <Chip
                   avatar={{
                   src: assignTo[0].userImage ? assignTo[0].userImage : '',
-                  name: assignTo[0].value,
+                  name: assignTo[0].label,
                 }}
                 >
-                  {assignTo[0].value}
+                  {assignTo[0].label}
                 </Chip>
 ) : (<AvatarGroup size="xlarge">{assignTo.map((value) => <Avatar name={value.value} src={value.userImage ? value.userImage : ''} />)}</AvatarGroup>)
 }
