@@ -46,7 +46,7 @@ const data = {
       dueDate: '13/07/2020',
       updatedAt: '29/10/20 at 14:32',
       createdAt: '2020-08-14',
-      assignTo: [{ value: 'Ryan Killick', label: 'Ryan Killick', userImage:'user1.png' }],
+      assignTo: [{ value: 'ryanKillick', label: 'Ryan Killick', userImage:'user1.png' }],
       reportingYear: 'April 2020 - March 2021',
       actualData: { value: 4, label: '4 months' },
       forecastData: { value: 8, label: '8 months' },
@@ -81,9 +81,9 @@ const data = {
       forecastData: { value: 5, label: '5 months' },
       createdAt: '2020-08-14',
       assignTo: [
-        { value: 'Howell Lee', label: 'Howell Lee', userImage:'user1.png' },
-        { value: 'Ryan Killick', label: 'Ryan Killick', userImage:'user2.png' },
-        { value: 'Ryan Manton', label: 'Ryan Manton', userImage:'user3.png' },
+        { value: 'howellLee', label: 'Howell Lee', userImage:'user1.png' },
+        { value: 'ryanKillick', label: 'Ryan Killick', userImage:'user2.png' },
+        { value: 'ryanManton', label: 'Ryan Manton', userImage:'user3.png' },
       ],
       reportingYear: 'April 2020 - March 2021',
       year: '2020',
@@ -102,7 +102,7 @@ const data = {
       dueDate: '23/07/2020',
       updatedAt: '29/10/20 at 14:32',
       createdAt: '2020-08-14',
-      assignTo: [{ value: 'Ryan Killick', label: 'Ryan Killick', userImage:'user1.png' }],
+      assignTo: [{ value: 'ryanKillick', label: 'Ryan Killick', userImage:'user1.png' }],
       reportingYear: 'April 2020 - March 2021',
       actualData: { value: 2, label: '2 months' },
       forecastData: { value: 10, label: '10 months' },
@@ -124,7 +124,7 @@ const data = {
       dueDate: '23/12/2020',
       updatedAt: '29/10/20 at 14:32',
       createdAt: '2020-08-14',
-      assignTo: [{ value: 'Ryan Killick', label: 'Ryan Killick', userImage:'user1.png' }],
+      assignTo: [{ value: 'ryanKillick', label: 'Ryan Killick', userImage:'user1.png' }],
       reportingYear: 'April 2020 - March 2021',
       actualData: { value: 3, label: '3 months' },
       forecastData: { value: 9, label: '9 months' },
@@ -466,13 +466,13 @@ const versionHistory = {
 }
 
 const userList = [
-  { value:'Ryan Killick',
+  { value:'ryanKillick',
     label:'Ryan Killick' },
-  { value:'Ryan Manton',
+  { value:'ryanManton',
     label:'Ryan Manton' },
-  { value:'Howell Lee',
+  { value:'howellLee',
     label:'Howell Lee' },
-  { value:'Boladale',
+  { value:'boladale',
     label:'Boladale' },
   ];
 

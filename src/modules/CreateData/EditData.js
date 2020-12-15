@@ -6,7 +6,7 @@ import Toast from '@dentsu-ui/components/dist/cjs/components/Toast';
 import Form from './Form'
 import useCustomForm from '../../hooks/useCustomForm';
 import validationRule from '../../utils/validate';
-import { options, monthOptions, reportingYear, data } from '../Mock/mockData'
+import { options, monthOptions, reportingYear, data, userList } from '../Mock/mockData'
 import { dataFieldCms as PageContent } from '../../cms';
 
 
@@ -25,7 +25,7 @@ const EditData = (props) => {
     actualData:filterCompleteList[0].actualData,
     forecastData: filterCompleteList[0].forecastData,
     dueDate: new Date(),
-    assignTo: [{ value:'Howell Lee', label:'Howell Lee' }, { value:'Ryan Killick', label:'Ryan Killick' }],
+    assignTo: [{ value:'howellLee', label:'Howell Lee' }, { value:'ryanKillick', label:'Ryan Killick' }],
   };
   const { handleChange, values, forecastOptions,
     handleSelectField, handleSubmit,
@@ -78,6 +78,7 @@ const EditData = (props) => {
             dueDate={values.dueDate}
             reportingYear={reportingYear}
             forecastOptions={forecastOptions}
+            userList={userList}
           />
         </Modal.Body>
         <Modal.Footer>

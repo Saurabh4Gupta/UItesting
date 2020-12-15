@@ -75,7 +75,6 @@ const DataList = (props) => {
 
   const addRequest = (values) => {
     try {
-      values.localMarket = { value: 'UK', label: 'United Kingdom' };
       values.createdAt = new Date();
       values.isActive = true;
       values.isCompleted = false;
