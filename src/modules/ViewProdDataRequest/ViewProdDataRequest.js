@@ -53,7 +53,7 @@ const ViewProdDataRequest = (props) => {
       actualData: values.actualData,
       forecastData: values.forecastData,
       reportingYear: values.reportingYear.value,
-      assignTo: 'Ryan Manton',
+      assignTo: values.assignTo,
     });
   };
 

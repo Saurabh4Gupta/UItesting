@@ -25,7 +25,7 @@ const EditData = (props) => {
     actualData:filterCompleteList[0].actualData,
     forecastData: filterCompleteList[0].forecastData,
     dueDate: new Date(),
-    assignTo: [{ value:'howellLee', label:'Howell Lee' }, { value:'ryanKillick', label:'Ryan Killick' }],
+    assignTo: filterCompleteList[0].assignTo,
   };
   const { handleChange, values, forecastOptions,
     handleSelectField, handleSubmit,
