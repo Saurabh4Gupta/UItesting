@@ -5,7 +5,7 @@ import { dataFieldCms } from '../../cms/dataFieldCms'
 
 const ActionBtn = (props) => {
   const {
-    handleToggleData,
+    // handleToggleData,
     handleMoveToCompleteModel,
     actionName,
     deleteBtn,
@@ -17,9 +17,7 @@ const ActionBtn = (props) => {
       <Menu>
         <Menu.Button />
         <Menu.List>
-          <Menu.Item onClick={actionName === dataFieldCms.moveToComplete
-            ? handleMoveToCompleteModel : handleToggleData}
-          >
+          <Menu.Item onClick={handleMoveToCompleteModel}>
             {actionName}
           </Menu.Item>
           {showStatus === false ? (
@@ -35,7 +33,7 @@ const ActionBtn = (props) => {
   );
 };
 ActionBtn.propTypes = {
-  handleToggleData: PropTypes.func.isRequired,
+  // handleToggleData: PropTypes.func.isRequired,
   actionName: PropTypes.string.isRequired,
   deleteBtn: PropTypes.string.isRequired,
   showStatus: PropTypes.bool.isRequired,

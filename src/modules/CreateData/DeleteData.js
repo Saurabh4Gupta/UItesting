@@ -4,22 +4,28 @@ import PropTypes from 'prop-types';
 import { dataFieldCms } from '../../cms/dataFieldCms'
 
 const DeleteData = (props) => {
-  const { deleteModalData, setModalOpen, deleteRequest,
-    handleToggleData, setIsMoveToCompleteModel, moveToCompleteModelData } = props;
+  const { deleteModalData, setModalOpen, handleDelete,
+    handleMoveToCompleteData, setIsMoveToCompleteModel, moveToCompleteModelData } = props;
   const { isDeleteModal, requestId } = deleteModalData;
   const { isMoveToComplete, requestID } = moveToCompleteModelData;
+
   const requestChangeHandler = () => {
     if (!isDeleteModal) {
       setIsMoveToCompleteModel({ isMoveToComplete: false, requestID: '' })
     } else {
-      setModalOpen({ isDeleteModal: false, requestId: '' })
+      setModalOpen({ isDeleteModal: false, requestId: '' });
     }
   }
   const requestChangeHandlerOnSubmit = () => {
+    console.log('>>>>>>.requestChangeHandlerOnSubmit');
     if (!isDeleteModal) {
-      handleToggleData(requestID)
+
+      handleMoveToCompleteData(requestID);
+      setIsMoveToCompleteModel({ isMoveToComplete: false, requestID: '' });
     } else {
-      deleteRequest(requestId)
+      console.log('>>>>>>.isDeleteModal', requestID);
+      handleDelete(requestId);
+      setModalOpen({ isDeleteModal: false, requestId: '' });
     }
   }
 
@@ -60,18 +66,18 @@ const DeleteData = (props) => {
 };
 DeleteData.propTypes = {
   setModalOpen: PropTypes.func,
-  deleteRequest: PropTypes.func,
+  handleDelete: PropTypes.func,
   deleteModalData: PropTypes.object,
-  handleToggleData: PropTypes.func,
+  handleMoveToCompleteData: PropTypes.func,
   setIsMoveToCompleteModel: PropTypes.func,
   moveToCompleteModelData: PropTypes.object,
 };
 
 DeleteData.defaultProps = {
   setModalOpen: () => { },
-  deleteRequest: () => { },
+  handleDelete: () => { },
   deleteModalData: {},
-  handleToggleData: () => { },
+  handleMoveToCompleteData: () => { },
   setIsMoveToCompleteModel: () => { },
   moveToCompleteModelData: {},
 };

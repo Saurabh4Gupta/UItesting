@@ -2,7 +2,6 @@
 import React, { useState, useEffect } from 'react';
 import { Box } from '@dentsu-ui/components';
 import { useLocation } from 'react-router';
-import { useQuery } from '@apollo/react-hooks';
 import PageController from '../PageController/PageController';
 import DataList from './DataList';
 import { dataFieldCms as PageContent } from '../../cms';
@@ -22,52 +21,16 @@ const DataField = (props) => {
   const [isUploadModal, setIsUploadModal] = useState(false);
   const [isLoading, setLoading] = useState(true);
 
-  const [originalOngingList, setOriginalOngoingList] = useState(
-    getData(filterDataBy.market.value),
-  );
-
-  // const [loading, error, data, refetch] = useQuery('getDataList');
-
   useEffect(() => {
     setLoading(false);
     setDataList(getData(filterDataBy.market.value, 'ongoing'))
   }, [filterDataBy.market])
-  // const updateOngoingList = (id, isToAdd) => {
-  //   let filteredArray = [];
-
-  //   const orignalArray = getData(filterDataBy.market.value).data;
-
-  //   if (isToAdd) {
-  //     const newArray = orignalArray.find((a) => a.id === id);
-
-  //     filteredArray = [...originalOngingList.data];
-  //     filteredArray.push(newArray);
-  //   } else {
-  //     filteredArray = originalOngingList.data.filter(
-  //       (value) => value.id !== id,
-  //     );
-  //   }
-
-  //   setOriginalOngoingList({
-  //     data: filteredArray,
-  //     totalCount: dataList.totalCount,
-  //   });
-  // };
-
-  const addNewRequest = (request) => {
-    const orignalArray = getData(filterDataBy.market.value).data;
-    const filteredArray = [...orignalArray, request];
-
-    setOriginalOngoingList({
-      data: filteredArray,
-      totalCount: filteredArray.length,
-    });
-  };
 
   const handleMarket = (selected) => {
     setLoading(true);
     setFilterDataBy({ market: selected });
   };
+
   // useEffect(() => {
   //   console.log('<dhkjashdjshajdhsajhdjashdhhashhsh');
   //   setTimeout(() => {
@@ -100,11 +63,6 @@ const DataField = (props) => {
             dataList={dataList}
             setDataList={setDataList}
             loading={isLoading}
-            // updateOngoingList={updateOngoingList}
-            // originalOngingList={originalOngingList}
-           // setOriginalOngoingList={setOriginalOngoingList}
-            addNewRequest={addNewRequest}
-          // refetch={refetch}
           />
         </Box>
       </PageController>

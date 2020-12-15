@@ -159,18 +159,34 @@ const data = {
 const completedData = {
   data: [],
 };
-export const getCompletedData = () => ({
-  completedCount: completedData.data.length,
-  completedData: completedData.data,
-});
+
+export const getCompletedData = () => {
+  const filterData = data.data.filter(key => key.isCompleted);
+  return { totalCount: filterData.length, data: filterData};
+};
+
+export const getCompletedDataCount() => {
+
+}
+
 export const getData = (market, status) => {
   if (market === '' || market === undefined) {
-    const filerData = data.data.filter(key => !key.isCompleted && !key.isDeleted);
-    return { totalCount: data.data.length, data: filerData }
+    const filterData = data.data.filter(key => !key.isCompleted && !key.isDeleted);
+    return { totalCount: data.data.length, data: filterData }
   }
   if (status === 'ongoing') {
-    const filerData = data.data.filter(key => key.localMarket.value === market && !key.isCompleted);
-    return { totalCount: filerData.length, data: filerData };
+    const filterData = data.data.filter(
+      (key) => key.localMarket.value === market && !key.isCompleted && !key.isDeleted,
+    );
+    console.log('>>>>>>>>>>>>>>>', filterData);
+    return { totalCount: filterData.length, data: filterData };
+  }
+  if (status === 'complete') {
+    const filterData = data.data.filter(
+      (key) => key.localMarket.value === market && key.isCompleted && !key.isDeleted,
+    );
+    console.log('complete>>>>>>>>>>>>>>>', filterData);
+    return { totalCount: filterData.length, data: filterData };
   }
 };
 
@@ -282,7 +298,6 @@ const assignToOptions = [
     value: 'UK',
     label: 'United Kingdom',
   },
-
 ];
 
 const clientList = [
@@ -349,7 +364,7 @@ const reportingYear = [
     value: `April ${prevStartDate}  -  March ${prevEndDate}`,
     label: `April ${prevStartDate}  -  March ${prevEndDate}`,
   },
-]
+];
 
 const versionHistory = {
   data: [
@@ -484,7 +499,7 @@ const versionHistory = {
       createdAt: '2020-12-01',
     },
   ],
-}
+};
 
 export {
   assignToOptions,
