@@ -15,7 +15,7 @@ const DataField = (props) => {
   const query = new URLSearchParams(location.search);
   const clientCode = query.get('client_code');
   const [filterDataBy, setFilterDataBy] = useState({
-    market: { label: 'All Markets', value: '' },
+    market: { label: 'All markets', value: '' },
   });
   const [ongoingData, setDataList] = useState({ data: [], totalCount: 0 });
   const [isUploadModal, setIsUploadModal] = useState(false);
