@@ -22,11 +22,6 @@ const DataList = (props) => {
     setDataList,
     loading,
     updateOngoingList,
-    // eslint-disable-next-line react/prop-types
-    originalOngingList,
-    // eslint-disable-next-line react/prop-types
-    setOriginalOngoingList,
-    addNewRequest,
   } = props;
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -51,30 +46,50 @@ const DataList = (props) => {
 
   const toast = Toast();
 
+  // const searchChangeHandler = (input) => {
+  //   if (tabIndex === 0) {
+
+  //      const originalList = originalCompleteData.completedData;
+  //     const updatedList = originalList.filter(
+  //       (d) => d.clientMarket.toLowerCase().includes(input.toLowerCase())
+  //         || d.name.toLowerCase().includes(input.toLowerCase()),
+  //     );
+  //     const copyList = { ...completeData };
+  //     setCompleteData({
+  //       completedData: updatedList,
+  //       completedCount: copyList.completedCount,
+  //     });
+  //   } else {
+  //     const originalList = originalCompleteData.completedData;
+  //     const updatedList = originalList.filter(
+  //       (d) => d.clientMarket.toLowerCase().includes(input.toLowerCase())
+  //         || d.name.toLowerCase().includes(input.toLowerCase()),
+  //     );
+  //     const copyList = { ...completeData };
+  //     setCompleteData({
+  //       completedData: updatedList,
+  //       completedCount: copyList.completedCount,
+  //     });
+  //   }
+  // };
+
   const searchChangeHandler = (input) => {
-    if (tabIndex === 0) {
-      const originalList = originalOngingList.data;
-      const updatedList = originalList.filter(
-        (d) => d.clientMarket.toLowerCase().includes(input.toLowerCase())
-          || d.name.toLowerCase().includes(input.toLowerCase()),
-      );
+    const requestStatus = tabIndex === 0 ? 'ongoing' : 'complete'
 
-      const copyList = { ...dataList };
+    const allDataList = getData(market.value, requestStatus);
+    const filteredList = getFilteredList(allDataList.data, input)
 
-      setDataList({ data: updatedList, totalCount: copyList.totalCount });
-    } else {
-      const originalList = originalCompleteData.completedData;
-      const updatedList = originalList.filter(
-        (d) => d.clientMarket.toLowerCase().includes(input.toLowerCase())
-          || d.name.toLowerCase().includes(input.toLowerCase()),
-      );
-      const copyList = { ...completeData };
-      setCompleteData({
-        completedData: updatedList,
-        completedCount: copyList.completedCount,
-      });
-    }
+    setDataList({ data: filteredList, totalCount: allDataList.totalCount });
   };
+
+  const getFilteredList = (data, searchInput) => {
+    const updatedList = data.filter(
+      (d) => d.clientMarket.toLowerCase().includes(searchInput.toLowerCase())
+        || d.name.toLowerCase().includes(searchInput.toLowerCase()),
+    );
+
+    return updatedList;
+  }
 
   const addRequest = async (values) => {
     try {
@@ -241,52 +256,52 @@ const DataList = (props) => {
           {loading ? (
             <Loader />
           ) : (
-              <Tabs.Panels>
-                <Tabs.Panel>
-                  {originalOngingList.data.length > 0 ? (
-                    <TableList
-                      data={data}
-                      cmsData={cmsData}
-                      deleteModalData={deleteModalData}
-                      setIsDeleteModal={setIsDeleteModal}
-                      setIsMoveToCompleteModel={setIsMoveToCompleteModel}
-                      moveToCompleteModelData={moveToCompleteModelData}
-                      handleToggleData={() => { }/* handleToggleData */}
-                      actionName={cmsData.moveToComplete}
-                      deleteRequest={deleteRequest}
-                      clientCode={clientCode}
-                      search={searchChangeHandler}
-                      handleDeleteModel={handleDeleteModel}
-                      handleMoveToCompleteModel={handleMoveToCompleteModel}
-                    />
+            <Tabs.Panels>
+              <Tabs.Panel>
+                {dataList.totalCount > 0 ? (
+                  <TableList
+                    data={data}
+                    cmsData={cmsData}
+                    deleteModalData={deleteModalData}
+                    setIsDeleteModal={setIsDeleteModal}
+                    setIsMoveToCompleteModel={setIsMoveToCompleteModel}
+                    moveToCompleteModelData={moveToCompleteModelData}
+                    handleToggleData={() => { }/* handleToggleData */}
+                    actionName={cmsData.moveToComplete}
+                    deleteRequest={deleteRequest}
+                    clientCode={clientCode}
+                    search={searchChangeHandler}
+                    handleDeleteModel={handleDeleteModel}
+                    handleMoveToCompleteModel={handleMoveToCompleteModel}
+                  />
                   ) : (
-                      <EmptyTable
-                        defaultText={cmsData.emptyProductivityDatarequestCaption}
-                        handleModal={handleModal}
-                      />
+                    <EmptyTable
+                      defaultText={cmsData.emptyProductivityDatarequestCaption}
+                      handleModal={handleModal}
+                    />
                     )}
-                </Tabs.Panel>
-                <Tabs.Panel>
-                  {originalCompleteData.completedData.length > 0 ? (
-                    <TableList
-                      data={completedData}
-                      cmsData={cmsData}
-                      actionName={cmsData.moveToOnGoing}
-                      handleToggleData={() => { }}// handleToggleData}
-                      showStatus={false}
-                      clientCode={clientCode}
-                      search={searchChangeHandler}
-                    />
+              </Tabs.Panel>
+              <Tabs.Panel>
+                {originalCompleteData.completedData.length > 0 ? (
+                  <TableList
+                    data={completedData}
+                    cmsData={cmsData}
+                    actionName={cmsData.moveToOnGoing}
+                    handleToggleData={() => { }}// handleToggleData}
+                    showStatus={false}
+                    clientCode={clientCode}
+                    search={searchChangeHandler}
+                  />
                   ) : (
-                      <EmptyTable
-                        defaultText={
+                    <EmptyTable
+                      defaultText={
                           cmsData.emptyCompletedProductivityDatarequestCaption
                         }
-                        handleModal={handleModal}
-                      />
+                      handleModal={handleModal}
+                    />
                     )}
-                </Tabs.Panel>
-              </Tabs.Panels>
+              </Tabs.Panel>
+            </Tabs.Panels>
             )}
         </Tabs>
       </Box>

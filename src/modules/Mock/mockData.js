@@ -165,7 +165,7 @@ export const getCompletedData = () => ({
 });
 export const getData = (market, status) => {
   if (market === '' || market === undefined) {
-    const filerData = data.data.filter(key => !key.isCompleted && !!key.isDeleted);
+    const filerData = data.data.filter(key => !key.isCompleted && !key.isDeleted);
     return { totalCount: data.data.length, data: filerData }
   }
   if (status === 'ongoing') {

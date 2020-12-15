@@ -31,28 +31,28 @@ const DataField = (props) => {
   useEffect(() => {
     setLoading(false);
     setDataList(getData(filterDataBy.market.value, 'ongoing'))
-  }, [])
-  const updateOngoingList = (id, isToAdd) => {
-    let filteredArray = [];
+  }, [filterDataBy.market])
+  // const updateOngoingList = (id, isToAdd) => {
+  //   let filteredArray = [];
 
-    const orignalArray = getData(filterDataBy.market.value).data;
+  //   const orignalArray = getData(filterDataBy.market.value).data;
 
-    if (isToAdd) {
-      const newArray = orignalArray.find((a) => a.id === id);
+  //   if (isToAdd) {
+  //     const newArray = orignalArray.find((a) => a.id === id);
 
-      filteredArray = [...originalOngingList.data];
-      filteredArray.push(newArray);
-    } else {
-      filteredArray = originalOngingList.data.filter(
-        (value) => value.id !== id,
-      );
-    }
+  //     filteredArray = [...originalOngingList.data];
+  //     filteredArray.push(newArray);
+  //   } else {
+  //     filteredArray = originalOngingList.data.filter(
+  //       (value) => value.id !== id,
+  //     );
+  //   }
 
-    setOriginalOngoingList({
-      data: filteredArray,
-      totalCount: dataList.totalCount,
-    });
-  };
+  //   setOriginalOngoingList({
+  //     data: filteredArray,
+  //     totalCount: dataList.totalCount,
+  //   });
+  // };
 
   const addNewRequest = (request) => {
     const orignalArray = getData(filterDataBy.market.value).data;
@@ -100,9 +100,9 @@ const DataField = (props) => {
             dataList={dataList}
             setDataList={setDataList}
             loading={isLoading}
-            updateOngoingList={updateOngoingList}
-            originalOngingList={originalOngingList}
-            setOriginalOngoingList={setOriginalOngoingList}
+            // updateOngoingList={updateOngoingList}
+            // originalOngingList={originalOngingList}
+           // setOriginalOngoingList={setOriginalOngoingList}
             addNewRequest={addNewRequest}
           // refetch={refetch}
           />
