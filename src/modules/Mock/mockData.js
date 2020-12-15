@@ -156,38 +156,54 @@ const data = {
   ],
 };
 
-const completedData = {
-  data: [],
-};
+// export const getCompleteData = () => {
+//   const filterData = data.data.filter(key => key.isCompleted);
+//   return { totalCount: filterData.length, data: filterData };
+// };
 
-export const getCompletedData = () => {
-  const filterData = data.data.filter(key => key.isCompleted);
-  return { totalCount: filterData.length, data: filterData};
-};
-
-export const getCompletedDataCount() => {
-
+export const getDataCount = (market, status) => {
+  let filterData = data.data;
+  if (status === 'ongoing') {
+     filterData = filterData.filter(
+      (key) => !key.isCompleted,
+    );
+    console.log('>>>>>>>>>>>>>>>ongoingCount', filterData);
+  }
+  if (status === 'complete') {
+     filterData = filterData.filter(
+      (key) => key.isCompleted,
+    );
+    console.log('completeCount>>>>>>>>>>>>>>>', filterData);
+  }
+  if (market !== '') {
+    filterData = filterData.filter(
+      (key) => key.localMarket.value === market,
+    );
+  }
+  return filterData.length;
 }
 
 export const getData = (market, status) => {
-  if (market === '' || market === undefined) {
-    const filterData = data.data.filter(key => !key.isCompleted && !key.isDeleted);
-    return { totalCount: data.data.length, data: filterData }
-  }
+  // debugger;
+  let filterData = data.data;
   if (status === 'ongoing') {
-    const filterData = data.data.filter(
-      (key) => key.localMarket.value === market && !key.isCompleted && !key.isDeleted,
+     filterData = filterData.filter(
+      (key) => !key.isCompleted,
     );
     console.log('>>>>>>>>>>>>>>>', filterData);
-    return { totalCount: filterData.length, data: filterData };
   }
   if (status === 'complete') {
-    const filterData = data.data.filter(
-      (key) => key.localMarket.value === market && key.isCompleted && !key.isDeleted,
+     filterData = filterData.filter(
+      (key) => key.isCompleted,
     );
     console.log('complete>>>>>>>>>>>>>>>', filterData);
-    return { totalCount: filterData.length, data: filterData };
   }
+  if (market !== '') {
+    filterData = filterData.filter(
+      (key) => key.localMarket.value === market,
+    );
+  }
+  return { totalCount:filterData.length, data:filterData };
 };
 
 export function updateData(values) {

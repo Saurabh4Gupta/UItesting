@@ -1,3 +1,4 @@
+/* eslint-disable no-shadow */
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
@@ -7,7 +8,7 @@ import Toast from '@dentsu-ui/components/dist/cjs/components/Toast';
 import EmptyTable from './EmptyTable';
 import TableList from './TableList';
 import CreateData from '../CreateData/CreateData';
-import { getCompletedData, getData, data as mockData } from '../Mock/mockData';
+import { getData, data as mockData, getDataCount } from '../Mock/mockData';
 import Loader from '../../components/loading';
 import { dataFieldCms as PageContent } from '../../cms';
 
@@ -22,13 +23,7 @@ const DataList = (props) => {
   } = props;
 
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [completeData, setCompleteData] = useState({
-    completedCount: 0,
-    completedData: [],
-  });
-  const [originalCompleteData, setOriginalCompleteData] = useState(
-    getCompletedData,
-  );
+  //const [completeData, setCompleteData] = useState(getCompleteData());
   const [deleteModalData, setIsDeleteModal] = useState({
     isDeleteModal: false,
     requestId: undefined,
@@ -36,7 +31,7 @@ const DataList = (props) => {
 
   // const [loadingg, error, data] = useMutation('postcomplete');
   const [tabIndex, setTabIndex] = useState(0);
-  const { completedData } = completeData;
+  // const { completedData } = completeData;
   const { data } = dataList;
   const [moveToCompleteModelData, setIsMoveToCompleteModel] = useState({
     isMoveToComplete: false,
@@ -88,13 +83,16 @@ const DataList = (props) => {
   };
 
   useEffect(() => {
+    console.log('>>>>>>tabindex', typeof tabIndex);
     if (tabIndex === 0) {
-      setDataList(getData(market, 'ongoing'));
+      setDataList(getData(market.value, 'ongoing'));
     } else {
-      setDataList(getData(market, 'complete'));
+      console.log('>>>>>>else');
+      setDataList(getData(market.value, 'complete'));
     }
   }, [tabIndex]);
 
+  console.log('>>>>>>data', data);
   const handleDelete = (id) => {
     const filterDeleteList = mockData.data.filter((item) => {
       if (item.id === id) {
@@ -143,11 +141,11 @@ const DataList = (props) => {
           <Tabs.List>
             <Tabs.Tab
               label={cmsData.ongoingLabel}
-              count={data ? data.length : 0}
+              count={getDataCount(market.value, 'ongoing')}
             />
             <Tabs.Tab
               label={cmsData.completeLabel}
-              count={completedData ? completedData.length : 0}
+              count={getDataCount(market.value, 'complete')}
             />
           </Tabs.List>
           {loading ? (
@@ -163,14 +161,14 @@ const DataList = (props) => {
                     setIsDeleteModal={setIsDeleteModal}
                     setIsMoveToCompleteModel={setIsMoveToCompleteModel}
                     moveToCompleteModelData={moveToCompleteModelData}
-                    handleToggleData={() => {} /* handleToggleData */}
-                    actionName={cmsData.moveToComplete}
+                    actionName={(tabIndex === 0) ? cmsData.moveToComplete : cmsData.moveToOnGoing}
                     handleDelete={handleDelete}
                     clientCode={clientCode}
                     search={searchChangeHandler}
                     handleDeleteModel={handleDeleteModel}
                     handleMoveToCompleteModel={handleMoveToCompleteModel}
                     handleMoveToCompleteData={handleMoveToCompleteData}
+                    showStatus={(tabIndex === 0)}
                   />
                 ) : (
                   <EmptyTable
@@ -180,9 +178,9 @@ const DataList = (props) => {
                 )}
               </Tabs.Panel>
               <Tabs.Panel>
-                {2 > 0 ? (
+                {dataList.totalCount > 0 && tabIndex === 1 ? (
                   <TableList
-                    data={completedData}
+                    data={data}
                     cmsData={cmsData}
                     actionName={cmsData.moveToOnGoing}
                     handleToggleData={() => {}} // handleToggleData}
