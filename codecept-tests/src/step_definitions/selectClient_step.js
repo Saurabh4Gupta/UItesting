@@ -14,4 +14,5 @@ let clients=["American Express","Burberry","Burger King","General Motors","Kello
   for(let i=0;i<clients.length;i++){
     selectClient.verifySpanText(clients[i])
   }
+  selectClient.clickOnViewDetails("American Express")
 });

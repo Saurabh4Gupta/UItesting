@@ -3,10 +3,12 @@ Feature: US TV rates manager overview - TRD-29
   I want to see an 'Overview' on loading the Rates Manager App that lists the Rate cards available to me
   so that I can access Rates information
 
-  @sanity @smoke
-  Scenario: Display Overview on load of Rates Manager App for TV
+  Background:
     Given User is on landing page
     When User login into the App as "Global Investment Management" user
-    Then User is on "My clients" Page
+
+  @sanity @smoke
+  Scenario: Verify GUI of select client page
+    Given User is on "My clients" Page
     Then User able to see subHeading as "Choose the client you wish to view"
     Then verify list of clients
