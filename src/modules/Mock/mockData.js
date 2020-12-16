@@ -55,7 +55,7 @@ const data = {
       year: '2020',
       quarter: 'Q2',
       totalTenure: '2020 Q2',
-      isCompleted:false,
+      isCompleted: false,
     },
     {
       id: 2,
@@ -89,7 +89,7 @@ const data = {
       year: '2020',
       quarter: 'Q3',
       totalTenure: '2020 Q3',
-      isCompleted:false,
+      isCompleted: false,
     },
     {
       id: 3,
@@ -111,7 +111,7 @@ const data = {
       year: '2020',
       quarter: 'Q1',
       totalTenure: '2020 Q1',
-      isCompleted:false,
+      isCompleted: false,
     },
     {
       id: 4,
@@ -133,24 +133,102 @@ const data = {
       year: '2020',
       quarter: 'Q1',
       totalTenure: '2020 Q1',
-      isCompleted:false,
+      isCompleted: false,
+    },
+    {
+      id: 5,
+      client: 'Microsoft',
+      localMarket: { value: 'UK', label: 'United Kingdom' },
+      status: 'Overdue',
+      clientMarket: 'Microsoft United Kingdom',
+      name: 'Productivity Q1 2020',
+      briefing: 'Need Data for the Q2 2020',
+      dueDate: '23/12/2020',
+      updatedAt: '29/10/20 at 14:32',
+      createdAt: '2020-08-14',
+      assignTo: 'Ryan Killick',
+      reportingYear: 'April 2020 - March 2021',
+      actualData: { value: 3, label: '3 months' },
+      forecastData: { value: 9, label: '9 months' },
+      isActive: true,
+      isDeleted: false,
+      year: '2020',
+      quarter: 'Q1',
+      totalTenure: '2020 Q1',
+      isCompleted: true,
     },
   ],
 };
 
-const completedData = {
-  data: [],
-};
-export const getCompletedData = () => ({
-  completedCount: completedData.data.length,
-  completedData: completedData.data,
-});
-export const getData = (value) => {
-  if (value === '') {
-    return { totalCount: data.data.length, data: data.data }
+// export const getCompleteData = () => {
+//   const filterData = data.data.filter(key => key.isCompleted);
+//   return { totalCount: filterData.length, data: filterData };
+// };
+
+export const getCount = (market, status = undefined) => {
+  let ongoingData;
+  let completeData
+  if (status === undefined) {
+    ongoingData = data.data.filter(key => !key.isCompleted && !key.isDeleted);
+    completeData = data.data.filter(key => key.isCompleted && !key.isDeleted);
   }
-  const filerData = data.data.filter(key => key.localMarket.value === value);
-  return { totalCount: filerData.length, data: filerData };
+  if (status === 'ongoing') {
+    ongoingData = data.data.filter(key => !key.isCompleted && !key.isDeleted);
+  }
+  if (status === 'complete') {
+    completeData = data.data.filter(key => key.isCompleted && !key.isDeleted);
+  }
+
+  if (market !== '') {
+    ongoingData = ongoingData.filter(key => key.localMarket.value === market);
+    completeData = completeData.filter(key => key.localMarket.value === market);
+    return { ongoingCount: ongoingData.length, completeCount: completeData.length };
+  }
+
+  return { ongoingCount: ongoingData.length, completeCount: completeData.length };
+}
+
+export const getDataCount = (market, status) => {
+  let filterData = data.data;
+  if (status === 'ongoing') {
+    filterData = filterData.filter(
+      (key) => !key.isCompleted,
+    );
+  }
+  if (status === 'complete') {
+    filterData = filterData.filter(
+      (key) => key.isCompleted,
+    );
+  }
+  if (market !== '') {
+    filterData = filterData.filter(
+      (key) => key.localMarket.value === market,
+    );
+  }
+  return filterData.length;
+}
+
+export const getDataById = (id) => data.data.find(key => key.id.toString() === id && !key.isDeleted)
+
+export const getData = (market, status) => {
+  // debugger;
+  let filterData = data.data;
+  if (status === 'ongoing') {
+    filterData = filterData.filter(
+      (key) => !key.isCompleted && !key.isDeleted,
+    );
+  }
+  if (status === 'complete') {
+    filterData = filterData.filter(
+      (key) => key.isCompleted && !key.isDeleted,
+    );
+  }
+  if (market !== '') {
+    filterData = filterData.filter(
+      (key) => key.localMarket.value === market,
+    );
+  }
+  return { totalCount: filterData.length, data: filterData };
 };
 
 export function updateData(values) {
@@ -261,7 +339,6 @@ const assignToOptions = [
     value: 'UK',
     label: 'United Kingdom',
   },
-
 ];
 
 const clientList = [
@@ -275,14 +352,14 @@ const clientList = [
   { title: 'The Kraft Heinz Company', avatar: '', clientCode: 'KHC' },
 ];
 const newDate = new Date();
-const nexStartDate =  newDate.getFullYear() + 1;
+const nexStartDate = newDate.getFullYear() + 1;
 const nextEndDate = newDate.getFullYear() + 2;
 
 const currentStartDate = newDate.getFullYear();
 const currentEndDate = newDate.getFullYear() + 1;
 
 const prevStartDate = newDate.getFullYear() - 1;
-const prevEndDate =  newDate.getFullYear();
+const prevEndDate = newDate.getFullYear();
 
 const market = [
   { value: '', label: 'All markets' },
@@ -321,14 +398,14 @@ const reportingYear = [
     label: `April ${nexStartDate}  -  March ${nextEndDate}`,
   },
   {
-    value:  `April ${currentStartDate}  -  March ${currentEndDate}`,
-    label:  `April ${currentStartDate}  -  March ${currentEndDate}`,
+    value: `April ${currentStartDate}  -  March ${currentEndDate}`,
+    label: `April ${currentStartDate}  -  March ${currentEndDate}`,
   },
   {
     value: `April ${prevStartDate}  -  March ${prevEndDate}`,
     label: `April ${prevStartDate}  -  March ${prevEndDate}`,
   },
-]
+];
 
 const versionHistory = {
   data: [
@@ -463,7 +540,7 @@ const versionHistory = {
       createdAt: '2020-12-01',
     },
   ],
-}
+};
 
 const userList = [
   { value:'ryanKillick',

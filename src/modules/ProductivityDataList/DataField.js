@@ -14,71 +14,36 @@ const DataField = (props) => {
   const { param } = props;
   const query = new URLSearchParams(location.search);
   const clientCode = query.get('client_code');
-  const [filterDataBy, setFilterDataBy] = useState({
-    market: { label: 'All markets', value: '' },
-  });
-  const [ongoingData, setDataList] = useState({ data: [], totalCount: 0 });
+  const [market, setMarket] = useState({ value: '', label: 'All markets' });
+  const [dataList, setDataList] = useState({ data: [], totalCount: 0 });
+  const [completeDataList, setCompleteDataList] = useState({ data: [], totalCount: 0 })
   const [isUploadModal, setIsUploadModal] = useState(false);
   const [isLoading, setLoading] = useState(true);
-  const [originalOngingList, setOriginalOngoingList] = useState(
-    getData(filterDataBy.market.value),
-  );
-
-  const updateOngoingList = (id, isToAdd) => {
-    let filteredArray = [];
-
-    const orignalArray = getData(filterDataBy.market.value).data;
-
-    if (isToAdd) {
-      const newArray = orignalArray.find((a) => a.id === id);
-
-      filteredArray = [...originalOngingList.data];
-      filteredArray.push(newArray);
-    } else {
-      filteredArray = originalOngingList.data.filter(
-        (value) => value.id !== id,
-      );
-    }
-
-    setOriginalOngoingList({
-      data: filteredArray,
-      totalCount: ongoingData.totalCount,
-    });
-  };
-
-  const addNewRequest = (request) => {
-    const orignalArray = getData(filterDataBy.market.value).data;
-    const filteredArray = [...orignalArray, request];
-
-    setOriginalOngoingList({
-      data: filteredArray,
-      totalCount: filteredArray.length,
-    });
-  };
 
   const handleMarket = (selected) => {
-    setLoading(true);
-    setFilterDataBy({ market: selected });
+    setMarket(selected);
   };
+
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
-      setDataList(getData(filterDataBy.market.value));
-      setOriginalOngoingList(getData(filterDataBy.market.value));
+      setDataList(getData(market.value, 'ongoing'));
+      setCompleteDataList(getData(market.value, 'complete'));
     }, 2000);
-  }, [filterDataBy]);
+  }, [])
 
   return (
     <>
-      <PageController
-        param={param}
-        filterDataBy={filterDataBy}
-        handleMarket={handleMarket}
-        pageTitle=""
-        pageMetadata="Client Overview"
-        isCompleted=""
-      >
-        <Box mb="200px">
+      <Box mb="200px">
+        <PageController
+          param={param}
+          market={market}
+          handleMarket={handleMarket}
+          pageTitle=""
+          pageMetadata="Client Overview"
+          isCompleted=""
+        >
+
           <UploadFile
             cmsData={PageContent}
             modalOpen={isUploadModal}
@@ -86,18 +51,18 @@ const DataField = (props) => {
           />
           <DataList
             cmsData={PageContent}
-            market={filterDataBy.market}
+            market={market}
+            completeDataList={completeDataList}
             clientCode={clientCode}
-            dataList={ongoingData}
+            dataList={dataList}
             setDataList={setDataList}
+            setCompleteDataList={setCompleteDataList}
             loading={isLoading}
-            updateOngoingList={updateOngoingList}
-            originalOngingList={originalOngingList}
-            setOriginalOngoingList={setOriginalOngoingList}
-            addNewRequest={addNewRequest}
+            setMarket={setMarket}
           />
-        </Box>
-      </PageController>
+
+        </PageController>
+      </Box>
     </>
   );
 };
