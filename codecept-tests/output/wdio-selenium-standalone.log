@@ -1,23 +1,24 @@
-15:28:18.282 INFO [GridLauncherV3.parse] - Selenium server version: 3.141.59, revision: e82be7d358
-15:28:18.551 INFO [GridLauncherV3.lambda$buildLaunchers$3] - Launching a standalone Selenium Server on port 4444
-2020-12-15 15:28:18.702:INFO::main: Logging initialized @1151ms to org.seleniumhq.jetty9.util.log.StdErrLog
-15:28:19.186 INFO [WebDriverServlet.<init>] - Initialising WebDriverServlet
-15:28:20.596 INFO [SeleniumServer.boot] - Selenium Server is up and running on port 4444
-15:28:21.099 INFO [ActiveSessionFactory.apply] - Capabilities are: {
+16:22:32.811 INFO [GridLauncherV3.parse] - Selenium server version: 3.141.59, revision: e82be7d358
+16:22:32.950 INFO [GridLauncherV3.lambda$buildLaunchers$3] - Launching a standalone Selenium Server on port 4444
+2020-12-16 16:22:33.005:INFO::main: Logging initialized @635ms to org.seleniumhq.jetty9.util.log.StdErrLog
+16:22:33.461 INFO [WebDriverServlet.<init>] - Initialising WebDriverServlet
+16:22:33.985 INFO [SeleniumServer.boot] - Selenium Server is up and running on port 4444
+16:22:34.226 INFO [ActiveSessionFactory.apply] - Capabilities are: {
   "browserName": "chrome",
   "goog:chromeOptions": {
     "useAutomationExtension": true,
     "prefs": {
-      "download.default_directory": "C:\\Users\\shubhamg\\Desktop\\dan-productivity-mgr-ui\\codecept-tests\\output\\Download"
+      "download.default_directory": "C:\\Users\\Vishal\\Desktop\\Produtivity Manager\\dan-productivity-mgr-ui\\codecept-tests\\output\\Download"
     }
   }
 }
-15:28:21.103 INFO [ActiveSessionFactory.lambda$apply$11] - Matched factory org.openqa.selenium.grid.session.remote.ServicedSession$Factory (provider: org.openqa.selenium.chrome.ChromeDriverService)
-Starting ChromeDriver 87.0.4280.88 (89e2380a3e36c3464b5dd1302349b1382549290d-refs/branch-heads/4280@{#1761}) on port 5108
+16:22:34.228 INFO [ActiveSessionFactory.lambda$apply$11] - Matched factory org.openqa.selenium.grid.session.remote.ServicedSession$Factory (provider: org.openqa.selenium.chrome.ChromeDriverService)
+Starting ChromeDriver 87.0.4280.88 (89e2380a3e36c3464b5dd1302349b1382549290d-refs/branch-heads/4280@{#1761}) on port 13487
 Only local connections are allowed.
 Please see https://chromedriver.chromium.org/security-considerations for suggestions on keeping ChromeDriver safe.
 ChromeDriver was started successfully.
-[1608026303.745][WARNING]: Deprecated chrome option is ignored: useAutomationExtension
-[1608026303.745][WARNING]: Deprecated chrome option is ignored: useAutomationExtension
-15:28:26.538 INFO [ProtocolHandshake.createSession] - Detected dialect: W3C
-15:28:26.584 INFO [RemoteSession$Factory.lambda$performHandshake$0] - Started new session 2d201b313ad08307babd30ea95d7f38c (org.openqa.selenium.chrome.ChromeDriverService)
+[1608115955.591][WARNING]: Deprecated chrome option is ignored: useAutomationExtension
+[1608115955.591][WARNING]: Deprecated chrome option is ignored: useAutomationExtension
+16:22:38.376 INFO [ProtocolHandshake.createSession] - Detected dialect: W3C
+16:22:38.408 INFO [RemoteSession$Factory.lambda$performHandshake$0] - Started new session b3d3b7ebf66c064c54cd586825fe88c4 (org.openqa.selenium.chrome.ChromeDriverService)
+16:23:06.759 INFO [ActiveSessions$1.onStop] - Removing session b3d3b7ebf66c064c54cd586825fe88c4 (org.openqa.selenium.chrome.ChromeDriverService)
