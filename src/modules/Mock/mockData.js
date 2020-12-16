@@ -46,7 +46,7 @@ const data = {
       dueDate: '13/07/2020',
       updatedAt: '29/10/20 at 14:32',
       createdAt: '2020-08-14',
-      assignTo: 'Ryan Killick',
+      assignTo: [{ value: 'ryanKillick', label: 'Ryan Killick', userImage:'user1.png' }],
       reportingYear: 'April 2020 - March 2021',
       actualData: { value: 4, label: '4 months' },
       forecastData: { value: 8, label: '8 months' },
@@ -80,7 +80,11 @@ const data = {
       actualData: { value: 7, label: '7 months' },
       forecastData: { value: 5, label: '5 months' },
       createdAt: '2020-08-14',
-      assignTo: 'Ryan Killick',
+      assignTo: [
+        { value: 'howellLee', label: 'Howell Lee', userImage:'user1.png' },
+        { value: 'ryanKillick', label: 'Ryan Killick', userImage:'user2.png' },
+        { value: 'ryanManton', label: 'Ryan Manton', userImage:'user3.png' },
+      ],
       reportingYear: 'April 2020 - March 2021',
       year: '2020',
       quarter: 'Q3',
@@ -98,7 +102,7 @@ const data = {
       dueDate: '23/07/2020',
       updatedAt: '29/10/20 at 14:32',
       createdAt: '2020-08-14',
-      assignTo: 'Ryan Killick',
+      assignTo: [{ value: 'ryanKillick', label: 'Ryan Killick', userImage:'user1.png' }],
       reportingYear: 'April 2020 - March 2021',
       actualData: { value: 2, label: '2 months' },
       forecastData: { value: 10, label: '10 months' },
@@ -120,7 +124,7 @@ const data = {
       dueDate: '23/12/2020',
       updatedAt: '29/10/20 at 14:32',
       createdAt: '2020-08-14',
-      assignTo: 'Ryan Killick',
+      assignTo: [{ value: 'ryanKillick', label: 'Ryan Killick', userImage:'user1.png' }],
       reportingYear: 'April 2020 - March 2021',
       actualData: { value: 3, label: '3 months' },
       forecastData: { value: 9, label: '9 months' },
@@ -281,7 +285,7 @@ const prevStartDate = newDate.getFullYear() - 1;
 const prevEndDate =  newDate.getFullYear();
 
 const market = [
-  { value: '', label: 'All Markets' },
+  { value: '', label: 'All markets' },
   {
     value: 'ARG',
     label: 'Argentina',
@@ -461,6 +465,17 @@ const versionHistory = {
   ],
 }
 
+const userList = [
+  { value:'ryanKillick',
+    label:'Ryan Killick' },
+  { value:'ryanManton',
+    label:'Ryan Manton' },
+  { value:'howellLee',
+    label:'Howell Lee' },
+  { value:'boladale',
+    label:'Boladale' },
+  ];
+
 export {
   assignToOptions,
   monthOptions,
@@ -471,4 +486,5 @@ export {
   reportingYear,
   data,
   versionHistory,
+  userList,
 };
