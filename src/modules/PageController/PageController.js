@@ -60,8 +60,6 @@ const PageController = (props) => {
             content: 'Move to complete',
             onClick: () => handleMoveToCompleteModal(),
             isDisabled: false,
-            variant: 'ghost',
-            icon: 'archive',
           }]
         }
         controls={

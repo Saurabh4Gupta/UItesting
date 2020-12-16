@@ -124,15 +124,15 @@ const TableList = (props) => {
                   {showStatus === false ? (
                     ''
                   ) : (
-                      <Box width="13%">
-                        {status === cmsData.overdue ? (
-                          <Chip variant="status" status="warning" hasStatusLight>
-                            {cmsData.overdue}
-                          </Chip>
+                    <Box width="13%">
+                      {status === cmsData.overdue ? (
+                        <Chip variant="status" status="warning" hasStatusLight>
+                          {cmsData.overdue}
+                        </Chip>
                         ) : (
                             ''
                           )}
-                      </Box>
+                    </Box>
                     )}
                   <Box width="30%">{`${cmsData.lastUpdate}: ${updatedAt}`}</Box>
                 </Stack>

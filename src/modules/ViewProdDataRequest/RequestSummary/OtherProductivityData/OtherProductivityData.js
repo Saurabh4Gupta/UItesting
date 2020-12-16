@@ -8,6 +8,7 @@ import Divider from '@dentsu-ui/components/dist/cjs/components/Divider';
 import Chip from '@dentsu-ui/components/dist/cjs/components/Chip';
 import PropTypes from 'prop-types';
 import Paragraph from '@dentsu-ui/components/dist/cjs/components/Paragraph/Paragraph';
+import { AvatarGroup, Avatar } from '@dentsu-ui/components';
 import { dataFieldCms as PageContent } from '../../../../cms/dataFieldCms';
 import EditData from '../../../CreateData/EditData';
 import TrackerTemplate from './TrackerTemplate';
@@ -107,14 +108,18 @@ const OtherProductivityData = (props) => {
                   {PageContent.assignedTo}
                 </Caption>
               </Box>
-              <Chip
-                avatar={{
-                  src: 'https://bit.ly/code-beast',
-                  name: 'John Paul Green',
+              {assignTo.length === 1
+              ? (
+                <Chip
+                  avatar={{
+                  src: assignTo[0].userImage ? assignTo[0].userImage : '',
+                  name: assignTo[0].label,
                 }}
-              >
-                {assignTo}
-              </Chip>
+                >
+                  {assignTo[0].label}
+                </Chip>
+) : (<AvatarGroup size="xlarge">{assignTo.map((value) => <Avatar name={value.value} src={value.userImage ? value.userImage : ''} />)}</AvatarGroup>)
+}
             </Stack>
           </Stack>
           <TrackerTemplate />

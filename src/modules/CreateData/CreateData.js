@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Form from './Form'
 import useCustomForm from '../../hooks/useCustomForm';
 import validationRule from '../../utils/validate';
-import { options, monthOptions, reportingYear } from '../Mock/mockData'
+import { options, monthOptions, reportingYear, userList } from '../Mock/mockData'
 
 const CreateData = (props) => {
   const { cmsData, market, isModalOpen, handleModal, addRequest } = props;
@@ -73,6 +73,7 @@ const CreateData = (props) => {
             monthOptions={monthOptions}
             reportingYear={reportingYear}
             forecastOptions={forecastOptions}
+            userList={userList}
           />
         </Modal.Body>
         <Modal.Footer>
