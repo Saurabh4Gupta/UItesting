@@ -8,6 +8,7 @@ const Form = (props) => {
   const { MAX_FILE_SIZE, ALLOWED_FILE_TYPES } = constant;
   const { handleFileChange, errors, cmsData, setError } = props;
 
+
   return (
     <>
       <FormField
@@ -17,7 +18,8 @@ const Form = (props) => {
       >
         <Dropzone
           allowMultiple={false}
-          allowReorder
+          dropValidation
+          allowFileTypeValidation
           onUpdateFiles={(fileItems) => {
             handleFileChange(fileItems);
           }}

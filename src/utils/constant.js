@@ -10,6 +10,6 @@ const constant = {
   ],
   MAX_FILE_SIZE: '20MB',
   BRIEFING_SUMMARY_CHAR_LIMIT: 800,
-
+  VALID_FILE_TYPES:['xls', 'xlsx', 'csv', 'xlsb', 'xlsm', 'xlt', 'xltm', 'xltx'],
 }
 export default constant;

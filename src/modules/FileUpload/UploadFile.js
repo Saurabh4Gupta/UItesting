@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import Toast from '@dentsu-ui/components/dist/cjs/components/Toast';
 import Form from '../../components/FileUpload/Form';
 import { dataFieldCms as PageContent } from '../../cms';
+import constant from '../../utils/constant';
 
 const UploadFile = (props) => {
   const { cmsData, modalOpen, setModalOpen } = props;
@@ -11,14 +12,29 @@ const UploadFile = (props) => {
   const [files, setFiles] = useState([]);
 
   const errorHandler = (errorMsg) => {
-    if (!errorMsg) errorMsg = 'Invalid file type ';
-    setError({ error: `${errorMsg}` });
+    if (errorMsg) {
+      setError({ error: `${PageContent.uploadFileErrorMessage}` });
+      return true;
+    }
+
+        setError({ error: null });
+        return false;
   };
 
   const validate = () => {
     if (!files.length) {
       setError({ error: `${PageContent.uploadFileErrorMessage}` });
       return false;
+    }
+    if (files.length) {
+      const fileType = files[0].file.name.split('.')[1];
+      if (constant.VALID_FILE_TYPES.includes(fileType)) {
+        setError({ error: null });
+        return true;
+      }
+
+        setError({ error: `${PageContent.uploadFileErrorMessage}` });
+        return false;
     }
     return true;
   };
@@ -27,10 +43,8 @@ const UploadFile = (props) => {
     const isValid = validate();
     if (isValid) {
       setModalOpen(false);
-
       if (!error.error) {
         const toast = new Toast();
-
         return toast({
           title: '',
           content: PageContent.toastFileUploaded,
@@ -46,11 +60,14 @@ const UploadFile = (props) => {
     setError({});
     setFiles([]);
   };
+
   const handleFileChange = (fileItems) => {
     validate();
     setFiles(fileItems);
     setError({ error: null });
   };
+
+
   return (
     <>
       <Modal
