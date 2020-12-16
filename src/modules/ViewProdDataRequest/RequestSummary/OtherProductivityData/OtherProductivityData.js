@@ -68,7 +68,7 @@ const OtherProductivityData = (props) => {
               {PageContent.reportingYear}
             </Caption>
           </Box>
-          {reportingYear}
+          {reportingYear.value}
           <br />
           <br />
           <Box mt="20px" mb="10px">

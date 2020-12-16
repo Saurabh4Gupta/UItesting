@@ -154,7 +154,7 @@ const Form = (props) => {
           dateFormat="DD/MM/YYYY"
           parseDate={(date) => new Date(date)}
           formatDate={(date) => date.toLocaleDateString()}
-          onChange={(date) => handleSelectField(date, { name: 'dueDate' })}
+          onChange={(date) => handleSelectField(date.toLocaleDateString(), { name: 'dueDate' })}
           minDate={new Date()}
           maxDate={new Date(maxDate)}
           value={dueDate}
