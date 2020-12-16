@@ -39,15 +39,15 @@ const DataList = (props) => {
 
   const toast = Toast();
 
-  const initialRender = useRef(true)
+  const initialRender = useRef(true);
 
   useEffect(() => {
     if (initialRender.current) {
       initialRender.current = false;
     } else if (tabIndex === 0) {
-      setDataList(getData(market.value, 'ongoing'))
+      setDataList(getData(market.value, 'ongoing'));
     } else {
-      setCompleteDataList(getData(market.value, 'complete'))
+      setCompleteDataList(getData(market.value, 'complete'));
     }
   }, [market, tabIndex]);
 
@@ -67,10 +67,12 @@ const DataList = (props) => {
       setDataList({ data: filteredList, totalCount: allDataList.totalCount });
     }
     if (tabIndex === 1) {
-      setCompleteDataList({ data: filteredList, totalCount: allDataList.totalCount })
+      setCompleteDataList({
+        data: filteredList,
+        totalCount: allDataList.totalCount,
+      });
     }
   };
-
 
   const addRequest = async (values) => {
     try {
@@ -99,7 +101,6 @@ const DataList = (props) => {
     }
   };
 
-
   const handleDelete = (id) => {
     mockData.data.forEach((item) => {
       if (item.id === id) {
@@ -109,6 +110,12 @@ const DataList = (props) => {
       return false;
     });
     setDataList(getData(market.value, 'ongoing'));
+
+    return toast({
+      title: '',
+      content: PageContent.toastRequestDeleted,
+      status: 'success',
+    });
   };
 
   const handleMoveToCompleteData = (id) => {
@@ -120,7 +127,13 @@ const DataList = (props) => {
       return false;
     });
     setDataList(getData(market.value, 'ongoing'));
-    setCompleteDataList(getData(market.value, 'complete'))
+    setCompleteDataList(getData(market.value, 'complete'));
+
+    return toast({
+      title: '',
+      content: PageContent.toastMovedToComplete,
+      status: 'success',
+    });
   };
 
   const handleMoveToOngoing = (id) => {
@@ -133,7 +146,13 @@ const DataList = (props) => {
     });
     setDataList(getData(market.value, 'ongoing'));
     setCompleteDataList(getData(market.value, 'complete'));
-  }
+
+    return toast({
+      title: '',
+      content: PageContent.toastMovedToOngoing,
+      status: 'success',
+    });
+  };
 
   const handleModal = (value) => {
     setIsModalOpen(value);
@@ -182,21 +201,25 @@ const DataList = (props) => {
                     setIsDeleteModal={setIsDeleteModal}
                     setIsMoveToCompleteModel={setIsMoveToCompleteModel}
                     moveToCompleteModelData={moveToCompleteModelData}
-                    actionName={(tabIndex === 0) ? cmsData.moveToComplete : cmsData.moveToOnGoing}
+                    actionName={
+                      tabIndex === 0
+                        ? cmsData.moveToComplete
+                        : cmsData.moveToOnGoing
+                    }
                     handleDelete={handleDelete}
                     clientCode={clientCode}
                     search={searchChangeHandler}
                     handleDeleteModel={handleDeleteModel}
                     handleMoveToCompleteModel={handleMoveToCompleteModel}
                     handleMoveToCompleteData={handleMoveToCompleteData}
-                    showStatus={(tabIndex === 0)}
+                    showStatus={tabIndex === 0}
                   />
-                  ) : (
-                    <EmptyTable
-                      defaultText={cmsData.emptyProductivityDatarequestCaption}
-                      handleModal={handleModal}
-                    />
-                    )}
+                ) : (
+                  <EmptyTable
+                    defaultText={cmsData.emptyProductivityDatarequestCaption}
+                    handleModal={handleModal}
+                  />
+                )}
               </Tabs.Panel>
               <Tabs.Panel>
                 {completeDataList.totalCount > 0 ? (
@@ -209,17 +232,17 @@ const DataList = (props) => {
                     clientCode={clientCode}
                     search={searchChangeHandler}
                   />
-                  ) : (
-                    <EmptyTable
-                      defaultText={
-                          cmsData.emptyCompletedProductivityDatarequestCaption
-                        }
-                      handleModal={handleModal}
-                    />
-                    )}
+                ) : (
+                  <EmptyTable
+                    defaultText={
+                      cmsData.emptyCompletedProductivityDatarequestCaption
+                    }
+                    handleModal={handleModal}
+                  />
+                )}
               </Tabs.Panel>
             </Tabs.Panels>
-            )}
+          )}
         </Tabs>
       </Box>
     </>
@@ -239,7 +262,7 @@ DataList.defaultProps = {
   market: { value: '' },
   dataList: [{}],
   clientCode: '',
-  setDataList: () => { },
+  setDataList: () => {},
   loading: true,
 };
 export default DataList;
