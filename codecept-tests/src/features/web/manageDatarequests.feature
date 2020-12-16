@@ -19,5 +19,5 @@ Feature: As an Amplifi Global or Local Investment team member
     And User will create new data request
     |localMarket|requestName  |briefing                 |reportingYear            |actualData|forecastData|dueDate   |assignTo    |
     |USA        |Data request1|This is automated request|April 2021  -  March 2022|7 months  |3 months    |25/02/2021|Ryan Killick|
-    Then Verify request is added.
+    Then Verify request is added and toast notification "Data request created" will be shown.
 

@@ -2,9 +2,10 @@ const I = actor();
 const GenericMethods = require('../../factories/GenericFuctions.js');
 const envURL = require('../../config/EnvConfig');
 const datePicker = require('../../factories/DatePicker');
-const chai = require('chai');
-const { assert } = chai;
+//const chai = require('chai');
+//const { assert } = chai;
 let envStatus = envURL.env === 'int-g1ds' || envURL.env === 'nft-g1ds' || envURL.env === 'stg-g1ds';
+
 module.exports = {
 
   homepageFields: {
@@ -18,9 +19,10 @@ module.exports = {
     aTextComp: (text) => `//a[text() = '${text}']/..`,
     iconLabel: (icon) => `//span[@icon='${icon}']/..`,
     labelDropdownComp:(text)=> `(//label[text()="${text}"]/..//input)[1]`,
-    labelTextComp:text=> `//label[text()="${text}"]`,
-    dropzoneArea:`//input[@id='filepond--browser-r5czck7n2']`,
+    labelTextComp:text=> `(//label[text()='Data request name']/../../../..//input)[3]`,
+    dropArea:`//input[@name='dropzone']`,
     frame: `//div[@id='container']//iframe`,
+
 
   },
 
@@ -76,10 +78,10 @@ module.exports = {
   },
 
 
-    selectLocalMarket(fieldname,option)
+   /* selectLocalMarket(fieldname,option)
     {
       GenericMethods.waitAndSelect(this.homepageFields.labelDropdownComp(fieldname),20);
-    },
+    },*/
 
     selectDropDown(fieldName, value){
     I.waitForVisible(this.homepageFields.labelDropdownComp(fieldName, 1), 60);
@@ -89,21 +91,26 @@ module.exports = {
     // I.click(this.fields.inputTextCurrency(value), 60);
   },
 
-  enterText(fieldname,value)
+  enterText(fieldname)
   {
     GenericMethods.waitAndFillField(this.homepageFields.labelTextComp(fieldname),20)
   },
 
 
-  uploadFile(text)
+  uploadFile()
   {
-    I.attachFile(this.homepageFields.dropzoneArea(text),"C:\\Users\\Vishal\\Documents\\Test Files")
+    I.attachFile(this.homepageFields.dropArea,"./TestFiles/Book1_xls.xls")
+
   },
   switchToFrame() {
     if (envStatus||envURL.env === 'brp') {
       I.waitForVisible(this.homepageFields.frame, 40);
       I.switchTo(this.homepageFields.frame);
     }
+  },
+
+  toastNotification(text){
+    GenericMethods.waitAndSee(this.homepageFields.pTextComp(text),20)
   },
 
   createDataRequest(table)
@@ -114,12 +121,14 @@ module.exports = {
     }=table;
 
     this.selectDropDown('Local market', localMarket);
+   // pause();
     this.enterText('Data request name',requestName);
     this.enterText('Briefing',briefing);
     this.selectDropDown('Reporting year',reportingYear);
     this.selectDropDown('Actual data',actualData);
     this.selectDropDown('Forecast data',forecastData);
-    this.uploadFile('Add tracker template file');
+    this.uploadFile();
+    I.wait(10)
     datePicker.datePickerInput(dueDate, this.homepageFields.labelTextComp('Due date'));
     this.selectDropDown('Assign to',assignTo);
     I.click(this.homepageFields.buttonComp('Create'))

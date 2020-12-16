@@ -8,6 +8,7 @@ const gherkin = {
     steps: [
         "./src/step_definitions/login_step.js",
         "./src/step_definitions/selectClient_step.js",
+        "./src/step_definitions/dataRequests.js",
     ],
 };
 

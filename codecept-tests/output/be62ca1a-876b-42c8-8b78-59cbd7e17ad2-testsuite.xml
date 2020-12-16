@@ -1,0 +1,189 @@
+<?xml version='1.0'?>
+<ns2:test-suite xmlns:ns2='urn:model.allure.qatools.yandex.ru' start='1608130716307' stop='1608130761135'>
+    <name>As an Amplifi Global or Local Investment team member</name>
+    <title>As an Amplifi Global or Local Investment team member</title>
+    <test-cases>
+        <test-case start='1608130729007' status='failed' stop='1608130760733'>
+            <name>Manage Productivity Data requests @sanity @smoke</name>
+            <title>Manage Productivity Data requests @sanity @smoke</title>
+            <labels>
+                <label name='tag' value='@sanity'/>
+                <label name='tag' value='@smoke'/>
+            </labels>
+            <parameters/>
+            <steps>
+                <step start='1608130757803' status='passed' stop='1608130757892'>
+                    <name>Given User is able to see subheading as "Productivity data requests" </name>
+                    <title>Given User is able to see subheading as "Productivity data requests" </title>
+                    <attachments/>
+                    <steps>
+                        <step start='1608130757803' status='passed' stop='1608130757859'>
+                            <name>I wait for visible "//h3[text() ='Productivity data requests']", 20</name>
+                            <title>I wait for visible "//h3[text() ='Productivity data requests']", 20</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                        <step start='1608130757859' status='passed' stop='1608130757892'>
+                            <name>I see element "//h3[text() ='Productivity data requests']"</name>
+                            <title>I see element "//h3[text() ='Productivity data requests']"</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                    </steps>
+                </step>
+                <step start='1608130757892' status='passed' stop='1608130758359'>
+                    <name>And User will click on "Create new data request" button and will see heading as "Create new data request" </name>
+                    <title>And User will click on "Create new data request" button and will see heading as "Create new data request" </title>
+                    <attachments/>
+                    <steps>
+                        <step start='1608130757892' status='passed' stop='1608130757926'>
+                            <name>I wait for visible "//span[text()='Create new data request']/..", 10</name>
+                            <title>I wait for visible "//span[text()='Create new data request']/..", 10</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                        <step start='1608130757926' status='passed' stop='1608130757969'>
+                            <name>I wait for enabled "//span[text()='Create new data request']/..", 10</name>
+                            <title>I wait for enabled "//span[text()='Create new data request']/..", 10</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                        <step start='1608130757969' status='passed' stop='1608130758249'>
+                            <name>I click "//span[text()='Create new data request']/.."</name>
+                            <title>I click "//span[text()='Create new data request']/.."</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                        <step start='1608130758249' status='passed' stop='1608130758316'>
+                            <name>I wait for visible "//h3[text() ='Create new data request']", 20</name>
+                            <title>I wait for visible "//h3[text() ='Create new data request']", 20</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                        <step start='1608130758316' status='passed' stop='1608130758359'>
+                            <name>I see element "//h3[text() ='Create new data request']"</name>
+                            <title>I see element "//h3[text() ='Create new data request']"</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                    </steps>
+                </step>
+                <step start='1608130758359' status='failed' stop='1608130760732'>
+                    <name>And User will create new data request </name>
+                    <title>And User will create new data request </title>
+                    <attachments/>
+                    <steps>
+                        <step start='1608130758359' status='passed' stop='1608130758434'>
+                            <name>I wait for visible "(//label[text()="Local market"]/..//input)[1]", 60</name>
+                            <title>I wait for visible "(//label[text()="Local market"]/..//input)[1]", 60</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                        <step start='1608130758434' status='passed' stop='1608130758717'>
+                            <name>I fill field "(//label[text()="Local market"]/..//input)[1]", "USA"</name>
+                            <title>I fill field "(//label[text()="Local market"]/..//input)[1]", "USA"</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                        <step start='1608130758717' status='passed' stop='1608130758862'>
+                            <name>I press key "Enter"</name>
+                            <title>I press key "Enter"</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                        <step start='1608130758862' status='passed' stop='1608130758901'>
+                            <name>I wait for visible "(//label[text()='Data request name']/../../../..//input)[3]", </name>
+                            <title>I wait for visible "(//label[text()='Data request name']/../../../..//input)[3]", </title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                        <step start='1608130758901' status='passed' stop='1608130759144'>
+                            <name>I fill field "(//label[text()='Data request name']/../../../..//input)[3]", 20</name>
+                            <title>I fill field "(//label[text()='Data request name']/../../../..//input)[3]", 20</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                        <step start='1608130759144' status='passed' stop='1608130759175'>
+                            <name>I wait for visible "(//label[text()='Data request name']/../../../..//input)[3]", </name>
+                            <title>I wait for visible "(//label[text()='Data request name']/../../../..//input)[3]", </title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                        <step start='1608130759175' status='passed' stop='1608130759382'>
+                            <name>I fill field "(//label[text()='Data request name']/../../../..//input)[3]", 20</name>
+                            <title>I fill field "(//label[text()='Data request name']/../../../..//input)[3]", 20</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                        <step start='1608130759382' status='passed' stop='1608130759432'>
+                            <name>I wait for visible "(//label[text()="Reporting year"]/..//input)[1]", 60</name>
+                            <title>I wait for visible "(//label[text()="Reporting year"]/..//input)[1]", 60</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                        <step start='1608130759432' status='passed' stop='1608130759755'>
+                            <name>I fill field "(//label[text()="Reporting year"]/..//input)[1]", "April 2021  -  March 2022"</name>
+                            <title>I fill field "(//label[text()="Reporting year"]/..//input)[1]", "April 2021  -  March 2022"</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                        <step start='1608130759756' status='passed' stop='1608130760079'>
+                            <name>I press key "Enter"</name>
+                            <title>I press key "Enter"</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                        <step start='1608130760079' status='passed' stop='1608130760125'>
+                            <name>I wait for visible "(//label[text()="Actual data"]/..//input)[1]", 60</name>
+                            <title>I wait for visible "(//label[text()="Actual data"]/..//input)[1]", 60</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                        <step start='1608130760126' status='passed' stop='1608130760302'>
+                            <name>I fill field "(//label[text()="Actual data"]/..//input)[1]", "7 months"</name>
+                            <title>I fill field "(//label[text()="Actual data"]/..//input)[1]", "7 months"</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                        <step start='1608130760302' status='passed' stop='1608130760427'>
+                            <name>I press key "Enter"</name>
+                            <title>I press key "Enter"</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                        <step start='1608130760427' status='passed' stop='1608130760459'>
+                            <name>I wait for visible "(//label[text()="Forecast data"]/..//input)[1]", 60</name>
+                            <title>I wait for visible "(//label[text()="Forecast data"]/..//input)[1]", 60</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                        <step start='1608130760459' status='passed' stop='1608130760637'>
+                            <name>I fill field "(//label[text()="Forecast data"]/..//input)[1]", "3 months"</name>
+                            <title>I fill field "(//label[text()="Forecast data"]/..//input)[1]", "3 months"</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                        <step start='1608130760637' status='passed' stop='1608130760730'>
+                            <name>I press key "Enter"</name>
+                            <title>I press key "Enter"</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                    </steps>
+                </step>
+            </steps>
+            <attachments>
+                <attachment title='Last Seen Screenshot' source='44e6a764-3786-4d90-8b3e-1c9d2dc6aaeb-attachment.png' type='image/png' size='155634'/>
+            </attachments>
+            <failure>
+                <message>this.homepageFields.dropArea is not a function</message>
+                <stack-trace>TypeError: this.homepageFields.dropArea is not a function
+                    at Object.uploadFile (C:\Users\Vishal\Desktop\Produtivity Manager\dan-productivity-mgr-ui\codecept-tests\src\pages\homepage.js:102:38)
+                    at Object.createDataRequest (C:\Users\Vishal\Desktop\Produtivity Manager\dan-productivity-mgr-ui\codecept-tests\src\pages\homepage.js:129:10)
+                    at C:\Users\Vishal\Desktop\Produtivity Manager\dan-productivity-mgr-ui\codecept-tests\src\step_definitions\dataRequests.js:16:12
+                    at runSteps (C:\Users\Vishal\Desktop\Produtivity Manager\dan-productivity-mgr-ui\codecept-tests\node_modules\codeceptjs\lib\interfaces\gherkin.js:49:15)
+                    at processTicksAndRejections (internal/process/task_queues.js:97:5)</stack-trace>
+            </failure>
+        </test-case>
+    </test-cases>
+</ns2:test-suite>
