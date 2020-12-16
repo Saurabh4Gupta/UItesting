@@ -1,39 +1,36 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { useLocation  } from 'react-router';
+import { useLocation, useHistory } from 'react-router';
 import Box from '@dentsu-ui/components/dist/cjs/components/Box';
 import PageController from '../PageController/PageController';
 import { dataFieldCms as PageContent } from '../../cms';
 import withPageController from '../../hoc/withPageController';
 import UploadFile from '../FileUpload/UploadFile';
 import RequestSummary from './RequestSummary/RequestSummary';
-import { data as prodRequests } from '../Mock/mockData';
+import { getDataById, data as mockData } from '../Mock/mockData';
 import Loader from '../../components/loading';
 import VersionHistory from '../VersionHistory/VersionHistory';
-import MoveToComplete from '../MoveToComplete/MoveToComplete'
+import MoveToComplete from '../../components/MoveToComplete/MoveToComplete'
 
 const ViewProdDataRequest = (props) => {
   const { param } = props;
 
-  const { data } = prodRequests;
   const location = useLocation();
 
   const query = new URLSearchParams(location.search);
   const requestId = query.get('request_id');
+  const clientCode = query.get('client_code');
   const [prodRequest, setProdRequest] = useState(
-    data.find((request) => request.id === +requestId),
+    getDataById(requestId),
   );
 
-  const [isUploadModal, setIsUploadModal] = useState(false);
+  const history = useHistory();
+
+  const [isUploadModal, setIsUploadModeal] = useState(false);
   const [isRequestModal, setIsRequestModal] = useState(false);
   const [isLoading, setLoading] = useState(true);
-  const [filterDataBy] = useState({
-    currency: { label: 'GBP (Default)', value: 'gbp' },
-    year: { label: 'Year to date', value: '' },
-  });
-
   const handleUploadModal = () => {
-    setIsUploadModal(true);
+    setIsUploadModeal(true);
   };
   const handleMoveToCompleteModal = () => {
     setIsRequestModal(true);
@@ -54,9 +51,24 @@ const ViewProdDataRequest = (props) => {
       actualData: values.actualData,
       forecastData: values.forecastData,
       reportingYear: values.reportingYear.value,
-      assignTo: 'Ryan Manton',
+      assignTo: values.assignTo,
     });
   };
+  const handleMoveToComplete = async () => {
+    await mockData.data.forEach((item) => {
+      if (item.id.toString() === requestId) {
+        item.isCompleted = true;
+        return true;
+      }
+      return false;
+    });
+
+    const queryString = `client_code=${clientCode}`
+    history.push({
+      pathname: '/datafield',
+      search: `?${queryString}`,
+    })
+  }
 
   return (
     <>
@@ -65,24 +77,23 @@ const ViewProdDataRequest = (props) => {
       ) : (
         <>
           {isUploadModal && (
-            <UploadFile
-              modalOpen={isUploadModal}
-              setModalOpen={setIsUploadModal}
-              cmsData={PageContent}
-            />
-          )}
+          <UploadFile
+            modalOpen={isUploadModal}
+            setModalOpen={setIsUploadModeal}
+            cmsData={PageContent}
+          />
+            )}
           {isRequestModal && (
           <MoveToComplete
             modalOpen={isRequestModal}
             setModalOpen={setIsRequestModal}
             cmsData={PageContent}
-            requestId={requestId}
+            handleMoveToComplete={handleMoveToComplete}
           />
-          )}
+            )}
           <PageController
             param={param}
             localMarket={prodRequest.localMarket.label}
-            filterDataBy={filterDataBy}
             pageTitle={prodRequest.name}
             pageMetadata={prodRequest.clientMarket}
             handleUploadModal={handleUploadModal}
@@ -98,7 +109,7 @@ const ViewProdDataRequest = (props) => {
             </Box>
           </PageController>
         </>
-      )}
+        )}
     </>
   );
 };

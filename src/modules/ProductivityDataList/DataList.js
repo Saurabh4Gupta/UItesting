@@ -1,16 +1,16 @@
+/* eslint-disable no-shadow */
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Box, Tabs } from '@dentsu-ui/components';
 import PropTypes from 'prop-types';
 import Toast from '@dentsu-ui/components/dist/cjs/components/Toast';
 import EmptyTable from './EmptyTable';
 import TableList from './TableList';
 import CreateData from '../CreateData/CreateData';
-import { getCompletedData } from '../Mock/mockData';
+import { getData, data as mockData } from '../Mock/mockData';
 import Loader from '../../components/loading';
 import { dataFieldCms as PageContent } from '../../cms';
-
 
 const DataList = (props) => {
   const {
@@ -20,60 +20,59 @@ const DataList = (props) => {
     dataList,
     setDataList,
     loading,
-    updateOngoingList,
-    // eslint-disable-next-line react/prop-types
-    originalOngingList,
-    // eslint-disable-next-line react/prop-types
-    setOriginalOngoingList,
-    addNewRequest,
+    completeDataList,
+    setCompleteDataList,
+    setMarket,
   } = props;
 
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [completeData, setCompleteData] = useState({
-    completedCount: 0,
-    completedData: [],
-  });
-  const [originalCompleteData, setOriginalCompleteData] = useState(
-    getCompletedData,
-  );
   const [deleteModalData, setIsDeleteModal] = useState({
     isDeleteModal: false,
     requestId: undefined,
   });
   const [tabIndex, setTabIndex] = useState(0);
-  const { completedData } = completeData;
   const { data } = dataList;
-  const originalCompletedData = originalCompleteData.completedData;
-  const [moveToCompleteModelData, setIsMoveToCompleteModel] = useState({ isMoveToComplete: false, requestID: undefined })
+  const [moveToCompleteModelData, setIsMoveToCompleteModel] = useState({
+    isMoveToComplete: false,
+    requestID: undefined,
+  });
 
   const toast = Toast();
 
-  const searchChangeHandler = (input) => {
-    if (tabIndex === 0) {
-      const originalList = originalOngingList.data;
-      const updatedList = originalList.filter(
-        (d) => d.clientMarket.toLowerCase().includes(input.toLowerCase())
-          || d.name.toLowerCase().includes(input.toLowerCase()),
-      );
+  const initialRender = useRef(true)
 
-      const copyList = { ...dataList };
-
-      setDataList({ data: updatedList, totalCount: copyList.totalCount });
+  useEffect(() => {
+    if (initialRender.current) {
+      initialRender.current = false;
+    } else if (tabIndex === 0) {
+      setDataList(getData(market.value, 'ongoing'))
     } else {
-      const originalList = originalCompleteData.completedData;
-      const updatedList = originalList.filter(
-        (d) => d.clientMarket.toLowerCase().includes(input.toLowerCase())
-          || d.name.toLowerCase().includes(input.toLowerCase()),
-      );
-      const copyList = { ...completeData };
-      setCompleteData({
-        completedData: updatedList,
-        completedCount: copyList.completedCount,
-      });
+      setCompleteDataList(getData(market.value, 'complete'))
+    }
+  }, [market, tabIndex]);
+
+  const getFilteredList = (data, searchInput) => {
+    const updatedList = data.filter(
+      (d) => d.clientMarket.toLowerCase().includes(searchInput.toLowerCase())
+        || d.name.toLowerCase().includes(searchInput.toLowerCase()),
+    );
+    return updatedList;
+  };
+
+  const searchChangeHandler = (input) => {
+    const requestStatus = tabIndex === 0 ? 'ongoing' : 'complete';
+    const allDataList = getData(market.value, requestStatus);
+    const filteredList = getFilteredList(allDataList.data, input);
+    if (tabIndex === 0) {
+      setDataList({ data: filteredList, totalCount: allDataList.totalCount });
+    }
+    if (tabIndex === 1) {
+      setCompleteDataList({ data: filteredList, totalCount: allDataList.totalCount })
     }
   };
 
-  const addRequest = (values) => {
+
+  const addRequest = async (values) => {
     try {
       values.createdAt = new Date();
       values.isActive = true;
@@ -81,20 +80,15 @@ const DataList = (props) => {
       values.year = '2020';
       values.quarter = 'Q3';
       values.isDeleted = false;
-      values.id = dataList.data.length + completeData.completedData.length + 1;
+      values.id = new Date().getTime();
       values.client = 'Microsoft';
       values.updatedAt = '30/11/20 at 14:32';
       values.clientMarket = `Microsoft ${values.assignTo.label}`;
-      const tempData = [...dataList.data, values];
-      const finalOngoingList = {
-        totalCount: tempData.length,
-        data: tempData,
-      };
-
-      addNewRequest(tempData[0]);
-
-      setDataList(finalOngoingList);
-
+      await mockData.data.push(values);
+      setDataList(getData(market.value, 'ongoing'));
+      if (values.localMarket.value !== market.value) {
+        setMarket({ value: '', label: 'All markets' });
+      }
       return toast({
         title: '',
         content: PageContent.toastRequestCreated,
@@ -104,94 +98,42 @@ const DataList = (props) => {
       return null;
     }
   };
-  const handleToggleData = (id) => {
-    if (tabIndex === 0) {
-      const filterCompleteList = data.filter((item) => {
-        if (item.id === id) {
-          item.isCompleted = true;
-          return true;
-        }
-        return false;
-      });
-      const tempData = [...completedData, ...filterCompleteList];
-      const finalCompletedList = {
-        completedCount: tempData.length,
-        completedData: tempData,
-      };
-      const OngoingRequest = data.filter((item) => item.id !== id);
-      const filterOngoinglist = {
-        totalCount: OngoingRequest.length,
-        data: OngoingRequest,
-      };
-      const originaltempData = [
-        ...originalCompletedData,
-        ...filterCompleteList,
-      ];
-      setDataList(filterOngoinglist);
-      updateOngoingList(id, false);
-      setCompleteData(finalCompletedList);
-      setOriginalCompleteData({
-        completedCount: originaltempData.length,
-        completedData: originaltempData,
-      });
-      setIsMoveToCompleteModel({ isMoveToComplete: false, requestID: undefined })
-      return toast({
-        title: '',
-        content: PageContent.toastMovedToComplete,
-        status: 'success',
-      });
-    }
-    let filteredArray = [];
-    const filterOngoingList = completedData.filter((item) => {
+
+
+  const handleDelete = (id) => {
+    mockData.data.forEach((item) => {
+      if (item.id === id) {
+        item.isDeleted = true;
+        return true;
+      }
+      return false;
+    });
+    setDataList(getData(market.value, 'ongoing'));
+  };
+
+  const handleMoveToCompleteData = (id) => {
+    mockData.data.forEach((item) => {
+      if (item.id === id) {
+        item.isCompleted = true;
+        return true;
+      }
+      return false;
+    });
+    setDataList(getData(market.value, 'ongoing'));
+    setCompleteDataList(getData(market.value, 'complete'))
+  };
+
+  const handleMoveToOngoing = (id) => {
+    mockData.data.forEach((item) => {
       if (item.id === id) {
         item.isCompleted = false;
         return true;
       }
       return false;
     });
-    const tempData = [...data, ...filterOngoingList];
-    const finalOngoingList = { totalCount: tempData.length, data: tempData };
-    const completedRequest = completedData.filter((item) => item.id !== id);
-    const filterCompletedlist = {
-      completedCount: completedRequest.length,
-      completedData: completedRequest,
-    };
-    setDataList(finalOngoingList);
-    updateOngoingList(id, true);
-    setCompleteData(filterCompletedlist);
-    filteredArray = originalCompleteData.completedData.filter(
-      (value) => value.id !== id,
-    );
-    setOriginalCompleteData({
-      completedCount: originalCompleteData.completedCount,
-      completedData: filteredArray,
-    });
-    return toast({
-      title: '',
-      content: PageContent.toastMovedToOngoing,
-      status: 'success',
-    });
-  };
-
-  const deleteRequest = (id) => {
-    try {
-      const OngoingRequest = data.filter((item) => item.id !== id);
-      const filterOngoinglist = {
-        totalCount: OngoingRequest.length,
-        data: OngoingRequest,
-      };
-      updateOngoingList(id, false);
-      setDataList(filterOngoinglist);
-      setIsDeleteModal({ isDeleteModal: false, requestId: undefined });
-      return toast({
-        title: '',
-        content: PageContent.toastRequestDeleted,
-        status: 'success',
-      });
-    } catch (error) {
-      return null;
-    }
-  };
+    setDataList(getData(market.value, 'ongoing'));
+    setCompleteDataList(getData(market.value, 'complete'));
+  }
 
   const handleModal = (value) => {
     setIsModalOpen(value);
@@ -205,6 +147,7 @@ const DataList = (props) => {
   const handleMoveToCompleteModel = (value) => {
     setIsMoveToCompleteModel({ isMoveToComplete: true, requestID: value });
   };
+
   return (
     <>
       <CreateData
@@ -219,11 +162,11 @@ const DataList = (props) => {
           <Tabs.List>
             <Tabs.Tab
               label={cmsData.ongoingLabel}
-              count={data ? data.length : 0}
+              count={dataList.totalCount}
             />
             <Tabs.Tab
               label={cmsData.completeLabel}
-              count={completedData ? completedData.length : 0}
+              count={completeDataList.totalCount}
             />
           </Tabs.List>
           {loading ? (
@@ -231,7 +174,7 @@ const DataList = (props) => {
           ) : (
             <Tabs.Panels>
               <Tabs.Panel>
-                {originalOngingList.data.length > 0 ? (
+                {dataList.totalCount > 0 ? (
                   <TableList
                     data={data}
                     cmsData={cmsData}
@@ -239,13 +182,14 @@ const DataList = (props) => {
                     setIsDeleteModal={setIsDeleteModal}
                     setIsMoveToCompleteModel={setIsMoveToCompleteModel}
                     moveToCompleteModelData={moveToCompleteModelData}
-                    handleToggleData={handleToggleData}
-                    actionName={cmsData.moveToComplete}
-                    deleteRequest={deleteRequest}
+                    actionName={(tabIndex === 0) ? cmsData.moveToComplete : cmsData.moveToOnGoing}
+                    handleDelete={handleDelete}
                     clientCode={clientCode}
                     search={searchChangeHandler}
                     handleDeleteModel={handleDeleteModel}
                     handleMoveToCompleteModel={handleMoveToCompleteModel}
+                    handleMoveToCompleteData={handleMoveToCompleteData}
+                    showStatus={(tabIndex === 0)}
                   />
                   ) : (
                     <EmptyTable
@@ -255,12 +199,12 @@ const DataList = (props) => {
                     )}
               </Tabs.Panel>
               <Tabs.Panel>
-                {originalCompleteData.completedData.length > 0 ? (
+                {completeDataList.totalCount > 0 ? (
                   <TableList
-                    data={completedData}
+                    data={completeDataList.data}
                     cmsData={cmsData}
                     actionName={cmsData.moveToOnGoing}
-                    handleToggleData={handleToggleData}
+                    handleMoveToOngoing={handleMoveToOngoing}
                     showStatus={false}
                     clientCode={clientCode}
                     search={searchChangeHandler}
@@ -289,7 +233,6 @@ DataList.propTypes = {
   dataList: PropTypes.array,
   setDataList: PropTypes.func,
   loading: PropTypes.bool,
-  updateOngoingList: PropTypes.func,
 };
 DataList.defaultProps = {
   cmsData: {},
@@ -298,6 +241,5 @@ DataList.defaultProps = {
   clientCode: '',
   setDataList: () => { },
   loading: true,
-  updateOngoingList: {},
 };
 export default DataList;

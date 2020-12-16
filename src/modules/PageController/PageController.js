@@ -2,7 +2,7 @@ import React from 'react';
 import { Page, Select, FormField } from '@dentsu-ui/components';
 import PropTypes from 'prop-types';
 import { useHistory, useLocation } from 'react-router';
-import { clientList, market } from '../Mock/mockData';
+import { clientList, market as marketOptions } from '../Mock/mockData';
 import { dataFieldCms as PageContent } from '../../cms';
 
 const PageController = (props) => {
@@ -13,7 +13,7 @@ const PageController = (props) => {
 
   const {
     param,
-    filterDataBy,
+    market,
     handleMarket,
     children,
     handleUploadModal,
@@ -56,28 +56,24 @@ const PageController = (props) => {
         }
         secondaryActions={
           isViewProduct && !isCompleted
-            && [{
-          content: 'Move to complete',
-          onClick: () => handleMoveToCompleteModal(),
-          isDisabled: false,
-          variant: 'ghost',
-          icon: 'archive',
-        }]
-      }
+          && [{
+            content: 'Move to complete',
+            onClick: () => handleMoveToCompleteModal(),
+            isDisabled: false,
+          }]
+        }
         controls={
           !isViewProduct && (
             <FormField>
               <Select
                 width={200}
-                options={market}
-                value={filterDataBy.market}
-                onChange={(selected, event) => {
-                  handleMarket(selected, event);
-                }}
+                options={marketOptions}
+                value={market}
+                onChange={handleMarket}
               />
             </FormField>
           )}
-        status={isCompleted ? { type:'neutral', label:'Complete', hasStatusLight:true } : ''}
+        status={isCompleted ? { type: 'neutral', label: 'Complete', hasStatusLight: true } : ''}
       >
         {children}
       </Page>
@@ -87,7 +83,7 @@ const PageController = (props) => {
 
 PageController.propTypes = {
   param: PropTypes.object,
-  filterDataBy: PropTypes.object,
+  market: PropTypes.object,
   handleMarket: PropTypes.func,
   children: PropTypes.node,
   handleUploadModal: PropTypes.func,
@@ -99,11 +95,7 @@ PageController.propTypes = {
 
 PageController.defaultProps = {
   param: { isViewProduct: false },
-  filterDataBy: {
-    market: { label: 'All Markets', value: '' },
-    currency: { value: 'gbp', label: 'Currency GBP (default' },
-    year: { value: '', label: 'Year to date' },
-  },
+  market: { value: '', label: 'All markets' },
   children: '',
   handleMarket: () => { },
   handleUploadModal: () => { },
