@@ -5,10 +5,11 @@ Feature: View details for Productivity data request
     When User login into the App as "Global Investment Management" user
     Given User is on "My clients" Page
     Then verify list of clients
+    Then User will go to client "Microsoft Corporation" homepage
  @smoke
  Scenario: User is able to view details of Request
     Given User will click on View Details
-    #And User is able to view request details
+    Then User is able to view title as "Productivity request"
     #Then Verify if user is on Productivity request page
 
    # Scenario: User is able to Edit data request

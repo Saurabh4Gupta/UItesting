@@ -1,9 +1,9 @@
-20:17:59.745 INFO [GridLauncherV3.parse] - Selenium server version: 3.141.59, revision: e82be7d358
-20:17:59.850 INFO [GridLauncherV3.lambda$buildLaunchers$3] - Launching a standalone Selenium Server on port 4444
-2020-12-16 20:17:59.906:INFO::main: Logging initialized @438ms to org.seleniumhq.jetty9.util.log.StdErrLog
-20:18:00.199 INFO [WebDriverServlet.<init>] - Initialising WebDriverServlet
-20:18:00.549 INFO [SeleniumServer.boot] - Selenium Server is up and running on port 4444
-20:18:00.733 INFO [ActiveSessionFactory.apply] - Capabilities are: {
+23:33:47.148 INFO [GridLauncherV3.parse] - Selenium server version: 3.141.59, revision: e82be7d358
+23:33:47.238 INFO [GridLauncherV3.lambda$buildLaunchers$3] - Launching a standalone Selenium Server on port 4444
+2020-12-16 23:33:47.286:INFO::main: Logging initialized @386ms to org.seleniumhq.jetty9.util.log.StdErrLog
+23:33:47.536 INFO [WebDriverServlet.<init>] - Initialising WebDriverServlet
+23:33:47.848 INFO [SeleniumServer.boot] - Selenium Server is up and running on port 4444
+23:33:48.029 INFO [ActiveSessionFactory.apply] - Capabilities are: {
   "browserName": "chrome",
   "goog:chromeOptions": {
     "useAutomationExtension": true,
@@ -12,12 +12,12 @@
     }
   }
 }
-20:18:00.735 INFO [ActiveSessionFactory.lambda$apply$11] - Matched factory org.openqa.selenium.grid.session.remote.ServicedSession$Factory (provider: org.openqa.selenium.chrome.ChromeDriverService)
-Starting ChromeDriver 87.0.4280.88 (89e2380a3e36c3464b5dd1302349b1382549290d-refs/branch-heads/4280@{#1761}) on port 29594
+23:33:48.032 INFO [ActiveSessionFactory.lambda$apply$11] - Matched factory org.openqa.selenium.grid.session.remote.ServicedSession$Factory (provider: org.openqa.selenium.chrome.ChromeDriverService)
+Starting ChromeDriver 87.0.4280.88 (89e2380a3e36c3464b5dd1302349b1382549290d-refs/branch-heads/4280@{#1761}) on port 12336
 Only local connections are allowed.
 Please see https://chromedriver.chromium.org/security-considerations for suggestions on keeping ChromeDriver safe.
 ChromeDriver was started successfully.
-[1608130081.919][WARNING]: Deprecated chrome option is ignored: useAutomationExtension
-[1608130081.919][WARNING]: Deprecated chrome option is ignored: useAutomationExtension
-20:18:04.627 INFO [ProtocolHandshake.createSession] - Detected dialect: W3C
-20:18:04.659 INFO [RemoteSession$Factory.lambda$performHandshake$0] - Started new session 82d7e93fba2564b6dac258bd6ff29e8b (org.openqa.selenium.chrome.ChromeDriverService)
+[1608141829.166][WARNING]: Deprecated chrome option is ignored: useAutomationExtension
+[1608141829.166][WARNING]: Deprecated chrome option is ignored: useAutomationExtension
+23:33:51.865 INFO [ProtocolHandshake.createSession] - Detected dialect: W3C
+23:33:51.892 INFO [RemoteSession$Factory.lambda$performHandshake$0] - Started new session fd4969311963a24c384250c14ff9eea9 (org.openqa.selenium.chrome.ChromeDriverService)

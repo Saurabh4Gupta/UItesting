@@ -24,7 +24,7 @@ module.exports = {
   },
 
   verifyTitle: function(Title) {
-    GenericMethods.waitAndSee(this.overviewFields.h3Header(Title), 20);
+    GenericMethods.waitAndSee(this.viewDetailsFields.h3Header(Title), 20);
   },
 
   verifySubtext: function(Subtext) {
