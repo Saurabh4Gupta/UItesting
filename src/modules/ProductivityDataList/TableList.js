@@ -21,6 +21,7 @@ const TableList = (props) => {
     cmsData,
     data,
     handleMoveToCompleteData,
+    handleMoveToOngoing,
     deleteModalData,
     setIsDeleteModal,
     actionName,
@@ -53,7 +54,7 @@ const TableList = (props) => {
         moveToCompleteModelData={moveToCompleteModelData}
         setIsMoveToCompleteModel={setIsMoveToCompleteModel}
         handleMoveToCompleteData={handleMoveToCompleteData}
-        // handleToggleData={handleToggleData}
+      // handleToggleData={handleToggleData}
       />
       <List
         items={data}
@@ -109,7 +110,8 @@ const TableList = (props) => {
                   alignItems="center"
                   flexDirection="row"
                   justifyContent="space-between"
-                  width="80%">
+                  width="80%"
+                >
                   <Box width="25%">
                     <b>{`${client} ${localMarket.label}`}</b>
                   </Box>
@@ -122,29 +124,31 @@ const TableList = (props) => {
                   {showStatus === false ? (
                     ''
                   ) : (
-                    <Box width="13%">
-                      {status === cmsData.overdue ? (
-                        <Chip variant="status" status="warning" hasStatusLight>
-                          {cmsData.overdue}
-                        </Chip>
-                      ) : (
-                        ''
-                      )}
-                    </Box>
-                  )}
+                      <Box width="13%">
+                        {status === cmsData.overdue ? (
+                          <Chip variant="status" status="warning" hasStatusLight>
+                            {cmsData.overdue}
+                          </Chip>
+                        ) : (
+                            ''
+                          )}
+                      </Box>
+                    )}
                   <Box width="30%">{`${cmsData.lastUpdate}: ${updatedAt}`}</Box>
                 </Stack>
                 <Stack
                   alignItems="center"
                   flexDirection="row"
                   justifyContent="flex-end"
-                  width="20%">
+                  width="20%"
+                >
                   <Box>
                     <Button
                       variant="ghost"
                       size="small"
                       iconLeft="layers"
-                      onClick={() => showDataRequestDetails(id)}>
+                      onClick={() => showDataRequestDetails(id)}
+                    >
                       {cmsData.viewDetails}
                     </Button>
                   </Box>
@@ -152,14 +156,12 @@ const TableList = (props) => {
                   <Box>
                     <ActionBtn
                       actionName={actionName}
-                      handleMoveToCompleteData={() => handleMoveToCompleteData(id)
-                      }
                       deleteBtn={cmsData.delete}
                       showStatus={showStatus}
                       handleDeleteModel={() => handleDeleteModel(id)}
                       handleMoveToCompleteModel={() => handleMoveToCompleteModel(id)
                       }
-                      handleDelete={() => handleDelete(id)}
+                      handleMoveToOngoing={() => handleMoveToOngoing(id)}
                     />
                   </Box>
                 </Stack>
@@ -195,6 +197,7 @@ TableList.propTypes = {
   handleMoveToCompleteModel: PropTypes.object,
   setIsMoveToCompleteModel: PropTypes.func.isRequired,
   moveToCompleteModelData: PropTypes.func.isRequired,
+  handleMoveToOngoing: PropTypes.func,
 };
 
 TableList.defaultProps = {
@@ -203,8 +206,9 @@ TableList.defaultProps = {
   clientCode: '',
   search: {},
   deleteModalData: {},
-  handleDelete: () => {},
-  handleMoveToCompleteModel: () => {},
+  handleDelete: () => { },
+  handleMoveToCompleteModel: () => { },
+  handleMoveToOngoing: () => { },
 };
 
 export default TableList;

@@ -14,43 +14,36 @@ const DataField = (props) => {
   const { param } = props;
   const query = new URLSearchParams(location.search);
   const clientCode = query.get('client_code');
-  const [filterDataBy, setFilterDataBy] = useState({
-    market: { label: 'All Markets', value: '' },
-  });
+  const [market, setMarket] = useState({ value: '', label: 'All markets' });
   const [dataList, setDataList] = useState({ data: [], totalCount: 0 });
+  const [completeDataList, setCompleteDataList] = useState({ data: [], totalCount: 0 })
   const [isUploadModal, setIsUploadModal] = useState(false);
   const [isLoading, setLoading] = useState(true);
 
-  useEffect(() => {
-    setLoading(false);
-    setDataList(getData(filterDataBy.market.value, 'ongoing'))
-  }, [filterDataBy.market])
-
   const handleMarket = (selected) => {
-    setLoading(true);
-    setFilterDataBy({ market: selected });
+    setMarket(selected);
   };
 
-  // useEffect(() => {
-  //   console.log('<dhkjashdjshajdhsajhdjashdhhashhsh');
-  //   setTimeout(() => {
-  //     setLoading(false);
-  //     setDataList(getData(filterDataBy.market.value, 'ongoing'));
-  //     // setOriginalOngoingList(getData(filterDataBy.market.value));
-  //   }, 2000);
-  // }, [filterDataBy]);
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+      setDataList(getData(market.value, 'ongoing'));
+      setCompleteDataList(getData(market.value, 'complete'));
+    }, 2000);
+  }, [])
 
   return (
     <>
-      <PageController
-        param={param}
-        filterDataBy={filterDataBy}
-        handleMarket={handleMarket}
-        pageTitle=""
-        pageMetadata="Client Overview"
-        isCompleted=""
-      >
-        <Box mb="200px">
+      <Box mb="200px">
+        <PageController
+          param={param}
+          market={market}
+          handleMarket={handleMarket}
+          pageTitle=""
+          pageMetadata="Client Overview"
+          isCompleted=""
+        >
+
           <UploadFile
             cmsData={PageContent}
             modalOpen={isUploadModal}
@@ -58,14 +51,18 @@ const DataField = (props) => {
           />
           <DataList
             cmsData={PageContent}
-            market={filterDataBy.market}
+            market={market}
+            completeDataList={completeDataList}
             clientCode={clientCode}
             dataList={dataList}
             setDataList={setDataList}
+            setCompleteDataList={setCompleteDataList}
             loading={isLoading}
+            setMarket={setMarket}
           />
-        </Box>
-      </PageController>
+
+        </PageController>
+      </Box>
     </>
   );
 };

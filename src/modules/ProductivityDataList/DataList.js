@@ -1,14 +1,14 @@
 /* eslint-disable no-shadow */
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Box, Tabs } from '@dentsu-ui/components';
 import PropTypes from 'prop-types';
 import Toast from '@dentsu-ui/components/dist/cjs/components/Toast';
 import EmptyTable from './EmptyTable';
 import TableList from './TableList';
 import CreateData from '../CreateData/CreateData';
-import { getData, data as mockData, getDataCount } from '../Mock/mockData';
+import { getData, data as mockData } from '../Mock/mockData';
 import Loader from '../../components/loading';
 import { dataFieldCms as PageContent } from '../../cms';
 
@@ -20,18 +20,17 @@ const DataList = (props) => {
     dataList,
     setDataList,
     loading,
+    completeDataList,
+    setCompleteDataList,
+    setMarket,
   } = props;
 
   const [isModalOpen, setIsModalOpen] = useState(false);
-  //const [completeData, setCompleteData] = useState(getCompleteData());
   const [deleteModalData, setIsDeleteModal] = useState({
     isDeleteModal: false,
     requestId: undefined,
   });
-
-  // const [loadingg, error, data] = useMutation('postcomplete');
   const [tabIndex, setTabIndex] = useState(0);
-  // const { completedData } = completeData;
   const { data } = dataList;
   const [moveToCompleteModelData, setIsMoveToCompleteModel] = useState({
     isMoveToComplete: false,
@@ -40,23 +39,38 @@ const DataList = (props) => {
 
   const toast = Toast();
 
-  const searchChangeHandler = (input) => {
-    const requestStatus = tabIndex === 0 ? 'ongoing' : 'complete';
+  const initialRender = useRef(true)
 
-    const allDataList = getData(market.value, requestStatus);
-    const filteredList = getFilteredList(allDataList.data, input);
-
-    setDataList({ data: filteredList, totalCount: allDataList.totalCount });
-  };
+  useEffect(() => {
+    if (initialRender.current) {
+      initialRender.current = false;
+    } else if (tabIndex === 0) {
+      setDataList(getData(market.value, 'ongoing'))
+    } else {
+      setCompleteDataList(getData(market.value, 'complete'))
+    }
+  }, [market, tabIndex]);
 
   const getFilteredList = (data, searchInput) => {
     const updatedList = data.filter(
-      (d) =>
-        d.clientMarket.toLowerCase().includes(searchInput.toLowerCase())
+      (d) => d.clientMarket.toLowerCase().includes(searchInput.toLowerCase())
         || d.name.toLowerCase().includes(searchInput.toLowerCase()),
     );
     return updatedList;
   };
+
+  const searchChangeHandler = (input) => {
+    const requestStatus = tabIndex === 0 ? 'ongoing' : 'complete';
+    const allDataList = getData(market.value, requestStatus);
+    const filteredList = getFilteredList(allDataList.data, input);
+    if (tabIndex === 0) {
+      setDataList({ data: filteredList, totalCount: allDataList.totalCount });
+    }
+    if (tabIndex === 1) {
+      setCompleteDataList({ data: filteredList, totalCount: allDataList.totalCount })
+    }
+  };
+
 
   const addRequest = async (values) => {
     try {
@@ -71,7 +85,10 @@ const DataList = (props) => {
       values.updatedAt = '30/11/20 at 14:32';
       values.clientMarket = `Microsoft ${values.assignTo.label}`;
       await mockData.data.push(values);
-      setDataList(getData());
+      setDataList(getData(market.value, 'ongoing'));
+      if (values.localMarket.value !== market.value) {
+        setMarket({ value: '', label: 'All markets' });
+      }
       return toast({
         title: '',
         content: PageContent.toastRequestCreated,
@@ -82,29 +99,20 @@ const DataList = (props) => {
     }
   };
 
-  useEffect(() => {
-    console.log('>>>>>>tabindex', typeof tabIndex);
-    if (tabIndex === 0) {
-      setDataList(getData(market.value, 'ongoing'));
-    } else {
-      console.log('>>>>>>else');
-      setDataList(getData(market.value, 'complete'));
-    }
-  }, [tabIndex]);
 
-  console.log('>>>>>>data', data);
   const handleDelete = (id) => {
-    const filterDeleteList = mockData.data.filter((item) => {
+    mockData.data.forEach((item) => {
       if (item.id === id) {
         item.isDeleted = true;
         return true;
       }
+      return false;
     });
     setDataList(getData(market.value, 'ongoing'));
   };
 
   const handleMoveToCompleteData = (id) => {
-    const filterCompleteList = mockData.data.filter((item) => {
+    mockData.data.forEach((item) => {
       if (item.id === id) {
         item.isCompleted = true;
         return true;
@@ -112,7 +120,20 @@ const DataList = (props) => {
       return false;
     });
     setDataList(getData(market.value, 'ongoing'));
+    setCompleteDataList(getData(market.value, 'complete'))
   };
+
+  const handleMoveToOngoing = (id) => {
+    mockData.data.forEach((item) => {
+      if (item.id === id) {
+        item.isCompleted = false;
+        return true;
+      }
+      return false;
+    });
+    setDataList(getData(market.value, 'ongoing'));
+    setCompleteDataList(getData(market.value, 'complete'));
+  }
 
   const handleModal = (value) => {
     setIsModalOpen(value);
@@ -141,11 +162,11 @@ const DataList = (props) => {
           <Tabs.List>
             <Tabs.Tab
               label={cmsData.ongoingLabel}
-              count={getDataCount(market.value, 'ongoing')}
+              count={dataList.totalCount}
             />
             <Tabs.Tab
               label={cmsData.completeLabel}
-              count={getDataCount(market.value, 'complete')}
+              count={completeDataList.totalCount}
             />
           </Tabs.List>
           {loading ? (
@@ -170,35 +191,35 @@ const DataList = (props) => {
                     handleMoveToCompleteData={handleMoveToCompleteData}
                     showStatus={(tabIndex === 0)}
                   />
-                ) : (
-                  <EmptyTable
-                    defaultText={cmsData.emptyProductivityDatarequestCaption}
-                    handleModal={handleModal}
-                  />
-                )}
+                  ) : (
+                    <EmptyTable
+                      defaultText={cmsData.emptyProductivityDatarequestCaption}
+                      handleModal={handleModal}
+                    />
+                    )}
               </Tabs.Panel>
               <Tabs.Panel>
-                {dataList.totalCount > 0 && tabIndex === 1 ? (
+                {completeDataList.totalCount > 0 ? (
                   <TableList
-                    data={data}
+                    data={completeDataList.data}
                     cmsData={cmsData}
                     actionName={cmsData.moveToOnGoing}
-                    handleToggleData={() => {}} // handleToggleData}
+                    handleMoveToOngoing={handleMoveToOngoing}
                     showStatus={false}
                     clientCode={clientCode}
                     search={searchChangeHandler}
                   />
-                ) : (
-                  <EmptyTable
-                    defaultText={
-                      cmsData.emptyCompletedProductivityDatarequestCaption
-                    }
-                    handleModal={handleModal}
-                  />
-                )}
+                  ) : (
+                    <EmptyTable
+                      defaultText={
+                          cmsData.emptyCompletedProductivityDatarequestCaption
+                        }
+                      handleModal={handleModal}
+                    />
+                    )}
               </Tabs.Panel>
             </Tabs.Panels>
-          )}
+            )}
         </Tabs>
       </Box>
     </>
@@ -218,7 +239,7 @@ DataList.defaultProps = {
   market: { value: '' },
   dataList: [{}],
   clientCode: '',
-  setDataList: () => {},
+  setDataList: () => { },
   loading: true,
 };
 export default DataList;

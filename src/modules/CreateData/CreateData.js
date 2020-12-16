@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Form from './Form'
 import useCustomForm from '../../hooks/useCustomForm';
 import validationRule from '../../utils/validate';
-import { options, monthOptions, reportingYear, data, getData } from '../Mock/mockData'
+import { options, monthOptions, reportingYear } from '../Mock/mockData'
 
 const CreateData = (props) => {
   const { cmsData, market, isModalOpen, handleModal, addRequest } = props;
@@ -36,7 +36,8 @@ const CreateData = (props) => {
   useEffect(() => {
     if (market.value === '') return
     handleChange({ target: { name: 'localMarket', value: market } });
-  }, [market])
+  }, [market]);
+
   const closeModalHandler = () => {
     handleModal(false)
     handleCancel();

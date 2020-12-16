@@ -161,19 +161,40 @@ const data = {
 //   return { totalCount: filterData.length, data: filterData };
 // };
 
+export const getCount = (market, status = undefined) => {
+  let ongoingData;
+  let completeData
+  if (status === undefined) {
+    ongoingData = data.data.filter(key => !key.isCompleted && !key.isDeleted);
+    completeData = data.data.filter(key => key.isCompleted && !key.isDeleted);
+  }
+  if (status === 'ongoing') {
+    ongoingData = data.data.filter(key => !key.isCompleted && !key.isDeleted);
+  }
+  if (status === 'complete') {
+    completeData = data.data.filter(key => key.isCompleted && !key.isDeleted);
+  }
+
+  if (market !== '') {
+    ongoingData = ongoingData.filter(key => key.localMarket.value === market);
+    completeData = completeData.filter(key => key.localMarket.value === market);
+    return { ongoingCount: ongoingData.length, completeCount: completeData.length };
+  }
+
+  return { ongoingCount: ongoingData.length, completeCount: completeData.length };
+}
+
 export const getDataCount = (market, status) => {
   let filterData = data.data;
   if (status === 'ongoing') {
-     filterData = filterData.filter(
+    filterData = filterData.filter(
       (key) => !key.isCompleted,
     );
-    console.log('>>>>>>>>>>>>>>>ongoingCount', filterData);
   }
   if (status === 'complete') {
-     filterData = filterData.filter(
+    filterData = filterData.filter(
       (key) => key.isCompleted,
     );
-    console.log('completeCount>>>>>>>>>>>>>>>', filterData);
   }
   if (market !== '') {
     filterData = filterData.filter(
@@ -183,27 +204,27 @@ export const getDataCount = (market, status) => {
   return filterData.length;
 }
 
+export const getDataById = (id) => data.data.find(key => key.id.toString() === id && !key.isDeleted)
+
 export const getData = (market, status) => {
   // debugger;
   let filterData = data.data;
   if (status === 'ongoing') {
-     filterData = filterData.filter(
-      (key) => !key.isCompleted,
+    filterData = filterData.filter(
+      (key) => !key.isCompleted && !key.isDeleted,
     );
-    console.log('>>>>>>>>>>>>>>>', filterData);
   }
   if (status === 'complete') {
-     filterData = filterData.filter(
-      (key) => key.isCompleted,
+    filterData = filterData.filter(
+      (key) => key.isCompleted && !key.isDeleted,
     );
-    console.log('complete>>>>>>>>>>>>>>>', filterData);
   }
   if (market !== '') {
     filterData = filterData.filter(
       (key) => key.localMarket.value === market,
     );
   }
-  return { totalCount:filterData.length, data:filterData };
+  return { totalCount: filterData.length, data: filterData };
 };
 
 export function updateData(values) {
