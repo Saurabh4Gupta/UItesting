@@ -1,11 +1,10 @@
 import React from 'react';
 import { Menu } from '@dentsu-ui/components';
 import PropTypes from 'prop-types';
-import { dataFieldCms } from '../../cms/dataFieldCms'
 
 const ActionBtn = (props) => {
   const {
-    handleToggleData,
+    handleMoveToOngoing,
     handleMoveToCompleteModel,
     actionName,
     deleteBtn,
@@ -17,33 +16,33 @@ const ActionBtn = (props) => {
       <Menu>
         <Menu.Button />
         <Menu.List>
-          <Menu.Item onClick={actionName === dataFieldCms.moveToComplete
-            ? handleMoveToCompleteModel : handleToggleData}
-          >
+          <Menu.Item onClick={!showStatus ? handleMoveToOngoing : handleMoveToCompleteModel}>
             {actionName}
           </Menu.Item>
-          {showStatus === false ? (
-            ''
-          ) : (
-            <Menu.Item onClick={handleDeleteModel}>
-              {deleteBtn}
-            </Menu.Item>
-            )}
+          {!showStatus === false
+            && (
+              <Menu.Item onClick={handleDeleteModel}>
+                {deleteBtn}
+              </Menu.Item>
+            )
+          }
         </Menu.List>
       </Menu>
     </>
   );
 };
 ActionBtn.propTypes = {
-  handleToggleData: PropTypes.func.isRequired,
+  // handleToggleData: PropTypes.func.isRequired,
   actionName: PropTypes.string.isRequired,
   deleteBtn: PropTypes.string.isRequired,
   showStatus: PropTypes.bool.isRequired,
   handleDeleteModel: PropTypes.func,
   handleMoveToCompleteModel: PropTypes.func.isRequired,
+  handleMoveToOngoing: PropTypes.func,
 };
 ActionBtn.defaultProps = {
   handleDeleteModel: true,
+  handleMoveToOngoing: () => { },
 };
 
 export default ActionBtn;

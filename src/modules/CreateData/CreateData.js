@@ -11,7 +11,7 @@ const CreateData = (props) => {
   const [isReadyToSubmit, setIsReadyToSubmit] = useState(false);
   const [loading, setLoading] = useState(false);
   const initialValues = {
-   localMarket: market,
+    localMarket: market,
     name: '',
     briefing: '',
     reportingYear: '',
@@ -36,12 +36,13 @@ const CreateData = (props) => {
   useEffect(() => {
     if (market.value === '') return
     handleChange({ target: { name: 'localMarket', value: market } });
-  }, [market])
+  }, [market]);
+
   const closeModalHandler = () => {
     handleModal(false)
     handleCancel();
   }
-  const onSubmit = () => {
+  const onSubmit = async () => {
     handleSubmit();
     if (isReadyToSubmit) {
       setLoading(true);
@@ -99,7 +100,7 @@ const CreateData = (props) => {
 };
 CreateData.propTypes = {
   cmsData: PropTypes.object,
- market: PropTypes.string,
+  market: PropTypes.string,
   isModalOpen: PropTypes.bool,
   handleModal: PropTypes.func,
   addRequest: PropTypes.func,

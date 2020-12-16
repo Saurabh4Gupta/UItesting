@@ -1,17 +1,13 @@
-import  React from 'react';
+import React from 'react';
 import { Modal, Button } from '@dentsu-ui/components';
 import PropTypes from 'prop-types';
 
 const MoveToComplete = (props) => {
-  const { cmsData, setModalOpen, modalOpen, requestId } = props;
+  const { cmsData, setModalOpen, modalOpen, handleMoveToComplete } = props;
   const onCloseModal = () => {
     setModalOpen(false);
   };
 
-  const onSubmit = (id) => {
-     setModalOpen(false);
-     console.log(id)
-   };
   return (
     <>
       <Modal
@@ -28,7 +24,7 @@ const MoveToComplete = (props) => {
           <Button variant="secondary" onClick={onCloseModal}>
             {cmsData.deleteButtonCancelMessage}
           </Button>
-          <Button onClick={() => onSubmit(requestId)}>{cmsData.yesContinue}</Button>
+          <Button onClick={handleMoveToComplete}>{cmsData.yesContinue}</Button>
         </Modal.Footer>
       </Modal>
     </>
@@ -38,13 +34,13 @@ MoveToComplete.propTypes = {
   setModalOpen: PropTypes.func,
   modalOpen: PropTypes.bool,
   cmsData: PropTypes.object,
-  requestId:PropTypes.string,
+  handleMoveToComplete: PropTypes.func,
 };
 
 MoveToComplete.defaultProps = {
-  setModalOpen: () => {},
+  setModalOpen: () => { },
   modalOpen: false,
   cmsData: {},
-  requestId:PropTypes.string,
+  handleMoveToComplete: () => { },
 };
 export default MoveToComplete;

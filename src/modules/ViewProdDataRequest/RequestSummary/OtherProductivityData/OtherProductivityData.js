@@ -59,7 +59,7 @@ const OtherProductivityData = (props) => {
                 >
                   {PageContent.editRequest}
                 </Link>
-              )}
+                )}
             </Subheading>
           </Box>
           <Box mt="20px" mb="10px">
