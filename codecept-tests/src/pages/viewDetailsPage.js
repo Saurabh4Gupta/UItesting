@@ -12,7 +12,7 @@ module.exports = {
     bTextComp: text => `//b[text() = "${text}"]`,
     buttonComp: text => `//span[text()="${text}"]/..`,
     spanTextComp: text => `//span[text()="${text}"]`,
-    viewDetail: name => `//b[text()="${name}"]/../../../..//span[text()='View details'])[1]`,
+    viewDetail: name => `(//b[text()="${name}"]/../../../..//span[text()="View details"])[1]`,
     aTextComp: (text) => `//a[text() = "${text}"]/..`,
     iconLabel: (icon) => `//span[@icon="${icon}"]/..`,
   },
@@ -66,4 +66,5 @@ module.exports = {
   verifySpanText(text) {
     GenericMethods.waitAndSee(this.overviewFields.spanTextComp(text), 20);
   },
+
 };

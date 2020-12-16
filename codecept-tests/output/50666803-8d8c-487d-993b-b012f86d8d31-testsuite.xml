@@ -1,0 +1,43 @@
+<?xml version='1.0'?>
+<ns2:test-suite xmlns:ns2='urn:model.allure.qatools.yandex.ru' start='1608122344924' stop='1608122415561'>
+    <name>View details for Productivity data request</name>
+    <title>View details for Productivity data request</title>
+    <test-cases>
+        <test-case start='1608122365822' status='failed' stop='1608122415220'>
+            <name>User is able to view details of Request @smoke</name>
+            <title>User is able to view details of Request @smoke</title>
+            <labels>
+                <label name='tag' value='@smoke'/>
+            </labels>
+            <parameters/>
+            <steps>
+                <step start='1608122395210' status='failed' stop='1608122415219'>
+                    <name>Given User will click on View Details </name>
+                    <title>Given User will click on View Details </title>
+                    <attachments/>
+                    <steps>
+                        <step start='1608122395210' status='failed' stop='1608122415216'>
+                            <name>I wait for visible "//b[text()="Microsoft United Kingdom"]/../../../..//span[text()='View details'])[1]", 20</name>
+                            <title>I wait for visible "//b[text()="Microsoft United Kingdom"]/../../../..//span[text()='View details'])[1]", 20</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                    </steps>
+                </step>
+            </steps>
+            <attachments>
+                <attachment title='Last Seen Screenshot' source='41777071-d1c3-4f2d-999f-1a651447ea9c-attachment.png' type='image/png' size='113783'/>
+            </attachments>
+            <failure>
+                <message>waitUntil condition failed with the following reason: invalid selector: Unable to locate an element with the xpath expression //b[text()="Microsoft United Kingdom"]/../../../..//span[text()='View details'])[1] because of the following error:
+                SyntaxError: Failed to execute 'evaluate' on 'Document': The string '//b[text()="Microsoft United Kingdom"]/../../../..//span[text()='View details'])[1]' is not a valid XPath expression.
+                  (Session info: chrome=87.0.4280.88)</message>
+                <stack-trace>Error: waitUntil condition failed with the following reason: invalid selector: Unable to locate an element with the xpath expression //b[text()="Microsoft United Kingdom"]/../../../..//span[text()='View details'])[1] because of the following error:
+                SyntaxError: Failed to execute 'evaluate' on 'Document': The string '//b[text()="Microsoft United Kingdom"]/../../../..//span[text()='View details'])[1]' is not a valid XPath expression.
+                  (Session info: chrome=87.0.4280.88)
+                    at C:\Users\LAP-R141\Desktop\dan-productivity-mgr-ui\codecept-tests\node_modules\webdriverio\build\commands\browser\waitUntil.js:26:15
+                    at async Browser.wrapCommandFn (C:\Users\LAP-R141\Desktop\dan-productivity-mgr-ui\codecept-tests\node_modules\@wdio\utils\build\shim.js:58:29)</stack-trace>
+            </failure>
+        </test-case>
+    </test-cases>
+</ns2:test-suite>

@@ -1,0 +1,33 @@
+<?xml version='1.0'?>
+<ns2:test-suite xmlns:ns2='urn:model.allure.qatools.yandex.ru' start='1608122221194' stop='1608122264004'>
+    <name>View details for Productivity data request</name>
+    <title>View details for Productivity data request</title>
+    <test-cases>
+        <test-case start='1608122239208' status='failed' stop='1608122263657'>
+            <name>User is able to view details of Request @smoke</name>
+            <title>User is able to view details of Request @smoke</title>
+            <labels>
+                <label name='tag' value='@smoke'/>
+            </labels>
+            <parameters/>
+            <steps/>
+            <attachments>
+                <attachment title='Last Seen Screenshot' source='a0a104ac-662a-47a0-8d12-99b6a258f297-attachment.png' type='image/png' size='59439'/>
+            </attachments>
+            <failure>
+                <message>No steps matching "User will click on View Details"</message>
+                <stack-trace>Error: No steps matching "User will click on View Details"
+                    at matchStep (C:\Users\LAP-R141\Desktop\dan-productivity-mgr-ui\codecept-tests\node_modules\codeceptjs\lib\interfaces\bdd.js:44:9)
+                    at runSteps (C:\Users\LAP-R141\Desktop\dan-productivity-mgr-ui\codecept-tests\node_modules\codeceptjs\lib\interfaces\gherkin.js:38:18)
+                    at Test.&lt;anonymous> (C:\Users\LAP-R141\Desktop\dan-productivity-mgr-ui\codecept-tests\node_modules\codeceptjs\lib\interfaces\gherkin.js:89:46)
+                    at Context.test.fn (C:\Users\LAP-R141\Desktop\dan-productivity-mgr-ui\codecept-tests\node_modules\codeceptjs\lib\scenario.js:78:14)
+                    at callFnAsync (C:\Users\LAP-R141\Desktop\dan-productivity-mgr-ui\codecept-tests\node_modules\mocha\lib\runnable.js:386:21)
+                    at Test.Runnable.run (C:\Users\LAP-R141\Desktop\dan-productivity-mgr-ui\codecept-tests\node_modules\mocha\lib\runnable.js:330:7)
+                    at Runner.runTest (C:\Users\LAP-R141\Desktop\dan-productivity-mgr-ui\codecept-tests\node_modules\mocha\lib\runner.js:621:10)
+                    at C:\Users\LAP-R141\Desktop\dan-productivity-mgr-ui\codecept-tests\node_modules\mocha\lib\runner.js:745:12
+                    at next (C:\Users\LAP-R141\Desktop\dan-productivity-mgr-ui\codecept-tests\node_modules\mocha\lib\runner.js:538:14)
+                    at C:\Users\LAP-R141\Desktop\dan-productivity-mgr-ui\codecept-tests\node_modules\mocha\lib\runner.js:548:7</stack-trace>
+            </failure>
+        </test-case>
+    </test-cases>
+</ns2:test-suite>

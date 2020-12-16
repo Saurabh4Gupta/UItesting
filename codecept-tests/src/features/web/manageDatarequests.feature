@@ -10,7 +10,7 @@ Feature: As an Amplifi Global or Local Investment team member
     Then verify list of clients
     Then User will go to client "Microsoft Corporation" homepage
 
-  @sanity @smoke
+  #@sanity @smoke
 
   Scenario: Manage Productivity Data requests
 
