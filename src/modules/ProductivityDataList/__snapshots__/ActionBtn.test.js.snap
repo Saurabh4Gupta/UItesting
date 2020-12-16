@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<EmptyState /> should match snapshot 1`] = `
+<Fragment>
+  <Menu>
+    <ForwardRef />
+    <ForwardRef>
+      <MenuItem
+        onClick={[MockFunction]}
+      >
+        test1
+      </MenuItem>
+      <MenuItem
+        onClick={[MockFunction]}
+      >
+        test2
+      </MenuItem>
+    </ForwardRef>
+  </Menu>
+</Fragment>
+`;

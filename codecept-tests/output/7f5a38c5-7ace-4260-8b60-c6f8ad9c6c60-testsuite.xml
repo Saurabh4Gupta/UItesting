@@ -1,0 +1,178 @@
+<?xml version='1.0'?>
+<ns2:test-suite xmlns:ns2='urn:model.allure.qatools.yandex.ru' start='1608045413728' stop='1608045455046'>
+    <name>As an Amplifi Global or Local Investment team member</name>
+    <title>As an Amplifi Global or Local Investment team member</title>
+    <test-cases>
+        <test-case start='1608045427241' status='failed' stop='1608045454671'>
+            <name>Access Productivity Manager and Client Page @sanity @smoke</name>
+            <title>Access Productivity Manager and Client Page @sanity @smoke</title>
+            <labels>
+                <label name='tag' value='@sanity'/>
+                <label name='tag' value='@smoke'/>
+            </labels>
+            <parameters/>
+            <steps>
+                <step start='1608045444698' status='passed' stop='1608045451756'>
+                    <name>Given User is on "My clients" Page </name>
+                    <title>Given User is on "My clients" Page </title>
+                    <attachments/>
+                    <steps>
+                        <step start='1608045444698' status='passed' stop='1608045451756'>
+                            <name>Object: waitAndSee </name>
+                            <title>Object: waitAndSee </title>
+                            <attachments/>
+                            <steps>
+                                <step start='1608045444698' status='passed' stop='1608045451727'>
+                                    <name>I wait for visible "//div[text() = 'My clients']", 80</name>
+                                    <title>I wait for visible "//div[text() = 'My clients']", 80</title>
+                                    <attachments/>
+                                    <steps/>
+                                </step>
+                                <step start='1608045451728' status='passed' stop='1608045451755'>
+                                    <name>I see element "//div[text() = 'My clients']"</name>
+                                    <title>I see element "//div[text() = 'My clients']"</title>
+                                    <attachments/>
+                                    <steps/>
+                                </step>
+                            </steps>
+                        </step>
+                    </steps>
+                </step>
+                <step start='1608045451756' status='passed' stop='1608045451813'>
+                    <name>Then User able to see subHeading as "Choose the client you wish to view" </name>
+                    <title>Then User able to see subHeading as "Choose the client you wish to view" </title>
+                    <attachments/>
+                    <steps>
+                        <step start='1608045451756' status='passed' stop='1608045451813'>
+                            <name>Object: waitAndSee </name>
+                            <title>Object: waitAndSee </title>
+                            <attachments/>
+                            <steps>
+                                <step start='1608045451756' status='passed' stop='1608045451788'>
+                                    <name>I wait for visible "//p[text() = 'Choose the client you wish to view']", 20</name>
+                                    <title>I wait for visible "//p[text() = 'Choose the client you wish to view']", 20</title>
+                                    <attachments/>
+                                    <steps/>
+                                </step>
+                                <step start='1608045451789' status='passed' stop='1608045451813'>
+                                    <name>I see element "//p[text() = 'Choose the client you wish to view']"</name>
+                                    <title>I see element "//p[text() = 'Choose the client you wish to view']"</title>
+                                    <attachments/>
+                                    <steps/>
+                                </step>
+                            </steps>
+                        </step>
+                    </steps>
+                </step>
+                <step start='1608045451813' status='failed' stop='1608045454671'>
+                    <name>Then verify list of clients </name>
+                    <title>Then verify list of clients </title>
+                    <attachments/>
+                    <steps>
+                        <step start='1608045451813' status='failed' stop='1608045454671'>
+                            <name>Object: waitAndSee </name>
+                            <title>Object: waitAndSee </title>
+                            <attachments/>
+                            <steps>
+                                <step start='1608045451813' status='passed' stop='1608045454363'>
+                                    <name>I wait for visible "//span[text()="American Express"]", 20</name>
+                                    <title>I wait for visible "//span[text()="American Express"]", 20</title>
+                                    <attachments/>
+                                    <steps/>
+                                </step>
+                                <step start='1608045454364' status='passed' stop='1608045454386'>
+                                    <name>I see element "//span[text()="American Express"]"</name>
+                                    <title>I see element "//span[text()="American Express"]"</title>
+                                    <attachments/>
+                                    <steps/>
+                                </step>
+                                <step start='1608045454386' status='passed' stop='1608045454412'>
+                                    <name>I wait for visible "//span[text()="Burberry"]", 20</name>
+                                    <title>I wait for visible "//span[text()="Burberry"]", 20</title>
+                                    <attachments/>
+                                    <steps/>
+                                </step>
+                                <step start='1608045454413' status='passed' stop='1608045454432'>
+                                    <name>I see element "//span[text()="Burberry"]"</name>
+                                    <title>I see element "//span[text()="Burberry"]"</title>
+                                    <attachments/>
+                                    <steps/>
+                                </step>
+                                <step start='1608045454433' status='passed' stop='1608045454459'>
+                                    <name>I wait for visible "//span[text()="Burger King"]", 20</name>
+                                    <title>I wait for visible "//span[text()="Burger King"]", 20</title>
+                                    <attachments/>
+                                    <steps/>
+                                </step>
+                                <step start='1608045454462' status='passed' stop='1608045454482'>
+                                    <name>I see element "//span[text()="Burger King"]"</name>
+                                    <title>I see element "//span[text()="Burger King"]"</title>
+                                    <attachments/>
+                                    <steps/>
+                                </step>
+                                <step start='1608045454482' status='passed' stop='1608045454509'>
+                                    <name>I wait for visible "//span[text()="General Motors"]", 20</name>
+                                    <title>I wait for visible "//span[text()="General Motors"]", 20</title>
+                                    <attachments/>
+                                    <steps/>
+                                </step>
+                                <step start='1608045454510' status='passed' stop='1608045454529'>
+                                    <name>I see element "//span[text()="General Motors"]"</name>
+                                    <title>I see element "//span[text()="General Motors"]"</title>
+                                    <attachments/>
+                                    <steps/>
+                                </step>
+                                <step start='1608045454530' status='passed' stop='1608045454551'>
+                                    <name>I wait for visible "//span[text()="Microsoft Corporation"]", 20</name>
+                                    <title>I wait for visible "//span[text()="Microsoft Corporation"]", 20</title>
+                                    <attachments/>
+                                    <steps/>
+                                </step>
+                                <step start='1608045454552' status='passed' stop='1608045454573'>
+                                    <name>I see element "//span[text()="Microsoft Corporation"]"</name>
+                                    <title>I see element "//span[text()="Microsoft Corporation"]"</title>
+                                    <attachments/>
+                                    <steps/>
+                                </step>
+                                <step start='1608045454574' status='passed' stop='1608045454600'>
+                                    <name>I wait for visible "//span[text()="Procter &amp; Gamble"]", 20</name>
+                                    <title>I wait for visible "//span[text()="Procter &amp; Gamble"]", 20</title>
+                                    <attachments/>
+                                    <steps/>
+                                </step>
+                                <step start='1608045454601' status='passed' stop='1608045454621'>
+                                    <name>I see element "//span[text()="Procter &amp; Gamble"]"</name>
+                                    <title>I see element "//span[text()="Procter &amp; Gamble"]"</title>
+                                    <attachments/>
+                                    <steps/>
+                                </step>
+                                <step start='1608045454622' status='passed' stop='1608045454647'>
+                                    <name>I wait for visible "//span[text()="The Kraft Heinz Company"]", 20</name>
+                                    <title>I wait for visible "//span[text()="The Kraft Heinz Company"]", 20</title>
+                                    <attachments/>
+                                    <steps/>
+                                </step>
+                                <step start='1608045454648' status='passed' stop='1608045454670'>
+                                    <name>I see element "//span[text()="The Kraft Heinz Company"]"</name>
+                                    <title>I see element "//span[text()="The Kraft Heinz Company"]"</title>
+                                    <attachments/>
+                                    <steps/>
+                                </step>
+                            </steps>
+                        </step>
+                    </steps>
+                </step>
+            </steps>
+            <attachments>
+                <attachment title='Last Seen Screenshot' source='5b67ca11-7e0e-476b-bd52-6749a63813a0-attachment.png' type='image/png' size='87382'/>
+            </attachments>
+            <failure>
+                <message>client is not defined</message>
+                <stack-trace>ReferenceError: client is not defined
+                    at C:\Users\Vishal\Desktop\Produtivity Manager\dan-productivity-mgr-ui\codecept-tests\src\step_definitions\selectClient_step.js:21:36
+                    at runSteps (C:\Users\Vishal\AppData\Roaming\npm\node_modules\codeceptjs-webdriverio\node_modules\codeceptjs\lib\interfaces\gherkin.js:48:15)
+                    at processTicksAndRejections (internal/process/task_queues.js:97:5)</stack-trace>
+            </failure>
+        </test-case>
+    </test-cases>
+</ns2:test-suite>

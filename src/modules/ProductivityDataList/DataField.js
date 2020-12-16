@@ -1,44 +1,70 @@
+/* eslint-disable react/prop-types */
 import React, { useState, useEffect } from 'react';
 import { Box } from '@dentsu-ui/components';
-import CreateData from '../CreateData/CreateData';
-import Overview from '../Overview/Overview';
+import { useLocation } from 'react-router';
 import PageController from '../PageController/PageController';
 import DataList from './DataList';
 import { dataFieldCms as PageContent } from '../../cms';
 import { getData } from '../Mock/mockData';
 import UploadFile from '../FileUpload/UploadFile';
+import withPageController from '../../hoc/withPageController';
 
 const DataField = (props) => {
-  const [market] = useState('');
-  const [dataList, setDataList] = useState(getData());
-  const [isDataCreated, setDataCreated] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const location = useLocation();
+  const { param } = props;
+  const query = new URLSearchParams(location.search);
+  const clientCode = query.get('client_code');
+  const [market, setMarket] = useState({ value: '', label: 'All markets' });
+  const [dataList, setDataList] = useState({ data: [], totalCount: 0 });
+  const [completeDataList, setCompleteDataList] = useState({ data: [], totalCount: 0 })
   const [isUploadModal, setIsUploadModal] = useState(false);
-  const handleModal = (value) => {
-    setIsModalOpen(value)
-  }
+  const [isLoading, setLoading] = useState(true);
+
+  const handleMarket = (selected) => {
+    setMarket(selected);
+  };
+
   useEffect(() => {
-    if (isDataCreated) {
-      setDataList(getData());
-    }
-  }, [isDataCreated])
+    setTimeout(() => {
+      setLoading(false);
+      setDataList(getData(market.value, 'ongoing'));
+      setCompleteDataList(getData(market.value, 'complete'));
+    }, 2000);
+  }, [])
+
   return (
     <>
-      <PageController {...props} setIsUploadModal={setIsUploadModal} />
-      <Box m="45px" mb="200px">
-        <Overview />
-        <CreateData
-          cmsData={PageContent}
+      <Box mb="200px">
+        <PageController
+          param={param}
           market={market}
-          isModalOpen={isModalOpen}
-          handleModal={handleModal}
-          setDataCreated={setDataCreated}
-        />
-        <UploadFile cmsData={PageContent} modalOpen={isUploadModal} setModalOpen={setIsUploadModal} />
-        <DataList cmsData={PageContent} handleModal={handleModal} dataList={dataList} />
+          handleMarket={handleMarket}
+          pageTitle=""
+          pageMetadata="Client Overview"
+          isCompleted=""
+        >
+
+          <UploadFile
+            cmsData={PageContent}
+            modalOpen={isUploadModal}
+            setModalOpen={setIsUploadModal}
+          />
+          <DataList
+            cmsData={PageContent}
+            market={market}
+            completeDataList={completeDataList}
+            clientCode={clientCode}
+            dataList={dataList}
+            setDataList={setDataList}
+            setCompleteDataList={setCompleteDataList}
+            loading={isLoading}
+            setMarket={setMarket}
+          />
+
+        </PageController>
       </Box>
     </>
-  )
-}
+  );
+};
 
-export default (DataField);
+export default withPageController(DataField);

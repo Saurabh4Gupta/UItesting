@@ -77,6 +77,12 @@ module.exports = {
     I.seeTextEquals(text, locator);
   },
 
+  waitAndSelect(locator,sec,option)   //for dropdown
+  {
+    I.waitForVisible(locator, sec);
+    I.selectOption(locator,option,sec);
+  },
+
   async waitAndGetTextFromAttribute(attribute, locator, sec) {
     I.waitForVisible(locator, sec);
     return await I.grabAttributeFrom(locator, attribute);
