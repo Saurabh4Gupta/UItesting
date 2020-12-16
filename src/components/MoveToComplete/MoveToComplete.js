@@ -29,7 +29,7 @@ const MoveToComplete = (props) => {
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={onCloseModal}>
-            {cmsData.deleteButtonCancelMessage}
+            {cmsData.noCancel}
           </Button>
           <Button onClick={handleMoveToComplete}>{cmsData.yesContinue}</Button>
         </Modal.Footer>
