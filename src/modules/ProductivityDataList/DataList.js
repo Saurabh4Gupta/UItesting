@@ -230,14 +230,14 @@ DataList.propTypes = {
   cmsData: PropTypes.object,
   clientCode: PropTypes.string,
   market: PropTypes.object || PropTypes.string,
-  dataList: PropTypes.array,
+  dataList: PropTypes.object,
   setDataList: PropTypes.func,
   loading: PropTypes.bool,
 };
 DataList.defaultProps = {
   cmsData: {},
   market: { value: '' },
-  dataList: [{}],
+  dataList: {},
   clientCode: '',
   setDataList: () => { },
   loading: true,
