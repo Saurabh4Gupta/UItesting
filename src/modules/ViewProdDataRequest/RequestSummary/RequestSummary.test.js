@@ -3,9 +3,9 @@ import { shallow } from 'enzyme';
 import RequestSummary from './RequestSummary'
 
 
-describe('Success test cases for: PageController component', () => {
+describe('Success test cases for: RequestSummary component', () => {
   let wrapper;
-  describe('Snapshot test for  PageController component', () => {
+  describe('Snapshot test for  RequestSummary component', () => {
     beforeAll(() => {
       wrapper = shallow(<RequestSummary />);
     });
