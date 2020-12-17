@@ -50,6 +50,7 @@ module.exports = {
   },
 
   waitAndClick(locator, sec) {
+
     I.waitForVisible(locator, sec);
     I.waitForEnabled(locator, sec);
     I.click(locator);

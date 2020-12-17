@@ -17,8 +17,10 @@ Given(/^User will create new data request$/, function(input) {
   });
 
 
-Then(/^Verify request is added and toast notification "([^"]*)" will be shown\.$/, function(text) {
+Then(/^User will click on "([^"]*)" button and Verify request is added and toast notification "([^"]*)" will be shown\.$/, function(button,text) {
 
+
+  homepage.clickOnButton(button);
  homepage.toastNotification(text)
 
   });

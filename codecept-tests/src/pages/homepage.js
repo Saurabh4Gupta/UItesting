@@ -5,6 +5,8 @@ const datePicker = require('../../factories/DatePicker');
 //const chai = require('chai');
 //const { assert } = chai;
 let envStatus = envURL.env === 'int-g1ds' || envURL.env === 'nft-g1ds' || envURL.env === 'stg-g1ds';
+const months = ['January', 'February', 'March', 'April', 'May', 'June',
+  'July', 'August', 'September', 'October', 'November', 'December'];
 
 module.exports = {
 
@@ -22,6 +24,9 @@ module.exports = {
     labelTextComp:text=> `(//label[text()='Data request name']/../../../..//input)[3]`,
     dropArea:`//input[@name='dropzone']`,
     frame: `//div[@id='container']//iframe`,
+    labelDateComp:(text)=>`//label[text()="${text}"]/../../../../..//input[@placeholder="Date"]`,
+    optionDateComp:(text)=>`//option[text()='${text}']`,
+    divDateCOmp:(text)=>`(//div[text()='${text}'])[1]`,
 
 
   },
@@ -65,8 +70,11 @@ module.exports = {
   },
 
   clickOnButton(button) {
-    GenericMethods.waitAndClick(this.homepageFields.buttonComp(button), 10);
 
+    //GenericMethods.waitAndClick(this.homepageFields.buttonComp(button), 10);
+  I.waitForVisible(this.homepageFields.buttonComp(button),20);
+  I.wait(3);
+  I.click(this.homepageFields.buttonComp(button));
   },
 
   clickOnViewDetails(client) {
@@ -78,10 +86,6 @@ module.exports = {
   },
 
 
-   /* selectLocalMarket(fieldname,option)
-    {
-      GenericMethods.waitAndSelect(this.homepageFields.labelDropdownComp(fieldname),20);
-    },*/
 
     selectDropDown(fieldName, value){
     I.waitForVisible(this.homepageFields.labelDropdownComp(fieldName, 1), 60);
@@ -113,6 +117,24 @@ module.exports = {
     GenericMethods.waitAndSee(this.homepageFields.pTextComp(text),20)
   },
 
+
+
+
+  datePickerInput(date, locator) {
+    const year = new Date(date).getFullYear();
+    const month = new Date(date).getMonth();
+    const datePick = new Date(date).getDate();
+    GenericMethods.waitAndClick(locator, 20);
+    I.wait(2);
+    GenericMethods.waitAndClick(`(//div[contains(@class,'datepicker')]//select)[2]`, 20);
+    GenericMethods.waitAndClick(`//option[text()='${year}']`, 20);
+    I.wait(2);
+    GenericMethods.waitAndClick(`(//div[contains(@class,'datepicker')]//select)[1]`, 20);
+    GenericMethods.waitAndClick(`//option[text()='${months[month]}']`, 20);
+    I.wait(2);
+    GenericMethods.waitAndClick(`(//div[text()='${datePick}'])[1]`, 20);
+  },
+
   createDataRequest(table)
   {
     const{
@@ -128,10 +150,14 @@ module.exports = {
     this.selectDropDown('Actual data',actualData);
     this.selectDropDown('Forecast data',forecastData);
     this.uploadFile();
-    I.wait(10)
-    datePicker.datePickerInput(dueDate, this.homepageFields.labelTextComp('Due date'));
+    I.wait(2);
+   // datePicker.datePickerInput(dueDate, this.homepageFields.labelTextComp('Due date')); //not in used
+
+   // this.date(this.homepageFields.labelDateComp(text),); //not in used
+    this.datePickerInput(dueDate, this.homepageFields.labelDateComp('Due date'));
+    I.wait(2);
     this.selectDropDown('Assign to',assignTo);
-    I.click(this.homepageFields.buttonComp('Create'))
+
 
   }
 
