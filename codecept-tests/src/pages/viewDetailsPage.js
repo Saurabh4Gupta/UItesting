@@ -1,7 +1,9 @@
 const I = actor();
 const GenericMethods = require('../../factories/GenericFuctions.js');
 const chai = require('chai');
-const { assert } = chai;
+const envURL = require('../../config/EnvConfig');
+const datePicker = require('../../factories/DatePicker');
+let envStatus = envURL.env === 'int-g1ds' || envURL.env === 'nft-g1ds' || envURL.env === 'stg-g1ds';
 
 module.exports = {
 
@@ -20,11 +22,11 @@ module.exports = {
   //============================================= UI-TRD-29 functions ====================================================================
 
   verifyDivText(text) {
-    GenericMethods.waitAndSee(this.overviewFields.divTextHeader(text), 80);
+    GenericMethods.waitAndSee(this.viewDetailsFields.divTextHeader(text), 80);
   },
 
-  verifyTitle: function(Title) {
-    GenericMethods.waitAndSee(this.viewDetailsFields.h3Header(Title), 20);
+  verifyTitle: function(text) {
+    GenericMethods.waitAndSee(this.viewDetailsFields.h3Header(text), 20);
   },
 
   verifySubtext: function(Subtext) {
@@ -36,7 +38,7 @@ module.exports = {
   },
 
   verifyButton: function(Button) {
-    GenericMethods.waitAndSee(this.overviewFields.buttonComp(Button), 20);
+    GenericMethods.waitAndSee(this.viewDetailsFields.buttonComp(Button), 20);
   },
 
   verifyATextComp(text) {
@@ -56,7 +58,7 @@ module.exports = {
   },
 
   clickOnButton(button) {
-    GenericMethods.waitAndClick(this.overviewFields.buttonComp(button), 10);
+    GenericMethods.waitAndClick(this.viewDetailsFields.buttonComp(button), 10);
   },
 
   clickOnViewDetails(name) {

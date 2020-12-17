@@ -6,15 +6,15 @@ Feature: View details for Productivity data request
     Given User is on "My clients" Page
     Then verify list of clients
     Then User will go to client "Microsoft Corporation" homepage
- @smoke
+ #@smoke
  Scenario: User is able to view details of Request
     Given User will click on View Details
-    Then User is able to view title as "Productivity request"
-    #Then Verify if user is on Productivity request page
-
-   # Scenario: User is able to Edit data request
-    #  Given User is on Productivity request page
-     # And User able to see Edit request button
+    And able to view Title as "Productivity Q2 2020"
+    Then User is able to view header as "Productivity request"
+  @smoke
+  Scenario: User is able to Edit data request
+    Given User will click on View Details
+    And User able to see "Edit request" button and click on it
      # Then User click on Edit request and edit details
      # And User able to Save edited request
 

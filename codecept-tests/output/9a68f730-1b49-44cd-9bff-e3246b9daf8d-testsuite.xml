@@ -1,0 +1,80 @@
+<?xml version='1.0'?>
+<ns2:test-suite xmlns:ns2='urn:model.allure.qatools.yandex.ru' start='1608188422079' stop='1608188518373'>
+    <name>View details for Productivity data request</name>
+    <title>View details for Productivity data request</title>
+    <test-cases>
+        <test-case start='1608188485490' status='passed' stop='1608188518365'>
+            <name>User is able to Edit data request @smoke</name>
+            <title>User is able to Edit data request @smoke</title>
+            <labels>
+                <label name='tag' value='@smoke'/>
+            </labels>
+            <parameters/>
+            <steps>
+                <step start='1608188513633' status='passed' stop='1608188515994'>
+                    <name>Given User will click on View Details </name>
+                    <title>Given User will click on View Details </title>
+                    <attachments/>
+                    <steps>
+                        <step start='1608188513633' status='passed' stop='1608188515879'>
+                            <name>I wait for visible "(//b[text()="Microsoft United Kingdom"]/../../../..//span[text()="View details"])[1]", 20</name>
+                            <title>I wait for visible "(//b[text()="Microsoft United Kingdom"]/../../../..//span[text()="View details"])[1]", 20</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                        <step start='1608188515879' status='passed' stop='1608188515901'>
+                            <name>I wait for enabled "(//b[text()="Microsoft United Kingdom"]/../../../..//span[text()="View details"])[1]", 20</name>
+                            <title>I wait for enabled "(//b[text()="Microsoft United Kingdom"]/../../../..//span[text()="View details"])[1]", 20</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                        <step start='1608188515901' status='passed' stop='1608188515994'>
+                            <name>I click "(//b[text()="Microsoft United Kingdom"]/../../../..//span[text()="View details"])[1]"</name>
+                            <title>I click "(//b[text()="Microsoft United Kingdom"]/../../../..//span[text()="View details"])[1]"</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                    </steps>
+                </step>
+                <step start='1608188515994' status='passed' stop='1608188518365'>
+                    <name>And User able to see "Edit request" button and click on it </name>
+                    <title>And User able to see "Edit request" button and click on it </title>
+                    <attachments/>
+                    <steps>
+                        <step start='1608188515994' status='passed' stop='1608188518144'>
+                            <name>I wait for visible "//span[text()="Edit request"]/..", 20</name>
+                            <title>I wait for visible "//span[text()="Edit request"]/..", 20</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                        <step start='1608188518144' status='passed' stop='1608188518163'>
+                            <name>I see element "//span[text()="Edit request"]/.."</name>
+                            <title>I see element "//span[text()="Edit request"]/.."</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                        <step start='1608188518163' status='passed' stop='1608188518182'>
+                            <name>I wait for visible "//span[text()="Edit request"]/..", 10</name>
+                            <title>I wait for visible "//span[text()="Edit request"]/..", 10</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                        <step start='1608188518182' status='passed' stop='1608188518203'>
+                            <name>I wait for enabled "//span[text()="Edit request"]/..", 10</name>
+                            <title>I wait for enabled "//span[text()="Edit request"]/..", 10</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                        <step start='1608188518203' status='passed' stop='1608188518365'>
+                            <name>I click "//span[text()="Edit request"]/.."</name>
+                            <title>I click "//span[text()="Edit request"]/.."</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                    </steps>
+                </step>
+            </steps>
+            <attachments/>
+        </test-case>
+    </test-cases>
+</ns2:test-suite>
