@@ -17,6 +17,7 @@ module.exports = {
     viewDetail: name => `(//b[text()="${name}"]/../../../..//span[text()="View details"])[1]`,
     aTextComp: (text) => `//a[text() = "${text}"]/..`,
     iconLabel: (icon) => `//span[@icon="${icon}"]/..`,
+    dropArea: `//input[@name='dropzone']`,
   },
 
   //============================================= UI-TRD-29 functions ====================================================================
@@ -58,7 +59,7 @@ module.exports = {
   },
 
   clickOnButton(button) {
-    GenericMethods.waitAndClick(this.viewDetailsFields.buttonComp(button), 10);
+    GenericMethods.waitAndClick(this.viewDetailsFields.buttonComp(button), 20);
   },
 
   clickOnViewDetails(name) {
@@ -68,5 +69,15 @@ module.exports = {
   verifySpanText(text) {
     GenericMethods.waitAndSee(this.overviewFields.spanTextComp(text), 20);
   },
+
+  toastNotification(text) {
+    GenericMethods.waitAndSee(this.viewDetailsFields.pTextComp(text), 20);
+  },
+
+  uploadFile() {
+    I.waitForElement(this.viewDetailsFields.dropArea, 20);
+    I.attachFile(this.viewDetailsFields.dropArea, './TestFiles/Book1_xls.xls');
+  },
+
 
 };

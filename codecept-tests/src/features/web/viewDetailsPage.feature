@@ -6,23 +6,22 @@ Feature: View details for Productivity data request
     Given User is on "My clients" Page
     Then verify list of clients
     Then User will go to client "Microsoft Corporation" homepage
- #@smoke
- Scenario: User is able to view details of Request
     Given User will click on View Details
+ #@smoke
+ #PM-28
+ Scenario: User is able to view details of Request
     And able to view Title as "Productivity Q2 2020"
     Then User is able to view header as "Productivity request"
-  @smoke
+  #@smoke
   Scenario: User is able to Edit data request
-    Given User will click on View Details
     And User able to see "Edit request" button and click on it
      # Then User click on Edit request and edit details
      # And User able to Save edited request
-
-#    Scenario: Verify if request is able to Move to complete
-   # Given User is on Productivity request page
-    #And User is able to see Move to complete button
-    #Then User click on Move to complete
-    #And User click on Yes,continue and request is moved to Complete
+    #smoke
+    #PM-150
+  Scenario: Verify if request is able to Move to complete
+     Given User is able to see "Move to complete" button and click on it
+     Then User click on "Yes, continue" and "Data request moved to complete" toast notification is shown
 
   #Scenario: Verify link for Show more
    # Given User is on Productivity request page
@@ -34,10 +33,9 @@ Feature: View details for Productivity data request
  #   Given User is on Productivity request page
   #  And User able to see load more below version if versions > 10
    # Then User click on load more and load 10 more versions
-
-  #Scenario: Verify if user is able to Upload new file
-   # Given User is on Productivity request page
-   # Then User click on Upload new file
+  @smoke
+  Scenario: Verify user is able to Upload new file
+   Given User is able to see "Upload new file" button
    # And Click on Browse and select file
    # Then Click on upload and able to upload new file
 
