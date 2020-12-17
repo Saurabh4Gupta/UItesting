@@ -1,0 +1,166 @@
+<?xml version='1.0'?>
+<ns2:test-suite xmlns:ns2='urn:model.allure.qatools.yandex.ru' start='1608220593695' stop='1608220658578'>
+    <name>As an Amplifi Global Investment team member</name>
+    <title>As an Amplifi Global Investment team member</title>
+    <test-cases>
+        <test-case start='1608220610844' status='failed' stop='1608220658049'>
+            <name>Filter Productivity Requests by Market @sanity @smoke</name>
+            <title>Filter Productivity Requests by Market @sanity @smoke</title>
+            <labels>
+                <label name='tag' value='@sanity'/>
+                <label name='tag' value='@smoke'/>
+            </labels>
+            <parameters/>
+            <steps>
+                <step start='1608220650195' status='passed' stop='1608220650314'>
+                    <name>Given User is able to see subheading as "Productivity data requests" </name>
+                    <title>Given User is able to see subheading as "Productivity data requests" </title>
+                    <attachments/>
+                    <steps>
+                        <step start='1608220650195' status='passed' stop='1608220650261'>
+                            <name>I wait for visible "//h3[text() ='Productivity data requests']", 20</name>
+                            <title>I wait for visible "//h3[text() ='Productivity data requests']", 20</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                        <step start='1608220650261' status='passed' stop='1608220650313'>
+                            <name>I see element "//h3[text() ='Productivity data requests']"</name>
+                            <title>I see element "//h3[text() ='Productivity data requests']"</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                    </steps>
+                </step>
+                <step start='1608220650314' status='passed' stop='1608220655844'>
+                    <name>And User will select filer and will select "United Kingdom" </name>
+                    <title>And User will select filer and will select "United Kingdom" </title>
+                    <attachments/>
+                    <steps>
+                        <step start='1608220650314' status='passed' stop='1608220650398'>
+                            <name>I wait for visible "//div[text()="All markets"]/../../..//input", 20</name>
+                            <title>I wait for visible "//div[text()="All markets"]/../../..//input", 20</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                        <step start='1608220650398' status='passed' stop='1608220650760'>
+                            <name>I fill field "//div[text()="All markets"]/../../..//input", "United Kingdom"</name>
+                            <title>I fill field "//div[text()="All markets"]/../../..//input", "United Kingdom"</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                        <step start='1608220650760' status='passed' stop='1608220650840'>
+                            <name>I press key "Enter"</name>
+                            <title>I press key "Enter"</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                        <step start='1608220650840' status='passed' stop='1608220655844'>
+                            <name>I wait 5</name>
+                            <title>I wait 5</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                    </steps>
+                </step>
+                <step start='1608220655844' status='passed' stop='1608220656461'>
+                    <name>And User will see requests related to "Microsoft United Kingdom" in Ongoing tab </name>
+                    <title>And User will see requests related to "Microsoft United Kingdom" in Ongoing tab </title>
+                    <attachments/>
+                    <steps>
+                        <step start='1608220655844' status='passed' stop='1608220655975'>
+                            <name>I wait for visible "//b[text() = 'Microsoft United Kingdom']", 20</name>
+                            <title>I wait for visible "//b[text() = 'Microsoft United Kingdom']", 20</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                        <step start='1608220655975' status='passed' stop='1608220656083'>
+                            <name>I see element "//b[text() = 'Microsoft United Kingdom']"</name>
+                            <title>I see element "//b[text() = 'Microsoft United Kingdom']"</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                        <step start='1608220656083' status='passed' stop='1608220656182'>
+                            <name>I wait for visible "//b[text() = 'Microsoft United Kingdom']", 20</name>
+                            <title>I wait for visible "//b[text() = 'Microsoft United Kingdom']", 20</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                        <step start='1608220656182' status='passed' stop='1608220656273'>
+                            <name>I see element "//b[text() = 'Microsoft United Kingdom']"</name>
+                            <title>I see element "//b[text() = 'Microsoft United Kingdom']"</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                        <step start='1608220656273' status='passed' stop='1608220656370'>
+                            <name>I wait for visible "//b[text() = 'Microsoft United Kingdom']", 20</name>
+                            <title>I wait for visible "//b[text() = 'Microsoft United Kingdom']", 20</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                        <step start='1608220656370' status='passed' stop='1608220656461'>
+                            <name>I see element "//b[text() = 'Microsoft United Kingdom']"</name>
+                            <title>I see element "//b[text() = 'Microsoft United Kingdom']"</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                    </steps>
+                </step>
+                <step start='1608220656461' status='passed' stop='1608220657000'>
+                    <name>And User will click on "Create new data request" button and will see heading as "Create new data request" </name>
+                    <title>And User will click on "Create new data request" button and will see heading as "Create new data request" </title>
+                    <attachments/>
+                    <steps>
+                        <step start='1608220656461' status='passed' stop='1608220656527'>
+                            <name>I wait for visible "//span[text()='Create new data request']/..", 20</name>
+                            <title>I wait for visible "//span[text()='Create new data request']/..", 20</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                        <step start='1608220656527' status='passed' stop='1608220656880'>
+                            <name>I click "//span[text()='Create new data request']/.."</name>
+                            <title>I click "//span[text()='Create new data request']/.."</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                        <step start='1608220656881' status='passed' stop='1608220656946'>
+                            <name>I wait for visible "//h3[text() ='Create new data request']", 20</name>
+                            <title>I wait for visible "//h3[text() ='Create new data request']", 20</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                        <step start='1608220656946' status='passed' stop='1608220657000'>
+                            <name>I see element "//h3[text() ='Create new data request']"</name>
+                            <title>I see element "//h3[text() ='Create new data request']"</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                    </steps>
+                </step>
+                <step start='1608220657000' status='failed' stop='1608220658048'>
+                    <name>And User will see in Local market field "United Kingdom" and User will click on "Cancel" button </name>
+                    <title>And User will see in Local market field "United Kingdom" and User will click on "Cancel" button </title>
+                    <attachments/>
+                    <steps>
+                        <step start='1608220657000' status='failed' stop='1608220658016'>
+                            <name>I wait for visible " //label[text()="Local market"]/../../../../../..//div[text()="United Kingdom"]", </name>
+                            <title>I wait for visible " //label[text()="Local market"]/../../../../../..//div[text()="United Kingdom"]", </title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                    </steps>
+                </step>
+            </steps>
+            <attachments>
+                <attachment title='Last Seen Screenshot' source='8e225138-aabf-4c76-afad-49cd7d50dc00-attachment.png' type='image/png' size='143832'/>
+            </attachments>
+            <failure>
+                <message>waitUntil condition failed with the following reason: invalid selector: An invalid or illegal selector was specified
+                  (Session info: chrome=87.0.4280.88)</message>
+                <stack-trace>Error: waitUntil condition failed with the following reason: invalid selector: An invalid or illegal selector was specified
+                  (Session info: chrome=87.0.4280.88)
+                    at C:\Users\Vishal\Desktop\Produtivity Manager\dan-productivity-mgr-ui\codecept-tests\node_modules\webdriverio\build\commands\browser\waitUntil.js:26:15
+                    at async Browser.wrapCommandFn (C:\Users\Vishal\Desktop\Produtivity Manager\dan-productivity-mgr-ui\codecept-tests\node_modules\@wdio\utils\build\shim.js:58:29)</stack-trace>
+            </failure>
+        </test-case>
+    </test-cases>
+</ns2:test-suite>
