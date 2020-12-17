@@ -12,13 +12,11 @@ Feature: As an Amplifi Global Investment team member
     Then User will go to client "Microsoft Corporation" homepage
 
   @sanity @smoke
-
   Scenario: Create new Productivity Data requests
-
     Given User is able to see subheading as "Productivity data requests"
     And User will click on "Create new data request" button and will see heading as "Create new data request"
     And User will create new data request
-    |localMarket|requestName  |briefing                 |reportingYear            |actualData|forecastData|dueDate   |assignTo    |
-    |USA        |Data request1|This is automated request|April 2021  -  March 2022|7 months  |3 months    |02/26/2021|Ryan Killick|
-     Then User will click on "Create" button and Verify request is added and toast notification "Data request created" will be shown.
+      | localMarket | requestName   | briefing                  | reportingYear             | actualData | forecastData | dueDate    | assignTo     |
+      | USA         | Data request1 | This is automated request | April 2021  -  March 2022 | 7 months   | 3 months     | 02/26/2021 | Ryan Killick |
+    Then User will click on "Create" button and Verify request is added and toast notification "Data request created" will be shown.
 

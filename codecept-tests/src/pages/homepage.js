@@ -2,14 +2,11 @@ const I = actor();
 const GenericMethods = require('../../factories/GenericFuctions.js');
 const envURL = require('../../config/EnvConfig');
 const datePicker = require('../../factories/DatePicker');
-//const chai = require('chai');
-//const { assert } = chai;
+const chai = require('chai');
+const { assert } = chai;
 let envStatus = envURL.env === 'int-g1ds' || envURL.env === 'nft-g1ds' || envURL.env === 'stg-g1ds';
-const months = ['January', 'February', 'March', 'April', 'May', 'June',
-  'July', 'August', 'September', 'October', 'November', 'December'];
 
 module.exports = {
-
   homepageFields: {
     divTextHeader: text => `//div[text() = '${text}']`,
     h3Header: text => `//h3[text() ='${text}']`,
@@ -20,18 +17,15 @@ module.exports = {
     clientDetail: client => `//span[text()="${client}"]/../../../..//span[text()="View details"]`,
     aTextComp: (text) => `//a[text() = '${text}']/..`,
     iconLabel: (icon) => `//span[@icon='${icon}']/..`,
-    labelDropdownComp:(text)=> `(//label[text()="${text}"]/..//input)[1]`,
-    labelTextComp:text=> `(//label[text()='Data request name']/../../../..//input)[3]`,
-    dropArea:`//input[@name='dropzone']`,
+    textAreaComp: (label) => `//label[text()="${label}"]/..//textarea`,
+    labelDropdownComp: (text) => `(//label[text()="${text}"]/..//input)[1]`,
+    labelTextComp: text => `(//label[text()='Data request name']/../../../..//input)[3]`,
+    dropArea: `//input[@name='dropzone']`,
     frame: `//div[@id='container']//iframe`,
-    labelDateComp:(text)=>`//label[text()="${text}"]/../../../../..//input[@placeholder="Date"]`,
-    optionDateComp:(text)=>`//option[text()='${text}']`,
-    divDateCOmp:(text)=>`(//div[text()='${text}'])[1]`,
-
-
+    labelDateComp: (text) => `//label[text()="${text}"]/../../../../..//input[@placeholder="Date"]`,
+    optionDateComp: (text) => `//option[text()='${text}']`,
+    divDateCOmp: (text) => `(//div[text()='${text}'])[1]`,
   },
-
-
 
   verifyDivText(text) {
     GenericMethods.waitAndSee(this.homepageFields.divTextHeader(text), 80);
@@ -70,11 +64,8 @@ module.exports = {
   },
 
   clickOnButton(button) {
-
-    //GenericMethods.waitAndClick(this.homepageFields.buttonComp(button), 10);
-  I.waitForVisible(this.homepageFields.buttonComp(button),20);
-  I.wait(3);
-  I.click(this.homepageFields.buttonComp(button));
+    I.waitForVisible(this.homepageFields.buttonComp(button), 20);
+    I.click(this.homepageFields.buttonComp(button));
   },
 
   clickOnViewDetails(client) {
@@ -85,84 +76,51 @@ module.exports = {
     GenericMethods.waitAndSee(this.homepageFields.spanTextComp(text), 20);
   },
 
-
-
-    selectDropDown(fieldName, value){
+  selectDropDown(fieldName, value) {
     I.waitForVisible(this.homepageFields.labelDropdownComp(fieldName, 1), 60);
     I.fillField(this.homepageFields.labelDropdownComp(fieldName, 1), value);
     I.pressKey('Enter');
-    // I.waitForVisible(this.fields.inputTextCurrency(value));
-    // I.click(this.fields.inputTextCurrency(value), 60);
   },
 
-  enterText(fieldname)
-  {
-    GenericMethods.waitAndFillField(this.homepageFields.labelTextComp(fieldname),20)
+  enterText(fieldName, text) {
+    GenericMethods.waitAndFillField(this.homepageFields.labelTextComp(fieldName), text, 20);
   },
 
-
-  uploadFile()
-  {
-    I.attachFile(this.homepageFields.dropArea,"./TestFiles/Book1_xls.xls")
-
+  uploadFile() {
+    I.waitForElement(this.homepageFields.dropArea, 20);
+    I.attachFile(this.homepageFields.dropArea, './TestFiles/Book1_xls.xls');
   },
+
   switchToFrame() {
-    if (envStatus||envURL.env === 'brp') {
+    if (envStatus || envURL.env === 'brp') {
       I.waitForVisible(this.homepageFields.frame, 40);
       I.switchTo(this.homepageFields.frame);
     }
   },
 
-  toastNotification(text){
-    GenericMethods.waitAndSee(this.homepageFields.pTextComp(text),20)
+  toastNotification(text) {
+    GenericMethods.waitAndSee(this.homepageFields.pTextComp(text), 20);
   },
 
-
-
-
-  datePickerInput(date, locator) {
-    const year = new Date(date).getFullYear();
-    const month = new Date(date).getMonth();
-    const datePick = new Date(date).getDate();
-    GenericMethods.waitAndClick(locator, 20);
-    I.wait(2);
-    GenericMethods.waitAndClick(`(//div[contains(@class,'datepicker')]//select)[2]`, 20);
-    GenericMethods.waitAndClick(`//option[text()='${year}']`, 20);
-    I.wait(2);
-    GenericMethods.waitAndClick(`(//div[contains(@class,'datepicker')]//select)[1]`, 20);
-    GenericMethods.waitAndClick(`//option[text()='${months[month]}']`, 20);
-    I.wait(2);
-    GenericMethods.waitAndClick(`(//div[text()='${datePick}'])[1]`, 20);
+  enterTextInTextArea(label, text) {
+    I.waitForVisible(this.homepageFields.textAreaComp(label), 20);
+    I.fillField(this.homepageFields.textAreaComp(label), text);
   },
 
-  createDataRequest(table)
-  {
-    const{
+  createDataRequest(table) {
+    const {
       localMarket, requestName, briefing, reportingYear, actualData,
-      forecastData, dueDate, assignTo
-    }=table;
+      forecastData, dueDate, assignTo,
+    } = table;
 
     this.selectDropDown('Local market', localMarket);
-   // pause();
-    this.enterText('Data request name',requestName);
-    this.enterText('Briefing',briefing);
-    this.selectDropDown('Reporting year',reportingYear);
-    this.selectDropDown('Actual data',actualData);
-    this.selectDropDown('Forecast data',forecastData);
+    this.enterText('Data request name', requestName);
+    this.enterTextInTextArea('Briefing', briefing);
+    this.selectDropDown('Reporting year', reportingYear);
+    this.selectDropDown('Actual data', actualData);
+    this.selectDropDown('Forecast data', forecastData);
     this.uploadFile();
-    I.wait(2);
-   // datePicker.datePickerInput(dueDate, this.homepageFields.labelTextComp('Due date')); //not in used
-
-   // this.date(this.homepageFields.labelDateComp(text),); //not in used
-    this.datePickerInput(dueDate, this.homepageFields.labelDateComp('Due date'));
-    I.wait(2);
-    this.selectDropDown('Assign to',assignTo);
-
-
-  }
-
-
-
-
-
+    datePicker.datePickerInput(dueDate, this.homepageFields.labelDateComp('Due date'));
+    this.selectDropDown('Assign to', assignTo);
+  },
 };
