@@ -1,0 +1,89 @@
+<?xml version='1.0'?>
+<ns2:test-suite xmlns:ns2='urn:model.allure.qatools.yandex.ru' start='1608208000194' stop='1608208060514'>
+    <name>View details for Productivity data request</name>
+    <title>View details for Productivity data request</title>
+    <test-cases>
+        <test-case start='1608208028641' status='failed' stop='1608208060183'>
+            <name>User is able to Edit data request @smoke</name>
+            <title>User is able to Edit data request @smoke</title>
+            <labels>
+                <label name='tag' value='@smoke'/>
+            </labels>
+            <parameters/>
+            <steps>
+                <step start='1608208055385' status='passed' stop='1608208057754'>
+                    <name>Given User will click on View Details </name>
+                    <title>Given User will click on View Details </title>
+                    <attachments/>
+                    <steps>
+                        <step start='1608208055385' status='passed' stop='1608208057611'>
+                            <name>I wait for visible "(//b[text()="Microsoft United Kingdom"]/../../../..//span[text()="View details"])[1]", 20</name>
+                            <title>I wait for visible "(//b[text()="Microsoft United Kingdom"]/../../../..//span[text()="View details"])[1]", 20</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                        <step start='1608208057611' status='passed' stop='1608208057637'>
+                            <name>I wait for enabled "(//b[text()="Microsoft United Kingdom"]/../../../..//span[text()="View details"])[1]", 20</name>
+                            <title>I wait for enabled "(//b[text()="Microsoft United Kingdom"]/../../../..//span[text()="View details"])[1]", 20</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                        <step start='1608208057637' status='passed' stop='1608208057754'>
+                            <name>I click "(//b[text()="Microsoft United Kingdom"]/../../../..//span[text()="View details"])[1]"</name>
+                            <title>I click "(//b[text()="Microsoft United Kingdom"]/../../../..//span[text()="View details"])[1]"</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                    </steps>
+                </step>
+                <step start='1608208057754' status='failed' stop='1608208060183'>
+                    <name>And User able to see "Edit request" button and click on it </name>
+                    <title>And User able to see "Edit request" button and click on it </title>
+                    <attachments/>
+                    <steps>
+                        <step start='1608208057754' status='passed' stop='1608208059899'>
+                            <name>I wait for visible "//span[text()="Edit request"]/..", 20</name>
+                            <title>I wait for visible "//span[text()="Edit request"]/..", 20</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                        <step start='1608208059899' status='passed' stop='1608208059938'>
+                            <name>I see element "//span[text()="Edit request"]/.."</name>
+                            <title>I see element "//span[text()="Edit request"]/.."</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                        <step start='1608208059938' status='passed' stop='1608208059962'>
+                            <name>I wait for visible "//span[text()="Edit request"]/..", 10</name>
+                            <title>I wait for visible "//span[text()="Edit request"]/..", 10</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                        <step start='1608208059962' status='passed' stop='1608208059987'>
+                            <name>I wait for enabled "//span[text()="Edit request"]/..", 10</name>
+                            <title>I wait for enabled "//span[text()="Edit request"]/..", 10</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                        <step start='1608208059987' status='passed' stop='1608208060181'>
+                            <name>I click "//span[text()="Edit request"]/.."</name>
+                            <title>I click "//span[text()="Edit request"]/.."</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                    </steps>
+                </step>
+            </steps>
+            <attachments>
+                <attachment title='Last Seen Screenshot' source='c53c30e7-7de4-4f34-8531-806e7ad77d1c-attachment.png' type='image/png' size='21328'/>
+            </attachments>
+            <failure>
+                <message>homepage is not defined</message>
+                <stack-trace>ReferenceError: homepage is not defined
+                    at C:\Users\LAP-R141\Desktop\dan-productivity-mgr-ui\codecept-tests\src\step_definitions\viewDetails_step.js:20:3
+                    at runSteps (C:\Users\LAP-R141\Desktop\dan-productivity-mgr-ui\codecept-tests\node_modules\codeceptjs\lib\interfaces\gherkin.js:49:15)
+                    at processTicksAndRejections (internal/process/task_queues.js:97:5)</stack-trace>
+            </failure>
+        </test-case>
+    </test-cases>
+</ns2:test-suite>
