@@ -11,7 +11,7 @@ import RequestSummary from './RequestSummary/RequestSummary';
 import { getDataById, data as mockData } from '../Mock/mockData';
 import Loader from '../../components/loading';
 import VersionHistory from '../VersionHistory/VersionHistory';
-import MoveToComplete from '../MoveToComplete/MoveToComplete';
+import MoveToComplete from '../../components/MoveToComplete/MoveToComplete';
 
 const ViewProdDataRequest = (props) => {
   const { param } = props;
