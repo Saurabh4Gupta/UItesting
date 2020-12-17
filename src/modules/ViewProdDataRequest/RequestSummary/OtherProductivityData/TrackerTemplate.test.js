@@ -11,4 +11,8 @@ describe('Test cases for tracker template', () => {
   it('should match the snapshot', () => {
     expect(wrapper).toMatchSnapshot();
   })
+
+  it('Renders correctly', () => {
+    expect(wrapper.exists()).toBe(true);
+  });
 });
