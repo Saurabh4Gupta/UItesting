@@ -41,7 +41,7 @@ const DataField = (props) => {
           handleMarket={handleMarket}
           pageTitle=""
           pageMetadata="Client Overview"
-          isCompleted=""
+          isCompleted={false}
         >
 
           <UploadFile
