@@ -48,7 +48,7 @@ const ViewProdDataRequest = (props) => {
       briefing: values.briefing,
       actualData: values.actualData,
       forecastData: values.forecastData,
-      reportingYear: values.reportingYear.value,
+      reportingYear: values.reportingYear,
       assignTo: values.assignTo,
     });
   };

@@ -21,7 +21,7 @@ const EditData = (props) => {
     localMarket: filterCompleteList[0].localMarket,
     name: filterCompleteList[0].name,
     briefing: filterCompleteList[0].briefing,
-    reportingYear:{ value: filterCompleteList[0].reportingYear, label: filterCompleteList[0].reportingYear },
+    reportingYear:filterCompleteList[0].reportingYear,
     actualData:filterCompleteList[0].actualData,
     forecastData: filterCompleteList[0].forecastData,
     dueDate: new Date(),
