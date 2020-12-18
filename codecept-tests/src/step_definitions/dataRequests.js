@@ -63,6 +63,22 @@ Then(/^User will click on "([^"]*)" button and Verify request is added and toast
       homepage.verifyCompleteRequests();
 
   });
+
+ ///Scenario4
   Given(/^User will see confirmation alert box heading as "([^"]*)"$/, function(Subtext) {
   homepage.verifySubtext(Subtext);
+  });
+
+  //Scenario5
+Given(/^User will enter "([^"]*)" in search box\.$/, function(text) {
+    homepage.enterTextInSearch(text);
+  });
+
+  Given(/^User will remove search text from search box and User will click on show filter to select "([^"]*)"$/, function(option) {
+    homepage.showFilter();
+  });
+
+  Given(/^User will see requests related to "([^"]*)" in Ongoing tab for (\d+) Q1$/, function() {
+    homepage.verifyCompleteRequests();
+
   });

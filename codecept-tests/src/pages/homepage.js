@@ -17,9 +17,9 @@ module.exports = {
     clientDetail: client => `//span[text()="${client}"]/../../../..//span[text()="View details"]`,
     aTextComp: (text) => `//a[text() = '${text}']/..`,
     iconLabel: (icon) => `//span[@icon='${icon}']/..`,
-    textAreaComp: (label) => `//label[text()="${label}"]/..//textarea`,
+      textAreaComp: (label) => `//label[text()="${label}"]/..//textarea`,
     labelDropdownComp: (text) => `(//label[text()="${text}"]/..//input)[1]`,
-    labelTextComp: text => `(//label[text()='Data request name']/../../../..//input)[3]`,
+    labelTextComp: (text) => `(//label[text()='Data request name']/../../../..//input)[3]`,
     dropArea: `//input[@name='dropzone']`,
     frame: `//div[@id='container']//iframe`,
     labelDateComp: (text) => `//label[text()="${text}"]/../../../../..//input[@placeholder="Date"]`,
@@ -29,6 +29,11 @@ module.exports = {
     filterMarket:(text)=>`//div[text()="${text}"]/../../..//input`,
     market:(field,text) =>`//label[text()="${field}"]/../../../../../..//div[text()="${text}"]`,
     moreIcon:(text)=> `(//span[text()="View details"]/../../../../../..//span[@icon="${text}"])[1]`,
+    searchBox:`//input[@type='search']`,
+   showFilter:(fieldName,option)=>`//span[text()="${fieldName}"]/../../..//option[text()="${option}"]`,
+
+    show: `(//option[text()="All"]/..//option)[2]`,
+
   },
 
   verifyDivText(text) {
@@ -194,5 +199,19 @@ module.exports = {
 
   },
 
+  enterTextInSearch(text){
 
+    I.waitForVisible(this.homepageFields.searchBox,20);
+    I.fillField(this.homepageFields.searchBox,text);
+  },
+
+  showFilter(option){
+
+    GenericMethods.clearFields(this.homepageFields.searchBox,20);
+    I.pressKey('Tab');
+    I.pressKey('Enter');
+    I.click(`(//option[text()='All']/following-sibling::option)[1]`);
+    I.pressKey('Enter');
+
+  }
 };

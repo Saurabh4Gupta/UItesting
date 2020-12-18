@@ -25,7 +25,9 @@ let clients=["American Express","Burberry","Burger King","General Motors","Micro
 
 
  Then(/^User is able to see subheading as "([^"]*)"$/, function(Title) {
+
    selectClient.verifyTitle(Title)
+
 
   });
 
