@@ -35,16 +35,23 @@ Feature: As an Amplifi Global Investment team member
       And User will click on "Create new data request" button and will see heading as "Create new data request"
       And User will see in Local market field "Please select" and User will click on "Cancel" button
 
-  @sanity @smoke
+ # @sanity @smoke
     ######PM-44BRP: Move to Complete#####
     Scenario:Move to Complete
     Given User is able to see subheading as "Productivity data requests"
       And User will click on "more" button and will click on "Move to complete" option
-    #  And User will see confirmation alert box heading as "You will not be able to make any more edits to this request unless it is moved back to "/Ongoing/"."
+     # And User will see confirmation alert box heading as "You will not be able to make any more edits to this request unless it is moved back to "/Ongoing/"."
       Then User will will click on "Yes, continue" button and will see toast notification "Data request moved to complete"
       Then User will go to "Complete" tab and will verify requests
 
+#####PM-30BRP: Delete a productivity data request##
 
+  @sanity @smoke
+  Scenario:Delete productivity request
+    Given User is able to see subheading as "Productivity data requests"
+    And User will click on "more" button and will click on "Delete" option
+    And User will see confirmation alert box heading as "Once deleted, this data request will no longer be available."
+    Then User will will click on "Yes, delete" button and will see toast notification "Data request deleted"
 
 
 

@@ -63,3 +63,6 @@ Then(/^User will click on "([^"]*)" button and Verify request is added and toast
       homepage.verifyCompleteRequests();
 
   });
+  Given(/^User will see confirmation alert box heading as "([^"]*)"$/, function(Subtext) {
+  homepage.verifySubtext(Subtext);
+  });
