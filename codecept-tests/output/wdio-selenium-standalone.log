@@ -1,0 +1,23 @@
+12:42:34.376 INFO [GridLauncherV3.parse] - Selenium server version: 3.141.59, revision: e82be7d358
+12:42:34.488 INFO [GridLauncherV3.lambda$buildLaunchers$3] - Launching a standalone Selenium Server on port 4444
+2020-12-18 12:42:34.544:INFO::main: Logging initialized @464ms to org.seleniumhq.jetty9.util.log.StdErrLog
+12:42:34.868 INFO [WebDriverServlet.<init>] - Initialising WebDriverServlet
+12:42:35.243 INFO [SeleniumServer.boot] - Selenium Server is up and running on port 4444
+12:42:35.439 INFO [ActiveSessionFactory.apply] - Capabilities are: {
+  "browserName": "chrome",
+  "goog:chromeOptions": {
+    "useAutomationExtension": true,
+    "prefs": {
+      "download.default_directory": "C:\\Users\\LAP-R141\\Desktop\\dan-productivity-mgr-ui\\codecept-tests\\output\\Download"
+    }
+  }
+}
+12:42:35.439 INFO [ActiveSessionFactory.lambda$apply$11] - Matched factory org.openqa.selenium.grid.session.remote.ServicedSession$Factory (provider: org.openqa.selenium.chrome.ChromeDriverService)
+Starting ChromeDriver 87.0.4280.88 (89e2380a3e36c3464b5dd1302349b1382549290d-refs/branch-heads/4280@{#1761}) on port 14811
+Only local connections are allowed.
+Please see https://chromedriver.chromium.org/security-considerations for suggestions on keeping ChromeDriver safe.
+ChromeDriver was started successfully.
+[1608275556.685][WARNING]: Deprecated chrome option is ignored: useAutomationExtension
+[1608275556.686][WARNING]: Deprecated chrome option is ignored: useAutomationExtension
+12:42:39.420 INFO [ProtocolHandshake.createSession] - Detected dialect: W3C
+12:42:39.451 INFO [RemoteSession$Factory.lambda$performHandshake$0] - Started new session 99daaf90850d80013a88e14404a327a1 (org.openqa.selenium.chrome.ChromeDriverService)

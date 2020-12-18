@@ -35,7 +35,12 @@ Feature: View details for Productivity data request
    # Then User click on load more and load 10 more versions
   @smoke
   Scenario: Verify user is able to Upload new file
-   Given User is able to see "Upload new file" button
+    Given User is able to see and click on "Upload new file" button
+    Then User attach tracker file
+    And User click on "Upload" button and "File uploaded" toast notification is shown
+
+
+
    # And Click on Browse and select file
    # Then Click on upload and able to upload new file
 

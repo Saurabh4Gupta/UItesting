@@ -2,6 +2,7 @@ const viewDetails = require('../pages/viewDetailsPage');
 const genericFunction = require('../../factories/GenericFuctions');
 
 
+
 //const homepage = require('../../pages/homepage');
 const I = actor();
 
@@ -36,10 +37,19 @@ Then(/^User click on "([^"]*)" and "([^"]*)" toast notification is shown$/, func
   //I.wait(10);
   viewDetails.toastNotification(text);
 });
-Given(/^User is able to see "([^"]*)" button$/, function(button) {
+Given(/^User is able to see and click on "([^"]*)" button$/, function(button) {
   viewDetails.verifyButton(button);
   viewDetails.clickOnButton(button);
   //I.wait(10);
+
+});
+Then(/^User attach tracker file$/, function() {
   viewDetails.uploadFile();
   I.wait(10);
+});
+Then(/^User click on "([^"]*)" button and "([^"]*)" toast notification is shown$/, function(button,text) {
+  viewDetails.verifyButton(button);
+  viewDetails.clickOnUpload(button);
+  viewDetails.toastNotification(text);
+  I.wait(5);
 });

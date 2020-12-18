@@ -1,0 +1,129 @@
+<?xml version='1.0'?>
+<ns2:test-suite xmlns:ns2='urn:model.allure.qatools.yandex.ru' start='1608274637098' stop='1608274742730'>
+    <name>View details for Productivity data request</name>
+    <title>View details for Productivity data request</title>
+    <test-cases>
+        <test-case start='1608274690389' status='failed' stop='1608274742323'>
+            <name>Verify user is able to Upload new file @smoke</name>
+            <title>Verify user is able to Upload new file @smoke</title>
+            <labels>
+                <label name='tag' value='@smoke'/>
+            </labels>
+            <parameters/>
+            <steps>
+                <step start='1608274729302' status='passed' stop='1608274731783'>
+                    <name>Given User is able to see and click on "Upload new file" button </name>
+                    <title>Given User is able to see and click on "Upload new file" button </title>
+                    <attachments/>
+                    <steps>
+                        <step start='1608274729302' status='passed' stop='1608274731456'>
+                            <name>I wait for visible "//span[text()="Upload new file"]/..", 20</name>
+                            <title>I wait for visible "//span[text()="Upload new file"]/..", 20</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                        <step start='1608274731457' status='passed' stop='1608274731481'>
+                            <name>I see element "//span[text()="Upload new file"]/.."</name>
+                            <title>I see element "//span[text()="Upload new file"]/.."</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                        <step start='1608274731481' status='passed' stop='1608274731506'>
+                            <name>I wait for visible "//span[text()="Upload new file"]/..", 20</name>
+                            <title>I wait for visible "//span[text()="Upload new file"]/..", 20</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                        <step start='1608274731506' status='passed' stop='1608274731535'>
+                            <name>I wait for enabled "//span[text()="Upload new file"]/..", 20</name>
+                            <title>I wait for enabled "//span[text()="Upload new file"]/..", 20</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                        <step start='1608274731535' status='passed' stop='1608274731783'>
+                            <name>I click "//span[text()="Upload new file"]/.."</name>
+                            <title>I click "//span[text()="Upload new file"]/.."</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                    </steps>
+                </step>
+                <step start='1608274731783' status='passed' stop='1608274742034'>
+                    <name>Then User attach tracker file </name>
+                    <title>Then User attach tracker file </title>
+                    <attachments/>
+                    <steps>
+                        <step start='1608274731783' status='passed' stop='1608274731840'>
+                            <name>I wait for element "//input[@name='dropzone']", 20</name>
+                            <title>I wait for element "//input[@name='dropzone']", 20</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                        <step start='1608274731840' status='passed' stop='1608274732023'>
+                            <name>I attach file "//input[@name='dropzone']", "./TestFiles/Book1_xls.xls"</name>
+                            <title>I attach file "//input[@name='dropzone']", "./TestFiles/Book1_xls.xls"</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                        <step start='1608274732023' status='passed' stop='1608274742034'>
+                            <name>I wait 10</name>
+                            <title>I wait 10</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                    </steps>
+                </step>
+                <step start='1608274742034' status='failed' stop='1608274742323'>
+                    <name>And User click on "Upload" button and "File uploaded" toast notification is shown </name>
+                    <title>And User click on "Upload" button and "File uploaded" toast notification is shown </title>
+                    <attachments/>
+                    <steps>
+                        <step start='1608274742034' status='passed' stop='1608274742099'>
+                            <name>I wait for visible "//span[text()="Upload"]/..", 20</name>
+                            <title>I wait for visible "//span[text()="Upload"]/..", 20</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                        <step start='1608274742099' status='passed' stop='1608274742135'>
+                            <name>I see element "//span[text()="Upload"]/.."</name>
+                            <title>I see element "//span[text()="Upload"]/.."</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                        <step start='1608274742135' status='passed' stop='1608274742169'>
+                            <name>I wait for visible "//span[text()="Upload"]/..", 20</name>
+                            <title>I wait for visible "//span[text()="Upload"]/..", 20</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                        <step start='1608274742169' status='passed' stop='1608274742212'>
+                            <name>I wait for enabled "//span[text()="Upload"]/..", 20</name>
+                            <title>I wait for enabled "//span[text()="Upload"]/..", 20</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                        <step start='1608274742212' status='failed' stop='1608274742320'>
+                            <name>I click "//span[text()="Upload"]/.."</name>
+                            <title>I click "//span[text()="Upload"]/.."</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                    </steps>
+                </step>
+            </steps>
+            <attachments>
+                <attachment title='Last Seen Screenshot' source='aee138b4-549a-49bd-b60f-b6375d453e66-attachment.png' type='image/png' size='106967'/>
+            </attachments>
+            <failure>
+                <message>element not interactable
+                  (Session info: chrome=87.0.4280.88)</message>
+                <stack-trace>element not interactable: element not interactable
+                  (Session info: chrome=87.0.4280.88)
+                    at Object.getErrorFromResponseBody (C:\Users\LAP-R141\Desktop\dan-productivity-mgr-ui\codecept-tests\node_modules\webdriver\build\utils.js:94:12)
+                    at WebDriverRequest._request (C:\Users\LAP-R141\Desktop\dan-productivity-mgr-ui\codecept-tests\node_modules\webdriver\build\request.js:134:31)
+                    at processTicksAndRejections (internal/process/task_queues.js:97:5)
+                    at async Browser.wrapCommandFn (C:\Users\LAP-R141\Desktop\dan-productivity-mgr-ui\codecept-tests\node_modules\@wdio\utils\build\shim.js:58:29)</stack-trace>
+            </failure>
+        </test-case>
+    </test-cases>
+</ns2:test-suite>

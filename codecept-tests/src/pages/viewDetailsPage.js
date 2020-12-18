@@ -18,6 +18,7 @@ module.exports = {
     aTextComp: (text) => `//a[text() = "${text}"]/..`,
     iconLabel: (icon) => `//span[@icon="${icon}"]/..`,
     dropArea: `//input[@name='dropzone']`,
+    uploadbutton: text => `(//span[text()="Upload"]/..)[2]`
   },
 
   //============================================= UI-TRD-29 functions ====================================================================
@@ -60,6 +61,10 @@ module.exports = {
 
   clickOnButton(button) {
     GenericMethods.waitAndClick(this.viewDetailsFields.buttonComp(button), 20);
+  },
+
+  clickOnUpload(button){
+    GenericMethods.waitAndClick(this.viewDetailsFields.uploadbutton(button),20);
   },
 
   clickOnViewDetails(name) {
