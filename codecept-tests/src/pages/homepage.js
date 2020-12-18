@@ -33,6 +33,9 @@ module.exports = {
    showFilter:(fieldName,option)=>`//span[text()="${fieldName}"]/../../..//option[text()="${option}"]`,
 
     show: `(//option[text()="All"]/..//option)[2]`,
+    completeTabCount: (fieldName,text)=> `//span[text()="${fieldName}"]/small[text()="${text}"]`,
+    createNewRequest:(fieldName)=> `(//span[text()="${fieldName}"])[2]`,
+
 
   },
 
@@ -213,5 +216,16 @@ module.exports = {
     I.click(`(//option[text()='All']/following-sibling::option)[1]`);
     I.pressKey('Enter');
 
+  },
+  verifyNoOfRequests(text)
+  {
+  I.waitForVisible(this.homepageFields.completeTabCount('Complete',text),20);
+
+
+  },
+
+  createNewData()
+  {
+    I.waitForVisible(this.homepageFields.createNewRequest('Create new data request'),20);
   }
 };

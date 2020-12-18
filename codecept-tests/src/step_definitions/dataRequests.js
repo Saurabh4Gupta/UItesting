@@ -71,6 +71,7 @@ Then(/^User will click on "([^"]*)" button and Verify request is added and toast
 
   //Scenario5
 Given(/^User will enter "([^"]*)" in search box\.$/, function(text) {
+   I.wait(5);
     homepage.enterTextInSearch(text);
   });
 
@@ -81,4 +82,19 @@ Given(/^User will enter "([^"]*)" in search box\.$/, function(text) {
   Given(/^User will see requests related to "([^"]*)" in Ongoing tab for (\d+) Q1$/, function() {
     homepage.verifyCompleteRequests();
 
+  });
+
+  //Scneario6
+Given(/^User will go to "([^"]*)" tab and will see "([^"]*)" numbers of request under complete tab$/, function(button,text) {
+      homepage.goToCompleteTab(button);
+      homepage.verifyNoOfRequests(text);
+
+  });
+  Then(/^User will see "([^"]*)" button under tab\.$/, function() {
+    homepage.createNewData();
+
+  });
+
+  Given(/^User will see "([^"]*)" numbers of request under ongoing tab$/, function(text) {
+  homepage.verifyNoOfRequests(text);
   });

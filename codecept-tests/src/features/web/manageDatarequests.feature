@@ -57,7 +57,7 @@ Feature: As an Amplifi Global Investment team member
     Then User will will click on "Yes, delete" button and will see toast notification "Data request deleted"
 
 ##PM-75-BRP: Search or filter a list of ongoing productivity data requests###
-  @sanity @smoke
+ # @sanity @smoke
   Scenario:Delete productivity request
     Given User is able to see subheading as "Productivity data requests"
     And User will enter "United" in search box.
@@ -65,6 +65,16 @@ Feature: As an Amplifi Global Investment team member
     And User will remove search text from search box and User will click on show filter to select "2020 Q1"
     And User will see requests related to "Microsoft United Kingdom" in Ongoing tab for 2020 Q1
 
+
+##PM-35-BRP: Display Client Page with (empty) Ongoing Productivity Requests#
+  @sanity @smoke
+  Scenario:Empty
+    Given User is able to see subheading as "Productivity data requests"
+   # And User will enter "sunita" in search box.
+   #And User will see "0" numbers of request under ongoing tab
+   # And User will see "Create new data request" button under tab.
+    And User will go to "Complete" tab and will see "0" numbers of request under complete tab
+    Then User will see "Create new data request" button under tab.
 
 
 
