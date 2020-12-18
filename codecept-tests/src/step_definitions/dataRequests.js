@@ -36,3 +36,30 @@ Then(/^User will click on "([^"]*)" button and Verify request is added and toast
 
    homepage.filter1(value);
   });
+
+ ////Scenario3//
+  Given(/^User will click on "([^"]*)" button and will click on "([^"]*)" option$/, function(text,option) {
+    I.wait(5);
+    homepage.moveToComplete(text,option);
+    I.wait(5)
+
+  });
+
+
+ Given(/^User will see confirmation alert box heading as "([^"]*)"\/Ongoing\/"([^"]*)"$/, function(Subtext) {
+   homepage.verifySubtext(Subtext);
+
+  });
+  Then(/^User will will click on "([^"]*)" button and will see toast notification "([^"]*)"$/, function(Button,text) {
+
+    homepage.clickOnButton(Button);
+    homepage.toastNotification(text);
+  });
+
+
+ Then(/^User will go to "([^"]*)" tab and will verify requests$/, function(button) {
+
+      homepage.goToCompleteTab(button);
+      homepage.verifyCompleteRequests();
+
+  });

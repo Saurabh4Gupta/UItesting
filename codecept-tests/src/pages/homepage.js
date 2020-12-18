@@ -28,6 +28,7 @@ module.exports = {
     optionText:(fieldname,option)=>`(//label[text()="${fieldname}"]/..//input[@value="${option}"])[1]`,
     filterMarket:(text)=>`//div[text()="${text}"]/../../..//input`,
     market:(field,text) =>`//label[text()="${field}"]/../../../../../..//div[text()="${text}"]`,
+    moreIcon:(text)=> `(//span[text()="View details"]/../../../../../..//span[@icon="${text}"])[1]`,
   },
 
   verifyDivText(text) {
@@ -172,6 +173,26 @@ module.exports = {
 
   },
 
+  moveToComplete(text,option){
+    GenericMethods.waitAndClick(this.homepageFields.moreIcon(text),20);
+    GenericMethods.waitAndClick(this.homepageFields.spanTextComp(option),10);
+
+  },
+
+  goToCompleteTab(button)
+  {
+    this.clickOnButton(button);
+    I.wait(2);
+
+  },
+
+  verifyCompleteRequests(){
+    let requests=["Microsoft United Kingdom"];
+    for(let i=0;i<requests.length;i++){
+      this.verifyBTextComp(requests[i])
+    }
+
+  },
 
 
 };
