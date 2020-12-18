@@ -25,6 +25,9 @@ module.exports = {
     labelDateComp: (text) => `//label[text()="${text}"]/../../../../..//input[@placeholder="Date"]`,
     optionDateComp: (text) => `//option[text()='${text}']`,
     divDateCOmp: (text) => `(//div[text()='${text}'])[1]`,
+    optionText:(fieldname,option)=>`(//label[text()="${fieldname}"]/..//input[@value="${option}"])[1]`,
+    filterMarket:(text)=>`//div[text()="${text}"]/../../..//input`,
+    market:(field,text) =>`//label[text()="${field}"]/../../../../../..//div[text()="${text}"]`,
   },
 
   verifyDivText(text) {
@@ -75,10 +78,14 @@ module.exports = {
   verifySpanText(text) {
     GenericMethods.waitAndSee(this.homepageFields.spanTextComp(text), 20);
   },
+  verifyBTextComp(text){
 
-  selectDropDown(fieldName, value) {
-    I.waitForVisible(this.homepageFields.labelDropdownComp(fieldName, 1), 60);
-    I.fillField(this.homepageFields.labelDropdownComp(fieldName, 1), value);
+    GenericMethods.waitAndSee(this.homepageFields.bTextComp(text),20);
+  },
+
+  selectDropDown(fieldname, value) {
+    I.waitForVisible(this.homepageFields.filterMarket(fieldname, 1), 60);
+    I.fillField(this.homepageFields.filterMarket(fieldname, 1), value);
     I.pressKey('Enter');
   },
 
@@ -123,4 +130,48 @@ module.exports = {
     datePicker.datePickerInput(dueDate, this.homepageFields.labelDateComp('Due date'));
     this.selectDropDown('Assign to', assignTo);
   },
+
+  filter(value){
+
+    //this.selectDropDown('All markets',value);
+   I.waitForVisible(this.homepageFields.filterMarket('All markets'),20);
+   I.fillField(this.homepageFields.filterMarket('All markets'),value);
+
+   I.pressKey('Enter');
+   I.wait(5);
+
+
+
+  },
+  filter1(value){
+
+    //this.selectDropDown('All markets',value);
+    I.waitForVisible(this.homepageFields.filterMarket('United Kingdom'),20);
+    I.fillField(this.homepageFields.filterMarket('United Kingdom'),value);
+
+    I.pressKey('Enter');
+    I.wait(5);
+
+
+
+  },
+
+  verifyOngoingRequests(){
+    let requests=["Microsoft United Kingdom","Microsoft United Kingdom","Microsoft United Kingdom"];
+    for(let i=0;i<requests.length;i++){
+      this.verifyBTextComp(requests[i])
+                    }
+
+  },
+
+  verifyLocalMarket(text,button){
+
+   GenericMethods.waitAndSee(this.homepageFields.market('Local market',text),10);
+   I.wait(5);
+   this.clickOnButton(button);
+
+  },
+
+
+
 };
