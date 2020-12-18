@@ -1,9 +1,6 @@
 const viewDetails = require('../pages/viewDetailsPage');
 const genericFunction = require('../../factories/GenericFuctions');
 
-
-
-
 //const homepage = require('../../pages/homepage');
 const I = actor();
 
@@ -64,4 +61,13 @@ Then(/^User click on "([^"]*)" and able to see entire briefing$/, function(butto
 });
 Then(/^User click on "([^"]*)" to close the modal$/, function(button) {
   viewDetails.clickOnButton(button);
+});
+Given(/^User able to see "([^"]*)" below version if versions are greater than 10$/, function(button) {
+  I.scrollPageToBottom();
+  viewDetails.verifyButton(button);
+
+});
+Then(/^User click on "([^"]*)" and load more versions$/, function(button) {
+  viewDetails.clickOnButton(button);
+  I.wait(5);
 });
