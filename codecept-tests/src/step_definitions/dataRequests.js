@@ -74,7 +74,7 @@ Given(/^User will enter "([^"]*)" in search box\.$/, function(text) {
     homepage.enterTextInSearch(text);
   });
 
-  Given(/^User will remove search text from search box and User will click on show filter to select "([^"]*)"$/, function(option) {
+  Given(/^User will remove search text from search box and User will click on show filter to select "([^"]*)"$/, function() {
     homepage.showFilter();
   });
 
