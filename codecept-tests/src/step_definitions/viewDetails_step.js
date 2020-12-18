@@ -3,6 +3,7 @@ const genericFunction = require('../../factories/GenericFuctions');
 
 
 
+
 //const homepage = require('../../pages/homepage');
 const I = actor();
 
@@ -52,4 +53,15 @@ Then(/^User click on "([^"]*)" button and "([^"]*)" toast notification is shown$
   viewDetails.clickOnUpload(button);
   viewDetails.toastNotification(text);
   I.wait(5);
+});
+Given(/^User able to see "([^"]*)" link if char greater than 800$/, function(button) {
+  viewDetails.verifyButton(button);
+});
+
+Then(/^User click on "([^"]*)" and able to see entire briefing$/, function(button) {
+  viewDetails.clickOnButton(button);
+  I.wait(5);
+});
+Then(/^User click on "([^"]*)" to close the modal$/, function(button) {
+  viewDetails.clickOnButton(button);
 });

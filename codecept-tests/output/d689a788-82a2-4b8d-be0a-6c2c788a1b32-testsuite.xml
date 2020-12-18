@@ -1,0 +1,93 @@
+<?xml version='1.0'?>
+<ns2:test-suite xmlns:ns2='urn:model.allure.qatools.yandex.ru' start='1608278204599' stop='1608278258510'>
+    <name>View details for Productivity data request</name>
+    <title>View details for Productivity data request</title>
+    <test-cases>
+        <test-case start='1608278225466' status='passed' stop='1608278258495'>
+            <name>Verify link for Show more @smoke</name>
+            <title>Verify link for Show more @smoke</title>
+            <labels>
+                <label name='tag' value='@smoke'/>
+            </labels>
+            <parameters/>
+            <steps>
+                <step start='1608278250865' status='passed' stop='1608278253066'>
+                    <name>Given User able to see "Show more" link if char greater than 800 </name>
+                    <title>Given User able to see "Show more" link if char greater than 800 </title>
+                    <attachments/>
+                    <steps>
+                        <step start='1608278250865' status='passed' stop='1608278253026'>
+                            <name>I wait for visible "//span[text()="Show more"]/..", 20</name>
+                            <title>I wait for visible "//span[text()="Show more"]/..", 20</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                        <step start='1608278253026' status='passed' stop='1608278253066'>
+                            <name>I see element "//span[text()="Show more"]/.."</name>
+                            <title>I see element "//span[text()="Show more"]/.."</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                    </steps>
+                </step>
+                <step start='1608278253066' status='passed' stop='1608278258255'>
+                    <name>Then User click on "Show more" and able to see entire briefing </name>
+                    <title>Then User click on "Show more" and able to see entire briefing </title>
+                    <attachments/>
+                    <steps>
+                        <step start='1608278253066' status='passed' stop='1608278253090'>
+                            <name>I wait for visible "//span[text()="Show more"]/..", 20</name>
+                            <title>I wait for visible "//span[text()="Show more"]/..", 20</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                        <step start='1608278253090' status='passed' stop='1608278253117'>
+                            <name>I wait for enabled "//span[text()="Show more"]/..", 20</name>
+                            <title>I wait for enabled "//span[text()="Show more"]/..", 20</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                        <step start='1608278253117' status='passed' stop='1608278253252'>
+                            <name>I click "//span[text()="Show more"]/.."</name>
+                            <title>I click "//span[text()="Show more"]/.."</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                        <step start='1608278253252' status='passed' stop='1608278258254'>
+                            <name>I wait 5</name>
+                            <title>I wait 5</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                    </steps>
+                </step>
+                <step start='1608278258255' status='passed' stop='1608278258495'>
+                    <name>And User click on "Close" to close the modal </name>
+                    <title>And User click on "Close" to close the modal </title>
+                    <attachments/>
+                    <steps>
+                        <step start='1608278258255' status='passed' stop='1608278258334'>
+                            <name>I wait for visible "//span[text()="Close"]/..", 20</name>
+                            <title>I wait for visible "//span[text()="Close"]/..", 20</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                        <step start='1608278258335' status='passed' stop='1608278258377'>
+                            <name>I wait for enabled "//span[text()="Close"]/..", 20</name>
+                            <title>I wait for enabled "//span[text()="Close"]/..", 20</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                        <step start='1608278258377' status='passed' stop='1608278258495'>
+                            <name>I click "//span[text()="Close"]/.."</name>
+                            <title>I click "//span[text()="Close"]/.."</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                    </steps>
+                </step>
+            </steps>
+            <attachments/>
+        </test-case>
+    </test-cases>
+</ns2:test-suite>

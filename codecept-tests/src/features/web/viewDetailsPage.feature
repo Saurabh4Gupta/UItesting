@@ -22,27 +22,21 @@ Feature: View details for Productivity data request
   Scenario: Verify if request is able to Move to complete
      Given User is able to see "Move to complete" button and click on it
      Then User click on "Yes, continue" and "Data request moved to complete" toast notification is shown
+#@smoke
+  Scenario: Verify link for Show more
+    Given User able to see "Show more" link if char greater than 800
+    Then User click on "Show more" and able to see entire briefing
+    And User click on "Close" to close the modal
 
-  #Scenario: Verify link for Show more
-   # Given User is on Productivity request page
-    #And User able to see show more link if char > 800
-    #Then User click on Show more and able to see entire briefing
-    #Then User click on Close to close the modal
-
-#  Scenario: Verify link for Load more for version
- #   Given User is on Productivity request page
-  #  And User able to see load more below version if versions > 10
+  #Scenario: Verify link for Load more for version
+    #And User able to see load more below version if versions > 10
    # Then User click on load more and load 10 more versions
-  @smoke
+  #@smoke
   Scenario: Verify user is able to Upload new file
     Given User is able to see and click on "Upload new file" button
     Then User attach tracker file
     And User click on "Upload" button and "File uploaded" toast notification is shown
 
-
-
-   # And Click on Browse and select file
-   # Then Click on upload and able to upload new file
 
   #Scenario: User able to download uploaded file from version history
    # Given User is on Productivity request page
