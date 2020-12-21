@@ -15,12 +15,10 @@ Feature: View details for Productivity data request
 
   Scenario: User is able to Edit data request
     Given User able to see "Edit request" button and click on it
-    And User will create new data request
+    And User will edit data request
       | localMarket | requestName   | briefing                  | reportingYear             | actualData | forecastData | dueDate    | assignTo     |
-      | USA         | Data request1 | This is automated request in edit window | April 2021  -  March 2022 | 7 months   | 3 months     | 02/26/2021 | Ryan Killick |
-    Then User will click on "Edit" button and Verify request is added and toast notification "Data request updated" will be shown.
-     # Then User click on Edit request and edit details
-     # And User able to Save edited request
+      | USA         | Data request2 | This is automated request in edit window | April 2019  -  March 2020 | 9 months   | 2 months     | 02/26/2021 | Ryan Manton |
+    Then User will click on "Save" button and Verify request is added and toast notification "Data request edited" will be shown.
 
     #PM-150
   Scenario: Verify if request is able to Move to complete
@@ -31,7 +29,7 @@ Feature: View details for Productivity data request
     Given User able to see "Show more" link if char greater than 800
     Then User click on "Show more" and able to see entire briefing
     And User click on "Close" to close the modal
-  @smoke
+
   Scenario: Verify link for Load more for version
     And User able to see "Load more" below version if versions are greater than 10
     Then User click on "Load more" and load more versions
@@ -41,8 +39,12 @@ Feature: View details for Productivity data request
     Then User attach tracker file
     And User click on "Upload" button and "File uploaded" toast notification is shown
 
+  #@smoke
+  Scenario: User able to download uploaded file from version history
+    Given User is able to see file with label "Current version"
+    Then User click on File link with label "Current version" and able to download file
 
-  #Scenario: User able to download uploaded file from version history
-   # Given User is on Productivity request page
-   # And User click on File name under version history
-   # Then File is downloaded
+  @smoke
+  Scenario: User can go back to Client Homepage
+    Given User able to see "Back to Microsoft Corporation" link
+    Then User click on "Back to Microsoft Corporation" and client homepage is loaded with header "Microsoft Corporation"
