@@ -9,6 +9,158 @@ exports[`<EmptyState /> should match snapshot 1`] = `
     isModalOpen={false}
     market={
       Object {
+        "label": "All markets",
+        "value": "",
+      }
+    }
+  />
+  <Box
+    mt="30px"
+  >
+    <Tabs
+      index={0}
+      onChange={[Function]}
+    >
+      <ForwardRef>
+        <ForwardRef
+          count={1}
+        />
+        <ForwardRef
+          count={1}
+        />
+      </ForwardRef>
+      <ForwardRef>
+        <ForwardRef>
+          <TableList
+            clientCode="MC"
+            cmsData="data"
+            data={
+              Object {
+                "actualData": Object {
+                  "label": "4 months",
+                  "value": 4,
+                },
+                "assignTo": Array [],
+                "briefing": "Lorem Ipsum",
+                "client": "Microsoft",
+                "clientMarket": "Microsoft United Kingdom",
+                "createdAt": "2020-08-14",
+                "dueDate": "13/07/2020",
+                "forecastData": Object {
+                  "label": "8 months",
+                  "value": 8,
+                },
+                "id": 1,
+                "isActive": true,
+                "isDeleted": false,
+                "localMarket": Object {
+                  "label": "United Kingdom",
+                  "value": "UK",
+                },
+                "name": "Productivity Q2 2020",
+                "quarter": "Q2",
+                "reportingYear": Object {
+                  "label": "April 2020  -  March 2021",
+                  "value": "April 2020  -  March 2021",
+                },
+                "status": "Overdue",
+                "totalTenure": "2020 Q2",
+                "updatedAt": "29/10/20 at 14:32",
+                "year": "2020",
+              }
+            }
+            deleteModalData={
+              Object {
+                "isDeleteModal": false,
+                "requestId": undefined,
+              }
+            }
+            handleDelete={[Function]}
+            handleDeleteModel={[Function]}
+            handleMoveToCompleteData={[Function]}
+            handleMoveToCompleteModel={[Function]}
+            handleMoveToOngoing={[Function]}
+            moveToCompleteModelData={
+              Object {
+                "isMoveToComplete": false,
+                "requestID": undefined,
+              }
+            }
+            search={[Function]}
+            setIsDeleteModal={[Function]}
+            setIsMoveToCompleteModel={[Function]}
+            showStatus={true}
+          />
+        </ForwardRef>
+        <ForwardRef>
+          <TableList
+            clientCode="MC"
+            cmsData="data"
+            data={Array []}
+            deleteModalData={Object {}}
+            handleDelete={[Function]}
+            handleDeleteModel={[Function]}
+            handleMoveToCompleteData={[Function]}
+            handleMoveToCompleteModel={[Function]}
+            handleMoveToOngoing={[Function]}
+            moveToCompleteModelData={Object {}}
+            search={[Function]}
+            setIsDeleteModal={[Function]}
+            setIsMoveToCompleteModel={[Function]}
+            showStatus={false}
+          />
+        </ForwardRef>
+      </ForwardRef>
+    </Tabs>
+  </Box>
+</Fragment>
+`;
+
+exports[`<EmptyState /> should match snapshot 2`] = `
+<Fragment>
+  <CreateData
+    addRequest={[Function]}
+    cmsData="data"
+    handleModal={[Function]}
+    isModalOpen={false}
+    market={
+      Object {
+        "label": "All markets",
+        "value": "",
+      }
+    }
+  />
+  <Box
+    mt="30px"
+  >
+    <Tabs
+      index={0}
+      onChange={[Function]}
+    >
+      <ForwardRef>
+        <ForwardRef
+          count={1}
+        />
+        <ForwardRef
+          count={1}
+        />
+      </ForwardRef>
+      <Loader />
+    </Tabs>
+  </Box>
+</Fragment>
+`;
+
+exports[`<EmptyState /> should match snapshot 3`] = `
+<Fragment>
+  <CreateData
+    addRequest={[Function]}
+    cmsData="data"
+    handleModal={[Function]}
+    isModalOpen={false}
+    market={
+      Object {
+        "label": "All markets",
         "value": "",
       }
     }
@@ -28,7 +180,18 @@ exports[`<EmptyState /> should match snapshot 1`] = `
           count={0}
         />
       </ForwardRef>
-      <Loader />
+      <ForwardRef>
+        <ForwardRef>
+          <withRouter(EmptyTable)
+            handleModal={[Function]}
+          />
+        </ForwardRef>
+        <ForwardRef>
+          <withRouter(EmptyTable)
+            handleModal={[Function]}
+          />
+        </ForwardRef>
+      </ForwardRef>
     </Tabs>
   </Box>
 </Fragment>

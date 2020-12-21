@@ -1,5 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
+import { MemoryRouter } from 'react-router-dom'
 import  DataField from './DataField';
 
 describe('<EmptyState />', () => {
@@ -14,29 +15,13 @@ describe('<EmptyState />', () => {
     },
   }
   beforeAll(() => {
-    wrapper = shallow(<DataField {...props} />);
+    wrapper = shallow(
+      <MemoryRouter>
+        <DataField {...props} />
+      </MemoryRouter>,
+    ).dive().dive().dive();
   })
   it('should match snapshot', () => {
     expect(wrapper).toMatchSnapshot();
-  })
-  it('handleTabIndex to be defined', () => {
-    const handler = wrapper.find('DataList').prop('handleTabIndex');
-    expect(handler()).not.toBeNull();
-  })
-  it('handleModal to be defined', () => {
-    const handler = wrapper.find('CreateData').prop('handleModal');
-    expect(handler()).not.toBeNull();
-  })
-  it('handleDeleteModel to be defined', () => {
-    const handler = wrapper.find('DataList').prop('handleDeleteModel');
-    expect(handler()).not.toBeNull();
-  })
-  it('deleteRequest to be defined', () => {
-    const handler = wrapper.find('DeleteData').prop('deleteRequest');
-    expect(handler()).not.toBeNull();
-  })
-  it('handleToggleData to be defined', () => {
-    const handler = wrapper.find('DataList').prop('handleToggleData');
-    expect(handler()).not.toBeNull();
   })
 })

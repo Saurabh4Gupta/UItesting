@@ -5,9 +5,7 @@ exports[`<EmptyState /> should match snapshot 1`] = `
   <Menu>
     <ForwardRef />
     <ForwardRef>
-      <MenuItem
-        onClick={[MockFunction]}
-      >
+      <MenuItem>
         test1
       </MenuItem>
       <MenuItem
