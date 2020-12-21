@@ -29,6 +29,8 @@ module.exports = {
     filterMarket:(text)=>`//div[text()="${text}"]/../../..//input`,
     market:(field,text) =>`//label[text()="${field}"]/../../../../../..//div[text()="${text}"]`,
     moreIcon:(text)=> `(//span[text()="View details"]/../../../../../..//span[@icon="${text}"])[1]`,
+
+
     searchBox:`//input[@type='search']`,
    showFilter:(fieldName,option)=>`//span[text()="${fieldName}"]/../../..//option[text()="${option}"]`,
 
@@ -187,12 +189,14 @@ module.exports = {
     GenericMethods.waitAndClick(this.homepageFields.spanTextComp(option),10);
 
   },
+
   moveToOngoing(text,option){
    // pause();
     GenericMethods.waitAndClick(this.homepageFields.completeMoreOption(text),20);
     GenericMethods.waitAndClick(this.homepageFields.spanTextComp(option),10);
 
   },
+
 
   goToCompleteTab(button)
   {
@@ -207,7 +211,10 @@ module.exports = {
       this.verifyBTextComp(requests[i])
     }
 
+
   },
+
+
 
   enterTextInSearch(text){
 

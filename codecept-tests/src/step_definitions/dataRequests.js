@@ -64,6 +64,11 @@ Then(/^User will click on "([^"]*)" button and Verify request is added and toast
 
   });
 
+  Given(/^User will see confirmation alert box heading as "([^"]*)"$/, function(Subtext) {
+  homepage.verifySubtext(Subtext);
+  });
+
+
  ///Scenario4
   Given(/^User will see confirmation alert box heading as "([^"]*)"$/, function(Subtext) {
   homepage.verifySubtext(Subtext);
@@ -109,3 +114,4 @@ Then(/^User will click on "([^"]*)" button and will click on "([^"]*)" option\.$
   Then(/^User will see toast notification "([^"]*)"\.$/, function(text) {
     homepage.toastNotification(text);
   });
+

@@ -27,6 +27,5 @@ let clients=["American Express","Burberry","Burger King","General Motors","Micro
 
    selectClient.verifyTitle(Title)
 
-
   });
 
