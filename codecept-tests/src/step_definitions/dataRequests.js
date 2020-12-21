@@ -63,6 +63,55 @@ Then(/^User will click on "([^"]*)" button and Verify request is added and toast
       homepage.verifyCompleteRequests();
 
   });
+
   Given(/^User will see confirmation alert box heading as "([^"]*)"$/, function(Subtext) {
   homepage.verifySubtext(Subtext);
   });
+
+
+ ///Scenario4
+  Given(/^User will see confirmation alert box heading as "([^"]*)"$/, function(Subtext) {
+  homepage.verifySubtext(Subtext);
+  });
+
+  //Scenario5
+Given(/^User will enter "([^"]*)" in search box\.$/, function(text) {
+   I.wait(5);
+    homepage.enterTextInSearch(text);
+  });
+
+  Given(/^User will remove search text from search box and User will click on show filter to select "([^"]*)"$/, function() {
+    homepage.showFilter();
+  });
+
+  Given(/^User will see requests related to "([^"]*)" in Ongoing tab for (\d+) Q1$/, function() {
+    homepage.verifyCompleteRequests();
+
+  });
+
+  //Scneario6
+Given(/^User will go to "([^"]*)" tab and will see "([^"]*)" numbers of request under complete tab$/, function(button,text) {
+      homepage.goToCompleteTab(button);
+      homepage.verifyNoOfRequests(text);
+
+  });
+  Then(/^User will see "([^"]*)" button under tab\.$/, function() {
+    homepage.createNewData();
+
+  });
+
+  Given(/^User will see "([^"]*)" numbers of request under ongoing tab$/, function(text) {
+  homepage.verifyNoOfRequests(text);
+  });
+
+
+Then(/^User will click on "([^"]*)" button and will click on "([^"]*)" option\.$/, function(text,option) {
+
+  I.wait(5);
+  homepage.moveToOngoing(text,option);
+  I.wait(5)
+  });
+  Then(/^User will see toast notification "([^"]*)"\.$/, function(text) {
+    homepage.toastNotification(text);
+  });
+
