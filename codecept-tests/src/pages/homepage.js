@@ -17,9 +17,9 @@ module.exports = {
     clientDetail: client => `//span[text()="${client}"]/../../../..//span[text()="View details"]`,
     aTextComp: (text) => `//a[text() = '${text}']/..`,
     iconLabel: (icon) => `//span[@icon='${icon}']/..`,
-    textAreaComp: (label) => `//label[text()="${label}"]/..//textarea`,
+      textAreaComp: (label) => `//label[text()="${label}"]/..//textarea`,
     labelDropdownComp: (text) => `(//label[text()="${text}"]/..//input)[1]`,
-    labelTextComp: text => `(//label[text()='Data request name']/../../../..//input)[3]`,
+    labelTextComp: (text) => `(//label[text()='Data request name']/../../../..//input)[3]`,
     dropArea: `//input[@name='dropzone']`,
     frame: `//div[@id='container']//iframe`,
     labelDateComp: (text) => `//label[text()="${text}"]/../../../../..//input[@placeholder="Date"]`,
@@ -28,6 +28,16 @@ module.exports = {
     optionText:(fieldname,option)=>`(//label[text()="${fieldname}"]/..//input[@value="${option}"])[1]`,
     filterMarket:(text)=>`//div[text()="${text}"]/../../..//input`,
     market:(field,text) =>`//label[text()="${field}"]/../../../../../..//div[text()="${text}"]`,
+    moreIcon:(text)=> `(//span[text()="View details"]/../../../../../..//span[@icon="${text}"])[1]`,
+    searchBox:`//input[@type='search']`,
+   showFilter:(fieldName,option)=>`//span[text()="${fieldName}"]/../../..//option[text()="${option}"]`,
+
+    show: `(//option[text()="All"]/..//option)[2]`,
+    completeTabCount: (fieldName,text)=> `//span[text()="${fieldName}"]/small[text()="${text}"]`,
+    createNewRequest:(fieldName)=> `(//span[text()="${fieldName}"])[2]`,
+    completeMoreOption:(text)=>`(//span[text()='Complete']/../../../../../../../../../../../../../../../..//span[@icon="${text}"])[4]`,
+
+
   },
 
   verifyDivText(text) {
@@ -172,6 +182,57 @@ module.exports = {
 
   },
 
+  moveToComplete(text,option){
+    GenericMethods.waitAndClick(this.homepageFields.moreIcon(text),20);
+    GenericMethods.waitAndClick(this.homepageFields.spanTextComp(option),10);
+
+  },
+  moveToOngoing(text,option){
+   // pause();
+    GenericMethods.waitAndClick(this.homepageFields.completeMoreOption(text),20);
+    GenericMethods.waitAndClick(this.homepageFields.spanTextComp(option),10);
+
+  },
+
+  goToCompleteTab(button)
+  {
+    this.clickOnButton(button);
+    I.wait(2);
+
+  },
+
+  verifyCompleteRequests(){
+    let requests=["Microsoft United Kingdom"];
+    for(let i=0;i<requests.length;i++){
+      this.verifyBTextComp(requests[i])
+    }
+
+  },
+
+  enterTextInSearch(text){
+
+    I.waitForVisible(this.homepageFields.searchBox,20);
+    I.fillField(this.homepageFields.searchBox,text);
+  },
+
+  showFilter(option){
+
+    GenericMethods.clearFields(this.homepageFields.searchBox,20);
+    I.pressKey('Tab');
+    I.pressKey('Enter');
+    I.click(`(//option[text()='All']/following-sibling::option)[1]`);
+    I.pressKey('Enter');
+
+  },
+  verifyNoOfRequests(text)
+  {
+  I.waitForVisible(this.homepageFields.completeTabCount('Complete',text),20);
 
 
+  },
+
+  createNewData()
+  {
+    I.waitForVisible(this.homepageFields.createNewRequest('Create new data request'),20);
+  }
 };
