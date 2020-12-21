@@ -26,9 +26,14 @@ module.exports = {
     optionDateComp: (text) => `//option[text()='${text}']`,
     divDateCOmp: (text) => `(//div[text()='${text}'])[1]`,
     optionText:(fieldname,option)=>`(//label[text()="${fieldname}"]/..//input[@value="${option}"])[1]`,
-    filterMarket:(text)=>`//div[text()="${text}"]/../../..//input`,
-    market:(field,text) =>`//label[text()="${field}"]/../../../../../..//div[text()="${text}"]`,
+    filterMarket:(text)=>`//label[text()="${text}"]/../../..//input`,
+    selectedFilterMarket:(text)=>`(//label[text()="${text}"]/../..//input)[1]`,
+    globalFilter:(text)=>`//div[text()="${text}"]/../..//input`,
+    filterMarket1:(fieldname,value)=>`//label[text()="${fieldname}"]/../../../../../../../../..//input[@value="${value}"]`,
+    market:(text) =>`//div[text()="${text}"]/../..//input`,
+    market1:(text)=>`//div[text()="${text}"]`,
     moreIcon:(text)=> `(//span[text()="View details"]/../../../../../..//span[@icon="${text}"])[1]`,
+    assignTo:(text)=>`(//label[text()="${text}"]/../../../../../../../../..//input)[15]`,
 
 
     searchBox:`//input[@type='search']`,
@@ -100,6 +105,22 @@ module.exports = {
     I.fillField(this.homepageFields.filterMarket(fieldname, 1), value);
     I.pressKey('Enter');
   },
+  selectDropDownForSelectedMarket(fieldname, value) {
+    I.waitForVisible(this.homepageFields.filterMarket1(fieldname, 1), 60);
+    I.fillField(this.homepageFields.filterMarket1(fieldname, 1), value);
+    I.pressKey('Enter');
+  },
+
+  selectDropDownForSameMarket(text, value) {
+    I.waitForVisible(this.homepageFields.selectedFilterMarket(text, 1), 60);
+    I.fillField(this.homepageFields.selectedFilterMarket(text, 1), value);
+    I.pressKey('Enter');
+  },
+  selectDropDownAssignTo(fieldname, value) {
+    I.waitForVisible(this.homepageFields.assignTo(fieldname, 1), 60);
+    I.fillField(this.homepageFields.assignTo(fieldname, 1), value);
+    I.pressKey('Enter');
+  },
 
   enterText(fieldName, text) {
     GenericMethods.waitAndFillField(this.homepageFields.labelTextComp(fieldName), text, 20);
@@ -140,14 +161,52 @@ module.exports = {
     this.selectDropDown('Forecast data', forecastData);
     this.uploadFile();
     datePicker.datePickerInput(dueDate, this.homepageFields.labelDateComp('Due date'));
-    this.selectDropDown('Assign to', assignTo);
+    I.wait(5);
+    this.selectDropDownAssignTo('Assign to', assignTo);
+  },
+
+
+  createDataRequestForSelectedMarket(table) {
+    const {
+      localMarket, requestName, briefing, reportingYear, actualData,
+      forecastData, dueDate, assignTo,
+    } = table;
+
+    //this.selectDropDownForSelectedMarket('Local market', localMarket);
+    this.enterText('Data request name', requestName);
+    this.enterTextInTextArea('Briefing', briefing);
+    this.selectDropDown('Reporting year', reportingYear);
+    this.selectDropDown('Actual data', actualData);
+    this.selectDropDown('Forecast data', forecastData);
+    this.uploadFile();
+    datePicker.datePickerInput(dueDate, this.homepageFields.labelDateComp('Due date'));
+    I.wait(5);
+    this.selectDropDownAssignTo('Assign to', assignTo);
+  },
+
+  createDataRequestForSameMarket(table) {
+    const {
+      localMarket, requestName, briefing, reportingYear, actualData,
+      forecastData, dueDate, assignTo,
+    } = table;
+
+    this.selectDropDownForSameMarket('Local market', localMarket);
+    this.enterText('Data request name', requestName);
+    this.enterTextInTextArea('Briefing', briefing);
+    this.selectDropDown('Reporting year', reportingYear);
+    this.selectDropDown('Actual data', actualData);
+    this.selectDropDown('Forecast data', forecastData);
+    this.uploadFile();
+    datePicker.datePickerInput(dueDate, this.homepageFields.labelDateComp('Due date'));
+    I.wait(5);
+    this.selectDropDownAssignTo('Assign to', assignTo);
   },
 
   filter(value){
 
     //this.selectDropDown('All markets',value);
-   I.waitForVisible(this.homepageFields.filterMarket('All markets'),20);
-   I.fillField(this.homepageFields.filterMarket('All markets'),value);
+   I.waitForVisible(this.homepageFields.globalFilter('All markets'),20);
+   I.fillField(this.homepageFields.globalFilter('All markets'),value);
 
    I.pressKey('Enter');
    I.wait(5);
@@ -158,8 +217,8 @@ module.exports = {
   filter1(value){
 
     //this.selectDropDown('All markets',value);
-    I.waitForVisible(this.homepageFields.filterMarket('United Kingdom'),20);
-    I.fillField(this.homepageFields.filterMarket('United Kingdom'),value);
+    I.waitForVisible(this.homepageFields.market('United Kingdom'),20);
+    I.fillField(this.homepageFields.market('United Kingdom'),value);
 
     I.pressKey('Enter');
     I.wait(5);
@@ -176,11 +235,19 @@ module.exports = {
 
   },
 
-  verifyLocalMarket(text,button){
+  verifyLocalMarket(text){
 
-   GenericMethods.waitAndSee(this.homepageFields.market('Local market',text),10);
+   GenericMethods.waitAndSee(this.homepageFields.market(text),10);
    I.wait(5);
-   this.clickOnButton(button);
+  // this.clickOnButton(button);
+
+  },
+
+  verifyLocalMarketText(text){
+
+    GenericMethods.waitAndSee(this.homepageFields.market1(text),10);
+    I.wait(5);
+    // this.clickOnButton(button);
 
   },
 
@@ -241,5 +308,14 @@ module.exports = {
   createNewData()
   {
     I.waitForVisible(this.homepageFields.createNewRequest('Create new data request'),20);
+  },
+
+  verifyTextOfComp(text)
+  {
+
+   I.wait(5);
+
+    I.seeElement(this.homepageFields.market1(text));
+
   }
 };

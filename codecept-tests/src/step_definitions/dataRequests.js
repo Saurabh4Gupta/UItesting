@@ -29,7 +29,8 @@ Then(/^User will click on "([^"]*)" button and Verify request is added and toast
     homepage.verifyOngoingRequests();
   });
  Given(/^User will see in Local market field "([^"]*)" and User will click on "([^"]*)" button$/, function(text,button) {
-  homepage.verifyLocalMarket(text,button)
+  homepage.verifyLocalMarket(text,button);
+   homepage.clickOnButton(button);
   });
 
  Given(/^User will select filer and will select "([^"]*)" again$/, function(value) {
@@ -115,3 +116,21 @@ Then(/^User will click on "([^"]*)" button and will click on "([^"]*)" option\.$
     homepage.toastNotification(text);
   });
 
+
+  Given(/^User will see in Local market field "([^"]*)"$/, function(text) {
+    homepage.verifyLocalMarketText(text);
+
+  });
+  Then(/^User will check "([^"]*)" is selected in All Market filter$/, function(text) {
+   homepage.verifyTextOfComp(text);
+  });
+
+
+Given(/^User will create new data request for selected Market$/, function(input) {
+    table = genericFunction.transformTable(input);
+    homepage.createDataRequestForSelectedMarket(table[0]);
+  });
+Given(/^User will create new data request for same Market$/, function(input) {
+  table = genericFunction.transformTable(input);
+  homepage.createDataRequestForSameMarket(table[0]);
+  });

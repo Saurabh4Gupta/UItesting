@@ -31,7 +31,8 @@ Feature: View details for Productivity data request
     Given User able to see "Show more" link if char greater than 800
     Then User click on "Show more" and able to see entire briefing
     And User click on "Close" to close the modal
-  @smoke
+
+
   Scenario: Verify link for Load more for version
     And User able to see "Load more" below version if versions are greater than 10
     Then User click on "Load more" and load more versions
