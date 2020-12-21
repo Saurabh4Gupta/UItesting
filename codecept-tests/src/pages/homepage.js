@@ -35,6 +35,7 @@ module.exports = {
     show: `(//option[text()="All"]/..//option)[2]`,
     completeTabCount: (fieldName,text)=> `//span[text()="${fieldName}"]/small[text()="${text}"]`,
     createNewRequest:(fieldName)=> `(//span[text()="${fieldName}"])[2]`,
+    completeMoreOption:(text)=>`(//span[text()='Complete']/../../../../../../../../../../../../../../../..//span[@icon="${text}"])[4]`,
 
 
   },
@@ -183,6 +184,12 @@ module.exports = {
 
   moveToComplete(text,option){
     GenericMethods.waitAndClick(this.homepageFields.moreIcon(text),20);
+    GenericMethods.waitAndClick(this.homepageFields.spanTextComp(option),10);
+
+  },
+  moveToOngoing(text,option){
+   // pause();
+    GenericMethods.waitAndClick(this.homepageFields.completeMoreOption(text),20);
     GenericMethods.waitAndClick(this.homepageFields.spanTextComp(option),10);
 
   },

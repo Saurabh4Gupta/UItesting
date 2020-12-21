@@ -38,14 +38,19 @@ Feature: As an Amplifi Global Investment team member
     And User will click on "Create new data request" button and will see heading as "Create new data request"
     And User will see in Local market field "Please select" and User will click on "Cancel" button
 
- # @sanity @smoke
-    ######PM-44BRP: Move to Complete#####
+ @sanity @smoke
+    ######PM-44BRP: Move to Complete##### PM-57-BRP: Move to Ongoing##
   Scenario:Move to Complete
     Given User is able to see subheading as "Productivity data requests"
     And User will click on "more" button and will click on "Move to complete" option
     #And User will see confirmation alert box heading as "You will not be able to make any more edits to this request unless it is moved back to "/Ongoing/"."
     Then User will will click on "Yes, continue" button and will see toast notification "Data request moved to complete"
     Then User will go to "Complete" tab and will verify requests
+    And User will click on "more" button and will click on "Move to ongoing" option.
+    Then User will see toast notification "Data request moved to ongoing".
+   Then User will go to "Ongoing" tab and will verify requests
+
+
 
 #####PM-30BRP: Delete a productivity data request##
 
@@ -58,7 +63,7 @@ Feature: As an Amplifi Global Investment team member
 
 ##PM-75-BRP: Search or filter a list of ongoing productivity data requests###
  # @sanity @smoke
-  Scenario:Delete productivity request
+  Scenario:Search or filter a list of complete productivity data requests
     Given User is able to see subheading as "Productivity data requests"
     And User will enter "United" in search box.
     And User will see requests related to "Microsoft United Kingdom" in Ongoing tab
@@ -67,7 +72,7 @@ Feature: As an Amplifi Global Investment team member
 
 
 ##PM-35-BRP: Display Client Page with (empty) Ongoing Productivity Requests#
-  @sanity @smoke
+  #@sanity @smoke
   Scenario:Empty
     Given User is able to see subheading as "Productivity data requests"
    # And User will enter "sunita" in search box.

@@ -98,3 +98,14 @@ Given(/^User will go to "([^"]*)" tab and will see "([^"]*)" numbers of request 
   Given(/^User will see "([^"]*)" numbers of request under ongoing tab$/, function(text) {
   homepage.verifyNoOfRequests(text);
   });
+
+
+Then(/^User will click on "([^"]*)" button and will click on "([^"]*)" option\.$/, function(text,option) {
+
+  I.wait(5);
+  homepage.moveToOngoing(text,option);
+  I.wait(5)
+  });
+  Then(/^User will see toast notification "([^"]*)"\.$/, function(text) {
+    homepage.toastNotification(text);
+  });
