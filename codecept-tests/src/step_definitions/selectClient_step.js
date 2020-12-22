@@ -20,6 +20,7 @@ let clients=["American Express","Burberry","Burger King","General Motors","Micro
   Then(/^User will go to client "([^"]*)" homepage$/, function(client) {
    selectClient.clickOnViewDetails(client)
 
+
       });
 
 
