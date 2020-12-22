@@ -86,6 +86,7 @@ const DataList = (props) => {
       values.client = 'Microsoft';
       values.updatedAt = '30/11/20 at 14:32';
       values.clientMarket = `Microsoft ${values.localMarket.label}`;
+      values.dueDate = values.dueDate.toLocaleDateString();
       await mockData.data.push(values);
       setDataList(getData(market.value, 'ongoing'));
       if (values.localMarket.value !== market.value) {
