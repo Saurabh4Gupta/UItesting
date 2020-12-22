@@ -87,7 +87,7 @@ Feature: As an Amplifi Global Investment team member
 
 
 ##M-165BRP: Reset Market Filter if Productivity Request Created for Different Market##
-    @sanity @smoke
+    #@sanity @smoke
     Scenario: Reset Market Filter if Productivity Request Created for Different Market
     Given User is able to see subheading as "Productivity data requests"
     And User will select filer and will select first "USA"

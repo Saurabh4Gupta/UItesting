@@ -17,7 +17,7 @@ module.exports = {
     clientDetail: client => `//span[text()="${client}"]/../../../..//span[text()="View details"]`,
     aTextComp: (text) => `//a[text() = '${text}']/..`,
     iconLabel: (icon) => `//span[@icon='${icon}']/..`,
-      textAreaComp: (label) => `//label[text()="${label}"]/..//textarea`,
+    textAreaComp: (label) => `//label[text()="${label}"]/..//textarea`,
     labelDropdownComp: (text) => `(//label[text()="${text}"]/..//input)[1]`,
     labelTextComp: (text) => `(//label[text()='Data request name']/../../../..//input)[3]`,
     dropArea: `//input[@name='dropzone']`,
@@ -96,7 +96,6 @@ module.exports = {
     GenericMethods.waitAndSee(this.homepageFields.spanTextComp(text), 20);
   },
   verifyBTextComp(text){
-
     GenericMethods.waitAndSee(this.homepageFields.bTextComp(text),20);
   },
 
