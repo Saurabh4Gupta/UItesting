@@ -37,6 +37,7 @@ module.exports = {
 
 
     searchBox:`//input[@type='search']`,
+    searchBoxComplete:`(//input[@type='search'])[2]`,
    showFilter:(fieldName,option)=>`//span[text()="${fieldName}"]/../../..//option[text()="${option}"]`,
 
     show: `(//option[text()="All"]/..//option)[2]`,
@@ -234,6 +235,8 @@ module.exports = {
 
   },
 
+
+
   verifyLocalMarket(text){
 
    GenericMethods.waitAndSee(this.homepageFields.market(text),10);
@@ -282,10 +285,16 @@ module.exports = {
 
 
 
-  enterTextInSearch(text){
+  enterTextInSearch(text) {
 
-    I.waitForVisible(this.homepageFields.searchBox,20);
-    I.fillField(this.homepageFields.searchBox,text);
+    I.waitForVisible(this.homepageFields.searchBox, 20);
+    I.fillField(this.homepageFields.searchBox, text);
+  },
+
+  enterTextInCompleteSearch(text){
+
+    I.waitForVisible(this.homepageFields.searchBoxComplete,20);
+    I.fillField(this.homepageFields.searchBoxComplete,text);
   },
 
   showFilter(option){
@@ -293,7 +302,19 @@ module.exports = {
     GenericMethods.clearFields(this.homepageFields.searchBox,20);
     I.pressKey('Tab');
     I.pressKey('Enter');
+    I.wait(5);
     I.click(`(//option[text()='All']/following-sibling::option)[1]`);
+    I.pressKey('Enter');
+
+  },
+
+  showFilterInComplete(option){
+
+    GenericMethods.clearFields(this.homepageFields.searchBoxComplete,20);
+    I.pressKey('Tab');
+    I.pressKey('Enter');
+    I.wait(5);
+    I.click(`(//option[text()='All']/following-sibling::option)[5]`);
     I.pressKey('Enter');
 
   },
