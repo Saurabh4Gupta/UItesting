@@ -17,7 +17,7 @@ Feature: As an Amplifi Global Investment team member
 
 
     ########PM-25 BRP: Create a new productivity data request######
- ## @sanity @smoke
+  #@sanity @smoke
   Scenario: Create new Productivity Data requests
     Given User is able to see subheading as "Productivity data requests"
     And User will click on "Create new data request" button and will see heading as "Create new data request"
@@ -78,7 +78,7 @@ Feature: As an Amplifi Global Investment team member
 
 ##PM-35-BRP: Display Client Page with (empty) Ongoing Productivity Requests#
   #@sanity @smoke
-  Scenario:Empty
+  Scenario:Display Client Page with (empty) Complete Productivity Requests
     Given User is able to see subheading as "Productivity data requests"
    # And User will enter "sunita" in search box.
    #And User will see "0" numbers of request under ongoing tab
@@ -88,7 +88,7 @@ Feature: As an Amplifi Global Investment team member
 
 
 ##M-165BRP: Reset Market Filter if Productivity Request Created for Different Market##
-    @sanity @smoke
+    #@sanity @smoke
     Scenario: Reset Market Filter if Productivity Request Created for Different Market
     Given User is able to see subheading as "Productivity data requests"
     And User will select filer and will select first "USA"
@@ -108,8 +108,18 @@ Feature: As an Amplifi Global Investment team member
       Then User will check "All markets" is selected in All Market filter
 
 
+  ##PM-98BRP: Search or filter a list of "Complete" productivity data requests##
 
-
-
+   @sanity @smoke
+  Scenario: Search or filter a list of "Complete" productivity data requests
+    Given User is able to see subheading as "Productivity data requests"
+    And User will click on "more" button and will click on "Move to complete" option
+    #And User will see confirmation alert box heading as "You will not be able to make any more edits to this request unless it is moved back to "/Ongoing/"."
+    Then User will will click on "Yes, continue" button and will see toast notification "Data request moved to complete"
+    Then User will go to "Complete" tab and will verify requests
+    And User will enter "United" in search box in complete tab.
+    And User will see requests related to "Microsoft United Kingdom" in Complete tab
+    And User will remove search text from search box and User will click on show filter in complete tab to select "2020 Q1"
+    And User will see requests related to "Microsoft United Kingdom" in Complete tab for 2020 Q1
 
 

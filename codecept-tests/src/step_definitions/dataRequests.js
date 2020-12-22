@@ -16,6 +16,7 @@ Given(/^User will create new data request$/, function(input) {
 
 Then(/^User will click on "([^"]*)" button and Verify request is added and toast notification "([^"]*)" will be shown\.$/, function(button, text) {
   homepage.clickOnButton(button);
+  I.wait(3);
   homepage.toastNotification(text);
 });
 
@@ -133,4 +134,21 @@ Given(/^User will create new data request for selected Market$/, function(input)
 Given(/^User will create new data request for same Market$/, function(input) {
   table = genericFunction.transformTable(input);
   homepage.createDataRequestForSameMarket(table[0]);
+  });
+
+
+Then(/^User will see requests related to "([^"]*)" in Complete tab$/, function(arg1, callback) {
+    homepage.verifyCompleteRequests()
+  });
+ Then(/^User will see requests related to "([^"]*)" in Complete tab for (\d+) Q1$/, function(
+
+ ) {
+   homepage.verifyCompleteRequests()
+  });
+
+Then(/^User will enter "([^"]*)" in search box in complete tab\.$/, function(text) {
+    homepage.enterTextInCompleteSearch(text)
+  });
+Then(/^User will remove search text from search box and User will click on show filter in complete tab to select "([^"]*)"$/, function(option) {
+    homepage. showFilterInComplete(option)
   });

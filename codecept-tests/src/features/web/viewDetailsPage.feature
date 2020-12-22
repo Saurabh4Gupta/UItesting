@@ -44,7 +44,7 @@ Feature: View details for Productivity data request
     Given User is able to see file with label "Current version"
     Then User click on File link with label "Current version" and able to download file
 
-  @smoke
+  #@smoke
   Scenario: User can go back to Client Homepage
     Given User able to see "Back to Microsoft Corporation" link
     Then User click on "Back to Microsoft Corporation" and client homepage is loaded with header "Microsoft Corporation"
