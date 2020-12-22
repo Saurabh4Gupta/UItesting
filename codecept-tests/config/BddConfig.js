@@ -9,7 +9,9 @@ const gherkin = {
         "./src/step_definitions/login_step.js",
         "./src/step_definitions/selectClient_step.js",
       "./src/step_definitions/viewDetails_step.js",
-       "./src/step_definitions/dataRequests.js"
+       "./src/step_definitions/dataRequests.js",
+      "./src/step_definitions/viewComplete_step.js",
+
 
     ],
 };

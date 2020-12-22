@@ -30,8 +30,7 @@ Feature: As an Amplifi Global Investment team member
   #@sanity @smoke
 
     #########PM-105BRP: Filter Productivity Requests by Market#####
-
-     Scenario:Filter Productivity Requests by Market
+    Scenario:Filter Productivity Requests by Market
       Given User is able to see subheading as "Productivity data requests"
       And User will select filer and will select first "United Kingdom"
       And User will see requests related to "Microsoft United Kingdom" in Ongoing tab

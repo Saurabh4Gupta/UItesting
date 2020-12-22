@@ -1,4 +1,12 @@
-Feature: View details for Productivity data request
+Feature: As an Amplifi Global Investment team member
+  I want to View details for Productivity data request
+  I want to edit data request
+  I want to move an ongoing productivity data to the Complete using Move to Complete button
+  I want to show more for briefing if data is greater than 800 characters
+  I want to load more version files if files are greater than 10
+  I want to upload new file using Upload new file button
+  I want to download current version's tracker file
+  I want to go back to Client homepage
 
   Background:
     Given User is on landing page
@@ -9,10 +17,11 @@ Feature: View details for Productivity data request
     Given User will click on View Details
 
  #PM-28
- Scenario: User is able to view details of Request
+  #@smoke
+  Scenario: User is able to view details of Request
     And able to view Title as "Productivity Q2 2020"
     Then User is able to view header as "Productivity request"
-
+  #@smoke
   Scenario: User is able to Edit data request
     Given User able to see "Edit request" button and click on it
     And User will edit data request
@@ -21,19 +30,20 @@ Feature: View details for Productivity data request
     Then User will click on "Save" button and Verify request is added and toast notification "Data request edited" will be shown.
 
     #PM-150
+  #@smoke
   Scenario: Verify if request is able to Move to complete
      Given User is able to see "Move to complete" button and click on it
      Then User click on "Yes, continue" and "Data request moved to complete" toast notification is shown
-
+  #@smoke
   Scenario: Verify link for Show more
     Given User able to see "Show more" link if char greater than 800
     Then User click on "Show more" and able to see entire briefing
     And User click on "Close" to close the modal
-
+  #@smoke
   Scenario: Verify link for Load more for version
     And User able to see "Load more" below version if versions are greater than 10
     Then User click on "Load more" and load more versions
-
+  #@smoke
   Scenario: Verify user is able to Upload new file
     Given User is able to see and click on "Upload new file" button
     Then User attach tracker file
@@ -44,6 +54,7 @@ Feature: View details for Productivity data request
     Given User is able to see file with label "Current version"
     Then User click on File link with label "Current version" and able to download file
 
+    #PM-102
   #@smoke
   Scenario: User can go back to Client Homepage
     Given User able to see "Back to Microsoft Corporation" link
