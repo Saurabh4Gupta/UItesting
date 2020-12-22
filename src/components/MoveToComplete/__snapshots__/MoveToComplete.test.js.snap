@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Success test cases for: MoveToComplete component Snapshot test for MoveToComplete component Test to match the ForwardRef 1`] = `
+<Fragment>
+  <ForwardRef
+    isFullHeight={false}
+    isOpen={false}
+    onClose={[Function]}
+    width="500px"
+  >
+    <ForwardRef
+      hasCloseButton={true}
+    />
+    <ForwardRef>
+      <p />
+    </ForwardRef>
+    <ForwardRef>
+      <ForwardRef
+        onClick={[Function]}
+        variant="secondary"
+      />
+      <ForwardRef
+        onClick={[Function]}
+      />
+    </ForwardRef>
+  </ForwardRef>
+</Fragment>
+`;

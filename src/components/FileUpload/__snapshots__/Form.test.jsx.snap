@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Success test cases for: Loader component Snapshot test for  Loader component Test to match the snapsot 1`] = `
+<Fragment>
+  <FormField
+    hint="Only .xls, .xlsx, .csv, .xlsb, .xlsm, .xlt, .xltm, .xltx files in 20mb or less"
+    label="To upload a new file,drag and drop you file below or browse using the link"
+  >
+    <Dropzone
+      acceptedFileTypes={
+        Array [
+          "application/vnd.ms-excel",
+          "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "application/vnd.ms-excel.sheet.binary.macroEnabled.12",
+          "application/vnd.ms-excel.sheet.macroEnabled.12",
+          "application/vnd.ms-excel.template.macroEnabled.12",
+          "application/vnd.openxmlformats-officedocument.spreadsheetml.template",
+          "text/csv",
+        ]
+      }
+      allowFileTypeValidation={true}
+      allowMultiple={false}
+      dropValidation={true}
+      labelFileTypeNotAllowed="File must be of type .xls, .xlsx, .csv, .xlsb, .xlsm, .xlt, .xltm, .xltx"
+      labelMaxFileSizeExceeded="File must be less than 20MB"
+      maxFileSize="20MB"
+      maxFiles={1}
+      onError={[Function]}
+      onUpdateFiles={[Function]}
+      server="./"
+    />
+  </FormField>
+</Fragment>
+`;

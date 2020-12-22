@@ -41,13 +41,15 @@ const DataList = (props) => {
 
   const initialRender = useRef(true);
 
-  useEffect(() => {
+   useEffect(() => {
     if (initialRender.current) {
       initialRender.current = false;
     } else if (tabIndex === 0) {
       setDataList(getData(market.value, 'ongoing'));
+      setCompleteDataList(getData(market.value, 'complete'));
     } else {
       setCompleteDataList(getData(market.value, 'complete'));
+      setDataList(getData(market.value, 'ongoing'));
     }
   }, [market, tabIndex]);
 
