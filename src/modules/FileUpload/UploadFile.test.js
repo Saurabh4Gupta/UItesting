@@ -6,7 +6,6 @@ import { dataFieldCms as PageContent } from '../../cms'
 
 describe('Success test cases for: UploadFile component', () => {
   let wrapper;
-
   const setFiles = jest.fn();
     const useStateSpy = jest.spyOn(React, 'useState')
     useStateSpy.mockImplementation((files) => [files, setFiles]);

@@ -42,7 +42,6 @@ const UploadFile = (props) => {
         });
       }
    }
-
     return null;
   };
 
