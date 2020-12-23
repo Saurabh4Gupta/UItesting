@@ -39,15 +39,17 @@ const DataList = (props) => {
 
   const toast = Toast();
 
-  const initialRender = useRef(true)
+  const initialRender = useRef(true);
 
-  useEffect(() => {
+   useEffect(() => {
     if (initialRender.current) {
       initialRender.current = false;
     } else if (tabIndex === 0) {
-      setDataList(getData(market.value, 'ongoing'))
+      setDataList(getData(market.value, 'ongoing'));
+      setCompleteDataList(getData(market.value, 'complete'));
     } else {
-      setCompleteDataList(getData(market.value, 'complete'))
+      setCompleteDataList(getData(market.value, 'complete'));
+      setDataList(getData(market.value, 'ongoing'));
     }
   }, [market, tabIndex]);
 
@@ -67,10 +69,12 @@ const DataList = (props) => {
       setDataList({ data: filteredList, totalCount: allDataList.totalCount });
     }
     if (tabIndex === 1) {
-      setCompleteDataList({ data: filteredList, totalCount: allDataList.totalCount })
+      setCompleteDataList({
+        data: filteredList,
+        totalCount: allDataList.totalCount,
+      });
     }
   };
-
 
   const addRequest = async (values) => {
     try {
@@ -83,7 +87,8 @@ const DataList = (props) => {
       values.id = new Date().getTime();
       values.client = 'Microsoft';
       values.updatedAt = '30/11/20 at 14:32';
-      values.clientMarket = `Microsoft ${values.assignTo.label}`;
+      values.clientMarket = `Microsoft ${values.localMarket.label}`;
+      values.dueDate = values.dueDate.toLocaleDateString();
       await mockData.data.push(values);
       setDataList(getData(market.value, 'ongoing'));
       if (values.localMarket.value !== market.value) {
@@ -99,7 +104,6 @@ const DataList = (props) => {
     }
   };
 
-
   const handleDelete = (id) => {
     mockData.data.forEach((item) => {
       if (item.id === id) {
@@ -109,6 +113,12 @@ const DataList = (props) => {
       return false;
     });
     setDataList(getData(market.value, 'ongoing'));
+
+    return toast({
+      title: '',
+      content: PageContent.toastRequestDeleted,
+      status: 'success',
+    });
   };
 
   const handleMoveToCompleteData = (id) => {
@@ -120,7 +130,13 @@ const DataList = (props) => {
       return false;
     });
     setDataList(getData(market.value, 'ongoing'));
-    setCompleteDataList(getData(market.value, 'complete'))
+    setCompleteDataList(getData(market.value, 'complete'));
+
+    return toast({
+      title: '',
+      content: PageContent.toastMovedToComplete,
+      status: 'success',
+    });
   };
 
   const handleMoveToOngoing = (id) => {
@@ -133,7 +149,13 @@ const DataList = (props) => {
     });
     setDataList(getData(market.value, 'ongoing'));
     setCompleteDataList(getData(market.value, 'complete'));
-  }
+
+    return toast({
+      title: '',
+      content: PageContent.toastMovedToOngoing,
+      status: 'success',
+    });
+  };
 
   const handleModal = (value) => {
     setIsModalOpen(value);
@@ -182,21 +204,25 @@ const DataList = (props) => {
                     setIsDeleteModal={setIsDeleteModal}
                     setIsMoveToCompleteModel={setIsMoveToCompleteModel}
                     moveToCompleteModelData={moveToCompleteModelData}
-                    actionName={(tabIndex === 0) ? cmsData.moveToComplete : cmsData.moveToOnGoing}
+                    actionName={
+                      tabIndex === 0
+                        ? cmsData.moveToComplete
+                        : cmsData.moveToOnGoing
+                    }
                     handleDelete={handleDelete}
                     clientCode={clientCode}
                     search={searchChangeHandler}
                     handleDeleteModel={handleDeleteModel}
                     handleMoveToCompleteModel={handleMoveToCompleteModel}
                     handleMoveToCompleteData={handleMoveToCompleteData}
-                    showStatus={(tabIndex === 0)}
+                    showStatus={tabIndex === 0}
                   />
-                  ) : (
-                    <EmptyTable
-                      defaultText={cmsData.emptyProductivityDatarequestCaption}
-                      handleModal={handleModal}
-                    />
-                    )}
+                ) : (
+                  <EmptyTable
+                    defaultText={cmsData.emptyProductivityDatarequestCaption}
+                    handleModal={handleModal}
+                  />
+                )}
               </Tabs.Panel>
               <Tabs.Panel>
                 {completeDataList.totalCount > 0 ? (
@@ -209,17 +235,17 @@ const DataList = (props) => {
                     clientCode={clientCode}
                     search={searchChangeHandler}
                   />
-                  ) : (
-                    <EmptyTable
-                      defaultText={
-                          cmsData.emptyCompletedProductivityDatarequestCaption
-                        }
-                      handleModal={handleModal}
-                    />
-                    )}
+                ) : (
+                  <EmptyTable
+                    defaultText={
+                      cmsData.emptyCompletedProductivityDatarequestCaption
+                    }
+                    handleModal={handleModal}
+                  />
+                )}
               </Tabs.Panel>
             </Tabs.Panels>
-            )}
+          )}
         </Tabs>
       </Box>
     </>
@@ -230,16 +256,16 @@ DataList.propTypes = {
   cmsData: PropTypes.object,
   clientCode: PropTypes.string,
   market: PropTypes.object || PropTypes.string,
-  dataList: PropTypes.array,
+  dataList: PropTypes.object,
   setDataList: PropTypes.func,
   loading: PropTypes.bool,
 };
 DataList.defaultProps = {
   cmsData: {},
   market: { value: '' },
-  dataList: [{}],
+  dataList: {},
   clientCode: '',
-  setDataList: () => { },
+  setDataList: () => {},
   loading: true,
 };
 export default DataList;

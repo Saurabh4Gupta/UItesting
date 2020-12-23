@@ -185,30 +185,35 @@ const TableList = (props) => {
 TableList.propTypes = {
   cmsData: PropTypes.object,
   data: PropTypes.arrayOf(PropTypes.object).isRequired,
-  handleMoveToCompleteData: PropTypes.func.isRequired,
+  handleMoveToCompleteData: PropTypes.func,
   actionName: PropTypes.string.isRequired,
-  showStatus: PropTypes.string,
+  showStatus: PropTypes.bool,
   deleteModalData: PropTypes.object,
-  setIsDeleteModal: PropTypes.func.isRequired,
-  handleDeleteModel: PropTypes.func.isRequired,
+  setIsDeleteModal: PropTypes.func,
+  handleDeleteModel: PropTypes.func,
   clientCode: PropTypes.string,
   search: PropTypes.func,
   handleDelete: PropTypes.func,
-  handleMoveToCompleteModel: PropTypes.object,
-  setIsMoveToCompleteModel: PropTypes.func.isRequired,
-  moveToCompleteModelData: PropTypes.func.isRequired,
+  handleMoveToCompleteModel: PropTypes.func,
+  setIsMoveToCompleteModel: PropTypes.func,
+  moveToCompleteModelData: PropTypes.object,
   handleMoveToOngoing: PropTypes.func,
 };
 
 TableList.defaultProps = {
   cmsData: {},
-  showStatus: '',
+  showStatus: false,
   clientCode: '',
   search: {},
   deleteModalData: {},
   handleDelete: () => { },
   handleMoveToCompleteModel: () => { },
   handleMoveToOngoing: () => { },
+  handleDeleteModel: () => {},
+  setIsMoveToCompleteModel: () => {},
+  handleMoveToCompleteData: () => {},
+  setIsDeleteModal: () => {},
+  moveToCompleteModelData: {},
 };
 
 export default TableList;

@@ -34,7 +34,6 @@ const CreateData = (props) => {
   }, [errors, values]);
 
   useEffect(() => {
-    if (market.value === '') return
     handleChange({ target: { name: 'localMarket', value: market } });
   }, [market]);
 
@@ -101,7 +100,7 @@ const CreateData = (props) => {
 };
 CreateData.propTypes = {
   cmsData: PropTypes.object,
-  market: PropTypes.string,
+  market: PropTypes.object,
   isModalOpen: PropTypes.bool,
   handleModal: PropTypes.func,
   addRequest: PropTypes.func,

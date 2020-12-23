@@ -4,41 +4,33 @@ import EditData from './EditData';
 import { dataFieldCms as PageContent } from '../../cms';
 
 describe('Success test cases for: Loader component', () => {
-let wrapper;
-const props = {
-cmsData: {},
-isModalOpen: false,
-handleModal: () => { },
-}
+    let wrapper;
+    const props = {
+        cmsData: {},
+        market: { value: 'UK', label: 'United Kingdom' },
+        isModalOpen: false,
+        addRequest: jest.fn(),
+        handleModal: jest.fn(),
+        setDataCreated: jest.fn(false),
+        handleChange: jest.fn(),
+        setLoading: jest.fn(),
+        closeModalHandler: jest.fn(),
+        onSubmit: jest.fn(),
+        requestId: '1',
+    }
+    const localMarket = { value: 'UK', label: 'United Kingdom' }
+    const initialValues = {
+        localMarket,
+    };
 
-describe('Snapshot test for Loader component', () => {
-beforeEach(() => {
-wrapper = shallow(<EditData {...props} cmsData={PageContent} />);
-});
+    describe('Snapshot test for Loader component', () => {
+        beforeAll(() => {
+            wrapper = shallow(<EditData.WrappedComponent {...props} cmsData={PageContent} initialValues={initialValues} />);
+        });
 
-it('Test to match the snapsot', () => {
-expect(wrapper).toMatchSnapshot();
-});
-
-// it('checking cancel content', () => {
-// wrapper.find({ children: PageContent.cancel }).simulate('click');
-// });
-// it('Test click event', () => {
-// wrapper.find({ children: PageContent.cancel }).simulate('click');
-// });
-// it('Test click event', () => {
-// wrapper.find({ children: PageContent.save }).simulate('click');
-// });
-
-// it('button function test', () => {
-// const fn = wrapper.find('.dentsu-button').at(1).prop('onClick');
-// expect(fn).toBeInstanceOf(Function);
-// fn();
-// });
-
-it('Renders correctly', () => {
-expect(wrapper.exists()).toBe(true);
-});
-});
+        it('Test to match the snapsot', () => {
+            expect(wrapper).toMatchSnapshot();
+        });
+    });
 });
 describe('Failure test cases for: Duplicate data page', () => { });

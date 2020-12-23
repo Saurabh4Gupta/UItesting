@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useLocation, useHistory } from 'react-router';
 import Box from '@dentsu-ui/components/dist/cjs/components/Box';
+import Toast from '@dentsu-ui/components/dist/cjs/components/Toast';
 import PageController from '../PageController/PageController';
 import { dataFieldCms as PageContent } from '../../cms';
 import withPageController from '../../hoc/withPageController';
@@ -10,7 +11,7 @@ import RequestSummary from './RequestSummary/RequestSummary';
 import { getDataById, data as mockData } from '../Mock/mockData';
 import Loader from '../../components/loading';
 import VersionHistory from '../VersionHistory/VersionHistory';
-import MoveToComplete from '../MoveToComplete/MoveToComplete'
+import MoveToComplete from '../../components/MoveToComplete/MoveToComplete';
 
 const ViewProdDataRequest = (props) => {
   const { param } = props;
@@ -19,9 +20,7 @@ const ViewProdDataRequest = (props) => {
   const query = new URLSearchParams(location.search);
   const requestId = query.get('request_id');
   const clientCode = query.get('client_code');
-  const [prodRequest, setProdRequest] = useState(
-    getDataById(requestId),
-  );
+  const [prodRequest, setProdRequest] = useState(getDataById(requestId));
 
   const history = useHistory();
 
@@ -49,7 +48,7 @@ const ViewProdDataRequest = (props) => {
       briefing: values.briefing,
       actualData: values.actualData,
       forecastData: values.forecastData,
-      reportingYear: values.reportingYear.value,
+      reportingYear: values.reportingYear,
       assignTo: values.assignTo,
     });
   };
@@ -62,12 +61,20 @@ const ViewProdDataRequest = (props) => {
       return false;
     });
 
-    const queryString = `client_code=${clientCode}`
+    const queryString = `client_code=${clientCode}`;
     history.push({
       pathname: '/datafield',
       search: `?${queryString}`,
-    })
-  }
+    });
+
+    const toast = new Toast();
+
+    return toast({
+      title: '',
+      content: PageContent.toastMovedToComplete,
+      status: 'success',
+    });
+  };
 
   return (
     <>
@@ -76,20 +83,20 @@ const ViewProdDataRequest = (props) => {
       ) : (
         <>
           {isUploadModal && (
-          <UploadFile
-            modalOpen={isUploadModal}
-            setModalOpen={setIsUploadModeal}
-            cmsData={PageContent}
-          />
-            )}
+            <UploadFile
+              modalOpen={isUploadModal}
+              setModalOpen={setIsUploadModeal}
+              cmsData={PageContent}
+            />
+          )}
           {isRequestModal && (
-          <MoveToComplete
-            modalOpen={isRequestModal}
-            setModalOpen={setIsRequestModal}
-            cmsData={PageContent}
-            handleMoveToComplete={handleMoveToComplete}
-          />
-            )}
+            <MoveToComplete
+              modalOpen={isRequestModal}
+              setModalOpen={setIsRequestModal}
+              cmsData={PageContent}
+              handleMoveToComplete={handleMoveToComplete}
+            />
+          )}
           <PageController
             param={param}
             localMarket={prodRequest.localMarket.label}
@@ -108,7 +115,7 @@ const ViewProdDataRequest = (props) => {
             </Box>
           </PageController>
         </>
-        )}
+      )}
     </>
   );
 };

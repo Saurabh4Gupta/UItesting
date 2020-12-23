@@ -1,0 +1,310 @@
+<?xml version='1.0'?>
+<ns2:test-suite xmlns:ns2='urn:model.allure.qatools.yandex.ru' start='1608032933744' stop='1608033031323'>
+    <name>As an Amplifi Global or Local Investment team member</name>
+    <title>As an Amplifi Global or Local Investment team member</title>
+    <test-cases>
+        <test-case start='1608032945201' status='failed' stop='1608033030885'>
+            <name>Access Productivity Manager and Client Page @sanity @smoke</name>
+            <title>Access Productivity Manager and Client Page @sanity @smoke</title>
+            <labels>
+                <label name='tag' value='@sanity'/>
+                <label name='tag' value='@smoke'/>
+            </labels>
+            <parameters/>
+            <steps>
+                <step start='1608032945217' status='passed' stop='1608032953264'>
+                    <name>Given User is on landing page </name>
+                    <title>Given User is on landing page </title>
+                    <attachments/>
+                    <steps>
+                        <step start='1608032945217' status='passed' stop='1608032953264'>
+                            <name>I am on page </name>
+                            <title>I am on page </title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                    </steps>
+                </step>
+                <step start='1608032953264' status='passed' stop='1608033010503'>
+                    <name>When User login into the App as "Global Investment Management" user </name>
+                    <title>When User login into the App as "Global Investment Management" user </title>
+                    <attachments/>
+                    <steps>
+                        <step start='1608032953264' status='passed' stop='1608032956629'>
+                            <name>Object: tempLogin </name>
+                            <title>Object: tempLogin </title>
+                            <attachments/>
+                            <steps>
+                                <step start='1608032953264' status='passed' stop='1608032956618'>
+                                    <name>I is present "#okta-signin-username", 10</name>
+                                    <title>I is present "#okta-signin-username", 10</title>
+                                    <attachments/>
+                                    <steps/>
+                                </step>
+                            </steps>
+                        </step>
+                        <step start='1608032956629' status='passed' stop='1608032956885'>
+                            <name>Object: fillEmail </name>
+                            <title>Object: fillEmail </title>
+                            <attachments/>
+                            <steps>
+                                <step start='1608032956629' status='passed' stop='1608032956660'>
+                                    <name>I wait for visible "#okta-signin-username", 30</name>
+                                    <title>I wait for visible "#okta-signin-username", 30</title>
+                                    <attachments/>
+                                    <steps/>
+                                </step>
+                                <step start='1608032956661' status='passed' stop='1608032956884'>
+                                    <name>I fill field "#okta-signin-username", "barry.styles@dan-demo.com"</name>
+                                    <title>I fill field "#okta-signin-username", "barry.styles@dan-demo.com"</title>
+                                    <attachments/>
+                                    <steps/>
+                                </step>
+                            </steps>
+                        </step>
+                        <step start='1608032956885' status='passed' stop='1608032957048'>
+                            <name>Object: fillPassword </name>
+                            <title>Object: fillPassword </title>
+                            <attachments/>
+                            <steps>
+                                <step start='1608032956885' status='passed' stop='1608032956927'>
+                                    <name>I wait for visible "//input[@name="password"]", 30</name>
+                                    <title>I wait for visible "//input[@name="password"]", 30</title>
+                                    <attachments/>
+                                    <steps/>
+                                </step>
+                                <step start='1608032956927' status='passed' stop='1608032957047'>
+                                    <name>I fill field "//input[@name="password"]", "hgKT70!&amp;vd"</name>
+                                    <title>I fill field "//input[@name="password"]", "hgKT70!&amp;vd"</title>
+                                    <attachments/>
+                                    <steps/>
+                                </step>
+                            </steps>
+                        </step>
+                        <step start='1608032957048' status='passed' stop='1608032957129'>
+                            <name>Object: login </name>
+                            <title>Object: login </title>
+                            <attachments/>
+                            <steps>
+                                <step start='1608032957048' status='passed' stop='1608032957129'>
+                                    <name>I click "//input[@id='okta-signin-submit']"</name>
+                                    <title>I click "//input[@id='okta-signin-submit']"</title>
+                                    <attachments/>
+                                    <steps/>
+                                </step>
+                            </steps>
+                        </step>
+                        <step start='1608032957129' status='passed' stop='1608032963164'>
+                            <name>Object: acceptCookiesOnLandingPage </name>
+                            <title>Object: acceptCookiesOnLandingPage </title>
+                            <attachments/>
+                            <steps>
+                                <step start='1608032957129' status='passed' stop='1608032963162'>
+                                    <name>I is present "//span[text()='I agree']/..", 10</name>
+                                    <title>I is present "//span[text()='I agree']/..", 10</title>
+                                    <attachments/>
+                                    <steps/>
+                                </step>
+                            </steps>
+                        </step>
+                        <step start='1608032963164' status='passed' stop='1608032963263'>
+                            <name>I wait for visible "//span[text()='I agree']/..", 20</name>
+                            <title>I wait for visible "//span[text()='I agree']/..", 20</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                        <step start='1608032963263' status='passed' stop='1608032963348'>
+                            <name>I click "//span[text()='I agree']/.."</name>
+                            <title>I click "//span[text()='I agree']/.."</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                        <step start='1608032963349' status='passed' stop='1608033010120'>
+                            <name>Object: acceptCookiesOnLandingPage </name>
+                            <title>Object: acceptCookiesOnLandingPage </title>
+                            <attachments/>
+                            <steps>
+                                <step start='1608032963349' status='passed' stop='1608032963373'>
+                                    <name>I is present "//span[text()='Accept cookies']/..", 2</name>
+                                    <title>I is present "//span[text()='Accept cookies']/..", 2</title>
+                                    <attachments/>
+                                    <steps/>
+                                </step>
+                            </steps>
+                        </step>
+                        <step start='1608033010120' status='passed' stop='1608033010186'>
+                            <name>I wait for visible "//span[text()='Accept cookies']/..", 40</name>
+                            <title>I wait for visible "//span[text()='Accept cookies']/..", 40</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                        <step start='1608033010193' status='passed' stop='1608033010306'>
+                            <name>I wait for enabled "//span[text()='Accept cookies']/..", 40</name>
+                            <title>I wait for enabled "//span[text()='Accept cookies']/..", 40</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                        <step start='1608033010307' status='passed' stop='1608033010409'>
+                            <name>I click "//span[text()='Accept cookies']/.."</name>
+                            <title>I click "//span[text()='Accept cookies']/.."</title>
+                            <attachments/>
+                            <steps/>
+                        </step>
+                        <step start='1608033010410' status='passed' stop='1608033010503'>
+                            <name>Object: switchToFrame </name>
+                            <title>Object: switchToFrame </title>
+                            <attachments/>
+                            <steps>
+                                <step start='1608033010410' status='passed' stop='1608033010444'>
+                                    <name>I wait for visible "//div[@id='container']//iframe", 40</name>
+                                    <title>I wait for visible "//div[@id='container']//iframe", 40</title>
+                                    <attachments/>
+                                    <steps/>
+                                </step>
+                                <step start='1608033010445' status='passed' stop='1608033010502'>
+                                    <name>I switch to "//div[@id='container']//iframe"</name>
+                                    <title>I switch to "//div[@id='container']//iframe"</title>
+                                    <attachments/>
+                                    <steps/>
+                                </step>
+                            </steps>
+                        </step>
+                    </steps>
+                </step>
+                <step start='1608033010503' status='passed' stop='1608033010569'>
+                    <name>Then User is on "My clients" Page </name>
+                    <title>Then User is on "My clients" Page </title>
+                    <attachments/>
+                    <steps>
+                        <step start='1608033010503' status='passed' stop='1608033010569'>
+                            <name>Object: waitAndSee </name>
+                            <title>Object: waitAndSee </title>
+                            <attachments/>
+                            <steps>
+                                <step start='1608033010503' status='passed' stop='1608033010533'>
+                                    <name>I wait for visible "//div[text() = 'My clients']", 80</name>
+                                    <title>I wait for visible "//div[text() = 'My clients']", 80</title>
+                                    <attachments/>
+                                    <steps/>
+                                </step>
+                                <step start='1608033010534' status='passed' stop='1608033010569'>
+                                    <name>I see element "//div[text() = 'My clients']"</name>
+                                    <title>I see element "//div[text() = 'My clients']"</title>
+                                    <attachments/>
+                                    <steps/>
+                                </step>
+                            </steps>
+                        </step>
+                    </steps>
+                </step>
+                <step start='1608033010569' status='passed' stop='1608033010620'>
+                    <name>Then User able to see subHeading as "Choose the client you wish to view" </name>
+                    <title>Then User able to see subHeading as "Choose the client you wish to view" </title>
+                    <attachments/>
+                    <steps>
+                        <step start='1608033010569' status='passed' stop='1608033010620'>
+                            <name>Object: waitAndSee </name>
+                            <title>Object: waitAndSee </title>
+                            <attachments/>
+                            <steps>
+                                <step start='1608033010569' status='passed' stop='1608033010598'>
+                                    <name>I wait for visible "//p[text() = 'Choose the client you wish to view']", 20</name>
+                                    <title>I wait for visible "//p[text() = 'Choose the client you wish to view']", 20</title>
+                                    <attachments/>
+                                    <steps/>
+                                </step>
+                                <step start='1608033010599' status='passed' stop='1608033010619'>
+                                    <name>I see element "//p[text() = 'Choose the client you wish to view']"</name>
+                                    <title>I see element "//p[text() = 'Choose the client you wish to view']"</title>
+                                    <attachments/>
+                                    <steps/>
+                                </step>
+                            </steps>
+                        </step>
+                    </steps>
+                </step>
+                <step start='1608033010620' status='failed' stop='1608033030884'>
+                    <name>Then verify list of clients </name>
+                    <title>Then verify list of clients </title>
+                    <attachments/>
+                    <steps>
+                        <step start='1608033010620' status='failed' stop='1608033030884'>
+                            <name>Object: waitAndSee </name>
+                            <title>Object: waitAndSee </title>
+                            <attachments/>
+                            <steps>
+                                <step start='1608033010620' status='passed' stop='1608033010645'>
+                                    <name>I wait for visible "//span[text()='American Express']", 20</name>
+                                    <title>I wait for visible "//span[text()='American Express']", 20</title>
+                                    <attachments/>
+                                    <steps/>
+                                </step>
+                                <step start='1608033010646' status='passed' stop='1608033010669'>
+                                    <name>I see element "//span[text()='American Express']"</name>
+                                    <title>I see element "//span[text()='American Express']"</title>
+                                    <attachments/>
+                                    <steps/>
+                                </step>
+                                <step start='1608033010670' status='passed' stop='1608033010705'>
+                                    <name>I wait for visible "//span[text()='Burberry']", 20</name>
+                                    <title>I wait for visible "//span[text()='Burberry']", 20</title>
+                                    <attachments/>
+                                    <steps/>
+                                </step>
+                                <step start='1608033010706' status='passed' stop='1608033010748'>
+                                    <name>I see element "//span[text()='Burberry']"</name>
+                                    <title>I see element "//span[text()='Burberry']"</title>
+                                    <attachments/>
+                                    <steps/>
+                                </step>
+                                <step start='1608033010749' status='passed' stop='1608033010786'>
+                                    <name>I wait for visible "//span[text()='Burger King']", 20</name>
+                                    <title>I wait for visible "//span[text()='Burger King']", 20</title>
+                                    <attachments/>
+                                    <steps/>
+                                </step>
+                                <step start='1608033010787' status='passed' stop='1608033010816'>
+                                    <name>I see element "//span[text()='Burger King']"</name>
+                                    <title>I see element "//span[text()='Burger King']"</title>
+                                    <attachments/>
+                                    <steps/>
+                                </step>
+                                <step start='1608033010817' status='passed' stop='1608033010849'>
+                                    <name>I wait for visible "//span[text()='General Motors']", 20</name>
+                                    <title>I wait for visible "//span[text()='General Motors']", 20</title>
+                                    <attachments/>
+                                    <steps/>
+                                </step>
+                                <step start='1608033010850' status='passed' stop='1608033010876'>
+                                    <name>I see element "//span[text()='General Motors']"</name>
+                                    <title>I see element "//span[text()='General Motors']"</title>
+                                    <attachments/>
+                                    <steps/>
+                                </step>
+                                <step start='1608033010877' status='failed' stop='1608033030880'>
+                                    <name>I wait for visible "//span[text()='Kellogg's Company']", 20</name>
+                                    <title>I wait for visible "//span[text()='Kellogg's Company']", 20</title>
+                                    <attachments/>
+                                    <steps/>
+                                </step>
+                            </steps>
+                        </step>
+                    </steps>
+                </step>
+            </steps>
+            <attachments>
+                <attachment title='Last Seen Screenshot' source='2c0053fc-a69c-415e-92a1-5b7f4bcd286e-attachment.png' type='image/png' size='74124'/>
+            </attachments>
+            <failure>
+                <message>waitUntil condition failed with the following reason: invalid selector: Unable to locate an element with the xpath expression //span[text()='Kellogg's Company'] because of the following error:
+                SyntaxError: Failed to execute 'evaluate' on 'Document': The string '//span[text()='Kellogg's Company']' is not a valid XPath expression.
+                  (Session info: chrome=87.0.4280.88)</message>
+                <stack-trace>Error: waitUntil condition failed with the following reason: invalid selector: Unable to locate an element with the xpath expression //span[text()='Kellogg's Company'] because of the following error:
+                SyntaxError: Failed to execute 'evaluate' on 'Document': The string '//span[text()='Kellogg's Company']' is not a valid XPath expression.
+                  (Session info: chrome=87.0.4280.88)
+                    at C:\Users\Vishal\AppData\Roaming\npm\node_modules\codeceptjs-webdriverio\node_modules\webdriverio\build\commands\browser\waitUntil.js:40:11
+                    at async Browser.wrapCommandFn (C:\Users\Vishal\AppData\Roaming\npm\node_modules\codeceptjs-webdriverio\node_modules\webdriverio\node_modules\@wdio\utils\build\shim.js:74:23)</stack-trace>
+            </failure>
+        </test-case>
+    </test-cases>
+</ns2:test-suite>

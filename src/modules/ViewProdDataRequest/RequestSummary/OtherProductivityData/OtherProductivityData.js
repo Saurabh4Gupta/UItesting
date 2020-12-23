@@ -33,17 +33,7 @@ const OtherProductivityData = (props) => {
   const handleCreateData = () => {
     handleModal(true);
   };
-  // const handleEditData = (values) => {
-  //   prodRequest.localMarket = values.localMarket;
-  //   prodRequest.dueDate = '01/01/2021';
-  //   prodRequest.name = values.name;
-  //   prodRequest.briefing = values.briefing;
-  //   prodRequest.actualData = values.actualData;
-  //   prodRequest.forecastData = values.forecastData;
-  //   prodRequest.reportingYear = 'April 2021 - March 2022';
-  //   prodRequest.assignTo = 'Ryan Manton';
-  //   console.log('valueuueue', prodRequest.forecastData)
-  // }
+
   return (
     <>
       <Box width="30%" ml="20px">
@@ -68,7 +58,7 @@ const OtherProductivityData = (props) => {
               {PageContent.reportingYear}
             </Caption>
           </Box>
-          {reportingYear}
+          {reportingYear.value}
           <br />
           <br />
           <Box mt="20px" mb="10px">

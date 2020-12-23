@@ -4,13 +4,21 @@ exports[`test cases for Table list should match snapshot 1`] = `
 <Box
   mt="30px"
 >
+  <DeleteData
+    deleteModalData={Object {}}
+    handleDelete={[Function]}
+    handleMoveToCompleteData={[Function]}
+    moveToCompleteModelData={Object {}}
+    setIsMoveToCompleteModel={[Function]}
+    setModalOpen={[Function]}
+  />
   <List
     filteredText=""
     filters={
       Array [
         Object {
           "defaultText": "All",
-          "key": "enabled",
+          "key": "totalTenure",
           "label": "Show",
           "options": Array [
             Object {
@@ -42,6 +50,7 @@ exports[`test cases for Table list should match snapshot 1`] = `
         "test3",
       ]
     }
+    onSearchChange={[Function]}
     renderItem={[Function]}
     rowText="result in total"
     rowsText="results in total"
