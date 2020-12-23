@@ -17,7 +17,7 @@ Feature: As an Amplifi Global Investment team member
 
 
     ########PM-25 BRP: Create a new productivity data request######
-  #@sanity @smoke
+  @sanity @smoke
   Scenario: Create new Productivity Data requests
     Given User is able to see subheading as "Productivity data requests"
     And User will click on "Create new data request" button and will see heading as "Create new data request"
@@ -109,7 +109,7 @@ Feature: As an Amplifi Global Investment team member
 
   ##PM-98BRP: Search or filter a list of "Complete" productivity data requests##
 
-   @sanity @smoke
+   #@sanity @smoke
   Scenario: Search or filter a list of "Complete" productivity data requests
     Given User is able to see subheading as "Productivity data requests"
     And User will click on "more" button and will click on "Move to complete" option
