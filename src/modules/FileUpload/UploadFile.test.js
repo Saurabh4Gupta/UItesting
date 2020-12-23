@@ -6,9 +6,9 @@ import { dataFieldCms as PageContent } from '../../cms'
 
 describe('Success test cases for: UploadFile component', () => {
   let wrapper;
-  
+
   const setFiles = jest.fn();
-    const useStateSpy = jest.spyOn(React, "useState")
+    const useStateSpy = jest.spyOn(React, 'useState')
     useStateSpy.mockImplementation((files) => [files, setFiles]);
 
   const props = {
@@ -17,22 +17,22 @@ describe('Success test cases for: UploadFile component', () => {
     onSubmit: jest.fn(),
     onClick: jest.fn(),
     validate:useStateSpy.mockImplementation((files) => [files, setFiles]),
-    setModalOpen:jest.fn(false)
+    setModalOpen:jest.fn(false),
 };
-    
+
   describe('Snapshot test for  UploadFile component', () => {
     beforeEach(() => {
-      wrapper = shallow(<UploadFile {...props}/>);
+      wrapper = shallow(<UploadFile {...props} />);
     });
 
     it('Test Upload click event', () => {
      wrapper.find({ children: PageContent.upload }).simulate('click')
      });
-   
+
     it('Test Cancel click event', () => {
       wrapper.find({ children: PageContent.cancel }).simulate('click');
     });
-   
+
    it('invoking handleFileChange functions', () => {
     const errorMsg = 'Upload tracker template';
     const fn = jest.fn(errorMsg);

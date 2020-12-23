@@ -9,7 +9,7 @@ const UploadFile = (props) => {
   const { cmsData, modalOpen, setModalOpen } = props;
   const [error, setError] = useState({});
   const [files, setFiles] = useState([]);
-  const [isDisabled,setDisabled]= useState(true);
+  const [isDisabled, setDisabled] = useState(true);
 
   const errorHandler = (errorMsg) => {
     if (errorMsg) {
@@ -33,7 +33,7 @@ const UploadFile = (props) => {
     const isValid = validate();
     if (isValid) {
       setModalOpen(false);
-      if (!error.error && files.length>0) {
+      if (!error.error && files.length > 0) {
         const toast = new Toast();
         return toast({
           title: '',
@@ -42,7 +42,7 @@ const UploadFile = (props) => {
         });
       }
    }
-  
+
     return null;
   };
 
@@ -56,7 +56,7 @@ const UploadFile = (props) => {
     setDisabled(true)
     setFiles(fileItems);
     setError({ error: null });
-    if(files.length>0){
+    if (files.length > 0) {
       setDisabled(false)
     }
   };
