@@ -9,21 +9,21 @@ Feature: View details for Productivity data request
     Given User will click on View Details
 
  #PM-28
- Scenario: User is able to view details of Request
+  Scenario: User is able to view details of Request
     And able to view Title as "Productivity Q2 2020"
     Then User is able to view header as "Productivity request"
 
   Scenario: User is able to Edit data request
     Given User able to see "Edit request" button and click on it
     And User will edit data request
-      | localMarket | requestName   | briefing                  | reportingYear             | actualData | forecastData | dueDate    | assignTo     |
+      | localMarket | requestName   | briefing                                 | reportingYear             | actualData | forecastData | dueDate    | assignTo    |
       | USA         | Data request2 | This is automated request in edit window | April 2019  -  March 2020 | 9 months   | 2 months     | 02/26/2021 | Ryan Manton |
     Then User will click on "Save" button and Verify request is added and toast notification "Data request edited" will be shown.
 
     #PM-150
   Scenario: Verify if request is able to Move to complete
-     Given User is able to see "Move to complete" button and click on it
-     Then User click on "Yes, continue" and "Data request moved to complete" toast notification is shown
+    Given User is able to see "Move to complete" button and click on it
+    Then User click on "Yes, continue" and "Data request moved to complete" toast notification is shown
 
   Scenario: Verify link for Show more
     Given User able to see "Show more" link if char greater than 800

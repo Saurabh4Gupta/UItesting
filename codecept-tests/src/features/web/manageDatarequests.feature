@@ -31,21 +31,21 @@ Feature: As an Amplifi Global Investment team member
 
     #########PM-105BRP: Filter Productivity Requests by Market#####
 
-     Scenario:Filter Productivity Requests by Market
-      Given User is able to see subheading as "Productivity data requests"
-      And User will select filer and will select first "United Kingdom"
-      And User will see requests related to "Microsoft United Kingdom" in Ongoing tab
-      And User will click on "Create new data request" button and will see heading as "Create new data request"
-      And User will see in Local market field "United Kingdom" and User will click on "Cancel" button
-      And User will select filer and will select "All markets" again
-      And User will click on "Create new data request" button and will see heading as "Create new data request"
-      And User will see in Local market field "Please select" and User will click on "Cancel" button
+  Scenario:Filter Productivity Requests by Market
+    Given User is able to see subheading as "Productivity data requests"
+    And User will select filer and will select first "United Kingdom"
+    And User will see requests related to "Microsoft United Kingdom" in Ongoing tab
+    And User will click on "Create new data request" button and will see heading as "Create new data request"
+    And User will see in Local market field "United Kingdom" and User will click on "Cancel" button
+    And User will select filer and will select "All markets" again
+    And User will click on "Create new data request" button and will see heading as "Create new data request"
+    And User will see in Local market field "Please select" and User will click on "Cancel" button
 
 
 
  #@sanity @smoke
     ######PM-44BRP: Move to Complete##### PM-57-BRP: Move to Ongoing##
-   Scenario:Move to Complete
+  Scenario:Move to Complete
     Given User is able to see subheading as "Productivity data requests"
     And User will click on "more" button and will click on "Move to complete" option
     #And User will see confirmation alert box heading as "You will not be able to make any more edits to this request unless it is moved back to "/Ongoing/"."
@@ -53,7 +53,7 @@ Feature: As an Amplifi Global Investment team member
     Then User will go to "Complete" tab and will verify requests
     And User will click on "more" button and will click on "Move to ongoing" option.
     Then User will see toast notification "Data request moved to ongoing".
-   Then User will go to "Ongoing" tab and will verify requests
+    Then User will go to "Ongoing" tab and will verify requests
 
 
 
@@ -89,7 +89,7 @@ Feature: As an Amplifi Global Investment team member
 
 ##M-165BRP: Reset Market Filter if Productivity Request Created for Different Market##
     #@sanity @smoke
-    Scenario: Reset Market Filter if Productivity Request Created for Different Market
+  Scenario: Reset Market Filter if Productivity Request Created for Different Market
     Given User is able to see subheading as "Productivity data requests"
     And User will select filer and will select first "USA"
     And User will click on "Create new data request" button and will see heading as "Create new data request"
@@ -102,10 +102,10 @@ Feature: As an Amplifi Global Investment team member
     And User will click on "Create new data request" button and will see heading as "Create new data request"
     And User will see in Local market field "USA"
     And User will create new data request for same Market
-      | localMarket   | requestName   | briefing                  | reportingYear             | actualData | forecastData | dueDate    | assignTo     |
-      | United Kingdom| Data request1 | This is automated request | April 2021  -  March 2022 | 7 months   | 3 months     | 02/26/2021 | Ryan Killick |
-      Then User will click on "Create" button and Verify request is added and toast notification "Data request created" will be shown.
-      Then User will check "All markets" is selected in All Market filter
+      | localMarket    | requestName   | briefing                  | reportingYear             | actualData | forecastData | dueDate    | assignTo     |
+      | United Kingdom | Data request1 | This is automated request | April 2021  -  March 2022 | 7 months   | 3 months     | 02/26/2021 | Ryan Killick |
+    Then User will click on "Create" button and Verify request is added and toast notification "Data request created" will be shown.
+    Then User will check "All markets" is selected in All Market filter
 
 
   ##PM-98BRP: Search or filter a list of "Complete" productivity data requests##

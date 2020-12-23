@@ -7,7 +7,7 @@ let table = null;
 const I = actor();
 
 Given(/^User will click on View Details$/, function() {
-  viewDetails.clickOnViewDetails("Microsoft United Kingdom");
+  viewDetails.clickOnViewDetails('Microsoft United Kingdom');
 });
 
 Then(/^able to view Title as "([^"]*)"$/, function(text) {
@@ -37,7 +37,7 @@ Given(/^User is able to see "([^"]*)" button and click on it$/, function(button)
 });
 
 
-Then(/^User click on "([^"]*)" and "([^"]*)" toast notification is shown$/, function(button,text) {
+Then(/^User click on "([^"]*)" and "([^"]*)" toast notification is shown$/, function(button, text) {
   viewDetails.verifyButton(button);
   viewDetails.clickOnButton(button);
   //I.wait(10);
@@ -54,7 +54,7 @@ Then(/^User attach tracker file$/, function() {
   I.wait(10);
 });
 
-Then(/^User click on "([^"]*)" button and "([^"]*)" toast notification is shown$/, function(button,text) {
+Then(/^User click on "([^"]*)" button and "([^"]*)" toast notification is shown$/, function(button, text) {
   viewDetails.verifyButton(button);
   viewDetails.clickOnUpload(button);
   viewDetails.toastNotification(text);
@@ -96,7 +96,7 @@ Given(/^User able to see "([^"]*)" link$/, function(button) {
   viewDetails.verifyButton(button);
 });
 
-Then(/^User click on "([^"]*)" and client homepage is loaded with header "([^"]*)"$/, function(button,text) {
+Then(/^User click on "([^"]*)" and client homepage is loaded with header "([^"]*)"$/, function(button, text) {
   viewDetails.clickOnButton(button);
   viewDetails.verifyDivText(text);
   I.wait(2);

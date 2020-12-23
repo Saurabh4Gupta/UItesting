@@ -10,7 +10,6 @@ const gherkin = {
         "./src/step_definitions/selectClient_step.js",
       "./src/step_definitions/viewDetails_step.js",
        "./src/step_definitions/dataRequests.js"
-
     ],
 };
 
