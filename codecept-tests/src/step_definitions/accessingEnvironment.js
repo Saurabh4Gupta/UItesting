@@ -1,4 +1,4 @@
-const selectClient = require('../pages/selectClientPage');
+const selectClient = require('../pages/accessingEnvironment');
 const genericFunction = require('../../factories/GenericFuctions');
 
 Then(/^User is on "([^"]*)" Page$/, function(header) {
