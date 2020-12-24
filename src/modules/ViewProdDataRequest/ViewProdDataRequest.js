@@ -55,7 +55,7 @@ const ViewProdDataRequest = (props) => {
     let isSuccess;
     await mockData.data.forEach((item) => {
       if (item.id.toString() === requestId) {
-        if (flag === false) {
+        if (!flag) {
           isSuccess = false;
           return;
         }
