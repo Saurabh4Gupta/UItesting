@@ -96,9 +96,8 @@ module.exports = {
   verifySpanText(text) {
     GenericMethods.waitAndSee(this.homepageFields.spanTextComp(text), 20);
   },
-  verifyBTextComp(text) {
-
-    GenericMethods.waitAndSee(this.homepageFields.bTextComp(text), 20);
+  verifyBTextComp(text){
+    GenericMethods.waitAndSee(this.homepageFields.bTextComp(text),20);
   },
 
   selectDropDown(fieldname, value) {

@@ -30,16 +30,15 @@ Feature: As an Amplifi Global Investment team member
   #@sanity @smoke
 
     #########PM-105BRP: Filter Productivity Requests by Market#####
-
-  Scenario:Filter Productivity Requests by Market
-    Given User is able to see subheading as "Productivity data requests"
-    And User will select filer and will select first "United Kingdom"
-    And User will see requests related to "Microsoft United Kingdom" in Ongoing tab
-    And User will click on "Create new data request" button and will see heading as "Create new data request"
-    And User will see in Local market field "United Kingdom" and User will click on "Cancel" button
-    And User will select filer and will select "All markets" again
-    And User will click on "Create new data request" button and will see heading as "Create new data request"
-    And User will see in Local market field "Please select" and User will click on "Cancel" button
+    Scenario:Filter Productivity Requests by Market
+      Given User is able to see subheading as "Productivity data requests"
+      And User will select filer and will select first "United Kingdom"
+      And User will see requests related to "Microsoft United Kingdom" in Ongoing tab
+      And User will click on "Create new data request" button and will see heading as "Create new data request"
+      And User will see in Local market field "United Kingdom" and User will click on "Cancel" button
+      And User will select filer and will select "All markets" again
+      And User will click on "Create new data request" button and will see heading as "Create new data request"
+      And User will see in Local market field "Please select" and User will click on "Cancel" button
 
 
 
