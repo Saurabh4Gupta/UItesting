@@ -21,7 +21,6 @@ const ViewProdDataRequest = (props) => {
   const requestId = query.get('request_id');
   const clientCode = query.get('client_code');
   const [prodRequest, setProdRequest] = useState(getDataById(requestId));
-
   const history = useHistory();
 
   const [isUploadModal, setIsUploadModeal] = useState(false);
@@ -52,29 +51,40 @@ const ViewProdDataRequest = (props) => {
       assignTo: values.assignTo,
     });
   };
-  const handleMoveToComplete = async () => {
+  const handleMoveToComplete = async (flag) => {
+    let isSuccess;
     await mockData.data.forEach((item) => {
       if (item.id.toString() === requestId) {
+        if (flag === false) {
+          isSuccess = false;
+          return;
+        }
         item.isCompleted = true;
-        return true;
+        isSuccess = true;
       }
-      return false;
     });
 
-    const queryString = `client_code=${clientCode}`;
-    history.push({
-      pathname: '/datafield',
-      search: `?${queryString}`,
-    });
-
+    setIsRequestModal(false)
     const toast = new Toast();
-
-    return toast({
+    const toastError = new Toast();
+    if (isSuccess) {
+      const queryString = `client_code=${clientCode}`;
+      history.push({
+        pathname: '/datafield',
+        search: `?${queryString}`,
+      });
+     return toast({
+        title: '',
+        content: PageContent.toastMovedToComplete,
+        status: 'success',
+      });
+    }
+    return toastError({
       title: '',
-      content: PageContent.toastMovedToComplete,
-      status: 'success',
-    });
-  };
+      content: PageContent.failurNotificationMsg,
+      status: 'error',
+  });
+};
 
   return (
     <>
@@ -94,7 +104,7 @@ const ViewProdDataRequest = (props) => {
               modalOpen={isRequestModal}
               setModalOpen={setIsRequestModal}
               cmsData={PageContent}
-              handleMoveToComplete={handleMoveToComplete}
+              handleMoveToComplete={() => handleMoveToComplete(false)}
             />
           )}
           <PageController
