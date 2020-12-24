@@ -26,11 +26,11 @@ module.exports = {
     labelDateComp: (text) => `//label[text()="${text}"]/../../../../..//input[@placeholder="Date"]`,
     optionDateComp: (text) => `//option[text()='${text}']`,
     divDateCOmp: (text) => `(//div[text()='${text}'])[1]`,
-    optionText:(fieldname,option)=>`(//label[text()="${fieldname}"]/..//input[@value="${option}"])[1]`,
-    filterMarket:(text)=>`//div[text()="${text}"]/../../..//input`,
-    market:(field,text) =>`//label[text()="${field}"]/../../../../../..//div[text()="${text}"]`,
+    optionText: (fieldname, option) => `(//label[text()="${fieldname}"]/..//input[@value="${option}"])[1]`,
+    filterMarket: (text) => `//div[text()="${text}"]/../../..//input`,
+    market: (field, text) => `//label[text()="${field}"]/../../../../../..//div[text()="${text}"]`,
     filterEdit: (text) => `(//div[text()="${text}"]/../../..//input)[1]`,
-    editReporting:(text)=> `(//label[text()="${text}"]/../../..//input)[1]`,
+    editReporting: (text) => `(//label[text()="${text}"]/../../..//input)[1]`,
   },
 
   //============================================= UI-TRD-29 functions ====================================================================
@@ -75,8 +75,8 @@ module.exports = {
     GenericMethods.waitAndClick(this.viewDetailsFields.buttonComp(button), 20);
   },
 
-  clickOnUpload(button){
-    GenericMethods.waitAndClick(this.viewDetailsFields.uploadbutton(button),20);
+  clickOnUpload(button) {
+    GenericMethods.waitAndClick(this.viewDetailsFields.uploadbutton(button), 20);
   },
 
   clickOnViewDetails(name) {
@@ -87,8 +87,8 @@ module.exports = {
     GenericMethods.waitAndSee(this.viewDetailsFields.spanTextComp(text), 20);
   },
 
-  clickOnSpanText(text){
-    GenericMethods.waitAndClick(this.viewDetailsFields.spanTextComp(text),20);
+  clickOnSpanText(text) {
+    GenericMethods.waitAndClick(this.viewDetailsFields.spanTextComp(text), 20);
   },
 
   toastNotification(text) {
@@ -123,13 +123,13 @@ module.exports = {
     I.pressKey('Enter');
   },
 
-  selectReportingYear(text, value){
+  selectReportingYear(text, value) {
     I.waitForVisible(this.viewDetailsFields.editReporting(text, 1), 60);
     I.fillField(this.viewDetailsFields.editReporting(text, 1), value);
     I.pressKey('Enter');
   },
 
-  selectActualForecast(text,value){
+  selectActualForecast(text, value) {
     I.waitForVisible(this.viewDetailsFields.labelDropdownComp(text, 1), 60);
     I.fillField(this.viewDetailsFields.labelDropdownComp(text, 1), value);
     I.pressKey('Enter');

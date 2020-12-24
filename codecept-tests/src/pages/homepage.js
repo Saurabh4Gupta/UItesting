@@ -25,25 +25,25 @@ module.exports = {
     labelDateComp: (text) => `//label[text()="${text}"]/../../../../..//input[@placeholder="Date"]`,
     optionDateComp: (text) => `//option[text()='${text}']`,
     divDateCOmp: (text) => `(//div[text()='${text}'])[1]`,
-    optionText:(fieldname,option)=>`(//label[text()="${fieldname}"]/..//input[@value="${option}"])[1]`,
-    filterMarket:(text)=>`//label[text()="${text}"]/../../..//input`,
-    selectedFilterMarket:(text)=>`(//label[text()="${text}"]/../..//input)[1]`,
-    globalFilter:(text)=>`//div[text()="${text}"]/../..//input`,
-    filterMarket1:(fieldname,value)=>`//label[text()="${fieldname}"]/../../../../../../../../..//input[@value="${value}"]`,
-    market:(text) =>`//div[text()="${text}"]/../..//input`,
-    market1:(text)=>`//div[text()="${text}"]`,
-    moreIcon:(text)=> `(//span[text()="View details"]/../../../../../..//span[@icon="${text}"])[1]`,
-    assignTo:(text)=>`(//label[text()="${text}"]/../../../../../../../../..//input)[15]`,
+    optionText: (fieldname, option) => `(//label[text()="${fieldname}"]/..//input[@value="${option}"])[1]`,
+    filterMarket: (text) => `//label[text()="${text}"]/../../..//input`,
+    selectedFilterMarket: (text) => `(//label[text()="${text}"]/../..//input)[1]`,
+    globalFilter: (text) => `//div[text()="${text}"]/../..//input`,
+    filterMarket1: (fieldname, value) => `//label[text()="${fieldname}"]/../../../../../../../../..//input[@value="${value}"]`,
+    market: (text) => `//div[text()="${text}"]/../..//input`,
+    market1: (text) => `//div[text()="${text}"]`,
+    moreIcon: (text) => `(//span[text()="View details"]/../../../../../..//span[@icon="${text}"])[1]`,
+    assignTo: (text) => `(//label[text()="${text}"]/../../../../../../../../..//input)[15]`,
 
 
-    searchBox:`//input[@type='search']`,
-    searchBoxComplete:`(//input[@type='search'])[2]`,
-   showFilter:(fieldName,option)=>`//span[text()="${fieldName}"]/../../..//option[text()="${option}"]`,
+    searchBox: `//input[@type='search']`,
+    searchBoxComplete: `(//input[@type='search'])[2]`,
+    showFilter: (fieldName, option) => `//span[text()="${fieldName}"]/../../..//option[text()="${option}"]`,
 
     show: `(//option[text()="All"]/..//option)[2]`,
-    completeTabCount: (fieldName,text)=> `//span[text()="${fieldName}"]/small[text()="${text}"]`,
-    createNewRequest:(fieldName)=> `(//span[text()="${fieldName}"])[2]`,
-    completeMoreOption:(text)=>`(//span[text()='Complete']/../../../../../../../../../../../../../../../..//span[@icon="${text}"])[4]`,
+    completeTabCount: (fieldName, text) => `//span[text()="${fieldName}"]/small[text()="${text}"]`,
+    createNewRequest: (fieldName) => `(//span[text()="${fieldName}"])[2]`,
+    completeMoreOption: (text) => `(//span[text()='Complete']/../../../../../../../../../../../../../../../..//span[@icon="${text}"])[4]`,
 
 
   },
@@ -202,140 +202,105 @@ module.exports = {
     this.selectDropDownAssignTo('Assign to', assignTo);
   },
 
-  filter(value){
-
+  filter(value) {
     //this.selectDropDown('All markets',value);
-   I.waitForVisible(this.homepageFields.globalFilter('All markets'),20);
-   I.fillField(this.homepageFields.globalFilter('All markets'),value);
-
-   I.pressKey('Enter');
-   I.wait(5);
-
-
-
-  },
-  filter1(value){
-
-    //this.selectDropDown('All markets',value);
-    I.waitForVisible(this.homepageFields.market('United Kingdom'),20);
-    I.fillField(this.homepageFields.market('United Kingdom'),value);
+    I.waitForVisible(this.homepageFields.globalFilter('All markets'), 20);
+    I.fillField(this.homepageFields.globalFilter('All markets'), value);
 
     I.pressKey('Enter');
     I.wait(5);
-
-
-
   },
 
-  verifyOngoingRequests(){
-    let requests=["Microsoft United Kingdom","Microsoft United Kingdom","Microsoft United Kingdom"];
-    for(let i=0;i<requests.length;i++){
-      this.verifyBTextComp(requests[i])
-                    }
-
+  filter1(value) {
+    //this.selectDropDown('All markets',value);
+    I.waitForVisible(this.homepageFields.market('United Kingdom'), 20);
+    I.fillField(this.homepageFields.market('United Kingdom'), value);
+    I.pressKey('Enter');
+    I.wait(5);
   },
 
-
-
-  verifyLocalMarket(text){
-
-   GenericMethods.waitAndSee(this.homepageFields.market(text),10);
-   I.wait(5);
-  // this.clickOnButton(button);
-
+  verifyOngoingRequests() {
+    let requests = ['Microsoft United Kingdom', 'Microsoft United Kingdom', 'Microsoft United Kingdom'];
+    for (let i = 0; i < requests.length; i++) {
+      this.verifyBTextComp(requests[i]);
+    }
   },
 
-  verifyLocalMarketText(text){
+  verifyLocalMarket(text) {
 
-    GenericMethods.waitAndSee(this.homepageFields.market1(text),10);
+    GenericMethods.waitAndSee(this.homepageFields.market(text), 10);
     I.wait(5);
     // this.clickOnButton(button);
-
   },
 
-  moveToComplete(text,option){
-    GenericMethods.waitAndClick(this.homepageFields.moreIcon(text),20);
-    GenericMethods.waitAndClick(this.homepageFields.spanTextComp(option),10);
-
+  verifyLocalMarketText(text) {
+    GenericMethods.waitAndSee(this.homepageFields.market1(text), 10);
+    I.wait(5);
+    // this.clickOnButton(button);
   },
 
-  moveToOngoing(text,option){
-   // pause();
-    GenericMethods.waitAndClick(this.homepageFields.completeMoreOption(text),20);
-    GenericMethods.waitAndClick(this.homepageFields.spanTextComp(option),10);
-
+  moveToComplete(text, option) {
+    GenericMethods.waitAndClick(this.homepageFields.moreIcon(text), 20);
+    GenericMethods.waitAndClick(this.homepageFields.spanTextComp(option), 10);
   },
 
+  moveToOngoing(text, option) {
+    // pause();
+    GenericMethods.waitAndClick(this.homepageFields.completeMoreOption(text), 20);
+    GenericMethods.waitAndClick(this.homepageFields.spanTextComp(option), 10);
+  },
 
-  goToCompleteTab(button)
-  {
+  goToCompleteTab(button) {
     this.clickOnButton(button);
     I.wait(2);
-
   },
 
-  verifyCompleteRequests(){
-    let requests=["Microsoft United Kingdom"];
-    for(let i=0;i<requests.length;i++){
-      this.verifyBTextComp(requests[i])
+  verifyCompleteRequests() {
+    let requests = ['Microsoft United Kingdom'];
+    for (let i = 0; i < requests.length; i++) {
+      this.verifyBTextComp(requests[i]);
     }
-
-
   },
-
 
 
   enterTextInSearch(text) {
-
     I.waitForVisible(this.homepageFields.searchBox, 20);
     I.fillField(this.homepageFields.searchBox, text);
   },
 
-  enterTextInCompleteSearch(text){
-
-    I.waitForVisible(this.homepageFields.searchBoxComplete,20);
-    I.fillField(this.homepageFields.searchBoxComplete,text);
+  enterTextInCompleteSearch(text) {
+    I.waitForVisible(this.homepageFields.searchBoxComplete, 20);
+    I.fillField(this.homepageFields.searchBoxComplete, text);
   },
 
-  showFilter(option){
-
-    GenericMethods.clearFields(this.homepageFields.searchBox,20);
+  showFilter(option) {
+    GenericMethods.clearFields(this.homepageFields.searchBox, 20);
     I.pressKey('Tab');
     I.pressKey('Enter');
     I.wait(5);
     I.click(`(//option[text()='All']/following-sibling::option)[1]`);
     I.pressKey('Enter');
-
   },
 
-  showFilterInComplete(option){
-
-    GenericMethods.clearFields(this.homepageFields.searchBoxComplete,20);
+  showFilterInComplete(option) {
+    GenericMethods.clearFields(this.homepageFields.searchBoxComplete, 20);
     I.pressKey('Tab');
     I.pressKey('Enter');
     I.wait(5);
     I.click(`(//option[text()='All']/following-sibling::option)[5]`);
     I.pressKey('Enter');
-
   },
-  verifyNoOfRequests(text)
-  {
-  I.waitForVisible(this.homepageFields.completeTabCount('Complete',text),20);
-
-
+  verifyNoOfRequests(text) {
+    I.waitForVisible(this.homepageFields.completeTabCount('Complete', text), 20);
   },
 
-  createNewData()
-  {
-    I.waitForVisible(this.homepageFields.createNewRequest('Create new data request'),20);
+  createNewData() {
+    I.waitForVisible(this.homepageFields.createNewRequest('Create new data request'), 20);
   },
 
-  verifyTextOfComp(text)
-  {
-
-   I.wait(5);
-
+  verifyTextOfComp(text) {
+    I.wait(5);
     I.seeElement(this.homepageFields.market1(text));
 
-  }
+  },
 };
