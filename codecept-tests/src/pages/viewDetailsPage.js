@@ -72,7 +72,7 @@ module.exports = {
   },
 
   clickOnButton(button) {
-    GenericMethods.waitAndClick(this.viewDetailsFields.buttonComp(button), 20);
+    GenericMethods.waitAndClick(this.viewDetailsFields.buttonComp(button), 10);
   },
 
   clickOnUpload(button) {
