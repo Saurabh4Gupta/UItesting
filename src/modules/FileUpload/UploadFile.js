@@ -59,15 +59,14 @@ const UploadFile = (props) => {
   const onProcessFile = (errors, fileItems) => {
     console.log(fileItems, 'before', errors)
 
-    if (!!errors && !errors.type === 'error') {
-
+    if (!errors) {
       console.log(fileItems, 'inner', errors)
-      
+
       setDisabled(false)
     }
     console.log(fileItems, 'outer', errors)
   }
-  
+
   return (
     <>
       <Modal
