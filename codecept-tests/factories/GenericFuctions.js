@@ -3,7 +3,7 @@ const I = actor();
 module.exports = {
 
   transformTable(table) {
-    const {rows} = table;
+    const { rows } = table;
     const headerRow = rows.shift();
     const headers = headerRow.cells.map((item) => item.value);
     return rows.map((row) => {
@@ -16,7 +16,7 @@ module.exports = {
   },
 
   transFormList(table) {
-    const {cells} = table.rows[0];
+    const { cells } = table.rows[0];
     cells.forEach((item, index) => {
       cells[index] = item.value;
     });
@@ -77,10 +77,10 @@ module.exports = {
     I.seeTextEquals(text, locator);
   },
 
-  waitAndSelect(locator,sec,option)   //for dropdown
+  waitAndSelect(locator, sec, option)   //for dropdown
   {
     I.waitForVisible(locator, sec);
-    I.selectOption(locator,option,sec);
+    I.selectOption(locator, option, sec);
   },
 
   async waitAndGetTextFromAttribute(attribute, locator, sec) {
@@ -101,13 +101,13 @@ module.exports = {
     return `Bearer ${token.accessToken.accessToken}`;
   },
 
-  async deleteApi(url,headers,data) {
+  async deleteApi(url, headers, data) {
     const axios = require('axios');
     return await axios.delete(url, {
       headers: headers,
-      data: data
-    }).then((response)=>{
-     return response.data
+      data: data,
+    }).then((response) => {
+      return response.data;
     });
   },
 
@@ -121,8 +121,8 @@ module.exports = {
                  }
             }`, {}, {}, {
         authorization: token,
-        serviceConfig: {"tenantId": "ff2e3", "subTenantId": "y9dc5", "clientCode": "A_GNMOT", "marketCode": "US?"}
-      }
+        serviceConfig: { 'tenantId': 'ff2e3', 'subTenantId': 'y9dc5', 'clientCode': 'A_GNMOT', 'marketCode': 'US?' },
+      },
     );
   },
 

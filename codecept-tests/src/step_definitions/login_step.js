@@ -39,7 +39,7 @@ Then(/^verify user is on landing page$/, function() {
 });
 
 When(/^User login into the App as "([^"]*)" user$/, async function(type) {
-  let user=null,pass=null;
+  let user = null, pass = null;
   if (type === 'Global Investment Management') {
     user = (!envStatus) ? 'james.clay@dan-demo.com' : 'barry.styles@dan-demo.com';
     pass = (!envStatus) ? 'aiDR14$@ee' : 'hgKT70!&vd';
