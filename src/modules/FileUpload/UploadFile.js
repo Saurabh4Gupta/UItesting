@@ -42,7 +42,6 @@ const UploadFile = (props) => {
         });
       }
    }
-
     return null;
   };
 
@@ -56,10 +55,13 @@ const UploadFile = (props) => {
     setDisabled(true)
     setFiles(fileItems);
     setError({ error: null });
-    if (files.length > 0) {
-      setDisabled(false)
-    }
   };
+
+  const onProcessFile = (errors) => {
+    if (errors && errors.type === 'error') {
+      setDisabled(true)
+    }
+  }
   return (
     <>
       <Modal
@@ -71,6 +73,7 @@ const UploadFile = (props) => {
         <Modal.Header title={PageContent.uploadButtonText} />
         <Modal.Body>
           <Form
+            onProcessFile={onProcessFile}
             handleFileChange={handleFileChange}
             files={files}
             errors={error}
