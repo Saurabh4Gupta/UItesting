@@ -33,6 +33,8 @@ const TableList = (props) => {
     handleMoveToCompleteModel,
     setIsMoveToCompleteModel,
     moveToCompleteModelData,
+    handleFilter,
+    selectedFilter,
   } = props;
 
   const history = useHistory();
@@ -44,7 +46,6 @@ const TableList = (props) => {
       search: `?${queryString}`,
     });
   };
-
   return (
     <Box mt="30px">
       <DeleteData
@@ -60,15 +61,15 @@ const TableList = (props) => {
         items={data}
         searchBy="client"
         isSearchable
-        rowsText="results in total"
-        filteredText=""
+        filter={selectedFilter}
         rowText="result in total"
         onSearchChange={(input) => search(input)}
+        onFilterChange={handleFilter}
         filters={[
           {
             key: 'totalTenure',
             label: 'Show',
-            type: 'choice',
+
             defaultText: 'All',
             options: [
               {
@@ -124,15 +125,15 @@ const TableList = (props) => {
                   {showStatus === false ? (
                     ''
                   ) : (
-                    <Box width="13%">
-                      {status === cmsData.overdue ? (
-                        <Chip variant="status" status="warning" hasStatusLight>
-                          {cmsData.overdue}
-                        </Chip>
+                      <Box width="13%">
+                        {status === cmsData.overdue ? (
+                          <Chip variant="status" status="warning" hasStatusLight>
+                            {cmsData.overdue}
+                          </Chip>
                         ) : (
                             ''
                           )}
-                    </Box>
+                      </Box>
                     )}
                   <Box width="30%">{`${cmsData.lastUpdate}: ${updatedAt}`}</Box>
                 </Stack>
@@ -198,6 +199,8 @@ TableList.propTypes = {
   setIsMoveToCompleteModel: PropTypes.func,
   moveToCompleteModelData: PropTypes.object,
   handleMoveToOngoing: PropTypes.func,
+  handleFilter: PropTypes.func,
+  selectedFilter: PropTypes.array(PropTypes.object),
 };
 
 TableList.defaultProps = {
@@ -209,11 +212,13 @@ TableList.defaultProps = {
   handleDelete: () => { },
   handleMoveToCompleteModel: () => { },
   handleMoveToOngoing: () => { },
-  handleDeleteModel: () => {},
-  setIsMoveToCompleteModel: () => {},
-  handleMoveToCompleteData: () => {},
-  setIsDeleteModal: () => {},
+  handleDeleteModel: () => { },
+  setIsMoveToCompleteModel: () => { },
+  handleMoveToCompleteData: () => { },
+  setIsDeleteModal: () => { },
   moveToCompleteModelData: {},
+  handleFilter: () => { },
+  selectedFilter: [{ key: 'totalTenure', value: '' }],
 };
 
 export default TableList;

@@ -30,6 +30,8 @@ const DataList = (props) => {
     isDeleteModal: false,
     requestId: undefined,
   });
+  const [selectedFilter, setSelectedFilter] = useState([{ key: 'totalTenure', value: '' }]);
+  const [searchInput, setSearchInput] = useState('');
   const [tabIndex, setTabIndex] = useState(0);
   const { data } = dataList;
   const [moveToCompleteModelData, setIsMoveToCompleteModel] = useState({
@@ -53,19 +55,23 @@ const DataList = (props) => {
     }
   }, [market, tabIndex]);
 
-  const getFilteredList = (data, searchInput) => {
-    const updatedList = data.filter(
-      (d) => d.clientMarket.toLowerCase().includes(searchInput.toLowerCase())
-        || d.name.toLowerCase().includes(searchInput.toLowerCase()),
+  const getFilteredList = (data, searchInput, filterInput) => {
+    let updatedList = data.filter(
+      (d) => (d.clientMarket.toLowerCase().includes(searchInput.toLowerCase())
+        || d.name.toLowerCase().includes(searchInput.toLowerCase())
+      ),
     );
+    if (filterInput !== '') {
+      updatedList = updatedList.filter((key) => key.totalTenure.includes(filterInput))
+    }
     return updatedList;
   };
 
-  const searchChangeHandler = (input) => {
+
+  useEffect(() => {
     const requestStatus = tabIndex === 0 ? 'ongoing' : 'complete';
     const allDataList = getData(market.value, requestStatus);
-    const filteredList = getFilteredList(allDataList.data, input);
-
+    const filteredList = getFilteredList(allDataList.data, searchInput, selectedFilter[0].value);
     if (tabIndex === 0) {
       setDataList({ data: filteredList, totalCount: allDataList.totalCount });
     }
@@ -75,8 +81,16 @@ const DataList = (props) => {
         totalCount: allDataList.totalCount,
       });
     }
+  }, [searchInput, selectedFilter])
+
+
+  const searchChangeHandler = (input) => {
+    setSearchInput(input)
   };
 
+  const handleFilter = (input) => {
+    setSelectedFilter(input);
+  }
   const addRequest = async (values) => {
     try {
       values.createdAt = new Date();
@@ -170,7 +184,6 @@ const DataList = (props) => {
   const handleMoveToCompleteModel = (value) => {
     setIsMoveToCompleteModel({ isMoveToComplete: true, requestID: value });
   };
-
   return (
     <>
       <CreateData
@@ -217,6 +230,8 @@ const DataList = (props) => {
                     handleMoveToCompleteModel={handleMoveToCompleteModel}
                     handleMoveToCompleteData={handleMoveToCompleteData}
                     showStatus={tabIndex === 0}
+                    handleFilter={handleFilter}
+                    selectedFilter={selectedFilter}
                   />
                   ) : (
                     <EmptyTable
@@ -235,6 +250,8 @@ const DataList = (props) => {
                     showStatus={false}
                     clientCode={clientCode}
                     search={searchChangeHandler}
+                    handleFilter={handleFilter}
+                    selectedFilter={selectedFilter}
                   />
                   ) : (
                     <EmptyTable
