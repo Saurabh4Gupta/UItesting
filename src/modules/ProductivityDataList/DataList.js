@@ -41,7 +41,7 @@ const DataList = (props) => {
 
   const initialRender = useRef(true);
 
-   useEffect(() => {
+  useEffect(() => {
     if (initialRender.current) {
       initialRender.current = false;
     } else if (tabIndex === 0) {
@@ -65,6 +65,7 @@ const DataList = (props) => {
     const requestStatus = tabIndex === 0 ? 'ongoing' : 'complete';
     const allDataList = getData(market.value, requestStatus);
     const filteredList = getFilteredList(allDataList.data, input);
+
     if (tabIndex === 0) {
       setDataList({ data: filteredList, totalCount: allDataList.totalCount });
     }
@@ -184,11 +185,11 @@ const DataList = (props) => {
           <Tabs.List>
             <Tabs.Tab
               label={cmsData.ongoingLabel}
-              count={dataList.totalCount}
+              count={dataList.data.length}
             />
             <Tabs.Tab
               label={cmsData.completeLabel}
-              count={completeDataList.totalCount}
+              count={completeDataList.data.length}
             />
           </Tabs.List>
           {loading ? (
@@ -205,10 +206,10 @@ const DataList = (props) => {
                     setIsMoveToCompleteModel={setIsMoveToCompleteModel}
                     moveToCompleteModelData={moveToCompleteModelData}
                     actionName={
-                      tabIndex === 0
-                        ? cmsData.moveToComplete
-                        : cmsData.moveToOnGoing
-                    }
+                        tabIndex === 0
+                          ? cmsData.moveToComplete
+                          : cmsData.moveToOnGoing
+                      }
                     handleDelete={handleDelete}
                     clientCode={clientCode}
                     search={searchChangeHandler}
@@ -217,12 +218,12 @@ const DataList = (props) => {
                     handleMoveToCompleteData={handleMoveToCompleteData}
                     showStatus={tabIndex === 0}
                   />
-                ) : (
-                  <EmptyTable
-                    defaultText={cmsData.emptyProductivityDatarequestCaption}
-                    handleModal={handleModal}
-                  />
-                )}
+                  ) : (
+                    <EmptyTable
+                      defaultText={cmsData.emptyProductivityDatarequestCaption}
+                      handleModal={handleModal}
+                    />
+                    )}
               </Tabs.Panel>
               <Tabs.Panel>
                 {completeDataList.totalCount > 0 ? (
@@ -235,17 +236,17 @@ const DataList = (props) => {
                     clientCode={clientCode}
                     search={searchChangeHandler}
                   />
-                ) : (
-                  <EmptyTable
-                    defaultText={
-                      cmsData.emptyCompletedProductivityDatarequestCaption
-                    }
-                    handleModal={handleModal}
-                  />
-                )}
+                  ) : (
+                    <EmptyTable
+                      defaultText={
+                          cmsData.emptyCompletedProductivityDatarequestCaption
+                        }
+                      handleModal={handleModal}
+                    />
+                    )}
               </Tabs.Panel>
             </Tabs.Panels>
-          )}
+            )}
         </Tabs>
       </Box>
     </>
@@ -265,7 +266,7 @@ DataList.defaultProps = {
   market: { value: '' },
   dataList: {},
   clientCode: '',
-  setDataList: () => {},
+  setDataList: () => { },
   loading: true,
 };
 export default DataList;
