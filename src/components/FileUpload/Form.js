@@ -6,7 +6,7 @@ import constant from '../../utils/constant';
 
 const Form = (props) => {
   const { MAX_FILE_SIZE, ALLOWED_FILE_TYPES } = constant;
-  const { handleFileChange, errors, cmsData, setError } = props;
+  const { onProcessFile, handleFileChange, errors, cmsData, setError } = props;
 
 
   return (
@@ -26,6 +26,7 @@ const Form = (props) => {
           onError={(error) => {
             setError(error.main)
           }}
+          onProcessFile={(error) => onProcessFile(error)}
           maxFiles={1}
           maxFileSize={MAX_FILE_SIZE}
           labelMaxFileSizeExceeded={cmsData.uploadFileLargeMessage}
