@@ -26,7 +26,7 @@ const Form = (props) => {
           onError={(error) => {
             setError(error.main)
           }}
-          onProcessFile={(error) => onProcessFile(error)}
+          onProcessFile={(error, file) => onProcessFile(error, file)}
           maxFiles={1}
           maxFileSize={MAX_FILE_SIZE}
           labelMaxFileSizeExceeded={cmsData.uploadFileLargeMessage}
