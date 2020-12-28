@@ -56,15 +56,10 @@ const UploadFile = (props) => {
     setError({ error: null });
   };
 
-  const onProcessFile = (errors, fileItems) => {
-    console.log(fileItems, 'before', errors)
-
+  const onProcessFile = (errors) => {
     if (!errors) {
-      console.log(fileItems, 'inner', errors)
-
       setDisabled(false)
     }
-    console.log(fileItems, 'outer', errors)
   }
 
   return (
