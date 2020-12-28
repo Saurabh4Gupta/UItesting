@@ -42,6 +42,7 @@ Then(/^User click on "([^"]*)" and "([^"]*)" toast notification is shown$/, func
   viewDetails.clickOnButton(button);
   //I.wait(10);
   viewDetails.toastNotification(text);
+  I.wait(2);
 });
 
 Given(/^User is able to see and click on "([^"]*)" button$/, function(button) {

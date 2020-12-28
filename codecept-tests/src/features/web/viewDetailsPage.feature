@@ -32,9 +32,15 @@ Feature: As an Amplifi Global Investment team member
   #@smoke
   Scenario: Verify if request is able to Move to complete
     Given User is able to see "Move to complete" button and click on it
-   # Then User click on "Yes, continue" and "Data request moved to complete" toast notification is shown
-    Then User click on "Yes, continue" and "Looks like something went wrong. Please try again" toast notification is shown
+   Then User click on "Yes, continue" and "Data request moved to complete" toast notification is shown
 
+
+
+      #PM-293
+  #@smoke
+  Scenario: Display notification for action with fail result
+    Given User is able to see "Move to complete" button and click on it
+    Then User click on "Yes, continue" and "Looks like something went wrong. Please try again" toast notification is shown
 
   Scenario: Verify link for Show more
     Given User able to see "Show more" link if char greater than 800
