@@ -16,7 +16,6 @@ const UploadFile = (props) => {
       setError({ error: `${PageContent.uploadFileErrorMessage}` });
       return true;
     }
-    setDisabled(false)
     setError({ error: null });
     return false;
   };
@@ -58,8 +57,8 @@ const UploadFile = (props) => {
   };
 
   const onProcessFile = (errors) => {
-    if (errors && errors.type === 'error') {
-      setDisabled(true)
+    if (!errors && !errors.type === 'error') {
+      setDisabled(false)
     }
   }
   return (
