@@ -18,7 +18,6 @@ const Form = (props) => {
       >
         <Dropzone
           allowMultiple={false}
-          dropValidation
           allowFileTypeValidation
           onUpdateFiles={(fileItems) => {
             handleFileChange(fileItems);
