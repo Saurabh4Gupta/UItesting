@@ -1,10 +1,7 @@
 const I = actor();
-const GenericMethods = require('../../factories/GenericFuctions.js');
-const envURL = require('../../config/EnvConfig');
+const genericMethods = require('../../factories/GenericFuctions.js');
 const datePicker = require('../../factories/DatePicker');
-const chai = require('chai');
-const { assert } = chai;
-let envStatus = envURL.env === 'int-g1ds' || envURL.env === 'nft-g1ds' || envURL.env === 'stg-g1ds';
+const { assert } = require('chai');
 
 module.exports = {
   homepageFields: {
@@ -15,75 +12,73 @@ module.exports = {
     buttonComp: text => `//span[text()='${text}']/..`,
     spanTextComp: text => `//span[text()="${text}"]`,
     clientDetail: client => `//span[text()="${client}"]/../../../..//span[text()="View details"]`,
-    aTextComp: (text) => `//a[text() = '${text}']/..`,
-    iconLabel: (icon) => `//span[@icon='${icon}']/..`,
-    textAreaComp: (label) => `//label[text()="${label}"]/..//textarea`,
-    labelDropdownComp: (text) => `(//label[text()="${text}"]/..//input)[1]`,
+    aTextComp: text => `//a[text() = '${text}']/..`,
+    iconLabel: icon => `//span[@icon='${icon}']/..`,
+    textAreaComp: label => `//label[text()="${label}"]/..//textarea`,
+    labelDropdownComp: text => `(//label[text()="${text}"]/..//input)[1]`,
     labelTextComp: text => `(//label[text()='Data request name']/../../../..//input)[3]`,
     dropArea: `//input[@name='dropzone']`,
     frame: `//div[@id='container']//iframe`,
-    labelDateComp: (text) => `//label[text()="${text}"]/../../../../..//input[@placeholder="Date"]`,
-    optionDateComp: (text) => `//option[text()='${text}']`,
-    divDateCOmp: (text) => `(//div[text()='${text}'])[1]`,
+    labelDateComp: text => `//label[text()="${text}"]/../../../../..//input[@placeholder="Date"]`,
+    optionDateComp: text => `//option[text()='${text}']`,
+    divDateCOmp: text => `(//div[text()='${text}'])[1]`,
   },
 
   verifyDivText(text) {
-    GenericMethods.waitAndSee(this.homepageFields.divTextHeader(text), 80);
+    genericMethods.waitAndSee(this.homepageFields.divTextHeader(text), 80);
   },
 
   verifyTitle: function(Title) {
-    GenericMethods.waitAndSee(this.homepageFields.h3Header(Title), 20);
+    genericMethods.waitAndSee(this.homepageFields.h3Header(Title), 20);
   },
 
   verifySubtext: function(Subtext) {
-    GenericMethods.waitAndSee(this.homepageFields.pTextComp(Subtext), 20);
+    genericMethods.waitAndSee(this.homepageFields.pTextComp(Subtext), 20);
   },
 
   verifyLabel: function(Label) {
-    GenericMethods.waitAndSee(this.homepageFields.bTextComp(Label), 20);
+    genericMethods.waitAndSee(this.homepageFields.bTextComp(Label), 20);
   },
 
   verifyButton: function(Button) {
-    GenericMethods.waitAndSee(this.homepageFields.buttonComp(Button), 20);
+    genericMethods.waitAndSee(this.homepageFields.buttonComp(Button), 20);
   },
 
   verifyATextComp(text) {
-    GenericMethods.waitAndSee(this.homepageFields.aTextComp(text), 20);
+    genericMethods.waitAndSee(this.homepageFields.aTextComp(text), 20);
   },
 
   clickOnIcon(text) {
-    GenericMethods.waitAndClick(this.homepageFields.iconLabel(text), 20);
+    genericMethods.waitAndClick(this.homepageFields.iconLabel(text), 20);
   },
 
   seeOnIcon(text) {
-    GenericMethods.waitAndSee(this.homepageFields.iconLabel(text), 20);
+    genericMethods.waitAndSee(this.homepageFields.iconLabel(text), 20);
   },
 
   clickOnLinkComp(link) {
-    GenericMethods.waitAndClick(this.homepageFields.aTextComp(link), 20);
+    genericMethods.waitAndClick(this.homepageFields.aTextComp(link), 20);
   },
 
   clickOnButton(button) {
-    I.waitForVisible(this.homepageFields.buttonComp(button), 20);
-    I.click(this.homepageFields.buttonComp(button));
+    genericMethods.waitAndClick(this.homepageFields.buttonComp(button), 20);
   },
 
   clickOnViewDetails(client) {
-    GenericMethods.waitAndClick(this.homepageFields.clientDetail(client), 20);
+    genericMethods.waitAndClick(this.homepageFields.clientDetail(client), 20);
   },
 
   verifySpanText(text) {
-    GenericMethods.waitAndSee(this.homepageFields.spanTextComp(text), 20);
+    genericMethods.waitAndSee(this.homepageFields.spanTextComp(text), 20);
   },
 
   selectDropDown(fieldName, value) {
-    I.waitForVisible(this.homepageFields.labelDropdownComp(fieldName, 1), 60);
-    I.fillField(this.homepageFields.labelDropdownComp(fieldName, 1), value);
+    genericMethods.waitAndFillField(this.homepageFields.labelDropdownComp(fieldName, 1), value,60);
     I.pressKey('Enter');
   },
 
   enterText(fieldName, text) {
-    GenericMethods.waitAndFillField(this.homepageFields.labelTextComp(fieldName), text, 20);
+    genericMethods.waitAndFillField(this.homepageFields.labelTextComp(fieldName), text, 20);
   },
 
   uploadFile() {
@@ -91,20 +86,12 @@ module.exports = {
     I.attachFile(this.homepageFields.dropArea, './TestFiles/Book1_xls.xls');
   },
 
-  switchToFrame() {
-    if (envStatus || envURL.env === 'brp') {
-      I.waitForVisible(this.homepageFields.frame, 40);
-      I.switchTo(this.homepageFields.frame);
-    }
-  },
-
   toastNotification(text) {
-    GenericMethods.waitAndSee(this.homepageFields.pTextComp(text), 20);
+    genericMethods.waitAndSee(this.homepageFields.pTextComp(text), 20);
   },
 
   enterTextInTextArea(label, text) {
-    I.waitForVisible(this.homepageFields.textAreaComp(label), 20);
-    I.fillField(this.homepageFields.textAreaComp(label), text);
+    genericMethods.waitAndFillField(this.homepageFields.textAreaComp(label),text,20);
   },
 
   createDataRequest(table) {
