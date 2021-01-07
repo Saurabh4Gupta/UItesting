@@ -12,6 +12,8 @@ async function getValues(teamEnv, project){
       tag: '${APP_VER}',
       repository: `${project.secrets.app_container_reg}/${project.secrets.app_name}`,
     },
+    apollo_graphql_uri: `https://${project.secrets[`${teamEnv}_sharedEnvGA`]}-kong-proxy.az.${project.secrets[`${teamEnv}-target_name`]}.gdpdentsu.net/prodman`,
+    apollo_subscription_uri: `wss://${project.secrets[`${teamEnv}_sharedEnvGA`]}-kong-proxy.az.${project.secrets[`${teamEnv}-target_name`]}.gdpdentsu.net/prodman`,
     okta_issuer: project.secrets[`${teamEnv}_okta_issuer`],
     client_id: project.secrets[`${teamEnv}_client_id`],
     skip_preflight_check: project.secrets[`${teamEnv}_skip_preflight_check`],
@@ -29,9 +31,8 @@ async function getValues(teamEnv, project){
       ]
     },
   };
-
   
-  if ((teamEnv.includes('-int-g1ga')) || (teamEnv.includes('-nft-g1ga')) || (teamEnv.includes('-stg-g1ga')) || (teamEnv.includes('-prod-g1ga')) || (teamEnv.includes('-demo-g1ga'))) {
+  if (devops.MEUtilities.isRouteToLive(teamEnv)) {
     values.apollo_graphql_uri =  `https://ga-api-gw.wal.${env1}.az.eu.mediaecosystem.io/prodman`,
     values.apollo_subscription_uri = `wss://ga-api-gw.wal.${env1}.az.eu.mediaecosystem.io/prodman`;
     values.ingress.hosts = [`productivity-ui.wal.${env1}.az.eu.mediaecosystem.io`];
@@ -44,44 +45,16 @@ async function getValues(teamEnv, project){
     }, ];
   }
 
-  if ((teamEnv.includes('-brp-g1ga'))|| (teamEnv.includes('-pch-g1ga')) || (teamEnv.includes('-puat-g1ga')) || (teamEnv.includes('-pstg-g1ga'))) {
-    values.apollo_graphql_uri =  `https://${project.secrets[`${teamEnv}_sharedEnvGA`]}-kong-proxy.az.${project.secrets[`${teamEnv}-target_name`]}.gdpdentsu.net/prodman`;
-    values.apollo_subscription_uri = `wss://${project.secrets[`${teamEnv}_sharedEnvGA`]}-kong-proxy.az.${project.secrets[`${teamEnv}-target_name`]}.gdpdentsu.net/prodman`;
-    values.ingress.hosts = [`${teamEnv}-${project.secrets.app_name}.az.${project.secrets[teamEnv + "-target_name"]}.gdpdentsu.net`];
+  if (devops.MEUtilities.isRouteToPitch(teamEnv)) {
     values.ingress.class = "external";
-    values.ingress.tls = [{
-      secretName: `${teamEnv}-${project.secrets.app_name}.az.${project.secrets[teamEnv + "-target_name"]}.gdpdentsu.net`,
-      hosts: [
-        `${teamEnv}-${project.secrets.app_name}.az.${project.secrets[teamEnv + "-target_name"]}.gdpdentsu.net`,
-      ],
-    }, ];
+  
   }
 
-  if ((teamEnv.includes('-dint-g1ga'))) {
+  if (devops.MEUtilities.isRouteToHotfix(teamEnv)) {
     values.apollo_graphql_uri =  `https://${project.secrets[`${teamEnv}_sharedEnvGA`]}-kong-proxy.az.${project.secrets[`${teamEnv}-target_name`]}.gdpdentsu.net/prodman`;
     values.apollo_subscription_uri = `wss://${project.secrets[`${teamEnv}_sharedEnvGA`]}-kong-proxy.az.${project.secrets[`${teamEnv}-target_name`]}.gdpdentsu.net/prodman`;
-    values.ingress.hosts = [`${teamEnv}-${project.secrets.app_name}.az.${project.secrets[`${teamEnv}-target_name`]}.gdpdentsu.net`];
-    values.ingress.class = "nginx";
-    values.ingress.tls = [{
-      secretName: `${teamEnv}-${project.secrets.app_name}.az.${project.secrets[`${teamEnv}-target_name`]}.gdpdentsu.net`,
-      hosts: [
-        `${teamEnv}-${project.secrets.app_name}.az.${project.secrets[`${teamEnv}-target_name`]}.gdpdentsu.net`,
-      ],
-    }, ];
   }
 
-  if ((teamEnv.includes('-hint-g1ga'))) {
-    values.apollo_graphql_uri =  `https://${project.secrets[`${teamEnv}_sharedEnvGA`]}-kong-proxy.az.${project.secrets[`${teamEnv}-target_name`]}.gdpdentsu.net/prodman`;
-    values.apollo_subscription_uri = `wss://${project.secrets[`${teamEnv}_sharedEnvGA`]}-kong-proxy.az.${project.secrets[`${teamEnv}-target_name`]}.gdpdentsu.net/prodman`;
-    values.ingress.hosts = [`${teamEnv}-${project.secrets.app_name}.az.${project.secrets[`${teamEnv}-target_name`]}.gdpdentsu.net`];
-    values.ingress.class = "nginx";
-    values.ingress.tls = [{
-      secretName: `${teamEnv}-${project.secrets.app_name}.az.${project.secrets[`${teamEnv}-target_name`]}.gdpdentsu.net`,
-      hosts: [
-        `${teamEnv}-${project.secrets.app_name}.az.${project.secrets[`${teamEnv}-target_name`]}.gdpdentsu.net`,
-      ],
-    }, ];
-  }
   return values;
 }
 
