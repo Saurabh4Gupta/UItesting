@@ -19,6 +19,7 @@ async function getValues(teamEnv, project){
     skip_preflight_check: project.secrets[`${teamEnv}_skip_preflight_check`],
     apporigin: project.secrets[`${teamEnv}_apporigin`],
     use_method_to_fetch_perms: project.secrets[`${teamEnv}_use_method_to_fetch_perms`],
+    um_graphql_url: project.secrets[`${teamEnv}_um_graphql_url`],
     ingress: {
       class: 'nginx',
       enabled: true,
