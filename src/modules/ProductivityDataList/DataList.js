@@ -30,6 +30,8 @@ const DataList = (props) => {
     isDeleteModal: false,
     requestId: undefined,
   });
+  const [selectedFilter, setSelectedFilter] = useState([{ key: 'totalTenure', value: '' }]);
+  const [searchInput, setSearchInput] = useState('');
   const [tabIndex, setTabIndex] = useState(0);
   const { data } = dataList;
   const [moveToCompleteModelData, setIsMoveToCompleteModel] = useState({
@@ -41,7 +43,7 @@ const DataList = (props) => {
 
   const initialRender = useRef(true);
 
-   useEffect(() => {
+  useEffect(() => {
     if (initialRender.current) {
       initialRender.current = false;
     } else if (tabIndex === 0) {
@@ -53,18 +55,23 @@ const DataList = (props) => {
     }
   }, [market, tabIndex]);
 
-  const getFilteredList = (data, searchInput) => {
-    const updatedList = data.filter(
-      (d) => d.clientMarket.toLowerCase().includes(searchInput.toLowerCase())
-        || d.name.toLowerCase().includes(searchInput.toLowerCase()),
+  const getFilteredList = (data, searchInput, filterInput) => {
+    let updatedList = data.filter(
+      (d) => (d.clientMarket.toLowerCase().includes(searchInput.toLowerCase())
+        || d.name.toLowerCase().includes(searchInput.toLowerCase())
+      ),
     );
+    if (filterInput !== '') {
+      updatedList = updatedList.filter((key) => key.totalTenure.includes(filterInput))
+    }
     return updatedList;
   };
 
-  const searchChangeHandler = (input) => {
+
+  useEffect(() => {
     const requestStatus = tabIndex === 0 ? 'ongoing' : 'complete';
     const allDataList = getData(market.value, requestStatus);
-    const filteredList = getFilteredList(allDataList.data, input);
+    const filteredList = getFilteredList(allDataList.data, searchInput, selectedFilter[0].value);
     if (tabIndex === 0) {
       setDataList({ data: filteredList, totalCount: allDataList.totalCount });
     }
@@ -74,8 +81,16 @@ const DataList = (props) => {
         totalCount: allDataList.totalCount,
       });
     }
+  }, [searchInput, selectedFilter])
+
+
+  const searchChangeHandler = (input) => {
+    setSearchInput(input)
   };
 
+  const handleFilter = (input) => {
+    setSelectedFilter(input);
+  }
   const addRequest = async (values) => {
     try {
       values.createdAt = new Date();
@@ -169,7 +184,6 @@ const DataList = (props) => {
   const handleMoveToCompleteModel = (value) => {
     setIsMoveToCompleteModel({ isMoveToComplete: true, requestID: value });
   };
-
   return (
     <>
       <CreateData
@@ -184,11 +198,11 @@ const DataList = (props) => {
           <Tabs.List>
             <Tabs.Tab
               label={cmsData.ongoingLabel}
-              count={dataList.totalCount}
+              count={dataList.data.length}
             />
             <Tabs.Tab
               label={cmsData.completeLabel}
-              count={completeDataList.totalCount}
+              count={completeDataList.data.length}
             />
           </Tabs.List>
           {loading ? (
@@ -205,10 +219,10 @@ const DataList = (props) => {
                     setIsMoveToCompleteModel={setIsMoveToCompleteModel}
                     moveToCompleteModelData={moveToCompleteModelData}
                     actionName={
-                      tabIndex === 0
-                        ? cmsData.moveToComplete
-                        : cmsData.moveToOnGoing
-                    }
+                        tabIndex === 0
+                          ? cmsData.moveToComplete
+                          : cmsData.moveToOnGoing
+                      }
                     handleDelete={handleDelete}
                     clientCode={clientCode}
                     search={searchChangeHandler}
@@ -216,13 +230,15 @@ const DataList = (props) => {
                     handleMoveToCompleteModel={handleMoveToCompleteModel}
                     handleMoveToCompleteData={handleMoveToCompleteData}
                     showStatus={tabIndex === 0}
+                    handleFilter={handleFilter}
+                    selectedFilter={selectedFilter}
                   />
-                ) : (
-                  <EmptyTable
-                    defaultText={cmsData.emptyProductivityDatarequestCaption}
-                    handleModal={handleModal}
-                  />
-                )}
+                  ) : (
+                    <EmptyTable
+                      defaultText={cmsData.emptyProductivityDatarequestCaption}
+                      handleModal={handleModal}
+                    />
+                    )}
               </Tabs.Panel>
               <Tabs.Panel>
                 {completeDataList.totalCount > 0 ? (
@@ -234,18 +250,20 @@ const DataList = (props) => {
                     showStatus={false}
                     clientCode={clientCode}
                     search={searchChangeHandler}
+                    handleFilter={handleFilter}
+                    selectedFilter={selectedFilter}
                   />
-                ) : (
-                  <EmptyTable
-                    defaultText={
-                      cmsData.emptyCompletedProductivityDatarequestCaption
-                    }
-                    handleModal={handleModal}
-                  />
-                )}
+                  ) : (
+                    <EmptyTable
+                      defaultText={
+                          cmsData.emptyCompletedProductivityDatarequestCaption
+                        }
+                      handleModal={handleModal}
+                    />
+                    )}
               </Tabs.Panel>
             </Tabs.Panels>
-          )}
+            )}
         </Tabs>
       </Box>
     </>
@@ -265,7 +283,7 @@ DataList.defaultProps = {
   market: { value: '' },
   dataList: {},
   clientCode: '',
-  setDataList: () => {},
+  setDataList: () => { },
   loading: true,
 };
 export default DataList;

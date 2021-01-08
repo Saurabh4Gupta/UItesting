@@ -4,37 +4,26 @@ import PropTypes from 'prop-types';
 import Toast from '@dentsu-ui/components/dist/cjs/components/Toast';
 import Form from '../../components/FileUpload/Form';
 import { dataFieldCms as PageContent } from '../../cms';
-import constant from '../../utils/constant';
 
 const UploadFile = (props) => {
   const { cmsData, modalOpen, setModalOpen } = props;
   const [error, setError] = useState({});
   const [files, setFiles] = useState([]);
+  const [isDisabled, setDisabled] = useState(true);
 
   const errorHandler = (errorMsg) => {
     if (errorMsg) {
       setError({ error: `${PageContent.uploadFileErrorMessage}` });
       return true;
     }
-
-        setError({ error: null });
-        return false;
+    setError({ error: null });
+    return false;
   };
 
   const validate = () => {
     if (!files.length) {
       setError({ error: `${PageContent.uploadFileErrorMessage}` });
       return false;
-    }
-    if (files.length) {
-      const fileType = files[0].file.name.split('.')[1];
-      if (constant.VALID_FILE_TYPES.includes(fileType)) {
-        setError({ error: null });
-        return true;
-      }
-
-        setError({ error: `${PageContent.uploadFileErrorMessage}` });
-        return false;
     }
     return true;
   };
@@ -43,7 +32,7 @@ const UploadFile = (props) => {
     const isValid = validate();
     if (isValid) {
       setModalOpen(false);
-      if (!error.error) {
+      if (!error.error && files.length > 0) {
         const toast = new Toast();
         return toast({
           title: '',
@@ -51,7 +40,7 @@ const UploadFile = (props) => {
           status: 'success',
         });
       }
-    }
+   }
     return null;
   };
 
@@ -62,11 +51,16 @@ const UploadFile = (props) => {
   };
 
   const handleFileChange = (fileItems) => {
-    validate();
+    setDisabled(true)
     setFiles(fileItems);
     setError({ error: null });
   };
 
+  const onProcessFile = (errors) => {
+    if (!errors) {
+      setDisabled(false)
+    }
+  }
 
   return (
     <>
@@ -79,6 +73,7 @@ const UploadFile = (props) => {
         <Modal.Header title={PageContent.uploadButtonText} />
         <Modal.Body>
           <Form
+            onProcessFile={onProcessFile}
             handleFileChange={handleFileChange}
             files={files}
             errors={error}
@@ -90,7 +85,7 @@ const UploadFile = (props) => {
           <Button variant="secondary" onClick={onCloseModal}>
             {cmsData.cancel}
           </Button>
-          <Button onClick={() => onSubmit()}>{cmsData.upload}</Button>
+          <Button isDisabled={isDisabled} onClick={() => onSubmit()}>{cmsData.upload}</Button>
         </Modal.Footer>
       </Modal>
     </>

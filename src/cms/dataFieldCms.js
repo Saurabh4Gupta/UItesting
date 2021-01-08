@@ -89,4 +89,5 @@ export const dataFieldCms = {
   noCancel: 'No, cancel',
   yesContinue: 'Yes, continue',
   yesDelete: 'Yes, delete',
+  failurNotificationMsg: 'Looks like something went wrong. Please try again',
 }
