@@ -16,7 +16,10 @@ const DataField = (props) => {
   const clientCode = query.get('client_code');
   const [market, setMarket] = useState({ value: '', label: 'All markets' });
   const [dataList, setDataList] = useState({ data: [], totalCount: 0 });
-  const [completeDataList, setCompleteDataList] = useState({ data: [], totalCount: 0 })
+  const [completeDataList, setCompleteDataList] = useState({
+    data: [],
+    totalCount: 0,
+  });
   const [isUploadModal, setIsUploadModal] = useState(false);
   const [isLoading, setLoading] = useState(true);
 
@@ -30,7 +33,7 @@ const DataField = (props) => {
       setDataList(getData(market.value, 'ongoing'));
       setCompleteDataList(getData(market.value, 'complete'));
     }, 2000);
-  }, [])
+  }, []);
 
   return (
     <>
@@ -43,7 +46,6 @@ const DataField = (props) => {
           pageMetadata="Client Overview"
           isCompleted={false}
         >
-
           <UploadFile
             cmsData={PageContent}
             modalOpen={isUploadModal}
@@ -60,7 +62,6 @@ const DataField = (props) => {
             loading={isLoading}
             setMarket={setMarket}
           />
-
         </PageController>
       </Box>
     </>

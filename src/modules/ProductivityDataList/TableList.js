@@ -54,7 +54,7 @@ const TableList = (props) => {
         moveToCompleteModelData={moveToCompleteModelData}
         setIsMoveToCompleteModel={setIsMoveToCompleteModel}
         handleMoveToCompleteData={handleMoveToCompleteData}
-      // handleToggleData={handleToggleData}
+        // handleToggleData={handleToggleData}
       />
       <List
         items={data}
@@ -129,11 +129,11 @@ const TableList = (props) => {
                         <Chip variant="status" status="warning" hasStatusLight>
                           {cmsData.overdue}
                         </Chip>
-                        ) : (
-                            ''
-                          )}
+                      ) : (
+                        ''
+                      )}
                     </Box>
-                    )}
+                  )}
                   <Box width="30%">{`${cmsData.lastUpdate}: ${updatedAt}`}</Box>
                 </Stack>
                 <Stack
@@ -206,9 +206,9 @@ TableList.defaultProps = {
   clientCode: '',
   search: {},
   deleteModalData: {},
-  handleDelete: () => { },
-  handleMoveToCompleteModel: () => { },
-  handleMoveToOngoing: () => { },
+  handleDelete: () => {},
+  handleMoveToCompleteModel: () => {},
+  handleMoveToOngoing: () => {},
   handleDeleteModel: () => {},
   setIsMoveToCompleteModel: () => {},
   handleMoveToCompleteData: () => {},
