@@ -20,6 +20,7 @@ async function getValues(teamEnv, project){
     apporigin: project.secrets[`${teamEnv}_apporigin`],
     flagit_is_embedded_app: project.secrets[`${teamEnv}_flagit_is_embedded_app`],
     use_method_to_fetch_perms: project.secrets[`${teamEnv}_use_method_to_fetch_perms`],
+    um_graphql_url: project.secrets[`${teamEnv}_um_graphql_url`],
     ingress: {
       class: 'nginx',
       enabled: true,
