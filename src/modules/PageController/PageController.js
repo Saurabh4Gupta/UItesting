@@ -1,91 +1,107 @@
 import React from 'react';
-import {
-  Page,
-  Select,
-  Image,
-  TextContainer,
-  Box,
-  Stack,
-  Caption,
-  Heading,
-} from '@dentsu-ui/components';
+import { Page, Select, FormField } from '@dentsu-ui/components';
 import PropTypes from 'prop-types';
-import { clientList } from '../Mock/mockData';
+import { useHistory, useLocation } from 'react-router';
+import { clientList, market as marketOptions } from '../Mock/mockData';
+import { dataFieldCms as PageContent } from '../../cms';
 
-const PageController = (props) => (
-  <Box bg="rgba(220,220,220,0.4)" className="main">
-    <Page
-      metadata={<Title {...props} />}
-      primaryAction={{
-        content: 'Upload new File',
-        icon: 'upload',
-        onClick: () => props.setIsUploadModal(true),
-        isDisabled: false,
-      }}
-      breadcrumbs={[{
-        content: 'Back to Clients',
-        url: '/',
-      }]}
-    />
-  </Box>
-);
+const PageController = (props) => {
+  const history = useHistory();
+  const location = useLocation();
+  const query = new URLSearchParams(location.search);
+  const clientCode = query.get('client_code');
 
-const HeaderContent = () => (
-  <Stack flex="row" mt="30px">
-    <Box mr="10px">
-      <Select placeholder="Currency GBP(Default)" width={200} />
-    </Box>
-    <Box width={150} mr="10px">
-      <Select placeholder="All Markets" />
-    </Box>
-    <Box width={160} mr="10px">
-      <Select placeholder="Year to Date" style={{ backgound: 'none' }} />
-    </Box>
-  </Stack>
-);
+  const {
+    param,
+    market,
+    handleMarket,
+    children,
+    handleUploadModal,
+    pageTitle,
+    isCompleted,
+    pageMetadata,
+    handleMoveToCompleteModal,
+  } = props;
+  const { isViewProduct } = param;
+  const { title, avatar } = clientList.find(
+    (client) => client.clientCode === clientCode,
+  );
+  const contentToShow = isViewProduct ? `Back to ${title}` : `${PageContent.backLabel}`;
+  const clientNavigationHandler = () => (isViewProduct
+    ? history.replace(`/datafield?client_code=${clientCode}`)
+    : history.replace('/'));
 
-const Title = (props) => {
-  const { title, avatar } = clientList.find(client => client.clientCode === props.match.params.clientCode);
   return (
-    <Stack>
-      <Image
-        src={`/${avatar}`}
-        fallbackSrc="https://via.placeholder.com/150"
-        isRounded
-        htmlWidth="110"
-        htmlHeight="110"
-      />
-      <Stack flexDirection="column" ml="20px">
-        <div>
-          <TextContainer>
-            <Caption>Client Overview</Caption>
-          </TextContainer>
-        </div>
-        <div>
-          <TextContainer>
-            <h1>
-              {' '}
-              <Heading>{title}</Heading>
-            </h1>
-          </TextContainer>
-        </div>
-        <HeaderContent />
-      </Stack>
-    </Stack>
+    <>
+      <Page
+        metadata={pageMetadata}
+        title={!isViewProduct ? title : pageTitle}
+        thumbnail={`/${avatar}`}
+
+        breadcrumbs={[
+          {
+            content: contentToShow,
+            onClick: clientNavigationHandler,
+          },
+        ]}
+        primaryAction={
+          isViewProduct && !isCompleted
+            ? {
+              content: `${PageContent.uploadButtonText}`,
+              onClick: () => handleUploadModal(),
+              isDisabled: false,
+              icon: 'upload',
+            }
+            : false
+        }
+        secondaryActions={
+          isViewProduct && !isCompleted
+          && [{
+            content: 'Move to complete',
+            onClick: () => handleMoveToCompleteModal(),
+            isDisabled: false,
+          }]
+        }
+        controls={
+          !isViewProduct && (
+            <FormField>
+              <Select
+                width={200}
+                options={marketOptions}
+                value={market}
+                onChange={handleMarket}
+              />
+            </FormField>
+          )}
+        status={isCompleted ? { type: 'neutral', label: 'Complete', hasStatusLight: true } : ''}
+      >
+        {children}
+      </Page>
+    </>
   );
 };
 
-Title.propTypes = {
-  match: PropTypes.object,
-}
-
-Title.defaultProps = {
-  match: {},
-}
 PageController.propTypes = {
-  setIsUploadModal: PropTypes.func,
-}
+  param: PropTypes.object,
+  market: PropTypes.object,
+  handleMarket: PropTypes.func,
+  children: PropTypes.node,
+  handleUploadModal: PropTypes.func,
+  pageTitle: PropTypes.string,
+  isCompleted: PropTypes.bool,
+  pageMetadata: PropTypes.string,
+  handleMoveToCompleteModal: PropTypes.func,
+};
+
 PageController.defaultProps = {
-  setIsUploadModal: () => { },
-}
+  param: { isViewProduct: false },
+  market: { value: '', label: 'All markets' },
+  children: '',
+  handleMarket: () => { },
+  handleUploadModal: () => { },
+  pageTitle: '',
+  isCompleted: false,
+  pageMetadata: '',
+  handleMoveToCompleteModal: () => { },
+};
 export default PageController;

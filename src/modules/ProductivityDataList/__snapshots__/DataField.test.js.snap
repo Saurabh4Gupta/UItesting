@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<EmptyState /> should match snapshot 1`] = `
+<_class
+  match={
+    Object {
+      "params": Object {
+        "clientCode": "MC",
+      },
+      "path": "./url",
+    }
+  }
+/>
+`;

@@ -36,11 +36,11 @@ brigade-test/node_modules
 # test reports
 test-report.xml
 
-package-lock.json
-brigade-test/brigade.js
 build/
 build.log
 nginx.conf
 /.idea
 allure-report/
 
+#Debug.log
+codecept-tests/debug.log

@@ -1,73 +1,91 @@
 import React, { useState } from 'react';
 import { Modal, Button } from '@dentsu-ui/components';
 import PropTypes from 'prop-types';
+import Toast from '@dentsu-ui/components/dist/cjs/components/Toast';
 import Form from '../../components/FileUpload/Form';
-
+import { dataFieldCms as PageContent } from '../../cms';
 
 const UploadFile = (props) => {
   const { cmsData, modalOpen, setModalOpen } = props;
   const [error, setError] = useState({});
   const [files, setFiles] = useState([]);
+  const [isDisabled, setDisabled] = useState(true);
+
+  const errorHandler = (errorMsg) => {
+    if (errorMsg) {
+      setError({ error: `${PageContent.uploadFileErrorMessage}` });
+      return true;
+    }
+    setError({ error: null });
+    return false;
+  };
 
   const validate = () => {
     if (!files.length) {
-      setError({ error: 'Upload tracker template' })
+      setError({ error: `${PageContent.uploadFileErrorMessage}` });
       return false;
     }
-
-    setError({});
     return true;
-  }
+  };
 
   const onSubmit = () => {
     const isValid = validate();
-    console.log('++', isValid)
     if (isValid) {
-      setModalOpen(false)
-      setFiles([])
-      setError({})
-    }
+      setModalOpen(false);
+      if (!error.error && files.length > 0) {
+        const toast = new Toast();
+        return toast({
+          title: '',
+          content: PageContent.toastFileUploaded,
+          status: 'success',
+        });
+      }
+   }
+    return null;
   };
 
   const onCloseModal = () => {
     setModalOpen(false);
-    setError({})
-    setFiles([])
+    setError({});
+    setFiles([]);
   };
 
   const handleFileChange = (fileItems) => {
-    validate();
+    setDisabled(true)
     setFiles(fileItems);
-    setError({})
+    setError({ error: null });
+  };
+
+  const onProcessFile = (errors) => {
+    if (!errors) {
+      setDisabled(false)
+    }
   }
 
   return (
     <>
       <Modal
         isFullHeight={false}
-        width="540px"
+        width="650px"
         isOpen={modalOpen}
         onClose={onCloseModal}
       >
-        <Modal.Header title="Upload new file" />
+        <Modal.Header title={PageContent.uploadButtonText} />
         <Modal.Body>
-
           <Form
+            onProcessFile={onProcessFile}
             handleFileChange={handleFileChange}
             files={files}
             errors={error}
             cmsData={cmsData}
+            setError={errorHandler}
           />
-
         </Modal.Body>
         <Modal.Footer>
-          <Button
-            variant="secondary"
-            onClick={onCloseModal}
-          >
-            cancel
+          <Button variant="secondary" onClick={onCloseModal}>
+            {cmsData.cancel}
           </Button>
-          <Button onClick={() => onSubmit()}>Upload</Button>
+          <Button isDisabled={isDisabled} onClick={() => onSubmit()}>{cmsData.upload}</Button>
         </Modal.Footer>
       </Modal>
     </>
@@ -77,11 +95,11 @@ UploadFile.propTypes = {
   cmsData: PropTypes.object,
   modalOpen: PropTypes.bool,
   setModalOpen: PropTypes.func,
-}
+};
 
 UploadFile.defaultProps = {
   cmsData: {},
   modalOpen: false,
-  setModalOpen: () => { },
-}
+  setModalOpen: () => {},
+};
 export default UploadFile;

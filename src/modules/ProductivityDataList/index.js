@@ -1,4 +1,3 @@
-import DataList from './DataField';
-import PreviousData from './PreviousData';
+import DataList from './DataList';
 
-export { DataList, PreviousData };
+export { DataList };

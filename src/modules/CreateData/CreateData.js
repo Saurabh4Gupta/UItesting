@@ -4,45 +4,53 @@ import PropTypes from 'prop-types';
 import Form from './Form'
 import useCustomForm from '../../hooks/useCustomForm';
 import validationRule from '../../utils/validate';
-import { options, monthOptions, updateData } from '../Mock/mockData'
+import { options, monthOptions, reportingYear, userList } from '../Mock/mockData'
 
 const CreateData = (props) => {
-  const { cmsData, market, isModalOpen, handleModal, setDataCreated } = props;
+  const { cmsData, market, isModalOpen, handleModal, addRequest } = props;
   const [isReadyToSubmit, setIsReadyToSubmit] = useState(false);
+  const [loading, setLoading] = useState(false);
   const initialValues = {
     localMarket: market,
     name: '',
     briefing: '',
+    reportingYear: '',
     actualData: '',
     forecastData: '',
     dueDate: '',
     assignTo: '',
   };
-  const { handleChange, values,
+  const { handleChange, values, forecastOptions,
     handleSelectField, handleSubmit,
     errors, handleCancel } = useCustomForm({ initialValues, validate: validationRule });
 
   useEffect(() => {
     const isAnyValidationError = errors && !!(errors.localMarket || errors.name
       || errors.briefing || errors.dueDate || errors.assignTo || errors.forecastData
-      || errors.forecastData);
+      || errors.forecastData || errors.reportingYear);
     const isAllValuesFilled = values.localMarket && values.name && values.assignTo
-      && values.dueDate && values.forecastData && values.actualData && values.briefing;
+      && values.dueDate && values.forecastData && values.actualData && values.briefing && values.reportingYear;
     setIsReadyToSubmit(isAllValuesFilled && !isAnyValidationError);
   }, [errors, values]);
+
+  useEffect(() => {
+    handleChange({ target: { name: 'localMarket', value: market } });
+  }, [market]);
 
   const closeModalHandler = () => {
     handleModal(false)
     handleCancel();
   }
-  const onSubmit = () => {
+  const onSubmit = async () => {
     handleSubmit();
     if (isReadyToSubmit) {
+      setLoading(true);
       // mutation will be done here
-      closeModalHandler();
-
-      updateData(values)
-      setDataCreated(true)
+      setTimeout(() => {
+        setLoading(false);
+        closeModalHandler();
+        addRequest(values)
+      }, 1000);
     }
   }
   const handleCreateData = () => {
@@ -62,13 +70,16 @@ const CreateData = (props) => {
             cmsData={cmsData}
             options={options}
             monthOptions={monthOptions}
+            reportingYear={reportingYear}
+            forecastOptions={forecastOptions}
+            userList={userList}
           />
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={closeModalHandler}>
             {cmsData.cancel}
           </Button>
-          <Button onClick={onSubmit}>{cmsData.create}</Button>
+          <Button isLoading={loading} onClick={onSubmit}>{cmsData.create}</Button>
         </Modal.Footer>
       </Modal>
       <Stack flexDirection="row" justifyContent="space-between">
@@ -89,17 +100,17 @@ const CreateData = (props) => {
 };
 CreateData.propTypes = {
   cmsData: PropTypes.object,
-  market: PropTypes.string,
+  market: PropTypes.object,
   isModalOpen: PropTypes.bool,
   handleModal: PropTypes.func,
-  setDataCreated: PropTypes.func,
+  addRequest: PropTypes.func,
 }
 CreateData.defaultProps = {
   cmsData: {},
   market: 'UK',
   isModalOpen: false,
   handleModal: () => { },
-  setDataCreated: () => false,
+  addRequest: () => { },
 }
 
 export default CreateData;
