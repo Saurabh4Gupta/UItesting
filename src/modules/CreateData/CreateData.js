@@ -1,15 +1,19 @@
 import React, { useState, useEffect } from 'react'
+import { useQuery } from '@apollo/client';
 import { Caption, Subheading, TextContainer, Button, Stack, Modal } from '@dentsu-ui/components';
 import PropTypes from 'prop-types';
 import Form from './Form'
 import useCustomForm from '../../hooks/useCustomForm';
 import validationRule from '../../utils/validate';
-import { options, monthOptions, reportingYear, userList } from '../Mock/mockData'
+import { options, monthOptions, reportingYear } from '../Mock/mockData'
+import { GET_USERS } from './queries';
 
 const CreateData = (props) => {
+  const [userRequest, setUserRequest] = useState([]);
+  const { loading, error, data } = useQuery(GET_USERS);
   const { cmsData, market, isModalOpen, handleModal, addRequest } = props;
   const [isReadyToSubmit, setIsReadyToSubmit] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [isLoading, setLoading] = useState(false);
   const initialValues = {
     localMarket: market,
     name: '',
@@ -37,6 +41,17 @@ const CreateData = (props) => {
     handleChange({ target: { name: 'localMarket', value: market } });
   }, [market]);
 
+  // eslint-disable-next-line consistent-return
+  useEffect(() => {
+    console.log('userList', data);
+    if (loading) {
+      setLoading(false)
+    }
+    if (error) return `Error! ${error}`;
+    if (data) {
+      setUserRequest(data)
+    }
+  }, [data, loading, error]);
   const closeModalHandler = () => {
     handleModal(false)
     handleCancel();
@@ -72,14 +87,14 @@ const CreateData = (props) => {
             monthOptions={monthOptions}
             reportingYear={reportingYear}
             forecastOptions={forecastOptions}
-            userList={userList}
+            userList={userRequest.getUsers}
           />
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={closeModalHandler}>
             {cmsData.cancel}
           </Button>
-          <Button isLoading={loading} onClick={onSubmit}>{cmsData.create}</Button>
+          <Button isLoading={isLoading} onClick={onSubmit}>{cmsData.create}</Button>
         </Modal.Footer>
       </Modal>
       <Stack flexDirection="row" justifyContent="space-between">

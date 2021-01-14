@@ -167,7 +167,7 @@ const Form = (props) => {
         hint={cmsData.assignToHint}
       >
         <ChipInput
-          options={userList}
+          options={userList.data}
           isMulti
           name="assignTo"
           value={values.assignTo}
