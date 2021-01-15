@@ -7,7 +7,6 @@ const gherkin = {
     features: './src/features/*/*.feature',
     steps: [
         "./src/step_definitions/login_step.js",
-        "./src/step_definitions/accessingEnvironment.js",
     ],
 };
 

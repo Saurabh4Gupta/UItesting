@@ -11,7 +11,8 @@
     "test:smoke": "codeceptjs run --verbose --grep \"@smoke\" --plugins allure --config=./codecept.conf.js",
     "test:parallelExecution": "codeceptjs run multiple basic --grep \"@browserStack\" --plugins allure --config=./codecept.conf.js",
     "test:report": "allure serve ./output",
-    "test:report-gen": "allure generate ./output"
+    "test:report-gen": "allure generate ./output",
+    "test:UAT": "codeceptjs run --verbose --grep \"@UAT\" --plugins allure --config=./codecept.conf.js"
   },
   "devDependencies": {
     "@wdio/selenium-standalone-service": "^6.6.5",

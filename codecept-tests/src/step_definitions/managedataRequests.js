@@ -2,11 +2,30 @@ const genericFunction = require('../../factories/GenericFuctions');
 const homepage = require('../pages/homepage');
 let table = null;
 const I = actor();
+
+
+Then(/^User is on "([^"]*)" Page$/, function(header) {
+  homepage.verifyDivText(header);
+});
+
+
 Then(/^User is able to see subheading as "([^"]*)"$/, function(Title) {
 
-  selectClient.verifyTitle(Title);
+  homepage.verifyTitle(Title);
 
 });
+
+Then(/^verify list of clients$/, function() {
+  let clients = ['American Express', 'Burberry', 'Burger King', 'General Motors', 'Microsoft Corporation', 'Procter & Gamble', 'The Kraft Heinz Company'];
+  for (let i = 0; i < clients.length; i++) {
+    homepage.verifySpanText(clients[i]);
+  }
+});
+
+Then(/^User will go to client "([^"]*)" homepage$/, function(client) {
+  homepage.clickOnViewDetails(client);
+});
+
 
 Given(/^User will click on "([^"]*)" button and will see heading as "([^"]*)"$/, function(button, Title) {
   homepage.clickOnButton(button);
