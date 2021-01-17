@@ -16,12 +16,22 @@ import constant from '../../utils/constant';
 
 const Form = (props) => {
   const { MAX_FILE_SIZE, ALLOWED_FILE_TYPES } = constant;
-  const { values, handleChange, handleSelectField, errors, cmsData, options, monthOptions, dueDate, reportingYear,
-    forecastOptions, userList } = props;
-  const [files, setFiles] = useState([]);
-  const handleInit = () => {
-    console.log('Dropzone instance has initialised', files);
-  };
+  const {
+    values,
+    handleChange,
+    handleSelectField,
+    errors,
+    cmsData,
+    options,
+    monthOptions,
+    dueDate,
+    reportingYear,
+    forecastOptions,
+    userList,
+    handleOwners,
+    setFiles,
+  } = props;
+
   const now = new Date();
   const maxDate = new Date();
   maxDate.setFullYear(now.getFullYear() + 1);
@@ -37,9 +47,7 @@ const Form = (props) => {
           name="localMarket"
           options={options}
           onChange={(selected, event) => handleSelectField(selected, event)}
-          value={
-            options.find(key => key.value === values.localMarket.value)
-          }
+          value={options.find((key) => key.value === values.localMarket.value)}
         />
       </FormField>
       <FormField
@@ -78,10 +86,12 @@ const Form = (props) => {
             <Select
               name="reportingYear"
               options={reportingYear}
-              value={values.reportingYear}
+              value={reportingYear.find(
+                (key) => key.value === values.reportingYear.value,
+              )}
               placeholder={cmsData.selectPlaceHolder}
               onChange={(selected, event) => {
-                handleSelectField(selected, event)
+                handleSelectField(selected, event);
               }}
             />
           </FormField>
@@ -100,7 +110,7 @@ const Form = (props) => {
               value={values.actualData}
               placeholder={cmsData.selectPlaceHolder}
               onChange={(selected, event) => {
-                handleSelectField(selected, event)
+                handleSelectField(selected, event);
               }}
             />
           </FormField>
@@ -119,30 +129,27 @@ const Form = (props) => {
               options={forecastOptions}
               onChange={(selected, event) => handleSelectField(selected, event)}
             />
-
           </FormField>
         </Box>
       </Stack>
       <FormField
         label={cmsData.templateFileLabel}
         hint={cmsData.templateFileHint}
-        {...(errors.actualData ? { error: errors.actualData } : {})}
+        {...(errors.file ? { error: errors.file } : {})}
       >
         <Dropzone
           allowMultiple={false}
           allowReorder
-          onInit={() => handleInit()}
           onUpdateFiles={(fileItems) => {
             setFiles(fileItems);
           }}
           maxFiles={1}
           maxFileSize={MAX_FILE_SIZE}
-          server="./"
+          // onAddFileStart={(e) => handleUploadFile(e)}
           acceptedFileTypes={ALLOWED_FILE_TYPES}
           labelMaxFileSizeExceeded={cmsData.uploadFileLargeMessage}
           labelFileTypeNotAllowed={cmsData.labelFileTypeNotAllowed}
         />
-
       </FormField>
       <FormField
         {...(errors.dueDate ? { error: errors.dueDate } : {})}
@@ -170,14 +177,12 @@ const Form = (props) => {
           options={userList}
           isMulti
           name="assignTo"
-          value={values.assignTo}
-          onChange={(selected, event) => {
-            handleSelectField(selected, event)
-          }}
+          value={userList.filter((obj) => values.assignTo.includes(obj.value))}
+          onChange={(selected, event) => handleOwners(selected, event)}
         />
       </FormField>
     </>
-  )
+  );
 };
 
 export default Form;
