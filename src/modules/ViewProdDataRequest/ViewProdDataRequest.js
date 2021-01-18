@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useQuery } from '@apollo/client';
 import PropTypes from 'prop-types';
 import { useLocation, useHistory } from 'react-router';
 import Box from '@dentsu-ui/components/dist/cjs/components/Box';
@@ -12,6 +13,7 @@ import { getDataById, data as mockData } from '../Mock/mockData';
 import Loader from '../../components/loading';
 import VersionHistory from '../VersionHistory/VersionHistory';
 import MoveToComplete from '../../components/MoveToComplete/MoveToComplete';
+import { GET_DATA_REQUESTS } from './queries';
 
 const ViewProdDataRequest = (props) => {
   const { param } = props;
@@ -19,10 +21,15 @@ const ViewProdDataRequest = (props) => {
   const location = useLocation();
   const query = new URLSearchParams(location.search);
   const requestId = query.get('request_id');
+  console.log('>>>>>>>>>>>>>>>>', typeof (requestId))
   const clientCode = query.get('client_code');
-  const [prodRequest, setProdRequest] = useState(getDataById(requestId));
+  // const [prodRequest, setProdRequest] = useState(getDataById(requestId));
+  const [prodRequest, setProdRequest] = useState([]);
   const history = useHistory();
 
+  const { loading, error, data } = useQuery(GET_DATA_REQUESTS, {
+    variables: { id: requestId },
+  });
   const [isUploadModal, setIsUploadModeal] = useState(false);
   const [isRequestModal, setIsRequestModal] = useState(false);
   const [isLoading, setLoading] = useState(true);
@@ -32,6 +39,18 @@ const ViewProdDataRequest = (props) => {
   const handleMoveToCompleteModal = () => {
     setIsRequestModal(true);
   };
+
+  // eslint-disable-next-line consistent-return
+  useEffect(() => {
+    console.log('prod', data);
+    if (loading) {
+      setLoading(false)
+    }
+    if (error) return `Error! ${error}`;
+    if (data) {
+      setProdRequest(data)
+    }
+  }, [data, loading, error]);
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
@@ -73,7 +92,7 @@ const ViewProdDataRequest = (props) => {
         pathname: '/datafield',
         search: `?${queryString}`,
       });
-     return toast({
+      return toast({
         title: '',
         content: PageContent.toastMovedToComplete,
         status: 'success',
@@ -83,8 +102,8 @@ const ViewProdDataRequest = (props) => {
       title: '',
       content: PageContent.failurNotificationMsg,
       status: 'error',
-  });
-};
+    });
+  };
 
   return (
     <>
@@ -93,39 +112,44 @@ const ViewProdDataRequest = (props) => {
       ) : (
         <>
           {isUploadModal && (
-            <UploadFile
-              modalOpen={isUploadModal}
-              setModalOpen={setIsUploadModeal}
-              cmsData={PageContent}
-            />
-          )}
+          <UploadFile
+            modalOpen={isUploadModal}
+            setModalOpen={setIsUploadModeal}
+            cmsData={PageContent}
+          />
+            )}
           {isRequestModal && (
-            <MoveToComplete
-              modalOpen={isRequestModal}
-              setModalOpen={setIsRequestModal}
-              cmsData={PageContent}
-              handleMoveToComplete={() => handleMoveToComplete(false)}
-            />
-          )}
-          <PageController
-            param={param}
-            localMarket={prodRequest.localMarket.label}
-            pageTitle={prodRequest.name}
-            pageMetadata={prodRequest.clientMarket}
-            handleUploadModal={handleUploadModal}
-            isCompleted={prodRequest.isCompleted}
-            handleMoveToCompleteModal={handleMoveToCompleteModal}
-          >
-            <RequestSummary
-              prodRequest={prodRequest}
-              handleEditData={handleEditData}
-            />
-            <Box mt="30px">
-              <VersionHistory />
-            </Box>
-          </PageController>
+          <MoveToComplete
+            modalOpen={isRequestModal}
+            setModalOpen={setIsRequestModal}
+            cmsData={PageContent}
+            handleMoveToComplete={() => handleMoveToComplete(false)}
+          />
+            )}
+          {prodRequest.getDataRequests
+              && (
+                <PageController
+                  param={param}
+                  // localMarket={prodRequest.localMarket.label}
+                  // pageTitle={prodRequest.name}
+                  pageTitle={prodRequest.getDataRequests.data[0].name}
+                  pageMetadata={prodRequest.clientMarket}
+                  handleUploadModal={handleUploadModal}
+                  isCompleted={prodRequest.isCompleted}
+                  handleMoveToCompleteModal={handleMoveToCompleteModal}
+                >
+                  <RequestSummary
+                    // prodRequest={prodRequest}
+                    prodRequest={prodRequest.getDataRequests.data[0]}
+                    handleEditData={handleEditData}
+                  />
+                  <Box mt="30px">
+                    <VersionHistory trackerFiles={prodRequest.getDataRequests.data[0].trackerFiles} />
+                  </Box>
+                </PageController>
+              )}
         </>
-      )}
+        )}
     </>
   );
 };

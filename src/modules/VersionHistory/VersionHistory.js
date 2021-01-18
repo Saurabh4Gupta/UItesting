@@ -18,18 +18,25 @@ import Paragraph from '@dentsu-ui/components/dist/cjs/components/Paragraph';
 import { versionHistory } from '../Mock/mockData';
 import { dataFieldCms as PageContent } from '../../cms';
 
-const VersionHistory = () => {
-  const len = versionHistory.data.length;
+const VersionHistory = (props) => {
+  const { trackerFiles } = props;
+  const reversedData = [...trackerFiles].reverse()
+  console.log("trackerfiles", trackerFiles);
+  // const len = versionHistory.data.length;
+  const len = trackerFiles.length;
+  console.log("len", len)
+
   const LIMIT = 10;
-  const [list, setList] = useState(slice(versionHistory.data, 0, LIMIT));
+  const [list, setList] = useState(slice(reversedData, 0, LIMIT));
   const [index, setIndex] = useState(LIMIT);
 
   const loadMore = () => {
     const newIndex = index + LIMIT;
-    const newList = concat(list, slice(versionHistory.data, index, newIndex));
+    const newList = concat(list, slice(reversedData, index, newIndex));
     setIndex(newIndex);
     setList(newList);
   };
+  console.log("len", list.length)
   return (
     <Layout>
       <Layout.Section>
@@ -42,15 +49,15 @@ const VersionHistory = () => {
             hasTotal={false}
             isSearchable={false}
             items={list}
-            total={versionHistory.data.length}
+            total={reversedData.length}
             renderItem={(item) => {
               const { name, size, type, version } = item;
-              const dataLength = versionHistory.data.length;
+              const dataLength = reversedData.length;
               return (
                 <Link url="/DataMappings.xlsx" style={{ color: 'black' }}>
                   <Stack
                     flexDirection="row"
-                    justifyContent="space-between"
+                    // justifyContent="space-between"
                     style={{ border: '1px solid #f6f6f6' }}
                     mb="2"
                     width="370px"
@@ -80,7 +87,7 @@ const VersionHistory = () => {
                         {type}
                         {dataLength > 1 && (
                           <>
-                            {version === `V${dataLength - 1}.0` && (
+                            {version === `V${dataLength - 0}.0` && (
                               <>
                                 <Divider orientation="vertical" />
                                 <Chip
@@ -96,12 +103,12 @@ const VersionHistory = () => {
                         )}
                       </Box>
                     </Stack>
-                    <Box>
+                    <Box alignItems="flex-end">
                       <Icon
                         style={{
                           marginTop: '15px',
                           marginRight: '10px',
-                          marginLeft: '25px',
+                          marginLeft: '50px',
                         }}
                         icon="download"
                         color="blue"
@@ -126,8 +133,8 @@ const VersionHistory = () => {
               </Button>
             </Box>
           ) : (
-            false
-          )}
+              false
+            )}
         </Card>
       </Layout.Section>
     </Layout>

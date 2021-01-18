@@ -23,6 +23,8 @@ const OtherProductivityData = (props) => {
     reportingYear,
     isCompleted,
     id,
+    owners,
+    trackerTemplate,
   } = prodRequest;
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [market] = useState('');
@@ -58,7 +60,7 @@ const OtherProductivityData = (props) => {
               {PageContent.reportingYear}
             </Caption>
           </Box>
-          {reportingYear.value}
+          {reportingYear}
           <br />
           <br />
           <Box mt="20px" mb="10px">
@@ -71,7 +73,7 @@ const OtherProductivityData = (props) => {
               <Paragraph>
                 {PageContent.actualCapitalized}
                 :
-                <strong>{` ${actualData.label}`}</strong>
+                <strong>{` ${actualData}`}</strong>
               </Paragraph>
             </Box>
             <Divider orientation="vertical" isFlexChild />
@@ -79,7 +81,7 @@ const OtherProductivityData = (props) => {
               <Paragraph>
                 {PageContent.forecastCapitalized}
                 :
-                <strong>{` ${forecastData.label}`}</strong>
+                <strong>{` ${forecastData}`}</strong>
               </Paragraph>
             </Box>
           </Stack>
@@ -98,31 +100,31 @@ const OtherProductivityData = (props) => {
                   {PageContent.assignedTo}
                 </Caption>
               </Box>
-              {assignTo.length === 1
+              {owners.length === 1
               ? (
                 <Chip
                   avatar={{
-                  src: assignTo[0].userImage ? assignTo[0].userImage : '',
-                  name: assignTo[0].label,
+                  src: owners[0].userImage ? owners[0].userImage : '',
+                  name: owners[0].firstName,
                 }}
                 >
-                  {assignTo[0].label}
+                  {owners[0].label}
                 </Chip>
-) : (<AvatarGroup size="xlarge">{assignTo.map((value) => <Avatar name={value.value} src={value.userImage ? value.userImage : ''} />)}</AvatarGroup>)
+) : (<AvatarGroup size="xlarge">{owners.map((value) => <Avatar name={value.value} src={value.userImage ? value.userImage : ''} />)}</AvatarGroup>)
 }
             </Stack>
           </Stack>
-          <TrackerTemplate />
+          <TrackerTemplate trackerTemplate={trackerTemplate} />
         </Stack>
       </Box>
-      <EditData
+      {/* <EditData
         cmsData={PageContent}
         market={market}
         isModalOpen={isModalOpen}
         handleModal={handleModal}
         requestId={id}
         handleEditData={handleEditData}
-      />
+      /> */}
     </>
   );
 };
