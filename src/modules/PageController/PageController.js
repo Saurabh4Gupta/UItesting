@@ -1,16 +1,16 @@
-import React from 'react';
+import React,  { useEffect, useState } from 'react';
 import { Page, Select, FormField } from '@dentsu-ui/components';
 import PropTypes from 'prop-types';
 import { useHistory, useLocation } from 'react-router';
-import { clientList, market as marketOptions } from '../Mock/mockData';
+import { market as marketOptions } from '../Mock/mockData';
 import { dataFieldCms as PageContent } from '../../cms';
 
 const PageController = (props) => {
+  const [clientsListsData, setClientsListsData] = useState({});
   const history = useHistory();
   const location = useLocation();
   const query = new URLSearchParams(location.search);
   const clientCode = query.get('client_code');
-
   const {
     param,
     market,
@@ -21,12 +21,27 @@ const PageController = (props) => {
     isCompleted,
     pageMetadata,
     handleMoveToCompleteModal,
+    clilentsdata,
   } = props;
   const { isViewProduct } = param;
-  const { title, avatar } = clientList.find(
-    (client) => client.clientCode === clientCode,
-  );
-  const contentToShow = isViewProduct ? `Back to ${title}` : `${PageContent.backLabel}`;
+  // const { title, avatar } = clientList.find(
+  //   (client) => client.clientCode === clientCode,
+  // );
+  useEffect(() => {
+    if (clilentsdata) {
+      setClientsListsData(clilentsdata)
+    }
+    }, [clilentsdata]);
+
+  if (clientsListsData.getClientsList) {
+    const { name, avatar } = clientsListsData.getClientsList.data.find(
+    (client) => client.code === clientCode,
+    );
+
+  // const { name, avatar } = clilentdata.getClientsList.data.find(
+  //   (client) => client.code === clientCode,
+  // );
+  const contentToShow = isViewProduct ? `Back to ${name}` : `${PageContent.backLabel}`;
   const clientNavigationHandler = () => (isViewProduct
     ? history.replace(`/datafield?client_code=${clientCode}`)
     : history.replace('/'));
@@ -35,7 +50,7 @@ const PageController = (props) => {
     <>
       <Page
         metadata={pageMetadata}
-        title={!isViewProduct ? title : pageTitle}
+        title={!isViewProduct ? name : pageTitle}
         thumbnail={`/${avatar}`}
 
         breadcrumbs={[
@@ -79,6 +94,7 @@ const PageController = (props) => {
       </Page>
     </>
   );
+} return null
 };
 
 PageController.propTypes = {
@@ -91,6 +107,7 @@ PageController.propTypes = {
   isCompleted: PropTypes.bool,
   pageMetadata: PropTypes.string,
   handleMoveToCompleteModal: PropTypes.func,
+  clilentsdata: PropTypes.JSON,
 };
 
 PageController.defaultProps = {
@@ -103,5 +120,6 @@ PageController.defaultProps = {
   isCompleted: false,
   pageMetadata: '',
   handleMoveToCompleteModal: () => { },
+  clilentsdata: PropTypes.JSON,
 };
 export default PageController;
