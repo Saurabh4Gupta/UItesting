@@ -30,7 +30,7 @@ const CreateData = (props) => {
   const [uploadFile, { loading: fileLoading, error: fileError }] = useMutation(
     FILE_UPLOAD,
   );
-  const [createDataRequest, { loading, error, data: createData }] = useMutation(
+  const [createDataRequest, { loading, error }] = useMutation(
     CREATE_DATA_REQUEST,
   );
   const initialValues = {
@@ -88,9 +88,8 @@ const CreateData = (props) => {
   };
 
   useEffect(() => {
-    closeModalHandler();
     if (fileError) {
-      return toast({
+      toast({
         title: '',
         content: fileError.message,
         status: 'danger',
@@ -101,17 +100,6 @@ const CreateData = (props) => {
   useEffect(() => {
     handleChange({ target: { name: 'localMarket', value: market } });
   }, [market]);
-
-  useEffect(() => {
-    if (createData) {
-      closeModalHandler();
-      return toast({
-        title: '',
-        content: cmsData.toastRequestCreated,
-        status: 'success',
-      });
-    }
-  }, [loading, error, createData, fileLoading]);
 
   const handleCreateData = () => {
     handleModal(true);
@@ -131,7 +119,7 @@ const CreateData = (props) => {
       const fileUrl = reader.result;
       setValues((prevState) => ({
         ...prevState,
-        file: { fileUrl, filename: file.name },
+        file: { fileUrl, filename: file.name, size: file.size },
       }));
       setErrors((prevState) => ({
         ...prevState,
@@ -140,7 +128,7 @@ const CreateData = (props) => {
     };
   };
 
-  const onSubmit = async () => {
+  async function onSubmit() {
     handleSubmit();
     if (isReadyToSubmit) {
       const { file } = values;
@@ -149,7 +137,7 @@ const CreateData = (props) => {
       if (status !== 200) {
         setErrors((prevState) => ({
           ...prevState,
-          file: 'File Upload faild try again',
+          file: cmsData.fileUploadFailed,
         }));
         return;
       }
@@ -161,6 +149,7 @@ const CreateData = (props) => {
         forecastData,
         dueDate,
         assignTo,
+        // eslint-disable-next-line no-shadow
         reportingYear,
       } = values;
       const reqData = {
@@ -176,9 +165,22 @@ const CreateData = (props) => {
         filename: fileData.filename,
       };
 
-      createDataRequest({ variables: { data: reqData } });
+      const {
+        data: {
+          createDataRequests: { status: createDataStatus },
+        },
+      } = await createDataRequest({ variables: { data: reqData } });
+
+      if (createDataStatus === 200) {
+        closeModalHandler();
+        // eslint-disable-next-line consistent-return
+        return toast({
+          title: cmsData.toastRequestCreated,
+          status: 'success',
+        });
+      }
     }
-  };
+  }
 
   return (
     <>
