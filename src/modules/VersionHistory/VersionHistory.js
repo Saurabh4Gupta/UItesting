@@ -74,7 +74,6 @@ const VersionHistory = (props) => {
                         />
                       </Card.Thumbnail>
                     </Box>
-
                     <Stack flexDirection="column" mb="20px">
                       <Box mt="15px" ml="10px">
                         <Paragraph style={{ fontSize: '12px' }} isBold>
