@@ -2,12 +2,14 @@
 import React, { useState, useEffect } from 'react';
 import { Box } from '@dentsu-ui/components';
 import { useLocation } from 'react-router';
+import { useQuery } from '@apollo/client';
 import PageController from '../PageController/PageController';
 import DataList from './DataList';
 import { dataFieldCms as PageContent } from '../../cms';
 import { getData } from '../Mock/mockData';
 import UploadFile from '../FileUpload/UploadFile';
 import withPageController from '../../hoc/withPageController';
+import GET_LIST_CLIENT from '../ClientList/query';
 
 const DataField = (props) => {
   const location = useLocation();
@@ -27,6 +29,9 @@ const DataField = (props) => {
     setMarket(selected);
   };
 
+  const { data } = useQuery(GET_LIST_CLIENT, {
+    notifyOnNetworkStatusChange: true,
+  });
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
@@ -34,7 +39,6 @@ const DataField = (props) => {
       setCompleteDataList(getData(market.value, 'complete'));
     }, 2000);
   }, []);
-
   return (
     <>
       <Box mb="200px">
@@ -45,6 +49,7 @@ const DataField = (props) => {
           pageTitle=""
           pageMetadata="Client Overview"
           isCompleted={false}
+          clilentsdata={data}
         >
           <UploadFile
             cmsData={PageContent}

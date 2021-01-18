@@ -85,7 +85,6 @@ const ViewProdDataRequest = (props) => {
       status: 'error',
   });
 };
-
   return (
     <>
       {isLoading ? (

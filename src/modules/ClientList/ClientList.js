@@ -1,12 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+// import React, { useState } from 'react';
 import { Box, List, Link, Image, Page } from '@dentsu-ui/components';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router';
-import { clientList } from '../Mock/mockData';
+import { useQuery } from '@apollo/client';
+// import { clientList } from '../Mock/mockData';
 import Loader from '../../components/loading';
+import Error from '../../components/Error/Error'
+import GET_LIST_CLIENT from './query';
 
 const ClientList = (props) => {
-  const [isLoading, setLoading] = useState(true);
+ // const [isLoading, setLoading] = useState(true);
   const { cmsData } = props;
   const history = useHistory();
   const showClientDetails = (clientCode) => {
@@ -16,11 +20,20 @@ const ClientList = (props) => {
       search: `?${queryString}`,
     });
   };
-  useEffect(() => {
-    setTimeout(() => {
-      setLoading(false);
-    }, 3000);
-  }, []);
+  const { data, error, loading } = useQuery(GET_LIST_CLIENT, {
+    notifyOnNetworkStatusChange: true,
+  });
+  // useEffect(() => {
+  //   if (data) {
+  //     setClientData(data);
+  //   }
+  //   if (loading) return <Loader />;
+  //   if (error) return <Error />;
+  //   }, [data, error, loading]);
+  if (loading) return <Loader />;
+  if (error) return <Error />;
+  // if (data) { setClientData(data) }
+ // console.log('clientData', clientData.getClientsList.data);
   return (
     <>
       <Box mb="200px" ml="40px" mr="40px">
@@ -28,24 +41,25 @@ const ClientList = (props) => {
           title={cmsData.viewClientsHeading}
           description={cmsData.viewClientsCaption}
         >
-          {isLoading ? (
+          {/* {isLoading ? (
             <Loader />
-          ) : (
-            <List
-              hasTotal={false}
-              isSearchable={false}
-              items={clientList}
-              renderItem={(item, index) => {
-                const { title, clientCode, avatar } = item;
+          ) : ( */}
+          <List
+            hasTotal={false}
+            isSearchable={false}
+            //  items={clientList}
+            items={data.getClientsList.data}
+            renderItem={(item, index) => {
+                const { name, code, avatar } = item;
                 return (
                   <List.Row
                     key={index}
                     metadata={(
                       <Link
                         style={{ color: 'black', textDecoration: 'none' }}
-                        onClick={() => showClientDetails(clientCode)}
+                        onClick={() => showClientDetails(code)}
                       >
-                        {title}
+                        {name}
                       </Link>
                     )}
                     media={(
@@ -54,14 +68,14 @@ const ClientList = (props) => {
                           src={avatar}
                           size="30px"
                           fallbackSrc="https://via.placeholder.com/150"
-                          onClick={() => showClientDetails(clientCode)}
+                          onClick={() => showClientDetails(code)}
                         />
                       </Link>
                     )}
                     actions={(
                       <Link
                         iconLeft="layers"
-                        onClick={() => showClientDetails(clientCode)}
+                        onClick={() => showClientDetails(code)}
                       >
                         {cmsData.viewDetails}
                       </Link>
@@ -69,8 +83,8 @@ const ClientList = (props) => {
                   />
                 );
               }}
-            />
-          )}
+          />
+          {/* )} */}
         </Page>
       </Box>
     </>
