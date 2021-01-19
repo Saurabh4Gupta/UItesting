@@ -1,12 +1,13 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { useQuery } from '@apollo/client';
 import { Caption, Subheading, TextContainer, Button, Stack, Modal } from '@dentsu-ui/components';
 import PropTypes from 'prop-types';
 import Form from './Form'
 import useCustomForm from '../../hooks/useCustomForm';
 import validationRule from '../../utils/validate';
-import { options, monthOptions, reportingYear } from '../Mock/mockData'
+import { monthOptions, reportingYear } from '../Mock/mockData'
 import { GET_USERS } from './queries';
+import { MarketOptionsContext } from '../../contexts/marketOptions';
 
 const CreateData = (props) => {
   const [userRequest, setUserRequest] = useState([]);
@@ -43,7 +44,6 @@ const CreateData = (props) => {
 
   // eslint-disable-next-line consistent-return
   useEffect(() => {
-    console.log('userList', data);
     if (loading) {
       setLoading(false)
     }
@@ -71,6 +71,7 @@ const CreateData = (props) => {
   const handleCreateData = () => {
     handleModal(true);
   };
+  const marketOptions = useContext(MarketOptionsContext);
 
   return (
     <>
@@ -83,7 +84,7 @@ const CreateData = (props) => {
             handleSelectField={handleSelectField}
             errors={errors}
             cmsData={cmsData}
-            options={options}
+            options={marketOptions}
             monthOptions={monthOptions}
             reportingYear={reportingYear}
             forecastOptions={forecastOptions}
