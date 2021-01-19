@@ -10,6 +10,7 @@ import { getData } from '../Mock/mockData';
 import UploadFile from '../FileUpload/UploadFile';
 import withPageController from '../../hoc/withPageController';
 import GET_LIST_CLIENT from '../ClientList/query';
+import { MarketOptionsContext } from '../../contexts/marketOptions';
 
 const DataField = (props) => {
   const location = useLocation();
@@ -32,6 +33,23 @@ const DataField = (props) => {
   const { data } = useQuery(GET_LIST_CLIENT, {
     notifyOnNetworkStatusChange: true,
   });
+
+  const marketOptions = [{ value: '', label: 'All markets' }];
+
+  if (data) {
+    console.log('datasaket', data.getClientsList.data);
+    const { markets } = data.getClientsList.data.find(
+      (client) => client.code === clientCode,
+    );
+    markets.forEach((clientMarket) => {
+      marketOptions.push({
+        value: clientMarket.code,
+        label: clientMarket.name,
+        overviewId: clientMarket.overviewId,
+      });
+    });
+  }
+
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
@@ -41,34 +59,36 @@ const DataField = (props) => {
   }, []);
   return (
     <>
-      <Box mb="200px">
-        <PageController
-          param={param}
-          market={market}
-          handleMarket={handleMarket}
-          pageTitle=""
-          pageMetadata="Client Overview"
-          isCompleted={false}
-          clilentsdata={data}
-        >
-          <UploadFile
-            cmsData={PageContent}
-            modalOpen={isUploadModal}
-            setModalOpen={setIsUploadModal}
-          />
-          <DataList
-            cmsData={PageContent}
+      <MarketOptionsContext.Provider value={marketOptions}>
+        <Box mb="200px">
+          <PageController
+            param={param}
             market={market}
-            completeDataList={completeDataList}
-            clientCode={clientCode}
-            dataList={dataList}
-            setDataList={setDataList}
-            setCompleteDataList={setCompleteDataList}
-            loading={isLoading}
-            setMarket={setMarket}
-          />
-        </PageController>
-      </Box>
+            handleMarket={handleMarket}
+            pageTitle=""
+            pageMetadata="Client Overview"
+            isCompleted={false}
+            clilentsdata={data}
+          >
+            <UploadFile
+              cmsData={PageContent}
+              modalOpen={isUploadModal}
+              setModalOpen={setIsUploadModal}
+            />
+            <DataList
+              cmsData={PageContent}
+              market={market}
+              completeDataList={completeDataList}
+              clientCode={clientCode}
+              dataList={dataList}
+              setDataList={setDataList}
+              setCompleteDataList={setCompleteDataList}
+              loading={isLoading}
+              setMarket={setMarket}
+            />
+          </PageController>
+        </Box>
+      </MarketOptionsContext.Provider>
     </>
   );
 };
