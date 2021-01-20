@@ -1,13 +1,12 @@
 import React, { useContext } from 'react';
 import { Page, Select, FormField } from '@dentsu-ui/components';
 import PropTypes from 'prop-types';
-import { useHistory, useLocation } from 'react-router';
+import { useHistory } from 'react-router';
 import { dataFieldCms as PageContent } from '../../cms';
 import { MarketOptionsContext } from '../../contexts/marketOptions';
 
 const PageController = (props) => {
   const history = useHistory();
-  const location = useLocation();
   // const query = new URLSearchParams(location.search);
   // const clientCode = query.get('client_code');
   const {
@@ -25,16 +24,14 @@ const PageController = (props) => {
   const { isViewProduct } = param;
   const marketOptions = useContext(MarketOptionsContext);
 
-  console.log('>>>>>>>>>>>>>>', clientList);
   const { name, avatar, clientCode } = clientList;
 
   const contentToShow = isViewProduct
     ? `Back to ${name}`
     : `${PageContent.backLabel}`;
-  const clientNavigationHandler = () =>
-    isViewProduct
+  const clientNavigationHandler = () => (isViewProduct
       ? history.replace(`/datafield?client_code=${clientCode}`)
-      : history.replace('/');
+      : history.replace('/'));
 
   return (
     <>
@@ -59,8 +56,8 @@ const PageController = (props) => {
             : false
         }
         secondaryActions={
-          isViewProduct &&
-          !isCompleted && [
+          isViewProduct
+          && !isCompleted && [
             {
               content: 'Move to complete',
               onClick: () => handleMoveToCompleteModal(),
@@ -84,7 +81,8 @@ const PageController = (props) => {
           isCompleted
             ? { type: 'neutral', label: 'Complete', hasStatusLight: true }
             : ''
-        }>
+        }
+      >
         {children}
       </Page>
     </>

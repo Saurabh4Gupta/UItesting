@@ -11,7 +11,7 @@ import { ClientList } from './contexts/marketOptions';
 
 const Application = () => {
   const { token } = useAuth();
-  const { data: clientList, loading, error } = useQuery(GET_LIST_CLIENT);
+  const { data: clientList, loading } = useQuery(GET_LIST_CLIENT);
   if (loading) return <Loading />;
   return (
     <ApolloProvider client={apolloClient(token)}>

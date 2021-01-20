@@ -15,6 +15,7 @@ import Card from '@dentsu-ui/components/dist/cjs/components/Card';
 import Paragraph from '@dentsu-ui/components/dist/cjs/components/Paragraph';
 import ActionBtn from './ActionBtn';
 import DeleteData from '../CreateData/DeleteData';
+import { dateTimeFormat } from '../../utils/helper'
 
 const TableList = (props) => {
   const {
@@ -93,7 +94,6 @@ const TableList = (props) => {
           },
         ]}
         renderItem={(item, index) => {
-          console.log('>>>>>>>', item);
           const {
             client,
             overviewId,
@@ -113,7 +113,8 @@ const TableList = (props) => {
                   alignItems="center"
                   flexDirection="row"
                   justifyContent="space-between"
-                  width="80%">
+                  width="80%"
+                >
                   <Box width="25%">
                     <b>{`${client} ${localMarket.label}`}</b>
                   </Box>
@@ -137,22 +138,22 @@ const TableList = (props) => {
                     </Box>
                   )}
                   <Box width="30%">
-                    {`${cmsData.lastUpdate}: ${new Date(
-                      updatedAt,
-                    ).getDate()} at `}
+                    {`${cmsData.lastUpdate}: ${dateTimeFormat(updatedAt)}`}
                   </Box>
                 </Stack>
                 <Stack
                   alignItems="center"
                   flexDirection="row"
                   justifyContent="flex-end"
-                  width="20%">
+                  width="20%"
+                >
                   <Box>
                     <Button
                       variant="ghost"
                       size="small"
                       iconLeft="layers"
-                      onClick={() => showDataRequestDetails(id)}>
+                      onClick={() => showDataRequestDetails(overviewId)}
+                    >
                       {cmsData.viewDetails}
                     </Button>
                   </Box>
@@ -162,11 +163,10 @@ const TableList = (props) => {
                       actionName={actionName}
                       deleteBtn={cmsData.delete}
                       showStatus={showStatus}
-                      handleDeleteModel={() => handleDeleteModel(id)}
-                      handleMoveToCompleteModel={() =>
-                        handleMoveToCompleteModel(id)
+                      handleDeleteModel={() => handleDeleteModel(overviewId)}
+                      handleMoveToCompleteModel={() => handleMoveToCompleteModel(overviewId)
                       }
-                      handleMoveToOngoing={() => handleMoveToOngoing(id)}
+                      handleMoveToOngoing={() => handleMoveToOngoing(overviewId)}
                     />
                   </Box>
                 </Stack>

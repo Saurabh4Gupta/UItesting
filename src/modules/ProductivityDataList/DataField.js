@@ -1,3 +1,4 @@
+/* eslint-disable no-shadow */
 /* eslint-disable react/prop-types */
 import React, { useState, useEffect, useContext } from 'react';
 import { Box } from '@dentsu-ui/components';
@@ -9,6 +10,7 @@ import { dataFieldCms as PageContent } from '../../cms';
 import UploadFile from '../FileUpload/UploadFile';
 import withPageController from '../../hoc/withPageController';
 import { ClientList, MarketOptionsContext } from '../../contexts/marketOptions';
+import { parsedDataList } from '../../utils/helper'
 import GET_DATA_LIST from './query';
 
 const DataField = (props) => {
@@ -27,7 +29,6 @@ const DataField = (props) => {
   });
   const [isUploadModal, setIsUploadModal] = useState(false);
   const [dataList, setdataList] = useState({});
-  const [clientData, setClientData] = useState({});
   const handleMarket = (selected) => {
     setMarket(selected);
   };
@@ -52,22 +53,12 @@ const DataField = (props) => {
   const { name, avatar } = clientList.find(
     (client) => client.code === clientCode,
   );
-  const parsedDataList = (res) => {
-    const parsedRes = res.map((key) => {
-      const marketData = marketOptions.find(
-        (value) => key.overviewId === value.overviewId,
-      );
-      return Object.assign({}, key, { localMarket: marketData, client: name });
-    });
-    return parsedRes;
-  };
-
   useEffect(() => {
     if (listData) {
       const {
         data: { dataList, totalCount },
       } = listData.getDataList;
-      const paredData = parsedDataList(dataList);
+      const paredData = parsedDataList(dataList, marketOptions, name);
       setdataList({ dataList: paredData, totalCount });
     }
   }, [listData]);
@@ -83,7 +74,8 @@ const DataField = (props) => {
             pageTitle=""
             pageMetadata="Client Overview"
             isCompleted={false}
-            clientList={{ name, avatar, clientCode }}>
+            clientList={{ name, avatar, clientCode }}
+          >
             <UploadFile
               cmsData={PageContent}
               modalOpen={isUploadModal}
