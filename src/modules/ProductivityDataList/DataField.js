@@ -10,7 +10,7 @@ import { dataFieldCms as PageContent } from '../../cms';
 import UploadFile from '../FileUpload/UploadFile';
 import withPageController from '../../hoc/withPageController';
 import { ClientList, MarketOptionsContext } from '../../contexts/marketOptions';
-import { parsedDataList } from '../../utils/helper'
+import { parsedDataList } from '../../utils/helper';
 import GET_DATA_LIST from './query';
 
 const DataField = (props) => {
@@ -33,14 +33,16 @@ const DataField = (props) => {
     setMarket(selected);
   };
   const clientList = useContext(ClientList);
-  const { data: listData, loading: listLoading } = useQuery(GET_DATA_LIST, {
-    variables: { data: { clientCode, marketCode: market.value } },
-  });
+  const { data: listData, loading: listLoading, refetch } = useQuery(
+    GET_DATA_LIST,
+    {
+      variables: { data: { clientCode, marketCode: market.value } },
+    },
+  );
 
   const marketOptions = [
     { value: 'All', label: 'All markets', overviewId: '12' },
   ];
-
   const { markets } = clientList.find((client) => client.code === clientCode);
   markets.forEach((clientMarket) => {
     marketOptions.push({
@@ -74,8 +76,7 @@ const DataField = (props) => {
             pageTitle=""
             pageMetadata="Client Overview"
             isCompleted={false}
-            clientList={{ name, avatar, clientCode }}
-          >
+            clientList={{ name, avatar, clientCode }}>
             <UploadFile
               cmsData={PageContent}
               modalOpen={isUploadModal}
@@ -90,6 +91,7 @@ const DataField = (props) => {
               setCompleteDataList={setCompleteDataList}
               loading={listLoading}
               setMarket={setMarket}
+              refetch={refetch}
             />
           </PageController>
         </Box>

@@ -24,7 +24,7 @@ import CREATE_DATA_REQUEST from './mutation';
 
 const toast = Toast();
 const CreateData = (props) => {
-  const { cmsData, market, isModalOpen, handleModal } = props;
+  const { cmsData, market, isModalOpen, handleModal, refetch } = props;
   const [isReadyToSubmit, setIsReadyToSubmit] = useState(false);
 
   const [uploadFile, { loading: fileLoading, error: fileError }] = useMutation(
@@ -107,6 +107,7 @@ const CreateData = (props) => {
       const { status } = createData.createDataRequests;
       if (status === 200) {
         closeModalHandler();
+        refetch();
         return toast({
           title: cmsData.toastRequestCreated,
           status: 'success',
