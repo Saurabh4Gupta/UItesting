@@ -1,4 +1,4 @@
-import React,  { useEffect, useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import { Page, Select, FormField } from '@dentsu-ui/components';
 import PropTypes from 'prop-types';
 import { useHistory, useLocation } from 'react-router';
@@ -6,11 +6,10 @@ import { dataFieldCms as PageContent } from '../../cms';
 import { MarketOptionsContext } from '../../contexts/marketOptions';
 
 const PageController = (props) => {
-  const [clientsListsData, setClientsListsData] = useState({});
   const history = useHistory();
   const location = useLocation();
-  const query = new URLSearchParams(location.search);
-  const clientCode = query.get('client_code');
+  // const query = new URLSearchParams(location.search);
+  // const clientCode = query.get('client_code');
   const {
     param,
     market,
@@ -21,25 +20,21 @@ const PageController = (props) => {
     isCompleted,
     pageMetadata,
     handleMoveToCompleteModal,
-    clilentsdata,
+    clientList,
   } = props;
   const { isViewProduct } = param;
   const marketOptions = useContext(MarketOptionsContext);
-  useEffect(() => {
-    if (clilentsdata) {
-      setClientsListsData(clilentsdata)
-    }
-    }, [clilentsdata]);
 
-  if (clientsListsData.getClientsList) {
-    const { name, avatar } = clientsListsData.getClientsList.data.find(
-    (client) => client.code === clientCode,
-    );
+  console.log('>>>>>>>>>>>>>>', clientList);
+  const { name, avatar, clientCode } = clientList;
 
-  const contentToShow = isViewProduct ? `Back to ${name}` : `${PageContent.backLabel}`;
-  const clientNavigationHandler = () => (isViewProduct
-    ? history.replace(`/datafield?client_code=${clientCode}`)
-    : history.replace('/'));
+  const contentToShow = isViewProduct
+    ? `Back to ${name}`
+    : `${PageContent.backLabel}`;
+  const clientNavigationHandler = () =>
+    isViewProduct
+      ? history.replace(`/datafield?client_code=${clientCode}`)
+      : history.replace('/');
 
   return (
     <>
@@ -47,7 +42,6 @@ const PageController = (props) => {
         metadata={pageMetadata}
         title={!isViewProduct ? name : pageTitle}
         thumbnail={`/${avatar}`}
-
         breadcrumbs={[
           {
             content: contentToShow,
@@ -57,20 +51,22 @@ const PageController = (props) => {
         primaryAction={
           isViewProduct && !isCompleted
             ? {
-              content: `${PageContent.uploadButtonText}`,
-              onClick: () => handleUploadModal(),
-              isDisabled: false,
-              icon: 'upload',
-            }
+                content: `${PageContent.uploadButtonText}`,
+                onClick: () => handleUploadModal(),
+                isDisabled: false,
+                icon: 'upload',
+              }
             : false
         }
         secondaryActions={
-          isViewProduct && !isCompleted
-          && [{
-            content: 'Move to complete',
-            onClick: () => handleMoveToCompleteModal(),
-            isDisabled: false,
-          }]
+          isViewProduct &&
+          !isCompleted && [
+            {
+              content: 'Move to complete',
+              onClick: () => handleMoveToCompleteModal(),
+              isDisabled: false,
+            },
+          ]
         }
         controls={
           !isViewProduct && (
@@ -82,14 +78,17 @@ const PageController = (props) => {
                 onChange={handleMarket}
               />
             </FormField>
-          )}
-        status={isCompleted ? { type: 'neutral', label: 'Complete', hasStatusLight: true } : ''}
-      >
+          )
+        }
+        status={
+          isCompleted
+            ? { type: 'neutral', label: 'Complete', hasStatusLight: true }
+            : ''
+        }>
         {children}
       </Page>
     </>
   );
-} return null
 };
 
 PageController.propTypes = {
@@ -102,19 +101,19 @@ PageController.propTypes = {
   isCompleted: PropTypes.bool,
   pageMetadata: PropTypes.string,
   handleMoveToCompleteModal: PropTypes.func,
-  clilentsdata: PropTypes.JSON,
+  clientList: PropTypes.object,
 };
 
 PageController.defaultProps = {
   param: { isViewProduct: false },
   market: { value: '', label: 'All markets' },
   children: '',
-  handleMarket: () => { },
-  handleUploadModal: () => { },
+  handleMarket: () => {},
+  handleUploadModal: () => {},
   pageTitle: '',
   isCompleted: false,
   pageMetadata: '',
-  handleMoveToCompleteModal: () => { },
-  clilentsdata: PropTypes.JSON,
+  handleMoveToCompleteModal: () => {},
+  clientList: {},
 };
 export default PageController;

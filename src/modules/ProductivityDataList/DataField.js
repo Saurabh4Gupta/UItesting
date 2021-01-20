@@ -1,17 +1,15 @@
 /* eslint-disable react/prop-types */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Box } from '@dentsu-ui/components';
 import { useLocation } from 'react-router';
 import { useQuery } from '@apollo/client';
 import PageController from '../PageController/PageController';
 import DataList from './DataList';
 import { dataFieldCms as PageContent } from '../../cms';
-import { getData } from '../Mock/mockData';
 import UploadFile from '../FileUpload/UploadFile';
 import withPageController from '../../hoc/withPageController';
-import GET_LIST_CLIENT from '../ClientList/query';
-import { MarketOptionsContext } from '../../contexts/marketOptions';
-import GET_DATA_LIST from './DataListQuery';
+import { ClientList, MarketOptionsContext } from '../../contexts/marketOptions';
+import GET_DATA_LIST from './query';
 
 const DataField = (props) => {
   const location = useLocation();
@@ -19,60 +17,61 @@ const DataField = (props) => {
   const query = new URLSearchParams(location.search);
   const clientCode = query.get('client_code');
   const [market, setMarket] = useState({
-    value: '',
+    value: 'All',
     label: 'All markets',
-    id: '0',
+    overviewId: '0',
   });
-  const [dataList, setDataList] = useState({ data: [], totalCount: 0 });
   const [completeDataList, setCompleteDataList] = useState({
     data: [],
     totalCount: 0,
   });
   const [isUploadModal, setIsUploadModal] = useState(false);
-  const [isLoading, setLoading] = useState(true);
-  const [getDataList, setdataList] = useState({});
+  const [dataList, setdataList] = useState({});
+  const [clientData, setClientData] = useState({});
   const handleMarket = (selected) => {
     setMarket(selected);
   };
-
-  const { data } = useQuery(GET_LIST_CLIENT, {
-    notifyOnNetworkStatusChange: true,
-  });
-  const  { data: datalist }  = useQuery(GET_DATA_LIST, {
-    notifyOnNetworkStatusChange: true,
-    variables: {
-      marketCode: market.value,
-      clientCode,
-    },
+  const clientList = useContext(ClientList);
+  const { data: listData, loading: listLoading } = useQuery(GET_DATA_LIST, {
+    variables: { data: { clientCode, marketCode: market.value } },
   });
 
-  const marketOptions = [{ value: '', label: 'All markets' }];
+  const marketOptions = [
+    { value: 'All', label: 'All markets', overviewId: '12' },
+  ];
 
-  if (data) {
-    const { markets } = data.getClientsList.data.find(
-      (client) => client.code === clientCode,
-    );
-    markets.forEach((clientMarket) => {
-      marketOptions.push({
-        value: clientMarket.code,
-        label: clientMarket.name,
-        overviewId: clientMarket.overviewId,
-      });
+  const { markets } = clientList.find((client) => client.code === clientCode);
+  markets.forEach((clientMarket) => {
+    marketOptions.push({
+      value: clientMarket.code,
+      label: clientMarket.name,
+      overviewId: clientMarket.overviewId,
     });
-  }
+  });
+
+  const { name, avatar } = clientList.find(
+    (client) => client.code === clientCode,
+  );
+  const parsedDataList = (res) => {
+    const parsedRes = res.map((key) => {
+      const marketData = marketOptions.find(
+        (value) => key.overviewId === value.overviewId,
+      );
+      return Object.assign({}, key, { localMarket: marketData, client: name });
+    });
+    return parsedRes;
+  };
 
   useEffect(() => {
-    if (datalist) {
-      console.log('dataListsssssssss', datalist.data);
-      setdataList(datalist.data)
+    if (listData) {
+      const {
+        data: { dataList, totalCount },
+      } = listData.getDataList;
+      const paredData = parsedDataList(dataList);
+      setdataList({ dataList: paredData, totalCount });
     }
-    setTimeout(() => {
-      setLoading(false);
-      setDataList(getData(market.value, 'ongoing'));
-      setCompleteDataList(getData(market.value, 'complete'));
-    }, 2000);
-  }, []);
-console.log('getDataLists', getDataList);
+  }, [listData]);
+
   return (
     <>
       <MarketOptionsContext.Provider value={marketOptions}>
@@ -84,8 +83,7 @@ console.log('getDataLists', getDataList);
             pageTitle=""
             pageMetadata="Client Overview"
             isCompleted={false}
-            clilentsdata={data}
-          >
+            clientList={{ name, avatar, clientCode }}>
             <UploadFile
               cmsData={PageContent}
               modalOpen={isUploadModal}
@@ -97,9 +95,8 @@ console.log('getDataLists', getDataList);
               completeDataList={completeDataList}
               clientCode={clientCode}
               dataList={dataList}
-              setDataList={setDataList}
               setCompleteDataList={setCompleteDataList}
-              loading={isLoading}
+              loading={listLoading}
               setMarket={setMarket}
             />
           </PageController>
@@ -107,5 +104,5 @@ console.log('getDataLists', getDataList);
       </MarketOptionsContext.Provider>
     </>
   );
-}
+};
 export default withPageController(DataField);

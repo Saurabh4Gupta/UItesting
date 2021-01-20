@@ -93,64 +93,66 @@ const TableList = (props) => {
           },
         ]}
         renderItem={(item, index) => {
+          console.log('>>>>>>>', item);
           const {
             client,
+            overviewId,
             localMarket,
             name,
             actualData,
             forecastData,
-            year,
+            reportingYear,
             quarter,
             updatedAt,
-            status,
-            id,
+            isOverDue,
           } = item;
           return (
-            <div key={index}>
+            <div key={overviewId}>
               <Stack padding="15px">
                 <Stack
                   alignItems="center"
                   flexDirection="row"
                   justifyContent="space-between"
-                  width="80%"
-                >
+                  width="80%">
                   <Box width="25%">
                     <b>{`${client} ${localMarket.label}`}</b>
                   </Box>
                   <Box width="32%">
                     <b>{name}</b>
                     <Caption>
-                      {`${year} ${quarter}: ${actualData.label} ${cmsData.actual} + ${forecastData.label} ${cmsData.forecast}`}
+                      {`${reportingYear} ${quarter}: ${actualData} months ${cmsData.actual} + ${forecastData} months ${cmsData.forecast}`}
                     </Caption>
                   </Box>
                   {showStatus === false ? (
                     ''
                   ) : (
                     <Box width="13%">
-                      {status === cmsData.overdue ? (
+                      {isOverDue === cmsData.overdue ? (
                         <Chip variant="status" status="warning" hasStatusLight>
                           {cmsData.overdue}
                         </Chip>
-                        ) : (
-                            ''
-                          )}
+                      ) : (
+                        ''
+                      )}
                     </Box>
-                    )}
-                  <Box width="30%">{`${cmsData.lastUpdate}: ${updatedAt}`}</Box>
+                  )}
+                  <Box width="30%">
+                    {`${cmsData.lastUpdate}: ${new Date(
+                      updatedAt,
+                    ).getDate()} at `}
+                  </Box>
                 </Stack>
                 <Stack
                   alignItems="center"
                   flexDirection="row"
                   justifyContent="flex-end"
-                  width="20%"
-                >
+                  width="20%">
                   <Box>
                     <Button
                       variant="ghost"
                       size="small"
                       iconLeft="layers"
-                      onClick={() => showDataRequestDetails(id)}
-                    >
+                      onClick={() => showDataRequestDetails(id)}>
                       {cmsData.viewDetails}
                     </Button>
                   </Box>
@@ -161,7 +163,8 @@ const TableList = (props) => {
                       deleteBtn={cmsData.delete}
                       showStatus={showStatus}
                       handleDeleteModel={() => handleDeleteModel(id)}
-                      handleMoveToCompleteModel={() => handleMoveToCompleteModel(id)
+                      handleMoveToCompleteModel={() =>
+                        handleMoveToCompleteModel(id)
                       }
                       handleMoveToOngoing={() => handleMoveToOngoing(id)}
                     />
