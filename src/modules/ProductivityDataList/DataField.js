@@ -17,7 +17,11 @@ const DataField = (props) => {
   const { param } = props;
   const query = new URLSearchParams(location.search);
   const clientCode = query.get('client_code');
-  const [market, setMarket] = useState({ value: '', label: 'All markets' });
+  const [market, setMarket] = useState({
+    value: '',
+    label: 'All markets',
+    id: '0',
+  });
   const [dataList, setDataList] = useState({ data: [], totalCount: 0 });
   const [completeDataList, setCompleteDataList] = useState({
     data: [],
