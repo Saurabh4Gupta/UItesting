@@ -10,6 +10,8 @@ import { getData } from '../Mock/mockData';
 import UploadFile from '../FileUpload/UploadFile';
 import withPageController from '../../hoc/withPageController';
 import GET_LIST_CLIENT from '../ClientList/query';
+import GET_DATA_LIST from './DataListQuery';
+
 
 const DataField = (props) => {
   const location = useLocation();
@@ -24,7 +26,7 @@ const DataField = (props) => {
   });
   const [isUploadModal, setIsUploadModal] = useState(false);
   const [isLoading, setLoading] = useState(true);
-
+  const [getDataLists, setdataLists] = useState({});
   const handleMarket = (selected) => {
     setMarket(selected);
   };
@@ -32,13 +34,26 @@ const DataField = (props) => {
   const { data } = useQuery(GET_LIST_CLIENT, {
     notifyOnNetworkStatusChange: true,
   });
+  const  { data: datalist }  = useQuery(GET_DATA_LIST, {
+    notifyOnNetworkStatusChange: true,
+    variables: {
+      marketCode: market.value,
+      clientCode,
+    },
+  });
+
   useEffect(() => {
+    if (datalist) {
+      console.log('dataListsssssssss', datalist.data);
+      setdataLists(datalist.data)
+    }
     setTimeout(() => {
       setLoading(false);
       setDataList(getData(market.value, 'ongoing'));
       setCompleteDataList(getData(market.value, 'complete'));
     }, 2000);
   }, []);
+console.log('getDataLists', getDataLists);
   return (
     <>
       <Box mb="200px">
@@ -71,6 +86,5 @@ const DataField = (props) => {
       </Box>
     </>
   );
-};
-
+}
 export default withPageController(DataField);
