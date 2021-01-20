@@ -10,15 +10,19 @@ import { getData } from '../Mock/mockData';
 import UploadFile from '../FileUpload/UploadFile';
 import withPageController from '../../hoc/withPageController';
 import GET_LIST_CLIENT from '../ClientList/query';
+import { MarketOptionsContext } from '../../contexts/marketOptions';
 import GET_DATA_LIST from './DataListQuery';
-
 
 const DataField = (props) => {
   const location = useLocation();
   const { param } = props;
   const query = new URLSearchParams(location.search);
   const clientCode = query.get('client_code');
-  const [market, setMarket] = useState({ value: '', label: 'All markets' });
+  const [market, setMarket] = useState({
+    value: '',
+    label: 'All markets',
+    id: '0',
+  });
   const [dataList, setDataList] = useState({ data: [], totalCount: 0 });
   const [completeDataList, setCompleteDataList] = useState({
     data: [],
@@ -26,7 +30,7 @@ const DataField = (props) => {
   });
   const [isUploadModal, setIsUploadModal] = useState(false);
   const [isLoading, setLoading] = useState(true);
-  const [getDataLists, setdataLists] = useState({});
+  const [getDataList, setdataList] = useState({});
   const handleMarket = (selected) => {
     setMarket(selected);
   };
@@ -42,10 +46,25 @@ const DataField = (props) => {
     },
   });
 
+  const marketOptions = [{ value: '', label: 'All markets' }];
+
+  if (data) {
+    const { markets } = data.getClientsList.data.find(
+      (client) => client.code === clientCode,
+    );
+    markets.forEach((clientMarket) => {
+      marketOptions.push({
+        value: clientMarket.code,
+        label: clientMarket.name,
+        overviewId: clientMarket.overviewId,
+      });
+    });
+  }
+
   useEffect(() => {
     if (datalist) {
       console.log('dataListsssssssss', datalist.data);
-      setdataLists(datalist.data)
+      setdataList(datalist.data)
     }
     setTimeout(() => {
       setLoading(false);
@@ -53,37 +72,39 @@ const DataField = (props) => {
       setCompleteDataList(getData(market.value, 'complete'));
     }, 2000);
   }, []);
-console.log('getDataLists', getDataLists);
+console.log('getDataLists', getDataList);
   return (
     <>
-      <Box mb="200px">
-        <PageController
-          param={param}
-          market={market}
-          handleMarket={handleMarket}
-          pageTitle=""
-          pageMetadata="Client Overview"
-          isCompleted={false}
-          clilentsdata={data}
-        >
-          <UploadFile
-            cmsData={PageContent}
-            modalOpen={isUploadModal}
-            setModalOpen={setIsUploadModal}
-          />
-          <DataList
-            cmsData={PageContent}
+      <MarketOptionsContext.Provider value={marketOptions}>
+        <Box mb="200px">
+          <PageController
+            param={param}
             market={market}
-            completeDataList={completeDataList}
-            clientCode={clientCode}
-            dataList={dataList}
-            setDataList={setDataList}
-            setCompleteDataList={setCompleteDataList}
-            loading={isLoading}
-            setMarket={setMarket}
-          />
-        </PageController>
-      </Box>
+            handleMarket={handleMarket}
+            pageTitle=""
+            pageMetadata="Client Overview"
+            isCompleted={false}
+            clilentsdata={data}
+          >
+            <UploadFile
+              cmsData={PageContent}
+              modalOpen={isUploadModal}
+              setModalOpen={setIsUploadModal}
+            />
+            <DataList
+              cmsData={PageContent}
+              market={market}
+              completeDataList={completeDataList}
+              clientCode={clientCode}
+              dataList={dataList}
+              setDataList={setDataList}
+              setCompleteDataList={setCompleteDataList}
+              loading={isLoading}
+              setMarket={setMarket}
+            />
+          </PageController>
+        </Box>
+      </MarketOptionsContext.Provider>
     </>
   );
 }

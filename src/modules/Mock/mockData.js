@@ -46,8 +46,13 @@ const data = {
       dueDate: '13/07/2020',
       updatedAt: '29/10/20 at 14:32',
       createdAt: '2020-08-14',
-      assignTo: [{ value: 'ryanKillick', label: 'Ryan Killick', userImage:'user1.png' }],
-      reportingYear: { value: 'April 2020  -  March 2021', label: 'April 2020  -  March 2021' },
+      assignTo: [
+        { value: 'ryanKillick', label: 'Ryan Killick', userImage: 'user1.png' },
+      ],
+      reportingYear: {
+        value: 'April 2020  -  March 2021',
+        label: 'April 2020  -  March 2021',
+      },
       actualData: { value: 4, label: '4 months' },
       forecastData: { value: 8, label: '8 months' },
       isActive: true,
@@ -81,11 +86,14 @@ const data = {
       forecastData: { value: 5, label: '5 months' },
       createdAt: '2020-08-14',
       assignTo: [
-        { value: 'howellLee', label: 'Howell Lee', userImage:'user1.png' },
-        { value: 'ryanKillick', label: 'Ryan Killick', userImage:'user2.png' },
-        { value: 'ryanManton', label: 'Ryan Manton', userImage:'user3.png' },
+        { value: 'howellLee', label: 'Howell Lee', userImage: 'user1.png' },
+        { value: 'ryanKillick', label: 'Ryan Killick', userImage: 'user2.png' },
+        { value: 'ryanManton', label: 'Ryan Manton', userImage: 'user3.png' },
       ],
-      reportingYear:  { value: 'April 2020  -  March 2021', label: 'April 2020  -  March 2021' },
+      reportingYear: {
+        value: 'April 2020  -  March 2021',
+        label: 'April 2020  -  March 2021',
+      },
       year: '2020',
       quarter: 'Q3',
       totalTenure: '2020 Q3',
@@ -102,8 +110,13 @@ const data = {
       dueDate: '23/07/2020',
       updatedAt: '29/10/20 at 14:32',
       createdAt: '2020-08-14',
-      assignTo: [{ value: 'ryanKillick', label: 'Ryan Killick', userImage:'user1.png' }],
-      reportingYear: { value: 'April 2020  -  March 2021', label: 'April 2020  -  March 2021' },
+      assignTo: [
+        { value: 'ryanKillick', label: 'Ryan Killick', userImage: 'user1.png' },
+      ],
+      reportingYear: {
+        value: 'April 2020  -  March 2021',
+        label: 'April 2020  -  March 2021',
+      },
       actualData: { value: 2, label: '2 months' },
       forecastData: { value: 10, label: '10 months' },
       isActive: true,
@@ -124,8 +137,13 @@ const data = {
       dueDate: '23/12/2020',
       updatedAt: '29/10/20 at 14:32',
       createdAt: '2020-08-14',
-      assignTo: [{ value: 'ryanKillick', label: 'Ryan Killick', userImage:'user1.png' }],
-      reportingYear: { value: 'April 2020  -  March 2021', label: 'April 2020  -  March 2021' },
+      assignTo: [
+        { value: 'ryanKillick', label: 'Ryan Killick', userImage: 'user1.png' },
+      ],
+      reportingYear: {
+        value: 'April 2020  -  March 2021',
+        label: 'April 2020  -  March 2021',
+      },
       actualData: { value: 3, label: '3 months' },
       forecastData: { value: 9, label: '9 months' },
       isActive: true,
@@ -145,66 +163,62 @@ const data = {
 
 export const getCount = (market, status = undefined) => {
   let ongoingData;
-  let completeData
+  let completeData;
   if (status === undefined) {
-    ongoingData = data.data.filter(key => !key.isCompleted && !key.isDeleted);
-    completeData = data.data.filter(key => key.isCompleted && !key.isDeleted);
+    ongoingData = data.data.filter((key) => !key.isCompleted && !key.isDeleted);
+    completeData = data.data.filter((key) => key.isCompleted && !key.isDeleted);
   }
   if (status === 'ongoing') {
-    ongoingData = data.data.filter(key => !key.isCompleted && !key.isDeleted);
+    ongoingData = data.data.filter((key) => !key.isCompleted && !key.isDeleted);
   }
   if (status === 'complete') {
-    completeData = data.data.filter(key => key.isCompleted && !key.isDeleted);
+    completeData = data.data.filter((key) => key.isCompleted && !key.isDeleted);
   }
 
   if (market !== '') {
-    ongoingData = ongoingData.filter(key => key.localMarket.value === market);
-    completeData = completeData.filter(key => key.localMarket.value === market);
-    return { ongoingCount: ongoingData.length, completeCount: completeData.length };
+    ongoingData = ongoingData.filter((key) => key.localMarket.value === market);
+    completeData = completeData.filter(
+      (key) => key.localMarket.value === market,
+    );
+    return {
+      ongoingCount: ongoingData.length,
+      completeCount: completeData.length,
+    };
   }
 
-  return { ongoingCount: ongoingData.length, completeCount: completeData.length };
-}
+  return {
+    ongoingCount: ongoingData.length,
+    completeCount: completeData.length,
+  };
+};
 
 export const getDataCount = (market, status) => {
   let filterData = data.data;
   if (status === 'ongoing') {
-    filterData = filterData.filter(
-      (key) => !key.isCompleted,
-    );
+    filterData = filterData.filter((key) => !key.isCompleted);
   }
   if (status === 'complete') {
-    filterData = filterData.filter(
-      (key) => key.isCompleted,
-    );
+    filterData = filterData.filter((key) => key.isCompleted);
   }
   if (market !== '') {
-    filterData = filterData.filter(
-      (key) => key.localMarket.value === market,
-    );
+    filterData = filterData.filter((key) => key.localMarket.value === market);
   }
   return filterData.length;
-}
+};
 
-export const getDataById = (id) => data.data.find(key => key.id.toString() === id && !key.isDeleted)
+export const getDataById = (id) => data.data.find((key) => key.id.toString() === id && !key.isDeleted);
 
 export const getData = (market, status) => {
   // debugger;
   let filterData = data.data;
   if (status === 'ongoing') {
-    filterData = filterData.filter(
-      (key) => !key.isCompleted && !key.isDeleted,
-    );
+    filterData = filterData.filter((key) => !key.isCompleted && !key.isDeleted);
   }
   if (status === 'complete') {
-    filterData = filterData.filter(
-      (key) => key.isCompleted && !key.isDeleted,
-    );
+    filterData = filterData.filter((key) => key.isCompleted && !key.isDeleted);
   }
   if (market !== '') {
-    filterData = filterData.filter(
-      (key) => key.localMarket.value === market,
-    );
+    filterData = filterData.filter((key) => key.localMarket.value === market);
   }
   return { totalCount: filterData.length, data: filterData };
 };
@@ -223,27 +237,28 @@ export function updateData(values) {
 
 const options = [
   {
+    overViewId: '1',
     value: 'ARG',
     label: 'Argentina',
   },
   {
+    overViewId: '2',
     value: 'AUS',
     label: 'Australia',
   },
   {
+    overViewId: '3',
     value: 'BEL',
     label: 'Belgium',
   },
   {
+    overViewId: '4',
     value: 'UK',
     label: 'United Kingdom',
   },
-  { value: 'USA', label: 'USA' },
-  { value: 'FR', label: 'France' },
-  { value: 'NZ', label: 'New Zealand' },
-  { value: 'SGP', label: 'Singapore' },
-  { value: 'Tk', label: 'Turkey' },
-  { value: 'IT', label: 'Italy' },
+  { value: 'USA', label: 'USA', overViewId: '5' },
+  { value: 'FR', label: 'France', overViewId: '6' },
+  { value: 'NZ', label: 'New Zealand', overViewId: '7' },
 ];
 
 const monthOptions = [
@@ -372,15 +387,15 @@ const currency = [
 ];
 const reportingYear = [
   {
-    value: `April ${nexStartDate}  -  March ${nextEndDate}`,
+    value: 2020,
     label: `April ${nexStartDate}  -  March ${nextEndDate}`,
   },
   {
-    value: `April ${currentStartDate}  -  March ${currentEndDate}`,
+    value: 2021,
     label: `April ${currentStartDate}  -  March ${currentEndDate}`,
   },
   {
-    value: `April ${prevStartDate}  -  March ${prevEndDate}`,
+    value: 2022,
     label: `April ${prevStartDate}  -  March ${prevEndDate}`,
   },
 ];
@@ -521,15 +536,11 @@ const versionHistory = {
 };
 
 const userList = [
-  { value:'ryanKillick',
-    label:'Ryan Killick' },
-  { value:'ryanManton',
-    label:'Ryan Manton' },
-  { value:'howellLee',
-    label:'Howell Lee' },
-  { value:'boladale',
-    label:'Boladale' },
-  ];
+  { value: 'ryanKillick', label: 'Ryan Killick' },
+  { value: 'ryanManton', label: 'Ryan Manton' },
+  { value: 'howellLee', label: 'Howell Lee' },
+  { value: 'boladale', label: 'Boladale' },
+];
 
 export {
   assignToOptions,

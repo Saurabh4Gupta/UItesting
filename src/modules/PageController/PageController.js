@@ -1,9 +1,9 @@
-import React,  { useEffect, useState } from 'react';
+import React,  { useEffect, useState, useContext } from 'react';
 import { Page, Select, FormField } from '@dentsu-ui/components';
 import PropTypes from 'prop-types';
 import { useHistory, useLocation } from 'react-router';
-import { market as marketOptions } from '../Mock/mockData';
 import { dataFieldCms as PageContent } from '../../cms';
+import { MarketOptionsContext } from '../../contexts/marketOptions';
 
 const PageController = (props) => {
   const [clientsListsData, setClientsListsData] = useState({});
@@ -24,9 +24,7 @@ const PageController = (props) => {
     clilentsdata,
   } = props;
   const { isViewProduct } = param;
-  // const { title, avatar } = clientList.find(
-  //   (client) => client.clientCode === clientCode,
-  // );
+  const marketOptions = useContext(MarketOptionsContext);
   useEffect(() => {
     if (clilentsdata) {
       setClientsListsData(clilentsdata)
@@ -38,9 +36,6 @@ const PageController = (props) => {
     (client) => client.code === clientCode,
     );
 
-  // const { name, avatar } = clilentdata.getClientsList.data.find(
-  //   (client) => client.code === clientCode,
-  // );
   const contentToShow = isViewProduct ? `Back to ${name}` : `${PageContent.backLabel}`;
   const clientNavigationHandler = () => (isViewProduct
     ? history.replace(`/datafield?client_code=${clientCode}`)

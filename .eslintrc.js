@@ -19,6 +19,7 @@ module.exports = {
     'arrow-parens': 0,
     'key-spacing': [0, { mode: 'minimum' }],
     semi: 0,
+    'consistent-return': 0,
     'quote-props': 0,
     'import/no-extraneous-dependencies': 0,
     'no-multi-spaces': 0,
