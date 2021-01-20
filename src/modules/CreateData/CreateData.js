@@ -193,6 +193,7 @@ const CreateData = (props) => {
     }
   }
   const marketOptions = useContext(MarketOptionsContext);
+  const formMarketOption = marketOptions.filter((item) => item.value !== '');
 
   return (
     <>
@@ -205,7 +206,7 @@ const CreateData = (props) => {
             handleSelectField={handleSelectField}
             errors={errors}
             cmsData={cmsData}
-            options={marketOptions}
+            options={formMarketOption}
             monthOptions={monthOptions}
             reportingYear={reportingYear}
             forecastOptions={forecastOptions}
