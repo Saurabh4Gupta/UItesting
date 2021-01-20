@@ -11,8 +11,8 @@ Feature: As an Amplifi Global Investment team member
     When User login into the App as "Global Investment Management" user
     Given User is on "My clients" Page
     Then User able to see subHeading as "Choose the client you wish to view"
-    Then verify list of clients
-    Then User will go to client "Microsoft Corporation" homepage
+    #Then verify list of clients
+    Then User will go to client "Microsoft" homepage
 
 
 
@@ -27,10 +27,10 @@ Feature: As an Amplifi Global Investment team member
     Then User will click on "Create" button and Verify request is added and toast notification "Data request created" will be shown.
 
 
-  #@sanity @smoke
 
-    #########PM-105BRP: Filter Productivity Requests by Market#####
-    Scenario:Filter Productivity Requests by Market
+    #########PM-105BRP: Filter Productivity Requests by Market####
+    @sanity @smoke
+  Scenario:Filter Productivity Requests by Market
       Given User is able to see subheading as "Productivity data requests"
       And User will select filer and will select first "United Kingdom"
       And User will see requests related to "Microsoft United Kingdom" in Ongoing tab
@@ -42,8 +42,7 @@ Feature: As an Amplifi Global Investment team member
 
 
 
- #@sanity @smoke
-    ######PM-44BRP: Move to Complete##### PM-57-BRP: Move to Ongoing##
+ @smoke
   Scenario:Move to Complete
     Given User is able to see subheading as "Productivity data requests"
     And User will click on "more" button and will click on "Move to complete" option
@@ -58,7 +57,7 @@ Feature: As an Amplifi Global Investment team member
 
 #####PM-30BRP: Delete a productivity data request##
 
- # @sanity @smoke
+ @sanity @smoke
   Scenario:Delete productivity request
     Given User is able to see subheading as "Productivity data requests"
     And User will click on "more" button and will click on "Delete" option
@@ -66,7 +65,7 @@ Feature: As an Amplifi Global Investment team member
     Then User will will click on "Yes, delete" button and will see toast notification "Data request deleted"
 
 ##PM-75-BRP: Search or filter a list of ongoing productivity data requests###
-  #@sanity @smoke
+  @sanity @smoke
   Scenario:Search or filter a list of complete productivity data requests
     Given User is able to see subheading as "Productivity data requests"
     And User will enter "United" in search box.
@@ -87,7 +86,7 @@ Feature: As an Amplifi Global Investment team member
 
 
 ##M-165BRP: Reset Market Filter if Productivity Request Created for Different Market##
-    #@sanity @smoke
+    @sanity @smoke
   Scenario: Reset Market Filter if Productivity Request Created for Different Market
     Given User is able to see subheading as "Productivity data requests"
     And User will select filer and will select first "USA"
@@ -109,7 +108,7 @@ Feature: As an Amplifi Global Investment team member
 
   ##PM-98BRP: Search or filter a list of "Complete" productivity data requests##
 
-   #@sanity @smoke
+   @sanity @smoke
   Scenario: Search or filter a list of "Complete" productivity data requests
     Given User is able to see subheading as "Productivity data requests"
     And User will click on "more" button and will click on "Move to complete" option

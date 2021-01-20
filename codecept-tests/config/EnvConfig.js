@@ -1,6 +1,6 @@
 const envConfig = {
 
-    env: process.env.E2E_ENV || 'brp',
+    env: process.env.E2E_ENV || 'int-g1ds',
 
     dev: {
         web: {
@@ -22,7 +22,7 @@ const envConfig = {
 
     'int-g1ds': {
         web: {
-            HOST_URL: 'http://gdp-client01-int-dentsu-platform-client.az.gdpintegration.gdpdentsu.net',
+            HOST_URL: 'https://productivity-ui.wal.int.az.eu.mediaecosystem.io/',
         },
         server: {
             serverURL: 'https://shared01-int-g1ds-kong-proxy.az.eu-az-int-wal.gdpdentsu.net/mapping/graphql',

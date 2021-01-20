@@ -19,8 +19,6 @@ Then(/^verify list of clients$/, function() {
 
 Then(/^User will go to client "([^"]*)" homepage$/, function(client) {
   selectClient.clickOnViewDetails(client);
-
-
 });
 
 

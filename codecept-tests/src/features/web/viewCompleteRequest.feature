@@ -7,8 +7,8 @@ Feature: As an Amplifi Global Investment team member
     When User login into the App as "Global Investment Management" user
     Given User is on "My clients" Page
     Then User able to see subHeading as "Choose the client you wish to view"
-    Then verify list of clients
-    Then User will go to client "Microsoft Corporation" homepage
+    #Then verify list of clients
+    Then User will go to client "Microsoft" homepage
     @smoke
     Scenario: To view Complete request
       Given User is able to see subheading as "Productivity data requests"

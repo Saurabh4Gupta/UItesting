@@ -200,9 +200,9 @@ module.exports = {
   },
 
   switchToFrame() {
-    if (envStatus || envURL.env === 'brp') {
+    if (envStatus || envURL.env === 'int-g1ds') {
       I.waitForVisible(this.landingPage.frame, 40);
-      I.switchTo(this.landingPage.frame);
+      //I.switchTo(this.landingPage.frame);
     }
   },
 
