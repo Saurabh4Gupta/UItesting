@@ -131,11 +131,11 @@ const TableList = (props) => {
                         <Chip variant="status" status="warning" hasStatusLight>
                           {cmsData.overdue}
                         </Chip>
-                        ) : (
-                            ''
-                          )}
+                      ) : (
+                        ''
+                      )}
                     </Box>
-                    )}
+                  )}
                   <Box width="30%">{`${cmsData.lastUpdate}: ${updatedAt}`}</Box>
                 </Stack>
                 <Stack
