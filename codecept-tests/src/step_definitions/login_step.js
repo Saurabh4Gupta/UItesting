@@ -53,5 +53,5 @@ When(/^User login into the App as "([^"]*)" user$/, async function(type) {
   //   pass = (!envStatus) ? 'R@tet0ur3' : 'ybRY84{@rh';
   // }
   await loginPage.tempLogin(user, pass);
-  loginPage.switchToFrame();
+  //loginPage.switchToFrame();
 });

@@ -1,0 +1,21 @@
+<?xml version='1.0'?>
+<ns2:test-suite xmlns:ns2='urn:model.allure.qatools.yandex.ru' start='1611232350061' stop='1611232451068'>
+    <name>As an Amplifi Global Investment team member</name>
+    <title>As an Amplifi Global Investment team member</title>
+    <test-cases>
+        <test-case start='1611232360928' status='failed' stop='1611232430391'>
+            <name>Create new Productivity Data requests @sanity @smoke</name>
+            <title>Create new Productivity Data requests @sanity @smoke</title>
+            <labels/>
+            <parameters/>
+            <steps/>
+            <attachments/>
+            <failure>
+                <message>element (//div[@id='container']//iframe) still not visible after 40 sec</message>
+                <stack-trace>Error: element (//div[@id='container']//iframe) still not visible after 40 sec
+                    at C:\Users\LAP-R141\Desktop\Assignments\dan-productivity-mgr-ui\codecept-tests\node_modules\webdriverio\build\commands\browser\waitUntil.js:22:23
+                    at async Browser.wrapCommandFn (C:\Users\LAP-R141\Desktop\Assignments\dan-productivity-mgr-ui\codecept-tests\node_modules\@wdio\utils\build\shim.js:63:29)</stack-trace>
+            </failure>
+        </test-case>
+    </test-cases>
+</ns2:test-suite>

@@ -1,0 +1,29 @@
+18:21:46.768 INFO [GridLauncherV3.parse] - Selenium server version: 3.141.59, revision: e82be7d358
+18:21:46.870 INFO [GridLauncherV3.lambda$buildLaunchers$3] - Launching a standalone Selenium Server on port 4444
+2021-01-21 18:21:46.932:INFO::main: Logging initialized @449ms to org.seleniumhq.jetty9.util.log.StdErrLog
+18:21:47.215 INFO [WebDriverServlet.<init>] - Initialising WebDriverServlet
+18:21:47.600 INFO [SeleniumServer.boot] - Selenium Server is up and running on port 4444
+18:21:47.810 INFO [ActiveSessionFactory.apply] - Capabilities are: {
+  "browserName": "chrome",
+  "goog:chromeOptions": {
+    "useAutomationExtension": true,
+    "prefs": {
+      "download.default_directory": "C:\\Users\\LAP-R141\\Desktop\\Assignments\\dan-productivity-mgr-ui\\codecept-tests\\output\\Download"
+    }
+  }
+}
+18:21:47.811 INFO [ActiveSessionFactory.lambda$apply$11] - Matched factory org.openqa.selenium.grid.session.remote.ServicedSession$Factory (provider: org.openqa.selenium.chrome.ChromeDriverService)
+Starting ChromeDriver 87.0.4280.20 (c99e81631faa0b2a448e658c0dbd8311fb04ddbd-refs/branch-heads/4280@{#355}) on port 30460
+Only local connections are allowed.
+Please see https://chromedriver.chromium.org/security-considerations for suggestions on keeping ChromeDriver safe.
+ChromeDriver was started successfully.
+[1611233509.057][WARNING]: Deprecated chrome option is ignored: useAutomationExtension
+[1611233509.057][WARNING]: Deprecated chrome option is ignored: useAutomationExtension
+18:21:51.794 INFO [ProtocolHandshake.createSession] - Detected dialect: W3C
+18:21:51.831 INFO [RemoteSession$Factory.lambda$performHandshake$0] - Started new session 0f7b40d91111f46767b097c61a367a2c (org.openqa.selenium.chrome.ChromeDriverService)
+[1611233677.344][SEVERE]: Timed out receiving message from renderer: 10.000
+[1611233677.345][WARNING]: screenshot failed, retrying timeout: Timed out receiving message from renderer: 10.000
+[1611233687.346][SEVERE]: Timed out receiving message from renderer: 10.000
+[1611234022.614][SEVERE]: Timed out receiving message from renderer: 10.000
+[1611234022.614][WARNING]: screenshot failed, retrying timeout: Timed out receiving message from renderer: 10.000
+[1611234032.614][SEVERE]: Timed out receiving message from renderer: 10.000
