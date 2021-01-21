@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import moment from 'moment'
 import Stack from '@dentsu-ui/components/dist/cjs/components/Stack';
 import Subheading from '@dentsu-ui/components/dist/cjs/components/Subheading';
 import Caption from '@dentsu-ui/components/dist/cjs/components/Caption';
@@ -12,27 +13,30 @@ import { AvatarGroup, Avatar } from '@dentsu-ui/components';
 import { dataFieldCms as PageContent } from '../../../../cms/dataFieldCms';
 import EditData from '../../../CreateData/EditData';
 import TrackerTemplate from './TrackerTemplate';
+import { reportingYearData } from '../../../Mock/mockData'
 
 const OtherProductivityData = (props) => {
-  const { handleEditData, prodRequest } = props;
+  const { handleEditData, prodRequest, name } = props;
   const {
     dueDate,
     actualData,
     forecastData,
-    assignTo,
     reportingYear,
     isCompleted,
-    id,
+    owners,
+    trackerTemplate,
+    localMarket,
   } = prodRequest;
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [market] = useState('');
-
   const handleModal = (value) => {
     setIsModalOpen(value);
   };
   const handleCreateData = () => {
     handleModal(true);
   };
+  console.log("inside other", prodRequest)
+  const reportingYearLabel = reportingYearData.find((key) => key.value === reportingYear);
 
   return (
     <>
@@ -58,7 +62,7 @@ const OtherProductivityData = (props) => {
               {PageContent.reportingYear}
             </Caption>
           </Box>
-          {reportingYear.value}
+          {reportingYearLabel.label}
           <br />
           <br />
           <Box mt="20px" mb="10px">
@@ -71,7 +75,7 @@ const OtherProductivityData = (props) => {
               <Paragraph>
                 {PageContent.actualCapitalized}
                 :
-                <strong>{` ${actualData.label}`}</strong>
+                <strong>{` ${actualData} months`}</strong>
               </Paragraph>
             </Box>
             <Divider orientation="vertical" isFlexChild />
@@ -79,7 +83,7 @@ const OtherProductivityData = (props) => {
               <Paragraph>
                 {PageContent.forecastCapitalized}
                 :
-                <strong>{` ${forecastData.label}`}</strong>
+                <strong>{` ${forecastData} months`}</strong>
               </Paragraph>
             </Box>
           </Stack>
@@ -90,7 +94,7 @@ const OtherProductivityData = (props) => {
               <Box mr="10px" mb="10px">
                 <Caption style={{ color: 'gray' }}>{PageContent.dueBy}</Caption>
               </Box>
-              {dueDate}
+              {moment(dueDate).format('YYYY-MM-DD')}
             </Stack>
             <Stack flexDirection="column">
               <Box mb="7px" ml="8px">
@@ -98,29 +102,30 @@ const OtherProductivityData = (props) => {
                   {PageContent.assignedTo}
                 </Caption>
               </Box>
-              {assignTo.length === 1
-              ? (
-                <Chip
-                  avatar={{
-                  src: assignTo[0].userImage ? assignTo[0].userImage : '',
-                  name: assignTo[0].label,
-                }}
-                >
-                  {assignTo[0].label}
-                </Chip>
-) : (<AvatarGroup size="xlarge">{assignTo.map((value) => <Avatar name={value.value} src={value.userImage ? value.userImage : ''} />)}</AvatarGroup>)
-}
+              {owners.length === 1
+                ? (
+                  <Chip
+                    avatar={{
+                      src: owners[0].userImage ? owners[0].userImage : '',
+                      name: owners[0].label,
+                    }}
+                  >
+                    {owners[0].label}
+                  </Chip>
+                ) : (<AvatarGroup size="xlarge">{owners.map((value) => <Avatar name={value.label} src={value.userImage ? value.userImage : ''} />)}</AvatarGroup>)
+              }
             </Stack>
           </Stack>
-          <TrackerTemplate />
+          <TrackerTemplate trackerTemplate={trackerTemplate} name={name} localMarket={localMarket} />
         </Stack>
       </Box>
       <EditData
+        prodRequest={prodRequest}
         cmsData={PageContent}
         market={market}
         isModalOpen={isModalOpen}
         handleModal={handleModal}
-        requestId={id}
+        // requestId={id}
         handleEditData={handleEditData}
       />
     </>
@@ -130,10 +135,12 @@ const OtherProductivityData = (props) => {
 OtherProductivityData.propTypes = {
   prodRequest: PropTypes.object,
   handleEditData: PropTypes.func,
+  name: PropTypes.string,
 };
 OtherProductivityData.defaultProps = {
   prodRequest: PropTypes.object,
   handleEditData: PropTypes.func,
+  name: PropTypes.string,
 };
 
 export default OtherProductivityData;

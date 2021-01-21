@@ -25,7 +25,7 @@ const DataList = (props) => {
     setMarket,
     refetch,
   } = props;
-
+  console.log("clientcode", clientCode)
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [deleteModalData, setIsDeleteModal] = useState({
     isDeleteModal: false,

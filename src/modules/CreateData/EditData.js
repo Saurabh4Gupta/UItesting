@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { Button, Modal } from '@dentsu-ui/components';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
@@ -8,24 +8,26 @@ import useCustomForm from '../../hooks/useCustomForm';
 import validationRule from '../../utils/validate';
 import { options, monthOptions, reportingYear, data, userList } from '../Mock/mockData'
 import { dataFieldCms as PageContent } from '../../cms';
+import { MetaDataContext } from '../../contexts/marketOptions'
 
 
 const EditData = (props) => {
-  const { cmsData, isModalOpen, handleModal, requestId, handleEditData } = props;
+  const { cmsData, isModalOpen, handleModal, requestId, handleEditData, prodRequest } = props;
   const [isReadyToSubmit, setIsReadyToSubmit] = useState(false);
   const [loading, setLoading] = useState(false);
   const filterCompleteList = data.data.filter(
     (item) => item.id === requestId,
   );
+  console.log("prodrequest", prodRequest)
   const initialValues = {
-    localMarket: filterCompleteList[0].localMarket,
-    name: filterCompleteList[0].name,
-    briefing: filterCompleteList[0].briefing,
-    reportingYear:filterCompleteList[0].reportingYear,
-    actualData:filterCompleteList[0].actualData,
-    forecastData: filterCompleteList[0].forecastData,
+    localMarket: prodRequest.localMarket,
+    name: prodRequest.name,
+    briefing: prodRequest.briefing,
+    reportingYear: prodRequest.reportingYear,
+    actualData: prodRequest.actualData,
+    forecastData: prodRequest.forecastData,
     dueDate: new Date(),
-    assignTo: filterCompleteList[0].assignTo,
+    assignTo: prodRequest.owners,
   };
   const { handleChange, values, forecastOptions,
     handleSelectField, handleSubmit,
@@ -62,6 +64,9 @@ const EditData = (props) => {
       }, 1000);
     }
   }
+  const { marketOptions } = useContext(MetaDataContext);
+  const formMarketOption = marketOptions.filter((item) => item.value !== 'All');
+  console.log("value", values)
   return (
     <>
       <Modal isOpen={isModalOpen} onClose={closeModalHandler}>
@@ -73,10 +78,8 @@ const EditData = (props) => {
             handleSelectField={handleSelectField}
             errors={errors}
             cmsData={cmsData}
-            options={options}
+            options={formMarketOption}
             monthOptions={monthOptions}
-            dueDate={values.dueDate}
-            reportingYear={reportingYear}
             forecastOptions={forecastOptions}
             userList={userList}
           />
@@ -89,20 +92,20 @@ const EditData = (props) => {
         </Modal.Footer>
       </Modal>
     </>
-)
+  )
 };
 EditData.propTypes = {
-    cmsData: PropTypes.object,
-    isModalOpen: PropTypes.bool,
-    handleModal: PropTypes.func,
-    requestId:PropTypes.string,
-    handleEditData: PropTypes.func,
-  }
-  EditData.defaultProps = {
-    cmsData: {},
-    isModalOpen: false,
-    handleModal: () => { },
-    requestId:PropTypes.string,
-    handleEditData: PropTypes.func,
-  }
+  cmsData: PropTypes.object,
+  isModalOpen: PropTypes.bool,
+  handleModal: PropTypes.func,
+  requestId: PropTypes.string,
+  handleEditData: PropTypes.func,
+}
+EditData.defaultProps = {
+  cmsData: {},
+  isModalOpen: false,
+  handleModal: () => { },
+  requestId: PropTypes.string,
+  handleEditData: PropTypes.func,
+}
 export default withRouter(EditData);

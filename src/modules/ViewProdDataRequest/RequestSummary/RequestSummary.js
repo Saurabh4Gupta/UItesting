@@ -7,12 +7,18 @@ import Briefing from './Briefing/Briefing';
 import OtherProductivityData from './OtherProductivityData/OtherProductivityData';
 
 const RequestSummary = (props) => {
-  const { handleEditData, prodRequest } = props;
+  const { handleEditData, prodRequest, name, localMarket } = props;
+  console.log("name", name)
   return (
     <Card>
       <Stack flexDirection="row">
         <Briefing briefing={prodRequest.briefing} />
-        <OtherProductivityData prodRequest={prodRequest} handleEditData={handleEditData} />
+        <OtherProductivityData
+          prodRequest={prodRequest}
+          handleEditData={handleEditData}
+          name={name}
+          localMarket={localMarket}
+        />
       </Stack>
     </Card>
   )

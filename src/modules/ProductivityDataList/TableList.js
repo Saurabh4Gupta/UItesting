@@ -38,7 +38,7 @@ const TableList = (props) => {
     selectedFilter,
   } = props;
 
-  console.log('>>>>>>>>', data);
+  console.log('>>>>>>>>', clientCode);
 
   const history = useHistory();
 
