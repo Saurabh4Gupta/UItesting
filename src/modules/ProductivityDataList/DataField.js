@@ -1,44 +1,51 @@
+/* eslint-disable no-shadow */
 /* eslint-disable react/prop-types */
 import React, { useState, useEffect } from 'react';
 import { Box } from '@dentsu-ui/components';
-import { useLocation } from 'react-router';
 import { useQuery } from '@apollo/client';
 import PageController from '../PageController/PageController';
 import DataList from './DataList';
 import { dataFieldCms as PageContent } from '../../cms';
-import { getData } from '../Mock/mockData';
 import UploadFile from '../FileUpload/UploadFile';
 import withPageController from '../../hoc/withPageController';
-import GET_LIST_CLIENT from '../ClientList/query';
+import { parsedDataList } from '../../utils/helper';
+import GET_DATA_LIST from './query';
 
 const DataField = (props) => {
-  const location = useLocation();
-  const { param } = props;
-  const query = new URLSearchParams(location.search);
-  const clientCode = query.get('client_code');
-  const [market, setMarket] = useState({ value: '', label: 'All markets' });
-  const [dataList, setDataList] = useState({ data: [], totalCount: 0 });
+  const { param, marketOptions, clientMetaData } = props;
+
+  const { clientCode, name } = clientMetaData;
+  const [market, setMarket] = useState({
+    value: 'All',
+    label: 'All markets',
+    overviewId: '0',
+  });
   const [completeDataList, setCompleteDataList] = useState({
     data: [],
     totalCount: 0,
   });
   const [isUploadModal, setIsUploadModal] = useState(false);
-  const [isLoading, setLoading] = useState(true);
-
+  const [dataList, setdataList] = useState({});
   const handleMarket = (selected) => {
     setMarket(selected);
   };
+  const { data: listData, loading: listLoading, refetch } = useQuery(
+    GET_DATA_LIST,
+    {
+      variables: { data: { clientCode, marketCode: market.value } },
+    },
+  );
 
-  const { data } = useQuery(GET_LIST_CLIENT, {
-    notifyOnNetworkStatusChange: true,
-  });
   useEffect(() => {
-    setTimeout(() => {
-      setLoading(false);
-      setDataList(getData(market.value, 'ongoing'));
-      setCompleteDataList(getData(market.value, 'complete'));
-    }, 2000);
-  }, []);
+    if (listData) {
+      const {
+        data: { dataList, totalCount },
+      } = listData.getDataList;
+      const parsedData = parsedDataList(dataList, marketOptions, name);
+      setdataList({ dataList: parsedData, totalCount });
+    }
+  }, [listData]);
+
   return (
     <>
       <Box mb="200px">
@@ -49,7 +56,7 @@ const DataField = (props) => {
           pageTitle=""
           pageMetadata="Client Overview"
           isCompleted={false}
-          clilentsdata={data}
+          clientList={clientMetaData}
         >
           <UploadFile
             cmsData={PageContent}
@@ -58,19 +65,17 @@ const DataField = (props) => {
           />
           <DataList
             cmsData={PageContent}
-            market={market}
             completeDataList={completeDataList}
-            clientCode={clientCode}
             dataList={dataList}
-            setDataList={setDataList}
             setCompleteDataList={setCompleteDataList}
-            loading={isLoading}
+            loading={listLoading}
+            market={market}
             setMarket={setMarket}
+            refetch={refetch}
           />
         </PageController>
       </Box>
     </>
   );
 };
-
 export default withPageController(DataField);

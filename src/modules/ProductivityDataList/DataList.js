@@ -23,6 +23,7 @@ const DataList = (props) => {
     completeDataList,
     setCompleteDataList,
     setMarket,
+    refetch,
   } = props;
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -30,10 +31,12 @@ const DataList = (props) => {
     isDeleteModal: false,
     requestId: undefined,
   });
-  const [selectedFilter, setSelectedFilter] = useState([{ key: 'totalTenure', value: '' }]);
+  const [selectedFilter, setSelectedFilter] = useState([
+    { key: 'totalTenure', value: '' },
+  ]);
   const [searchInput, setSearchInput] = useState('');
   const [tabIndex, setTabIndex] = useState(0);
-  const { data } = dataList;
+  const { dataList: data, totalCount } = dataList;
   const [moveToCompleteModelData, setIsMoveToCompleteModel] = useState({
     isMoveToComplete: false,
     requestID: undefined,
@@ -57,21 +60,23 @@ const DataList = (props) => {
 
   const getFilteredList = (data, searchInput, filterInput) => {
     let updatedList = data.filter(
-      (d) => (d.clientMarket.toLowerCase().includes(searchInput.toLowerCase())
-        || d.name.toLowerCase().includes(searchInput.toLowerCase())
-      ),
+      (d) => d.clientMarket.toLowerCase().includes(searchInput.toLowerCase())
+        || d.name.toLowerCase().includes(searchInput.toLowerCase()),
     );
     if (filterInput !== '') {
-      updatedList = updatedList.filter((key) => key.totalTenure.includes(filterInput))
+      updatedList = updatedList.filter((key) => key.totalTenure.includes(filterInput));
     }
     return updatedList;
   };
 
-
   useEffect(() => {
     const requestStatus = tabIndex === 0 ? 'ongoing' : 'complete';
     const allDataList = getData(market.value, requestStatus);
-    const filteredList = getFilteredList(allDataList.data, searchInput, selectedFilter[0].value);
+    const filteredList = getFilteredList(
+      allDataList.data,
+      searchInput,
+      selectedFilter[0].value,
+    );
     if (tabIndex === 0) {
       setDataList({ data: filteredList, totalCount: allDataList.totalCount });
     }
@@ -81,42 +86,14 @@ const DataList = (props) => {
         totalCount: allDataList.totalCount,
       });
     }
-  }, [searchInput, selectedFilter])
-
+  }, [searchInput, selectedFilter]);
 
   const searchChangeHandler = (input) => {
-    setSearchInput(input)
+    setSearchInput(input);
   };
 
   const handleFilter = (input) => {
     setSelectedFilter(input);
-  }
-  const addRequest = async (values) => {
-    try {
-      values.createdAt = new Date();
-      values.isActive = true;
-      values.isCompleted = false;
-      values.year = '2020';
-      values.quarter = 'Q3';
-      values.isDeleted = false;
-      values.id = new Date().getTime();
-      values.client = 'Microsoft';
-      values.updatedAt = '30/11/20 at 14:32';
-      values.clientMarket = `Microsoft ${values.localMarket.label}`;
-      values.dueDate = values.dueDate.toLocaleDateString();
-      await mockData.data.push(values);
-      setDataList(getData(market.value, 'ongoing'));
-      if (values.localMarket.value !== market.value) {
-        setMarket({ value: '', label: 'All markets' });
-      }
-      return toast({
-        title: '',
-        content: PageContent.toastRequestCreated,
-        status: 'success',
-      });
-    } catch (error) {
-      return null;
-    }
   };
 
   const handleDelete = (id) => {
@@ -191,15 +168,14 @@ const DataList = (props) => {
         market={market}
         isModalOpen={isModalOpen}
         handleModal={handleModal}
-        addRequest={addRequest}
+        clientCode={clientCode}
+        refetch={refetch}
+        setMarket={setMarket}
       />
       <Box mt="30px">
         <Tabs onChange={handleTabIndex} index={tabIndex}>
           <Tabs.List>
-            <Tabs.Tab
-              label={cmsData.ongoingLabel}
-              count={dataList.data.length}
-            />
+            <Tabs.Tab label={cmsData.ongoingLabel} count={totalCount} />
             <Tabs.Tab
               label={cmsData.completeLabel}
               count={completeDataList.data.length}
@@ -219,10 +195,10 @@ const DataList = (props) => {
                     setIsMoveToCompleteModel={setIsMoveToCompleteModel}
                     moveToCompleteModelData={moveToCompleteModelData}
                     actionName={
-                        tabIndex === 0
-                          ? cmsData.moveToComplete
-                          : cmsData.moveToOnGoing
-                      }
+                      tabIndex === 0
+                        ? cmsData.moveToComplete
+                        : cmsData.moveToOnGoing
+                    }
                     handleDelete={handleDelete}
                     clientCode={clientCode}
                     search={searchChangeHandler}
@@ -233,12 +209,12 @@ const DataList = (props) => {
                     handleFilter={handleFilter}
                     selectedFilter={selectedFilter}
                   />
-                  ) : (
-                    <EmptyTable
-                      defaultText={cmsData.emptyProductivityDatarequestCaption}
-                      handleModal={handleModal}
-                    />
-                    )}
+                ) : (
+                  <EmptyTable
+                    defaultText={cmsData.emptyProductivityDatarequestCaption}
+                    handleModal={handleModal}
+                  />
+                )}
               </Tabs.Panel>
               <Tabs.Panel>
                 {completeDataList.totalCount > 0 ? (
@@ -253,17 +229,17 @@ const DataList = (props) => {
                     handleFilter={handleFilter}
                     selectedFilter={selectedFilter}
                   />
-                  ) : (
-                    <EmptyTable
-                      defaultText={
-                          cmsData.emptyCompletedProductivityDatarequestCaption
-                        }
-                      handleModal={handleModal}
-                    />
-                    )}
+                ) : (
+                  <EmptyTable
+                    defaultText={
+                      cmsData.emptyCompletedProductivityDatarequestCaption
+                    }
+                    handleModal={handleModal}
+                  />
+                )}
               </Tabs.Panel>
             </Tabs.Panels>
-            )}
+          )}
         </Tabs>
       </Box>
     </>
@@ -283,7 +259,7 @@ DataList.defaultProps = {
   market: { value: '' },
   dataList: {},
   clientCode: '',
-  setDataList: () => { },
+  setDataList: () => {},
   loading: true,
 };
 export default DataList;
