@@ -23,6 +23,7 @@ const DataList = (props) => {
     completeDataList,
     setCompleteDataList,
     setMarket,
+    refetch,
   } = props;
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -35,7 +36,7 @@ const DataList = (props) => {
   ]);
   const [searchInput, setSearchInput] = useState('');
   const [tabIndex, setTabIndex] = useState(0);
-  const { data } = dataList;
+  const { dataList: data, totalCount } = dataList;
   const [moveToCompleteModelData, setIsMoveToCompleteModel] = useState({
     isMoveToComplete: false,
     requestID: undefined,
@@ -168,14 +169,13 @@ const DataList = (props) => {
         isModalOpen={isModalOpen}
         handleModal={handleModal}
         clientCode={clientCode}
+        refetch={refetch}
+        setMarket={setMarket}
       />
       <Box mt="30px">
         <Tabs onChange={handleTabIndex} index={tabIndex}>
           <Tabs.List>
-            <Tabs.Tab
-              label={cmsData.ongoingLabel}
-              count={dataList.data.length}
-            />
+            <Tabs.Tab label={cmsData.ongoingLabel} count={totalCount} />
             <Tabs.Tab
               label={cmsData.completeLabel}
               count={completeDataList.data.length}

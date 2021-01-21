@@ -15,6 +15,7 @@ import Card from '@dentsu-ui/components/dist/cjs/components/Card';
 import Paragraph from '@dentsu-ui/components/dist/cjs/components/Paragraph';
 import ActionBtn from './ActionBtn';
 import DeleteData from '../CreateData/DeleteData';
+import { dateTimeFormat } from '../../utils/helper';
 
 const TableList = (props) => {
   const {
@@ -36,6 +37,8 @@ const TableList = (props) => {
     handleFilter,
     selectedFilter,
   } = props;
+
+  console.log('>>>>>>>>', data);
 
   const history = useHistory();
 
@@ -95,18 +98,19 @@ const TableList = (props) => {
         renderItem={(item, index) => {
           const {
             client,
+            overviewId,
             localMarket,
             name,
             actualData,
             forecastData,
-            year,
+            reportingYear,
             quarter,
             updatedAt,
-            status,
-            id,
+            isOverDue,
+            orignalId,
           } = item;
           return (
-            <div key={index}>
+            <div key={orignalId}>
               <Stack padding="15px">
                 <Stack
                   alignItems="center"
@@ -120,23 +124,25 @@ const TableList = (props) => {
                   <Box width="32%">
                     <b>{name}</b>
                     <Caption>
-                      {`${year} ${quarter}: ${actualData.label} ${cmsData.actual} + ${forecastData.label} ${cmsData.forecast}`}
+                      {`${reportingYear} ${quarter}: ${actualData} months ${cmsData.actual} + ${forecastData} months ${cmsData.forecast}`}
                     </Caption>
                   </Box>
                   {showStatus === false ? (
                     ''
                   ) : (
                     <Box width="13%">
-                      {status === cmsData.overdue ? (
+                      {isOverDue === cmsData.overdue ? (
                         <Chip variant="status" status="warning" hasStatusLight>
                           {cmsData.overdue}
                         </Chip>
-                        ) : (
-                            ''
-                          )}
+                      ) : (
+                        ''
+                      )}
                     </Box>
-                    )}
-                  <Box width="30%">{`${cmsData.lastUpdate}: ${updatedAt}`}</Box>
+                  )}
+                  <Box width="30%">
+                    {`${cmsData.lastUpdate}: ${dateTimeFormat(updatedAt)}`}
+                  </Box>
                 </Stack>
                 <Stack
                   alignItems="center"
@@ -149,7 +155,7 @@ const TableList = (props) => {
                       variant="ghost"
                       size="small"
                       iconLeft="layers"
-                      onClick={() => showDataRequestDetails(id)}
+                      onClick={() => showDataRequestDetails(orignalId)}
                     >
                       {cmsData.viewDetails}
                     </Button>
@@ -160,10 +166,11 @@ const TableList = (props) => {
                       actionName={actionName}
                       deleteBtn={cmsData.delete}
                       showStatus={showStatus}
-                      handleDeleteModel={() => handleDeleteModel(id)}
-                      handleMoveToCompleteModel={() => handleMoveToCompleteModel(id)
+                      handleDeleteModel={() => handleDeleteModel(overviewId)}
+                      handleMoveToCompleteModel={() => handleMoveToCompleteModel(overviewId)
                       }
-                      handleMoveToOngoing={() => handleMoveToOngoing(id)}
+                      handleMoveToOngoing={() => handleMoveToOngoing(overviewId)
+                      }
                     />
                   </Box>
                 </Stack>

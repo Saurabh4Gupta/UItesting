@@ -51,7 +51,7 @@ export const dataFieldCms = {
   overdue: 'Overdue',
   ongoing: 'Ongoing',
   complete: 'Complete',
-  lastUpdate: 'Last Update',
+  lastUpdate: 'Last Updated',
   moveToComplete: 'Move to complete',
   moveToOnGoing: 'Move to ongoing',
   delete: 'Delete',
