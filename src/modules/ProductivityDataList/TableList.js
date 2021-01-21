@@ -107,10 +107,10 @@ const TableList = (props) => {
             quarter,
             updatedAt,
             isOverDue,
-            orignalId,
+            originalId,
           } = item;
           return (
-            <div key={orignalId}>
+            <div key={originalId}>
               <Stack padding="15px">
                 <Stack
                   alignItems="center"
@@ -155,7 +155,7 @@ const TableList = (props) => {
                       variant="ghost"
                       size="small"
                       iconLeft="layers"
-                      onClick={() => showDataRequestDetails(orignalId)}
+                      onClick={() => showDataRequestDetails(originalId)}
                     >
                       {cmsData.viewDetails}
                     </Button>
