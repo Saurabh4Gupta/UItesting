@@ -4,4 +4,6 @@ const MarketOptionsContext = React.createContext();
 
 const ClientList = React.createContext();
 
-export { MarketOptionsContext, ClientList };
+const MetaDataContext = React.createContext();
+
+export { MarketOptionsContext, ClientList, MetaDataContext };

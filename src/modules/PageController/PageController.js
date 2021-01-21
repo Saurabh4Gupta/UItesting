@@ -3,7 +3,7 @@ import { Page, Select, FormField } from '@dentsu-ui/components';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router';
 import { dataFieldCms as PageContent } from '../../cms';
-import { MarketOptionsContext } from '../../contexts/marketOptions';
+import { MetaDataContext } from '../../contexts/marketOptions';
 
 const PageController = (props) => {
   const history = useHistory();
@@ -19,12 +19,12 @@ const PageController = (props) => {
     isCompleted,
     pageMetadata,
     handleMoveToCompleteModal,
-    clientList,
   } = props;
   const { isViewProduct } = param;
-  const marketOptions = useContext(MarketOptionsContext);
 
-  const { name, avatar, clientCode } = clientList;
+  const { marketOptions, clientMetaData } = useContext(MetaDataContext);
+
+  const { name, clientCode, avatar } = clientMetaData;
 
   const contentToShow = isViewProduct
     ? `Back to ${name}`
@@ -99,7 +99,6 @@ PageController.propTypes = {
   isCompleted: PropTypes.bool,
   pageMetadata: PropTypes.string,
   handleMoveToCompleteModal: PropTypes.func,
-  clientList: PropTypes.object,
 };
 
 PageController.defaultProps = {
@@ -112,6 +111,5 @@ PageController.defaultProps = {
   isCompleted: false,
   pageMetadata: '',
   handleMoveToCompleteModal: () => {},
-  clientList: {},
 };
 export default PageController;

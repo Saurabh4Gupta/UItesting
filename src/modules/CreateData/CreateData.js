@@ -18,13 +18,20 @@ import validationRule from '../../utils/validate';
 import { monthOptions, reportingYear } from '../Mock/mockData';
 
 import { GET_USERS } from './queries';
-import { MarketOptionsContext } from '../../contexts/marketOptions';
+import { MetaDataContext } from '../../contexts/marketOptions';
 import FILE_UPLOAD from '../FileUpload/mutation';
 import CREATE_DATA_REQUEST from './mutation';
 
 const toast = Toast();
 const CreateData = (props) => {
-  const { cmsData, market, isModalOpen, handleModal, refetch } = props;
+  const {
+    cmsData,
+    market,
+    isModalOpen,
+    handleModal,
+    refetch,
+    setMarket,
+  } = props;
   const [isReadyToSubmit, setIsReadyToSubmit] = useState(false);
 
   const [uploadFile, { loading: fileLoading, error: fileError }] = useMutation(
@@ -106,6 +113,7 @@ const CreateData = (props) => {
     if (createData) {
       const { status } = createData.createDataRequests;
       if (status === 200) {
+        setMarket(values.localMarket);
         closeModalHandler();
         refetch();
         return toast({
@@ -193,8 +201,8 @@ const CreateData = (props) => {
       createDataRequest({ variables: { data: reqData } });
     }
   }
-  const marketOptions = useContext(MarketOptionsContext);
-  const formMarketOption = marketOptions.filter((item) => item.value !== '');
+  const { marketOptions } = useContext(MetaDataContext);
+  const formMarketOption = marketOptions.filter((item) => item.value !== 'All');
 
   return (
     <>
@@ -246,12 +254,16 @@ CreateData.propTypes = {
   market: PropTypes.object,
   isModalOpen: PropTypes.bool,
   handleModal: PropTypes.func,
+  refetch: PropTypes.func,
+  setMarket: PropTypes.func,
 };
 CreateData.defaultProps = {
   cmsData: {},
   market: 'UK',
   isModalOpen: false,
   handleModal: () => {},
+  refetch: () => {},
+  setMarket: () => {},
 };
 
 export default CreateData;

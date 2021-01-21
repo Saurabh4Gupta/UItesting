@@ -1,23 +1,20 @@
 /* eslint-disable no-shadow */
 /* eslint-disable react/prop-types */
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Box } from '@dentsu-ui/components';
-import { useLocation } from 'react-router';
 import { useQuery } from '@apollo/client';
 import PageController from '../PageController/PageController';
 import DataList from './DataList';
 import { dataFieldCms as PageContent } from '../../cms';
 import UploadFile from '../FileUpload/UploadFile';
 import withPageController from '../../hoc/withPageController';
-import { ClientList, MarketOptionsContext } from '../../contexts/marketOptions';
 import { parsedDataList } from '../../utils/helper';
 import GET_DATA_LIST from './query';
 
 const DataField = (props) => {
-  const location = useLocation();
-  const { param } = props;
-  const query = new URLSearchParams(location.search);
-  const clientCode = query.get('client_code');
+  const { param, marketOptions, clientMetaData } = props;
+
+  const { clientCode, name } = clientMetaData;
   const [market, setMarket] = useState({
     value: 'All',
     label: 'All markets',
@@ -32,7 +29,6 @@ const DataField = (props) => {
   const handleMarket = (selected) => {
     setMarket(selected);
   };
-  const clientList = useContext(ClientList);
   const { data: listData, loading: listLoading, refetch } = useQuery(
     GET_DATA_LIST,
     {
@@ -40,62 +36,45 @@ const DataField = (props) => {
     },
   );
 
-  const marketOptions = [
-    { value: 'All', label: 'All markets', overviewId: '12' },
-  ];
-  const { markets } = clientList.find((client) => client.code === clientCode);
-  markets.forEach((clientMarket) => {
-    marketOptions.push({
-      value: clientMarket.code,
-      label: clientMarket.name,
-      overviewId: clientMarket.overviewId,
-    });
-  });
-
-  const { name, avatar } = clientList.find(
-    (client) => client.code === clientCode,
-  );
   useEffect(() => {
     if (listData) {
       const {
         data: { dataList, totalCount },
       } = listData.getDataList;
-      const paredData = parsedDataList(dataList, marketOptions, name);
-      setdataList({ dataList: paredData, totalCount });
+      const parsedData = parsedDataList(dataList, marketOptions, name);
+      setdataList({ dataList: parsedData, totalCount });
     }
   }, [listData]);
 
   return (
     <>
-      <MarketOptionsContext.Provider value={marketOptions}>
-        <Box mb="200px">
-          <PageController
-            param={param}
+      <Box mb="200px">
+        <PageController
+          param={param}
+          market={market}
+          handleMarket={handleMarket}
+          pageTitle=""
+          pageMetadata="Client Overview"
+          isCompleted={false}
+          clientList={clientMetaData}
+        >
+          <UploadFile
+            cmsData={PageContent}
+            modalOpen={isUploadModal}
+            setModalOpen={setIsUploadModal}
+          />
+          <DataList
+            cmsData={PageContent}
+            completeDataList={completeDataList}
+            dataList={dataList}
+            setCompleteDataList={setCompleteDataList}
+            loading={listLoading}
             market={market}
-            handleMarket={handleMarket}
-            pageTitle=""
-            pageMetadata="Client Overview"
-            isCompleted={false}
-            clientList={{ name, avatar, clientCode }}>
-            <UploadFile
-              cmsData={PageContent}
-              modalOpen={isUploadModal}
-              setModalOpen={setIsUploadModal}
-            />
-            <DataList
-              cmsData={PageContent}
-              market={market}
-              completeDataList={completeDataList}
-              clientCode={clientCode}
-              dataList={dataList}
-              setCompleteDataList={setCompleteDataList}
-              loading={listLoading}
-              setMarket={setMarket}
-              refetch={refetch}
-            />
-          </PageController>
-        </Box>
-      </MarketOptionsContext.Provider>
+            setMarket={setMarket}
+            refetch={refetch}
+          />
+        </PageController>
+      </Box>
     </>
   );
 };

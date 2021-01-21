@@ -15,7 +15,7 @@ import Card from '@dentsu-ui/components/dist/cjs/components/Card';
 import Paragraph from '@dentsu-ui/components/dist/cjs/components/Paragraph';
 import ActionBtn from './ActionBtn';
 import DeleteData from '../CreateData/DeleteData';
-import { dateTimeFormat } from '../../utils/helper'
+import { dateTimeFormat } from '../../utils/helper';
 
 const TableList = (props) => {
   const {
@@ -37,6 +37,8 @@ const TableList = (props) => {
     handleFilter,
     selectedFilter,
   } = props;
+
+  console.log('>>>>>>>>', data);
 
   const history = useHistory();
 
@@ -105,9 +107,10 @@ const TableList = (props) => {
             quarter,
             updatedAt,
             isOverDue,
+            orignalId,
           } = item;
           return (
-            <div key={overviewId}>
+            <div key={orignalId}>
               <Stack padding="15px">
                 <Stack
                   alignItems="center"
@@ -152,7 +155,7 @@ const TableList = (props) => {
                       variant="ghost"
                       size="small"
                       iconLeft="layers"
-                      onClick={() => showDataRequestDetails(overviewId)}
+                      onClick={() => showDataRequestDetails(orignalId)}
                     >
                       {cmsData.viewDetails}
                     </Button>
@@ -166,7 +169,8 @@ const TableList = (props) => {
                       handleDeleteModel={() => handleDeleteModel(overviewId)}
                       handleMoveToCompleteModel={() => handleMoveToCompleteModel(overviewId)
                       }
-                      handleMoveToOngoing={() => handleMoveToOngoing(overviewId)}
+                      handleMoveToOngoing={() => handleMoveToOngoing(overviewId)
+                      }
                     />
                   </Box>
                 </Stack>

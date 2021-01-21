@@ -60,14 +60,11 @@ const DataList = (props) => {
 
   const getFilteredList = (data, searchInput, filterInput) => {
     let updatedList = data.filter(
-      (d) =>
-        d.clientMarket.toLowerCase().includes(searchInput.toLowerCase()) ||
-        d.name.toLowerCase().includes(searchInput.toLowerCase()),
+      (d) => d.clientMarket.toLowerCase().includes(searchInput.toLowerCase())
+        || d.name.toLowerCase().includes(searchInput.toLowerCase()),
     );
     if (filterInput !== '') {
-      updatedList = updatedList.filter((key) =>
-        key.totalTenure.includes(filterInput),
-      );
+      updatedList = updatedList.filter((key) => key.totalTenure.includes(filterInput));
     }
     return updatedList;
   };
@@ -173,6 +170,7 @@ const DataList = (props) => {
         handleModal={handleModal}
         clientCode={clientCode}
         refetch={refetch}
+        setMarket={setMarket}
       />
       <Box mt="30px">
         <Tabs onChange={handleTabIndex} index={tabIndex}>
