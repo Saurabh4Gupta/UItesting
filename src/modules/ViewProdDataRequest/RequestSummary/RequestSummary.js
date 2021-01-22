@@ -8,7 +8,6 @@ import OtherProductivityData from './OtherProductivityData/OtherProductivityData
 
 const RequestSummary = (props) => {
   const { handleEditData, prodRequest, name, localMarket } = props;
-  console.log('name', name)
   return (
     <Card>
       <Stack flexDirection="row">
@@ -27,10 +26,14 @@ const RequestSummary = (props) => {
 RequestSummary.propTypes = {
   prodRequest: PropTypes.object,
   handleEditData: PropTypes.func,
+  name: PropTypes.string,
+  localMarket: PropTypes.string,
 };
 RequestSummary.defaultProps = {
   prodRequest: {},
   handleEditData: PropTypes.func,
+  name: PropTypes.string,
+  localMarket: PropTypes.string,
 };
 
 export default RequestSummary;

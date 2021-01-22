@@ -15,7 +15,6 @@ describe('Success test cases for: ViewClientList component', () => {
       // expect(wrapper).toMatchSnapshot();
       //  const listComponent = wrapper.find('List').props()
       //  .renderItem({item:  { title: 'American Express', avatar: '', clientCode: 'AE' }});
-      console.log(wrapper.debug());
       wrapper.showClientDetails('AB');
       // setProps
       // listComponent.setProps({ items: clientList });

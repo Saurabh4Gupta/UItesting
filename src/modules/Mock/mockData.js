@@ -232,7 +232,6 @@ export function updateData(values) {
   values.isDeleted = false;
   values.id = data.data.length + 1;
   values.client = 'Microsoft';
-  console.log('values', values);
   data.data.push(values);
 }
 

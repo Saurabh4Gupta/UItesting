@@ -31,6 +31,8 @@ const Form = (props) => {
     handleOwners,
     setFiles,
     loading,
+    isEdit,
+    dueDate,
   } = props;
 
   if (loading) return <Loader />;
@@ -171,7 +173,7 @@ const Form = (props) => {
           onChange={(date) => handleSelectField(date, { name: 'dueDate' })}
           minDate={new Date()}
           maxDate={new Date(maxDate)}
-          value={new Date(values.dueDate || '')}
+          value={isEdit ? new Date(values.dueDate || '') : dueDate}
         />
       </FormField>
 

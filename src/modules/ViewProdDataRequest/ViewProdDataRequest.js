@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useQuery } from '@apollo/client';
 import PropTypes from 'prop-types';
 import { useLocation, useHistory } from 'react-router';
@@ -9,25 +9,19 @@ import { dataFieldCms as PageContent } from '../../cms';
 import withPageController from '../../hoc/withPageController';
 import UploadFile from '../FileUpload/UploadFile';
 import RequestSummary from './RequestSummary/RequestSummary';
-import { getDataById, data as mockData } from '../Mock/mockData';
+import { data as mockData } from '../Mock/mockData';
 import Loader from '../../components/loading';
-import VersionHistory from '../VersionHistory/VersionHistory';
+// import VersionHistory from '../VersionHistory/VersionHistory';
 import MoveToComplete from '../../components/MoveToComplete/MoveToComplete';
 import { GET_DATA_REQUESTS } from './queries';
 import { parsedDataList } from '../../utils/helper';
-import { ClientList } from '../../contexts/marketOptions';
 
 const ViewProdDataRequest = (props) => {
   const { param, clientMetaData, marketOptions } = props;
   const { name, avatar, clientCode } = clientMetaData;
-  // const clientList = useContext(ClientList)
-  // const marketOptions = []
   const location = useLocation();
   const query = new URLSearchParams(location.search);
   const requestId = query.get('request_id');
-  console.log('>>>>>>>>>>>>>>>>', typeof (requestId))
-  // const clientCode = query.get('client_code');
-  // const [prodRequest, setProdRequest] = useState(getDataById(requestId));
   const [prodRequest, setProdRequest] = useState([]);
   const history = useHistory();
 
@@ -43,9 +37,6 @@ const ViewProdDataRequest = (props) => {
   const handleMoveToCompleteModal = () => {
     setIsRequestModal(true);
   };
-  // const { name, avatar } = clientList.find(
-  //   (client) => client.code === clientCode,
-  // );
 
   // eslint-disable-next-line consistent-return
   useEffect(() => {
@@ -56,7 +47,6 @@ const ViewProdDataRequest = (props) => {
     if (dataRequests) {
       const { data } = dataRequests.getDataRequests;
       const parsedRes = parsedDataList(data, marketOptions, name)
-      console.log('parsed', parsedRes)
       setProdRequest(parsedRes)
     }
   }, [dataRequests, loading, error]);
@@ -65,15 +55,6 @@ const ViewProdDataRequest = (props) => {
       setLoading(false);
     }, 2000);
   }, []);
-
-  // const { markets } = clientList.find((client) => client.code === clientCode);
-  // markets.forEach((clientMarket) => {
-  //   marketOptions.push({
-  //     value: clientMarket.code,
-  //     label: clientMarket.name,
-  //     overviewId: clientMarket.overviewId,
-  //   });
-  // });
 
   const handleEditData = (values) => {
     setProdRequest({
@@ -179,8 +160,12 @@ const ViewProdDataRequest = (props) => {
 };
 ViewProdDataRequest.propTypes = {
   param: PropTypes.object,
+  clientMetaData: PropTypes.object,
+  marketOptions: PropTypes.object,
 };
 ViewProdDataRequest.defaultProps = {
   param: {},
+  clientMetaData: PropTypes.object,
+  marketOptions: PropTypes.object,
 };
 export default withPageController(ViewProdDataRequest, { isViewProduct: true });

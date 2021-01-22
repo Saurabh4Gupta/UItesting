@@ -1,5 +1,5 @@
 import React from 'react';
-
+import PropTypes from 'prop-types';
 import Image from '@dentsu-ui/components/dist/cjs/components/Image';
 
 import Icon from '@dentsu-ui/components/dist/cjs/components/Icon';
@@ -12,7 +12,7 @@ import { dataFieldCms as PageContent } from '../../../../cms/dataFieldCms';
 const TrackerTemplate = (props) => {
   const { trackerTemplate, name, localMarket } = props;
   const trackerTemplateName = `${name} ${localMarket.value} - ${trackerTemplate[0].name}`
-  console.log('tracker', localMarket)
+
   return (
     <>
       <Stack flexDirection="column">
@@ -54,6 +54,17 @@ const TrackerTemplate = (props) => {
       </Stack>
     </>
   )
+};
+
+TrackerTemplate.propTypes = {
+  trackerTemplate: PropTypes.object,
+  localMarket: PropTypes.string,
+  name: PropTypes.string,
+};
+TrackerTemplate.defaultProps = {
+  trackerTemplate: PropTypes.object,
+  localMarket: PropTypes.string,
+  name: PropTypes.string,
 };
 
 export default TrackerTemplate;

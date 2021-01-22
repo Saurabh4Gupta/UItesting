@@ -35,7 +35,6 @@ const OtherProductivityData = (props) => {
   const handleCreateData = () => {
     handleModal(true);
   };
-  console.log('inside other', prodRequest);
   const reportingYearLabel = reportingYearData.find(
     (key) => key.value === reportingYear,
   );

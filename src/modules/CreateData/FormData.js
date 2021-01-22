@@ -207,6 +207,7 @@ const CreateData = (props) => {
             userList={userData}
             loading={userLoading}
             forecastOptions={forecastOptions}
+            isEdit={isEdit}
           />
         </Modal.Body>
         <Modal.Footer>
