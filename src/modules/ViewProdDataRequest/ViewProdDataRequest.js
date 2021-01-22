@@ -19,7 +19,7 @@ import { ClientList } from '../../contexts/marketOptions';
 
 const ViewProdDataRequest = (props) => {
   const { param, clientMetaData, marketOptions } = props;
-  const {name , avatar, clientCode} = clientMetaData;
+  const { name, avatar, clientCode } = clientMetaData;
   // const clientList = useContext(ClientList)
   // const marketOptions = []
   const location = useLocation();
@@ -56,7 +56,7 @@ const ViewProdDataRequest = (props) => {
     if (dataRequests) {
       const { data } = dataRequests.getDataRequests;
       const parsedRes = parsedDataList(data, marketOptions, name)
-      console.log("parsed", parsedRes)
+      console.log('parsed', parsedRes)
       setProdRequest(parsedRes)
     }
   }, [dataRequests, loading, error]);
@@ -129,23 +129,23 @@ const ViewProdDataRequest = (props) => {
         {isLoading ? (
           <Loader />
         ) : (
-            <>
-              {isUploadModal && (
-                <UploadFile
-                  modalOpen={isUploadModal}
-                  setModalOpen={setIsUploadModeal}
-                  cmsData={PageContent}
-                />
+          <>
+            {isUploadModal && (
+            <UploadFile
+              modalOpen={isUploadModal}
+              setModalOpen={setIsUploadModeal}
+              cmsData={PageContent}
+            />
               )}
-              {isRequestModal && (
-                <MoveToComplete
-                  modalOpen={isRequestModal}
-                  setModalOpen={setIsRequestModal}
-                  cmsData={PageContent}
-                  handleMoveToComplete={() => handleMoveToComplete(false)}
-                />
+            {isRequestModal && (
+            <MoveToComplete
+              modalOpen={isRequestModal}
+              setModalOpen={setIsRequestModal}
+              cmsData={PageContent}
+              handleMoveToComplete={() => handleMoveToComplete(false)}
+            />
               )}
-              {prodRequest.length
+            {prodRequest.length
                 && (
                   <PageController
                     param={param}
@@ -171,7 +171,7 @@ const ViewProdDataRequest = (props) => {
                     </Box>
                   </PageController>
                 )}
-            </>
+          </>
           )}
       </Box>
     </>

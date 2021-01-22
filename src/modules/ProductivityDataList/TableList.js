@@ -38,8 +38,6 @@ const TableList = (props) => {
     selectedFilter,
   } = props;
 
-  console.log('>>>>>>>>', clientCode);
-
   const history = useHistory();
 
   const showDataRequestDetails = (id) => {

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import moment from 'moment'
+import moment from 'moment';
 import Stack from '@dentsu-ui/components/dist/cjs/components/Stack';
 import Subheading from '@dentsu-ui/components/dist/cjs/components/Subheading';
 import Caption from '@dentsu-ui/components/dist/cjs/components/Caption';
@@ -11,9 +11,9 @@ import PropTypes from 'prop-types';
 import Paragraph from '@dentsu-ui/components/dist/cjs/components/Paragraph/Paragraph';
 import { AvatarGroup, Avatar } from '@dentsu-ui/components';
 import { dataFieldCms as PageContent } from '../../../../cms/dataFieldCms';
-import EditData from '../../../CreateData/EditData';
+import EditData from '../../../CreateData/FormData';
 import TrackerTemplate from './TrackerTemplate';
-import { reportingYearData } from '../../../Mock/mockData'
+import { reportingYearData } from '../../../Mock/mockData';
 
 const OtherProductivityData = (props) => {
   const { handleEditData, prodRequest, name } = props;
@@ -35,8 +35,10 @@ const OtherProductivityData = (props) => {
   const handleCreateData = () => {
     handleModal(true);
   };
-  console.log("inside other", prodRequest)
-  const reportingYearLabel = reportingYearData.find((key) => key.value === reportingYear);
+  console.log('inside other', prodRequest);
+  const reportingYearLabel = reportingYearData.find(
+    (key) => key.value === reportingYear,
+  );
 
   return (
     <>
@@ -54,7 +56,7 @@ const OtherProductivityData = (props) => {
                 >
                   {PageContent.editRequest}
                 </Link>
-                )}
+              )}
             </Subheading>
           </Box>
           <Box mt="20px" mb="10px">
@@ -102,21 +104,32 @@ const OtherProductivityData = (props) => {
                   {PageContent.assignedTo}
                 </Caption>
               </Box>
-              {owners.length === 1
-                ? (
-                  <Chip
-                    avatar={{
-                      src: owners[0].userImage ? owners[0].userImage : '',
-                      name: owners[0].label,
-                    }}
-                  >
-                    {owners[0].label}
-                  </Chip>
-                ) : (<AvatarGroup size="xlarge">{owners.map((value) => <Avatar name={value.label} src={value.userImage ? value.userImage : ''} />)}</AvatarGroup>)
-              }
+              {owners.length === 1 ? (
+                <Chip
+                  avatar={{
+                    src: owners[0].userImage ? owners[0].userImage : '',
+                    name: owners[0].label,
+                  }}
+                >
+                  {owners[0].label}
+                </Chip>
+              ) : (
+                <AvatarGroup size="xlarge">
+                  {owners.map((value) => (
+                    <Avatar
+                      name={value.label}
+                      src={value.userImage ? value.userImage : ''}
+                    />
+                  ))}
+                </AvatarGroup>
+              )}
             </Stack>
           </Stack>
-          <TrackerTemplate trackerTemplate={trackerTemplate} name={name} localMarket={localMarket} />
+          <TrackerTemplate
+            trackerTemplate={trackerTemplate}
+            name={name}
+            localMarket={localMarket}
+          />
         </Stack>
       </Box>
       <EditData
@@ -125,7 +138,7 @@ const OtherProductivityData = (props) => {
         market={market}
         isModalOpen={isModalOpen}
         handleModal={handleModal}
-        // requestId={id}
+        isEdit
         handleEditData={handleEditData}
       />
     </>

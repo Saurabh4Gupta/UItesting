@@ -24,14 +24,13 @@ const useCustomForm = ({ initialValues, validate }) => {
     const { name } = event;
     if (name === 'actualData') {
       const forecast = 12 - value.value;
-      const label = monthOptions.find((key) => key.value === forecast);
-      const data = { value: label.value, label: label.label };
       handleValidation('forecastData', forecast);
-      setValues((values.forecastData = data));
+      setValues({ ...values, forecastData: forecast, [name]: value.value });
       const forcastOptionsData = monthOptions.filter(
         (m) => m.value <= forecast,
       );
       setforecastOptions(forcastOptionsData);
+      return;
     }
 
     handleValidation(name, value);

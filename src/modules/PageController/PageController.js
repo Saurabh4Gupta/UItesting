@@ -25,7 +25,7 @@ const PageController = (props) => {
   const { marketOptions, clientMetaData } = useContext(MetaDataContext);
 
   const { name, clientCode, avatar } = clientMetaData;
-  console.log("name", name)
+  console.log('name', name)
 
   const contentToShow = isViewProduct
     ? `Back to ${name}`
