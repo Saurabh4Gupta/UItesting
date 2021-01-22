@@ -4,7 +4,7 @@ function validationRule(field, value) {
 
   switch (field) {
     case 'localMarket':
-      return value.value === 'All' ? 'This field cannot be blank' : '';
+      return !value ? 'This field cannot be blank' : '';
     case 'file':
       return value.length === 0 ? 'Please upload form' : '';
     case 'briefing':

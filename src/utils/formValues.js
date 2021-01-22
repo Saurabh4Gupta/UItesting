@@ -1,5 +1,4 @@
 const getInitialValues = ({ isEdit, market, data }) => {
-  console.log('>>>>>>>>>', data);
   let initialValues = {
     localMarket: market,
     blobId: '',
