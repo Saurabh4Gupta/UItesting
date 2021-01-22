@@ -71,7 +71,7 @@ const PageController = (props) => {
               <Select
                 width={200}
                 options={marketOptions}
-                value={market}
+                value={market || { value: 'All', label: 'All Markets' }}
                 onChange={handleMarket}
               />
             </FormField>

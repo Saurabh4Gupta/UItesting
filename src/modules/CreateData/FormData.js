@@ -1,26 +1,21 @@
 /* eslint-disable operator-linebreak */
 import React, { useState, useEffect, useContext } from 'react';
-import { useMutation, useLazyQuery } from '@apollo/client';
-import {
-  Caption,
-  Subheading,
-  TextContainer,
-  Button,
-  Stack,
-  Modal,
-} from '@dentsu-ui/components';
+import { useMutation, useQuery } from '@apollo/client';
+import { Button, Modal } from '@dentsu-ui/components';
 import PropTypes from 'prop-types';
 
 import Toast from '@dentsu-ui/components/dist/cjs/components/Toast';
+import moment from 'moment';
 import Form from './Form';
 import useCustomForm from '../../hooks/useCustomForm';
-import validationRule from '../../utils/validate';
-import { monthOptions, reportingYear } from '../Mock/mockData';
+import { checkValidation, validationRule } from '../../utils/validate';
+import { monthOptions, reportingYearData } from '../Mock/mockData';
 
 import { GET_USERS } from './queries';
 import { MetaDataContext } from '../../contexts/marketOptions';
 import FILE_UPLOAD from '../FileUpload/mutation';
 import CREATE_DATA_REQUEST from './mutation';
+import { getInitialValues } from '../../utils/formValues';
 
 const toast = Toast();
 const CreateData = (props) => {
@@ -31,7 +26,10 @@ const CreateData = (props) => {
     handleModal,
     refetch,
     setMarket,
+    isEdit,
+    prodRequest,
   } = props;
+
   const [isReadyToSubmit, setIsReadyToSubmit] = useState(false);
 
   const [uploadFile, { loading: fileLoading, error: fileError }] = useMutation(
@@ -41,25 +39,20 @@ const CreateData = (props) => {
     CREATE_DATA_REQUEST,
   );
   const [userData, setUserData] = useState([]);
-  const [getUsers, { error: userError, data }] = useLazyQuery(GET_USERS);
 
-  const initialValues = {
-    localMarket: market,
-    blobId: '',
-    name: '',
-    briefing: '',
-    reportingYear: '',
-    actualData: '',
-    forecastData: '',
-    dueDate: '',
-    assignTo: [],
-    file: [],
-  };
+  // const [files, setFiles] = useState([]);
+  const { loading: userLoading, error: userError, data: userList } = useQuery(
+    GET_USERS,
+  );
 
+  const initialValues = getInitialValues({
+    isEdit,
+    market,
+    data: prodRequest || null,
+  });
   const {
     handleChange,
     values,
-    forecastOptions,
     handleSelectField,
     handleSubmit,
     errors,
@@ -67,47 +60,20 @@ const CreateData = (props) => {
     handleOwners,
     setErrors,
     setValues,
+    forecastOptions,
   } = useCustomForm({ initialValues, validate: validationRule });
 
   useEffect(() => {
-    const isAnyValidationError =
-      errors &&
-      !!(
-        errors.localMarket ||
-        errors.name ||
-        errors.briefing ||
-        errors.dueDate ||
-        errors.assignTo ||
-        errors.forecastData ||
-        errors.forecastData ||
-        errors.reportingYear
-      );
-    const isAllValuesFilled =
-      values.localMarket &&
-      values.name &&
-      values.assignTo &&
-      values.dueDate &&
-      values.forecastData &&
-      values.actualData &&
-      values.briefing &&
-      values.reportingYear;
-    setIsReadyToSubmit(isAllValuesFilled && !isAnyValidationError);
-  }, [errors, values]);
+    if (userList) {
+      const { data } = userList.getUsers;
+      setUserData(data);
+    }
+  }, [userList]);
 
   const closeModalHandler = () => {
     handleModal(false);
     handleCancel();
   };
-
-  useEffect(() => {
-    if (fileError) {
-      toast({
-        title: '',
-        content: fileError.message,
-        status: 'danger',
-      });
-    }
-  }, [fileError, error, userError]);
 
   useEffect(() => {
     if (createData) {
@@ -122,20 +88,32 @@ const CreateData = (props) => {
         });
       }
     }
-    if (data) {
-      const { data: resData } = data.getUsers;
-      setUserData(resData);
+  }, [createData]);
+
+  useEffect(() => {
+    const { isAllValuesFilled, isAnyValidationError } = checkValidation(
+      values,
+      errors,
+    );
+    setIsReadyToSubmit(isAllValuesFilled && !isAnyValidationError);
+  }, [errors, values]);
+
+  useEffect(() => {
+    if (fileError) {
+      toast({
+        title: '',
+        content: fileError.message,
+        status: 'danger',
+      });
     }
-  }, [data, createData]);
+  }, [fileError, error, userError]);
 
   useEffect(() => {
     handleChange({ target: { name: 'localMarket', value: market } });
   }, [market]);
 
-  const handleCreateData = () => {
-    getUsers();
-    handleModal(true);
-  };
+  /* parsing file to base64 */
+
   const handleFile = (fileItems) => {
     if (fileItems.length === 0) {
       setValues((prevState) => ({
@@ -160,10 +138,16 @@ const CreateData = (props) => {
     };
   };
 
+  /* On submit */
+
   async function onSubmit() {
     handleSubmit();
     if (isReadyToSubmit) {
       const { file } = values;
+      if (isEdit) {
+        // Write mutation here check below for
+        // reference and in last return the  toast with status 200
+      }
       const { data: uploadData } = await uploadFile({ variables: { file } });
       const { data: fileData, status } = uploadData.uploadFile;
       if (status !== 200) {
@@ -188,11 +172,11 @@ const CreateData = (props) => {
       const reqData = {
         overviewId: localMarket.overviewId,
         blobId: fileData.blobId,
+        actualData,
+        forecastData,
         name,
         briefing,
-        reportingYear: reportingYear.value,
-        actualData: actualData.value,
-        forecastData: forecastData.value,
+        reportingYear: moment(reportingYear.value).format('YYYY'),
         dueDate,
         owners: assignTo,
         filename: fileData.filename,
@@ -217,11 +201,13 @@ const CreateData = (props) => {
             cmsData={cmsData}
             options={formMarketOption}
             monthOptions={monthOptions}
-            reportingYear={reportingYear}
-            forecastOptions={forecastOptions}
+            reportingYear={reportingYearData}
             handleOwners={handleOwners}
             setFiles={handleFile}
             userList={userData}
+            loading={userLoading}
+            forecastOptions={forecastOptions}
+            isEdit={isEdit}
           />
         </Modal.Body>
         <Modal.Footer>
@@ -233,19 +219,6 @@ const CreateData = (props) => {
           </Button>
         </Modal.Footer>
       </Modal>
-      <Stack flexDirection="row" justifyContent="space-between">
-        <Stack>
-          <TextContainer>
-            <Subheading>{cmsData.productivityDatarequestHeading}</Subheading>
-            <Caption isAssistive>
-              {cmsData.productivityDatarequestCaption}
-            </Caption>
-          </TextContainer>
-        </Stack>
-        <Button variant="secondary" iconLeft="add" onClick={handleCreateData}>
-          {cmsData.createNewDataRequest}
-        </Button>
-      </Stack>
     </>
   );
 };
@@ -256,6 +229,8 @@ CreateData.propTypes = {
   handleModal: PropTypes.func,
   refetch: PropTypes.func,
   setMarket: PropTypes.func,
+  isEdit: PropTypes.bool,
+  prodRequest: PropTypes.object,
 };
 CreateData.defaultProps = {
   cmsData: {},
@@ -264,6 +239,8 @@ CreateData.defaultProps = {
   handleModal: () => {},
   refetch: () => {},
   setMarket: () => {},
+  isEdit: false,
+  prodRequest: {},
 };
 
 export default CreateData;

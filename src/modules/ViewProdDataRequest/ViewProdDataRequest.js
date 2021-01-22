@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useQuery } from '@apollo/client';
 import PropTypes from 'prop-types';
 import { useLocation, useHistory } from 'react-router';
 import Box from '@dentsu-ui/components/dist/cjs/components/Box';
@@ -8,21 +9,25 @@ import { dataFieldCms as PageContent } from '../../cms';
 import withPageController from '../../hoc/withPageController';
 import UploadFile from '../FileUpload/UploadFile';
 import RequestSummary from './RequestSummary/RequestSummary';
-import { getDataById, data as mockData } from '../Mock/mockData';
+import { data as mockData } from '../Mock/mockData';
 import Loader from '../../components/loading';
-import VersionHistory from '../VersionHistory/VersionHistory';
+// import VersionHistory from '../VersionHistory/VersionHistory';
 import MoveToComplete from '../../components/MoveToComplete/MoveToComplete';
+import { GET_DATA_REQUESTS } from './queries';
+import { parsedDataList } from '../../utils/helper';
 
 const ViewProdDataRequest = (props) => {
-  const { param } = props;
-
+  const { param, clientMetaData, marketOptions } = props;
+  const { name, avatar, clientCode } = clientMetaData;
   const location = useLocation();
   const query = new URLSearchParams(location.search);
   const requestId = query.get('request_id');
-  const clientCode = query.get('client_code');
-  const [prodRequest, setProdRequest] = useState(getDataById(requestId));
+  const [prodRequest, setProdRequest] = useState([]);
   const history = useHistory();
 
+  const { loading, error, data: dataRequests } = useQuery(GET_DATA_REQUESTS, {
+    variables: { id: requestId },
+  });
   const [isUploadModal, setIsUploadModeal] = useState(false);
   const [isRequestModal, setIsRequestModal] = useState(false);
   const [isLoading, setLoading] = useState(true);
@@ -32,6 +37,19 @@ const ViewProdDataRequest = (props) => {
   const handleMoveToCompleteModal = () => {
     setIsRequestModal(true);
   };
+
+  // eslint-disable-next-line consistent-return
+  useEffect(() => {
+    if (loading) {
+      setLoading(false)
+    }
+    if (error) return `Error! ${error}`;
+    if (dataRequests) {
+      const { data } = dataRequests.getDataRequests;
+      const parsedRes = parsedDataList(data, marketOptions, name)
+      setProdRequest(parsedRes)
+    }
+  }, [dataRequests, loading, error]);
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
@@ -73,7 +91,7 @@ const ViewProdDataRequest = (props) => {
         pathname: '/datafield',
         search: `?${queryString}`,
       });
-     return toast({
+      return toast({
         title: '',
         content: PageContent.toastMovedToComplete,
         status: 'success',
@@ -83,55 +101,71 @@ const ViewProdDataRequest = (props) => {
       title: '',
       content: PageContent.failurNotificationMsg,
       status: 'error',
-  });
-};
+    });
+  };
+
   return (
     <>
-      {isLoading ? (
-        <Loader />
-      ) : (
-        <>
-          {isUploadModal && (
+      <Box mb="200px">
+        {isLoading ? (
+          <Loader />
+        ) : (
+          <>
+            {isUploadModal && (
             <UploadFile
               modalOpen={isUploadModal}
               setModalOpen={setIsUploadModeal}
               cmsData={PageContent}
             />
-          )}
-          {isRequestModal && (
+              )}
+            {isRequestModal && (
             <MoveToComplete
               modalOpen={isRequestModal}
               setModalOpen={setIsRequestModal}
               cmsData={PageContent}
               handleMoveToComplete={() => handleMoveToComplete(false)}
             />
+              )}
+            {prodRequest.length
+                && (
+                  <PageController
+                    param={param}
+                    localMarket={prodRequest[0].localMarket.label}
+                    // pageTitle={prodRequest.name}
+                    pageTitle={prodRequest[0].name}
+                    pageMetadata={`${name} ${prodRequest[0].localMarket.label}`}
+                    handleUploadModal={handleUploadModal}
+                    isCompleted={prodRequest.isCompleted}
+                    handleMoveToCompleteModal={handleMoveToCompleteModal}
+                    clientList={{ name, avatar, clientCode }}
+                  >
+                    <RequestSummary
+                      // prodRequest={prodRequest}
+                      prodRequest={prodRequest[0]}
+                      name={name}
+                      localMarket={prodRequest[0].localMarket.value}
+                      handleEditData={handleEditData}
+                    />
+                    <Box mt="30px">
+                      {/* <VersionHistory tracketTemplate={prodRequest[0].tracketTemplate} trackerFiles={prodRequest[0].trackerFiles} /> */}
+                      {/* <VersionHistory /> */}
+                    </Box>
+                  </PageController>
+                )}
+          </>
           )}
-          <PageController
-            param={param}
-            localMarket={prodRequest.localMarket.label}
-            pageTitle={prodRequest.name}
-            pageMetadata={prodRequest.clientMarket}
-            handleUploadModal={handleUploadModal}
-            isCompleted={prodRequest.isCompleted}
-            handleMoveToCompleteModal={handleMoveToCompleteModal}
-          >
-            <RequestSummary
-              prodRequest={prodRequest}
-              handleEditData={handleEditData}
-            />
-            <Box mt="30px">
-              <VersionHistory />
-            </Box>
-          </PageController>
-        </>
-      )}
+      </Box>
     </>
   );
 };
 ViewProdDataRequest.propTypes = {
   param: PropTypes.object,
+  clientMetaData: PropTypes.object,
+  marketOptions: PropTypes.object,
 };
 ViewProdDataRequest.defaultProps = {
   param: {},
+  clientMetaData: PropTypes.object,
+  marketOptions: PropTypes.object,
 };
 export default withPageController(ViewProdDataRequest, { isViewProduct: true });

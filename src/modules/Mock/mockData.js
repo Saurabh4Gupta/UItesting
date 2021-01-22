@@ -1,7 +1,7 @@
 const data = {
   data: [
     {
-      id: 1,
+      id: '5ffc21731a529b15835e2b02',
       client: 'Microsoft',
       localMarket: { value: 'UK', label: 'United Kingdom' },
       status: 'Overdue',
@@ -61,9 +61,10 @@ const data = {
       quarter: 'Q2',
       totalTenure: '2020 Q2',
       isCompleted: false,
+      owners: '00u3ygx4gxoiEY5mG0i7',
     },
     {
-      id: 2,
+      id: '5ffc21731a529b15835e2b02',
       client: 'Microsoft',
       localMarket: { value: 'USA', label: 'USA' },
       status: '',
@@ -100,7 +101,7 @@ const data = {
       isCompleted: false,
     },
     {
-      id: 3,
+      id: '5ffc21731a529b15835e2b02',
       client: 'Microsoft',
       localMarket: { value: 'UK', label: 'United Kingdom' },
       status: 'Overdue',
@@ -127,7 +128,7 @@ const data = {
       isCompleted: false,
     },
     {
-      id: 4,
+      id: '5ffc21731a529b15835e2b02',
       client: 'Microsoft',
       localMarket: { value: 'UK', label: 'United Kingdom' },
       status: 'Overdue',
@@ -231,7 +232,6 @@ export function updateData(values) {
   values.isDeleted = false;
   values.id = data.data.length + 1;
   values.client = 'Microsoft';
-  console.log('values', values);
   data.data.push(values);
 }
 
@@ -400,6 +400,20 @@ const reportingYear = [
   },
 ];
 
+const reportingYearData = [
+  {
+    value: '2020',
+    label: `April ${nexStartDate}  -  March ${nextEndDate}`,
+  },
+  {
+    value: '2021',
+    label: `April ${currentStartDate}  -  March ${currentEndDate}`,
+  },
+  {
+    value: '2022',
+    label: `April ${prevStartDate}  -  March ${prevEndDate}`,
+  },
+];
 const versionHistory = {
   data: [
     {
@@ -553,4 +567,5 @@ export {
   data,
   versionHistory,
   userList,
+  reportingYearData,
 };

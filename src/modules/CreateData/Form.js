@@ -13,6 +13,7 @@ import {
   ChipInput,
 } from '@dentsu-ui/components';
 import constant from '../../utils/constant';
+import Loader from '../../components/loading';
 
 const Form = (props) => {
   const { MAX_FILE_SIZE, ALLOWED_FILE_TYPES } = constant;
@@ -24,14 +25,17 @@ const Form = (props) => {
     cmsData,
     options,
     monthOptions,
-    dueDate,
     reportingYear,
     forecastOptions,
     userList,
     handleOwners,
     setFiles,
+    loading,
+    isEdit,
+    dueDate,
   } = props;
 
+  if (loading) return <Loader />;
   const now = new Date();
   const maxDate = new Date();
   maxDate.setFullYear(now.getFullYear() + 1);
@@ -87,7 +91,7 @@ const Form = (props) => {
               name="reportingYear"
               options={reportingYear}
               value={reportingYear.find(
-                (key) => key.value === values.reportingYear.value,
+                (key) => key.value === values.reportingYear,
               )}
               placeholder={cmsData.selectPlaceHolder}
               onChange={(selected, event) => {
@@ -107,7 +111,9 @@ const Form = (props) => {
             <Select
               name="actualData"
               options={monthOptions}
-              value={values.actualData}
+              value={monthOptions.find(
+                (key) => key.value === values.actualData,
+              )}
               placeholder={cmsData.selectPlaceHolder}
               onChange={(selected, event) => {
                 handleSelectField(selected, event);
@@ -125,7 +131,9 @@ const Form = (props) => {
             <Select
               name="forecastData"
               placeholder={cmsData.selectPlaceHolder}
-              value={values.forecastData}
+              value={monthOptions.find(
+                (key) => key.value === values.forecastData,
+              )}
               options={forecastOptions}
               onChange={(selected, event) => handleSelectField(selected, event)}
             />
@@ -149,6 +157,7 @@ const Form = (props) => {
           acceptedFileTypes={ALLOWED_FILE_TYPES}
           labelMaxFileSizeExceeded={cmsData.uploadFileLargeMessage}
           labelFileTypeNotAllowed={cmsData.labelFileTypeNotAllowed}
+          // files={values.files}
         />
       </FormField>
       <FormField
@@ -164,7 +173,7 @@ const Form = (props) => {
           onChange={(date) => handleSelectField(date, { name: 'dueDate' })}
           minDate={new Date()}
           maxDate={new Date(maxDate)}
-          value={dueDate}
+          value={isEdit ? new Date(values.dueDate || '') : dueDate}
         />
       </FormField>
 

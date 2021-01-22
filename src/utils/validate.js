@@ -1,6 +1,7 @@
 /* eslint-disable consistent-return */
 function validationRule(field, value) {
   // const date = new Date();
+
   switch (field) {
     case 'localMarket':
       return !value ? 'This field cannot be blank' : '';
@@ -34,4 +35,27 @@ function validationRule(field, value) {
       break;
   }
 }
-export default validationRule;
+
+const checkValidation = (values, errors) => {
+  const isAnyValidationError =    errors
+    && !!(
+      errors.localMarket
+      || errors.name
+      || errors.briefing
+      || errors.dueDate
+      || errors.assignTo
+      || errors.forecastData
+      || errors.forecastData
+      || errors.reportingYear
+    );
+  const isAllValuesFilled =    values.localMarket
+    && values.name
+    && values.assignTo
+    && values.dueDate
+    && values.forecastData
+    && values.actualData
+    && values.briefing
+    && values.reportingYear;
+  return { isAllValuesFilled, isAnyValidationError };
+};
+export { validationRule, checkValidation };

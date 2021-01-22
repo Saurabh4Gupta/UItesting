@@ -17,12 +17,10 @@ const DeleteData = (props) => {
     }
   }
   const requestChangeHandlerOnSubmit = () => {
-    console.log('>>>>>>.requestChangeHandlerOnSubmit');
     if (!isDeleteModal) {
       handleMoveToCompleteData(requestID);
       setIsMoveToCompleteModel({ isMoveToComplete: false, requestID: '' });
     } else {
-      console.log('>>>>>>.isDeleteModal', requestID);
       handleDelete(requestId);
       setModalOpen({ isDeleteModal: false, requestId: '' });
     }

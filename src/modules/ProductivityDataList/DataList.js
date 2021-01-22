@@ -7,7 +7,6 @@ import PropTypes from 'prop-types';
 import Toast from '@dentsu-ui/components/dist/cjs/components/Toast';
 import EmptyTable from './EmptyTable';
 import TableList from './TableList';
-import CreateData from '../CreateData/CreateData';
 import { getData, data as mockData } from '../Mock/mockData';
 import Loader from '../../components/loading';
 import { dataFieldCms as PageContent } from '../../cms';
@@ -22,11 +21,11 @@ const DataList = (props) => {
     loading,
     completeDataList,
     setCompleteDataList,
-    setMarket,
-    refetch,
+    handleModal,
+    // refetch,
+    // setMarket,
   } = props;
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [deleteModalData, setIsDeleteModal] = useState({
     isDeleteModal: false,
     requestId: undefined,
@@ -149,9 +148,6 @@ const DataList = (props) => {
     });
   };
 
-  const handleModal = (value) => {
-    setIsModalOpen(value);
-  };
   const handleTabIndex = (index) => {
     setTabIndex(index);
   };
@@ -163,16 +159,8 @@ const DataList = (props) => {
   };
   return (
     <>
-      <CreateData
-        cmsData={cmsData}
-        market={market}
-        isModalOpen={isModalOpen}
-        handleModal={handleModal}
-        clientCode={clientCode}
-        refetch={refetch}
-        setMarket={setMarket}
-      />
       <Box mt="30px">
+        <br />
         <Tabs onChange={handleTabIndex} index={tabIndex}>
           <Tabs.List>
             <Tabs.Tab label={cmsData.ongoingLabel} count={totalCount} />

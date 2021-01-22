@@ -8,6 +8,8 @@ const GET_DATA_LIST = gql`
       data {
         totalCount
         dataList {
+          originalId
+          forecastData
           overviewId
           originalId
           forecastData

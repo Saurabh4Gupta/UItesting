@@ -6,10 +6,11 @@ import { useQuery } from '@apollo/client';
 import PageController from '../PageController/PageController';
 import DataList from './DataList';
 import { dataFieldCms as PageContent } from '../../cms';
-import UploadFile from '../FileUpload/UploadFile';
 import withPageController from '../../hoc/withPageController';
 import { parsedDataList } from '../../utils/helper';
 import GET_DATA_LIST from './query';
+import CreateData from '../CreateData/FormData';
+import ProductivityRequest from '../CreateData/ProductivityRequest';
 
 const DataField = (props) => {
   const { param, marketOptions, clientMetaData } = props;
@@ -24,8 +25,12 @@ const DataField = (props) => {
     data: [],
     totalCount: 0,
   });
-  const [isUploadModal, setIsUploadModal] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [dataList, setdataList] = useState({});
+
+  const handleModal = (value) => {
+    setIsModalOpen(value);
+  };
   const handleMarket = (selected) => {
     setMarket(selected);
   };
@@ -49,6 +54,17 @@ const DataField = (props) => {
   return (
     <>
       <Box mb="200px">
+        {isModalOpen && (
+          <CreateData
+            cmsData={PageContent}
+            market={market}
+            isModalOpen={isModalOpen}
+            handleModal={handleModal}
+            clientCode={clientCode}
+            refetch={refetch}
+            setMarket={setMarket}
+          />
+        )}
         <PageController
           param={param}
           market={market}
@@ -58,10 +74,9 @@ const DataField = (props) => {
           isCompleted={false}
           clientList={clientMetaData}
         >
-          <UploadFile
+          <ProductivityRequest
             cmsData={PageContent}
-            modalOpen={isUploadModal}
-            setModalOpen={setIsUploadModal}
+            handleModal={handleModal}
           />
           <DataList
             cmsData={PageContent}
@@ -69,9 +84,10 @@ const DataField = (props) => {
             dataList={dataList}
             setCompleteDataList={setCompleteDataList}
             loading={listLoading}
-            market={market}
-            setMarket={setMarket}
-            refetch={refetch}
+            // market={market}
+            // setMarket={setMarket}
+            // refetch={refetch}
+            clientCode={clientCode}
           />
         </PageController>
       </Box>
