@@ -51,6 +51,7 @@ const DataField = (props) => {
     }
   }, [listData]);
 
+
   return (
     <>
       <Box mb="200px">
@@ -63,6 +64,7 @@ const DataField = (props) => {
             clientCode={clientCode}
             refetch={refetch}
             setMarket={setMarket}
+            isEdit={false}
           />
         )}
         <PageController

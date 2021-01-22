@@ -16,6 +16,8 @@ import { MetaDataContext } from '../../contexts/marketOptions';
 import FILE_UPLOAD from '../FileUpload/mutation';
 import CREATE_DATA_REQUEST from './mutation';
 import { getInitialValues } from '../../utils/formValues';
+import EDIT_DATA_REQUEST from './editMutation';
+
 
 const toast = Toast();
 const CreateData = (props) => {
@@ -38,6 +40,11 @@ const CreateData = (props) => {
   const [createDataRequest, { loading, error, data: createData }] = useMutation(
     CREATE_DATA_REQUEST,
   );
+  const [editDataRequest, { loading:editLoading, error: editError, data: editData }] = useMutation(
+    EDIT_DATA_REQUEST,
+  );
+
+ // console.log("+editData",editData)
   const [userData, setUserData] = useState([]);
 
   // const [files, setFiles] = useState([]);
@@ -62,7 +69,7 @@ const CreateData = (props) => {
     setValues,
     forecastOptions,
   } = useCustomForm({ initialValues, validate: validationRule });
-
+ // console.log("outside of use effet +++++++++view",values.localMarket)
   useEffect(() => {
     if (userList) {
       const { data } = userList.getUsers;
@@ -89,6 +96,21 @@ const CreateData = (props) => {
       }
     }
   }, [createData]);
+
+  useEffect(() => {
+    if (editData) {
+      const { status } = editData.editDataRequest;
+      if (status === 200) {
+        setMarket(values.localMarket);
+        closeModalHandler();
+        // refetch();
+        return toast({
+          title: cmsData.toastRequestEdited,
+          status: 'success',
+        });
+      }
+    }
+  }, [editData]);
 
   useEffect(() => {
     const { isAllValuesFilled, isAnyValidationError } = checkValidation(
@@ -141,22 +163,61 @@ const CreateData = (props) => {
   /* On submit */
 
   async function onSubmit() {
-    handleSubmit();
+    console.log('++++++++++++++++++++onSubmit')
+    // handleSubmit();
     if (isReadyToSubmit) {
+      console.log('isReadyToSubmit', isReadyToSubmit);
       const { file } = values;
+
+      const { data: uploadData } = await uploadFile({ variables: { file } });
+      const { data: fileData, status } = uploadData.uploadFile;
+      // if (status !== 200) {
+      //   setErrors((prevState) => ({
+      //     ...prevState,
+      //     file: cmsData.fileUploadFailed,
+      //   }));
+      //   return;
+      // }
+      console.log('out++++++++++++isEdit', isEdit)
       if (isEdit) {
         // Write mutation here check below for
         // reference and in last return the  toast with status 200
+
+        // const [editDataRequest, { loading, error, data: editData }] = useMutation(
+        //   EDIT_DATA_REQUEST,
+        // );
+        console.log('isEdit +++++++++view', values.localMarket)
+
+        const {
+          localMarket,
+          name,
+          briefing,
+          actualData,
+          forecastData,
+          dueDate,
+          assignTo,
+          // eslint-disable-next-line no-shadow
+          reportingYear,
+        } = values;
+
+        const reqData = {
+          overviewId: localMarket,
+          blobId: fileData.blobId,
+          actualData,
+          forecastData,
+          name,
+          briefing,
+          reportingYear: moment(reportingYear.value).format('YYYY'),
+          dueDate,
+          owners: assignTo,
+          filename: fileData.filename,
+        };
+
+        console.log('++++++++++++++++reqData', reqData);
+
+       editDataRequest({ variables: { data: reqData } });
       }
-      const { data: uploadData } = await uploadFile({ variables: { file } });
-      const { data: fileData, status } = uploadData.uploadFile;
-      if (status !== 200) {
-        setErrors((prevState) => ({
-          ...prevState,
-          file: cmsData.fileUploadFailed,
-        }));
-        return;
-      }
+
       const {
         localMarket,
         name,

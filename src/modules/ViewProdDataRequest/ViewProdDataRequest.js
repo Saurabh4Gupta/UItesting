@@ -50,6 +50,8 @@ const ViewProdDataRequest = (props) => {
       setProdRequest(parsedRes)
     }
   }, [dataRequests, loading, error]);
+
+  console.log('++++++++++++prodRequest', prodRequest[0])
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
@@ -143,7 +145,7 @@ const ViewProdDataRequest = (props) => {
                       // prodRequest={prodRequest}
                       prodRequest={prodRequest[0]}
                       name={name}
-                      localMarket={prodRequest[0].localMarket.value}
+                      localMarket={prodRequest[0].localMarket.label}
                       handleEditData={handleEditData}
                     />
                     <Box mt="30px">

@@ -37,6 +37,7 @@ const TableList = (props) => {
     handleFilter,
     selectedFilter,
   } = props;
+  // console.log("++++++++++++++++++",data);
 
   const history = useHistory();
 
