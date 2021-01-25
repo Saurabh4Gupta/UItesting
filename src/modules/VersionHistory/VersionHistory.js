@@ -8,6 +8,7 @@ import {
   Card,
   Button,
   Stack,
+  Link,
 } from '@dentsu-ui/components';
 import { slice, concat } from 'lodash';
 import { dataFieldCms as PageContent } from '../../cms';
@@ -39,7 +40,11 @@ const VersionHistory = (props) => {
     setList(newList);
   };
 
-  const downloadButton = <IconButton variant="ghost" icon="download" size="small" />;
+  const downloadButton = (
+    <Link url="/DataMappings.xlsx" style={{ color: 'black' }}>
+      <IconButton variant="ghost" icon="download" size="small" />
+    </Link>
+);
 
   return (
     <>
