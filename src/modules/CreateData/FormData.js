@@ -18,7 +18,6 @@ import CREATE_DATA_REQUEST from './mutation';
 import { getInitialValues } from '../../utils/formValues';
 import EDIT_DATA_REQUEST from './editMutation';
 
-
 const toast = Toast();
 const CreateData = (props) => {
   const {
@@ -30,6 +29,7 @@ const CreateData = (props) => {
     setMarket,
     isEdit,
     prodRequest,
+    handleEditData
   } = props;
 
   const [isReadyToSubmit, setIsReadyToSubmit] = useState(false);
@@ -40,11 +40,12 @@ const CreateData = (props) => {
   const [createDataRequest, { loading, error, data: createData }] = useMutation(
     CREATE_DATA_REQUEST,
   );
-  const [editDataRequest, { loading:editLoading, error: editError, data: editData }] = useMutation(
-    EDIT_DATA_REQUEST,
-  );
+  const [
+    editDataRequest,
+    { loading: editLoading, error: editError, data: editData },
+  ] = useMutation(EDIT_DATA_REQUEST);
 
- // console.log("+editData",editData)
+  // console.log("+editData",editData)
   const [userData, setUserData] = useState([]);
 
   // const [files, setFiles] = useState([]);
@@ -57,6 +58,9 @@ const CreateData = (props) => {
     market,
     data: prodRequest || null,
   });
+
+  console.log(prodRequest);
+
   const {
     handleChange,
     values,
@@ -69,7 +73,7 @@ const CreateData = (props) => {
     setValues,
     forecastOptions,
   } = useCustomForm({ initialValues, validate: validationRule });
- // console.log("outside of use effet +++++++++view",values.localMarket)
+  // console.log("outside of use effet +++++++++view",values.localMarket)
   useEffect(() => {
     if (userList) {
       const { data } = userList.getUsers;
@@ -99,11 +103,11 @@ const CreateData = (props) => {
 
   useEffect(() => {
     if (editData) {
-      const { status } = editData.editDataRequest;
+      const { status  , data} = editData.editDataRequest;
       if (status === 200) {
-        setMarket(values.localMarket);
         closeModalHandler();
-        // refetch();
+        values.reportingYear = data.reportingYear
+        handleEditData({...data , ...values})
         return toast({
           title: cmsData.toastRequestEdited,
           status: 'success',
@@ -117,6 +121,11 @@ const CreateData = (props) => {
       values,
       errors,
     );
+    console.log('READY TO SUBMIT')
+    console.log(isAllValuesFilled)
+    console.log(isAnyValidationError)
+
+
     setIsReadyToSubmit(isAllValuesFilled && !isAnyValidationError);
   }, [errors, values]);
 
@@ -162,15 +171,21 @@ const CreateData = (props) => {
 
   /* On submit */
 
-  async function onSubmit() {
-    console.log('++++++++++++++++++++onSubmit')
-    // handleSubmit();
-    if (isReadyToSubmit) {
-      console.log('isReadyToSubmit', isReadyToSubmit);
-      const { file } = values;
 
-      const { data: uploadData } = await uploadFile({ variables: { file } });
-      const { data: fileData, status } = uploadData.uploadFile;
+  async function onSubmit() {
+    // handleSubmit();
+    if (true) {
+      const {
+        localMarket,
+        name,
+        briefing,
+        actualData,
+        forecastData,
+        dueDate,
+        assignTo,
+        reportingYear,
+      } = values;
+
       // if (status !== 200) {
       //   setErrors((prevState) => ({
       //     ...prevState,
@@ -178,30 +193,34 @@ const CreateData = (props) => {
       //   }));
       //   return;
       // }
-      console.log('out++++++++++++isEdit', isEdit)
       if (isEdit) {
-        // Write mutation here check below for
-        // reference and in last return the  toast with status 200
-
-        // const [editDataRequest, { loading, error, data: editData }] = useMutation(
-        //   EDIT_DATA_REQUEST,
-        // );
-        console.log('isEdit +++++++++view', values.localMarket)
-
-        const {
-          localMarket,
-          name,
-          briefing,
-          actualData,
-          forecastData,
-          dueDate,
-          assignTo,
-          // eslint-disable-next-line no-shadow
-          reportingYear,
-        } = values;
+        const { id } = values;
 
         const reqData = {
-          overviewId: localMarket,
+          overviewId: localMarket.overviewId,
+          blobId: '16109702688125',
+          actualData,
+          forecastData,
+          name,
+          briefing,
+          reportingYear: moment(reportingYear.value).format('YYYY'),
+          dueDate,
+          id,
+          owners: assignTo,
+          filename: 'name.xlsx',
+        };
+
+        //console.log('DATA HITTING THE API ', reqData);
+
+        editDataRequest({ variables: { data: reqData } });
+      } else {
+        const { file } = values;
+
+        const { data: uploadData } = await uploadFile({ variables: { file } });
+        const { data: fileData, status } = uploadData.uploadFile;
+
+        const reqData = {
+          overviewId: localMarket.overviewId,
           blobId: fileData.blobId,
           actualData,
           forecastData,
@@ -213,46 +232,26 @@ const CreateData = (props) => {
           filename: fileData.filename,
         };
 
-        console.log('++++++++++++++++reqData', reqData);
-
-       editDataRequest({ variables: { data: reqData } });
+        createDataRequest({ variables: { data: reqData } });
       }
-
-      const {
-        localMarket,
-        name,
-        briefing,
-        actualData,
-        forecastData,
-        dueDate,
-        assignTo,
-        // eslint-disable-next-line no-shadow
-        reportingYear,
-      } = values;
-
-      const reqData = {
-        overviewId: localMarket.overviewId,
-        blobId: fileData.blobId,
-        actualData,
-        forecastData,
-        name,
-        briefing,
-        reportingYear: moment(reportingYear.value).format('YYYY'),
-        dueDate,
-        owners: assignTo,
-        filename: fileData.filename,
-      };
-
-      createDataRequest({ variables: { data: reqData } });
     }
   }
   const { marketOptions } = useContext(MetaDataContext);
   const formMarketOption = marketOptions.filter((item) => item.value !== 'All');
 
+  if (isEdit) {
+    values.localMarket = prodRequest.localMarket;
+    values.id = prodRequest.originalId;
+  }
+
+  const modalHeader = !isEdit
+    ? cmsData.createNewDataRequest
+    : cmsData.editDataRequest;
+
   return (
     <>
       <Modal isOpen={isModalOpen} onClose={closeModalHandler}>
-        <Modal.Header hasCloseButton title={cmsData.createNewDataRequest} />
+        <Modal.Header hasCloseButton title={modalHeader} />
         <Modal.Body>
           <Form
             values={values}

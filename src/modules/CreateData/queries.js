@@ -33,6 +33,7 @@ getDataRequests (id: $id) {
  }
  trackerTemplate{
  name
+ blobId
  }
  trackerFiles {
  name

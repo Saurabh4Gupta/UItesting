@@ -22,6 +22,7 @@ const GET_DATA_REQUESTS = gql`
         }
         trackerTemplate {
           name
+          blobId
         }
         trackerFiles {
           name

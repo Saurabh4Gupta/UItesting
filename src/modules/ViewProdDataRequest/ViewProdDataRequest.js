@@ -38,7 +38,6 @@ const ViewProdDataRequest = (props) => {
     setIsRequestModal(true);
   };
 
-  // eslint-disable-next-line consistent-return
   useEffect(() => {
     if (loading) {
       setLoading(false)
@@ -47,11 +46,11 @@ const ViewProdDataRequest = (props) => {
     if (dataRequests) {
       const { data } = dataRequests.getDataRequests;
       const parsedRes = parsedDataList(data, marketOptions, name)
+      console.log(parsedRes)
       setProdRequest(parsedRes)
     }
   }, [dataRequests, loading, error]);
 
-  console.log('++++++++++++prodRequest', prodRequest[0])
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
@@ -59,17 +58,10 @@ const ViewProdDataRequest = (props) => {
   }, []);
 
   const handleEditData = (values) => {
-    setProdRequest({
-      ...prodRequest,
-      localMarket: values.localMarket,
-      dueDate: values.dueDate.toLocaleDateString(),
-      name: values.name,
-      briefing: values.briefing,
-      actualData: values.actualData,
-      forecastData: values.forecastData,
-      reportingYear: values.reportingYear,
-      assignTo: values.assignTo,
-    });
+    setProdRequest([{
+      ...prodRequest[0],
+      ...values
+    }]);
   };
   const handleMoveToComplete = async (flag) => {
     let isSuccess;
@@ -83,6 +75,8 @@ const ViewProdDataRequest = (props) => {
         isSuccess = true;
       }
     });
+
+    console.log('VIEW PROD',prodRequest[0])
 
     setIsRequestModal(false)
     const toast = new Toast();
@@ -129,7 +123,7 @@ const ViewProdDataRequest = (props) => {
             />
               )}
             {prodRequest.length
-                && (
+                ? (
                   <PageController
                     param={param}
                     localMarket={prodRequest[0].localMarket.label}
@@ -153,7 +147,7 @@ const ViewProdDataRequest = (props) => {
                       {/* <VersionHistory /> */}
                     </Box>
                   </PageController>
-                )}
+                ) : null}
           </>
           )}
       </Box>

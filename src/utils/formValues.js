@@ -14,7 +14,7 @@ const getInitialValues = ({ isEdit, market, data }) => {
   if (isEdit) {
     initialValues = {
       localMarket: data.localMarket.value,
-      blobId: '',
+      blobId: data.trackerTemplate[0].blobId,
       name: data.name,
       briefing: data.briefing,
       reportingYear: data.reportingYear,

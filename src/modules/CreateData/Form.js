@@ -43,7 +43,7 @@ const Form = (props) => {
     <>
       <FormField
         label={cmsData.localMarketLabel}
-        {...(errors.localMarket ? { error: errors.localMarket } : {})}
+         {...(errors.localMarket && !isEdit? { error: errors.localMarket } : {})}
         hint={cmsData.localMarketHint}
       >
         <Select
