@@ -11,7 +11,7 @@ import UploadFile from '../FileUpload/UploadFile';
 import RequestSummary from './RequestSummary/RequestSummary';
 import { data as mockData } from '../Mock/mockData';
 import Loader from '../../components/loading';
-// import VersionHistory from '../VersionHistory/VersionHistory';
+import VersionHistory from '../VersionHistory/VersionHistory';
 import MoveToComplete from '../../components/MoveToComplete/MoveToComplete';
 import { GET_DATA_REQUESTS } from './queries';
 import { parsedDataList } from '../../utils/helper';
@@ -147,8 +147,7 @@ const ViewProdDataRequest = (props) => {
                       handleEditData={handleEditData}
                     />
                     <Box mt="30px">
-                      {/* <VersionHistory tracketTemplate={prodRequest[0].tracketTemplate} trackerFiles={prodRequest[0].trackerFiles} /> */}
-                      {/* <VersionHistory /> */}
+                      <VersionHistory tracketTemplate={prodRequest[0].trackerTemplate} trackerFiles={prodRequest[0].trackerFiles} />
                     </Box>
                   </PageController>
                 )}
