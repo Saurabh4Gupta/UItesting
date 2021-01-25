@@ -50,7 +50,7 @@ const checkValidation = (values, errors) => {
     );
   const isAllValuesFilled =    values.localMarket
     && values.name
-    && values.assignTo
+    //&& values.assignTo
     && values.dueDate
     && values.forecastData
     && values.actualData

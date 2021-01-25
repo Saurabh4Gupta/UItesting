@@ -184,6 +184,7 @@ const CreateData = (props) => {
         dueDate,
         assignTo,
         reportingYear,
+        blobId,
       } = values;
 
       // if (status !== 200) {
@@ -198,7 +199,7 @@ const CreateData = (props) => {
 
         const reqData = {
           overviewId: localMarket.overviewId,
-          blobId: '16109702688125',
+          blobId,
           actualData,
           forecastData,
           name,

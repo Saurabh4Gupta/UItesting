@@ -16,8 +16,6 @@ mutation EditDataRequest($data: createDataRequestInput!){
       dueDate
       owners
       isComplete
-      filename
-      blobId
     }
   }
 }`;
