@@ -9,7 +9,7 @@ const getInitialValues = ({ isEdit, market, data }) => {
     forecastData: '',
     dueDate: '',
     assignTo: [],
-    files: [],
+    file: [],
   };
   if (isEdit) {
     initialValues = {
@@ -22,7 +22,7 @@ const getInitialValues = ({ isEdit, market, data }) => {
       forecastData: data.forecastData,
       dueDate: data.dueDate,
       assignTo: data.owners,
-      files: [],
+      file: [],
     };
   }
   return initialValues;

@@ -6,7 +6,7 @@ function validationRule(field, value) {
     case 'localMarket':
       return !value ? 'This field cannot be blank' : '';
     case 'file':
-      return value.length === 0 ? 'Please upload form' : '';
+      return value.length === 0 ? 'Upload tracker template' : '';
     case 'briefing':
       return !value
         ? 'This field cannot be blank'
