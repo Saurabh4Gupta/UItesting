@@ -17,7 +17,9 @@ export const DELETE_DATA_REQUEST = gql`
     deleteDataRequests(id: $id) {
       message
       status
-      error
+      data {
+        originalId
+      }
     }
   }
 `;
