@@ -36,11 +36,8 @@ const OtherProductivityData = (props) => {
     handleModal(true);
   };
 
-  console.log('OTHER',prodRequest)
 
-  const reportingYearLabel = reportingYearData.find((key) => {
-    return key.value == reportingYear
-  });
+  const reportingYearLabel = reportingYearData.find((key) => key.value === reportingYear);
 
   return (
     <>
@@ -54,7 +51,8 @@ const OtherProductivityData = (props) => {
                 <Link
                   style={{ float: 'right' }}
                   iconLeft="edit"
-                  onClick={handleCreateData}>
+                  onClick={handleCreateData}
+                >
                   {PageContent.editRequest}
                 </Link>
               )}
@@ -76,14 +74,16 @@ const OtherProductivityData = (props) => {
           <Stack flexDirection="row">
             <Box mr="3px">
               <Paragraph>
-                {PageContent.actualCapitalized}:
+                {PageContent.actualCapitalized}
+                :
                 <strong>{` ${actualData} months`}</strong>
               </Paragraph>
             </Box>
             <Divider orientation="vertical" isFlexChild />
             <Box ml="3px">
               <Paragraph>
-                {PageContent.forecastCapitalized}:
+                {PageContent.forecastCapitalized}
+                :
                 <strong>{` ${forecastData} months`}</strong>
               </Paragraph>
             </Box>
@@ -108,7 +108,8 @@ const OtherProductivityData = (props) => {
                   avatar={{
                     src: owners[0].userImage ? owners[0].userImage : '',
                     name: owners[0].label,
-                  }}>
+                  }}
+                >
                   {owners[0].label}
                 </Chip>
               ) : (

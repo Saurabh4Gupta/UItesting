@@ -60,7 +60,7 @@ const ViewProdDataRequest = (props) => {
   const handleEditData = (values) => {
     setProdRequest([{
       ...prodRequest[0],
-      ...values
+      ...values,
     }]);
   };
   const handleMoveToComplete = async (flag) => {
@@ -76,7 +76,7 @@ const ViewProdDataRequest = (props) => {
       }
     });
 
-    console.log('VIEW PROD',prodRequest[0])
+    console.log('VIEW PROD', prodRequest[0])
 
     setIsRequestModal(false)
     const toast = new Toast();

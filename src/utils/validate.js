@@ -6,7 +6,7 @@ function validationRule(field, value) {
     case 'localMarket':
       return !value ? 'This field cannot be blank' : '';
     case 'file':
-      return value.length === 0 ? 'Please upload form' : '';
+      return value.length === 0 ? 'Upload tracker template' : '';
     case 'briefing':
       return !value
         ? 'This field cannot be blank'
@@ -48,9 +48,9 @@ const checkValidation = (values, errors) => {
       || errors.forecastData
       || errors.reportingYear
     );
-  const isAllValuesFilled =    values.localMarket
+  const isAllValuesFilled =  values.localMarket
     && values.name
-    //&& values.assignTo
+    // && values.assignTo
     && values.dueDate
     && values.forecastData
     && values.actualData

@@ -29,7 +29,7 @@ const CreateData = (props) => {
     setMarket,
     isEdit,
     prodRequest,
-    handleEditData
+    handleEditData,
   } = props;
 
   const [isReadyToSubmit, setIsReadyToSubmit] = useState(false);
@@ -42,13 +42,13 @@ const CreateData = (props) => {
   );
   const [
     editDataRequest,
-    { loading: editLoading, error: editError, data: editData },
+    { data: editData },
   ] = useMutation(EDIT_DATA_REQUEST);
 
-  // console.log("+editData",editData)
+
   const [userData, setUserData] = useState([]);
 
-  // const [files, setFiles] = useState([]);
+
   const { loading: userLoading, error: userError, data: userList } = useQuery(
     GET_USERS,
   );
@@ -59,13 +59,11 @@ const CreateData = (props) => {
     data: prodRequest || null,
   });
 
-  console.log(prodRequest);
 
   const {
     handleChange,
     values,
     handleSelectField,
-    handleSubmit,
     errors,
     handleCancel,
     handleOwners,
@@ -73,7 +71,7 @@ const CreateData = (props) => {
     setValues,
     forecastOptions,
   } = useCustomForm({ initialValues, validate: validationRule });
-  // console.log("outside of use effet +++++++++view",values.localMarket)
+
   useEffect(() => {
     if (userList) {
       const { data } = userList.getUsers;
@@ -103,11 +101,11 @@ const CreateData = (props) => {
 
   useEffect(() => {
     if (editData) {
-      const { status  , data} = editData.editDataRequest;
+      const { status, data } = editData.editDataRequest;
       if (status === 200) {
         closeModalHandler();
         values.reportingYear = data.reportingYear
-        handleEditData({...data , ...values})
+        handleEditData({ ...data, ...values })
         return toast({
           title: cmsData.toastRequestEdited,
           status: 'success',
@@ -121,11 +119,6 @@ const CreateData = (props) => {
       values,
       errors,
     );
-    console.log('READY TO SUBMIT')
-    console.log(isAllValuesFilled)
-    console.log(isAnyValidationError)
-
-
     setIsReadyToSubmit(isAllValuesFilled && !isAnyValidationError);
   }, [errors, values]);
 
@@ -173,8 +166,7 @@ const CreateData = (props) => {
 
 
   async function onSubmit() {
-    // handleSubmit();
-    if (true) {
+    if (isReadyToSubmit) {
       const {
         localMarket,
         name,
@@ -187,6 +179,7 @@ const CreateData = (props) => {
         blobId,
       } = values;
 
+
       // if (status !== 200) {
       //   setErrors((prevState) => ({
       //     ...prevState,
@@ -197,9 +190,14 @@ const CreateData = (props) => {
       if (isEdit) {
         const { id } = values;
 
+        const { file } = values;
+
+        const { data: uploadData } = await uploadFile({ variables: { file } });
+        const { data: fileData } = uploadData.uploadFile;
+
         const reqData = {
           overviewId: localMarket.overviewId,
-          blobId,
+          blobId:fileData.blobId ? fileData.blobId : blobId,
           actualData,
           forecastData,
           name,
@@ -208,17 +206,15 @@ const CreateData = (props) => {
           dueDate,
           id,
           owners: assignTo,
-          filename: 'name.xlsx',
+          filename: fileData.filename ? fileData.filename : 'name.xlsx',
         };
-
-        //console.log('DATA HITTING THE API ', reqData);
 
         editDataRequest({ variables: { data: reqData } });
       } else {
         const { file } = values;
 
         const { data: uploadData } = await uploadFile({ variables: { file } });
-        const { data: fileData, status } = uploadData.uploadFile;
+        const { data: fileData } = uploadData.uploadFile;
 
         const reqData = {
           overviewId: localMarket.overviewId,
@@ -288,6 +284,7 @@ CreateData.propTypes = {
   market: PropTypes.object,
   isModalOpen: PropTypes.bool,
   handleModal: PropTypes.func,
+  handleEditData: PropTypes.func,
   refetch: PropTypes.func,
   setMarket: PropTypes.func,
   isEdit: PropTypes.bool,
@@ -298,6 +295,7 @@ CreateData.defaultProps = {
   market: 'UK',
   isModalOpen: false,
   handleModal: () => {},
+  handleEditData:() => {},
   refetch: () => {},
   setMarket: () => {},
   isEdit: false,

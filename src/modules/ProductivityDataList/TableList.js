@@ -130,7 +130,9 @@ const TableList = (props) => {
                     ''
                   ) : (
                     <Box width="13%">
-                      {isOverDue === cmsData.overdue ? (
+                      {
+                      isOverDue
+                      ? (
                         <Chip variant="status" status="warning" hasStatusLight>
                           {cmsData.overdue}
                         </Chip>
