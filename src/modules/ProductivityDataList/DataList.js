@@ -5,11 +5,13 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Box, Tabs } from '@dentsu-ui/components';
 import PropTypes from 'prop-types';
 import Toast from '@dentsu-ui/components/dist/cjs/components/Toast';
+import { useMutation } from '@apollo/client';
 import EmptyTable from './EmptyTable';
 import TableList from './TableList';
 import { getData, data as mockData } from '../Mock/mockData';
 import Loader from '../../components/loading';
 import { dataFieldCms as PageContent } from '../../cms';
+import { DELETE_DATA_REQUEST } from '../CreateData/mutation';
 
 const DataList = (props) => {
   const {
@@ -22,7 +24,7 @@ const DataList = (props) => {
     completeDataList,
     setCompleteDataList,
     handleModal,
-    // refetch,
+    refetch,
     // setMarket,
   } = props;
 
@@ -40,10 +42,29 @@ const DataList = (props) => {
     isMoveToComplete: false,
     requestID: undefined,
   });
+  const [deleteDataRequest, { data: deleteData }] = useMutation(
+    DELETE_DATA_REQUEST,
+  );
 
   const toast = Toast();
 
   const initialRender = useRef(true);
+  useEffect(() => {
+    if (deleteData) {
+      const { status } = deleteData.deleteDataRequests;
+      if (status !== 200) {
+        return toast({
+          title: PageContent.failurNotificationMsg,
+          status: 'error',
+        });
+      }
+      refetch();
+      return toast({
+        title: PageContent.toastRequestDeleted,
+        status: 'success',
+      });
+    }
+  }, [deleteData]);
 
   useEffect(() => {
     if (initialRender.current) {
@@ -95,21 +116,8 @@ const DataList = (props) => {
     setSelectedFilter(input);
   };
 
-  const handleDelete = (id) => {
-    mockData.data.forEach((item) => {
-      if (item.id === id) {
-        item.isDeleted = true;
-        return true;
-      }
-      return false;
-    });
-    setDataList(getData(market.value, 'ongoing'));
-
-    return toast({
-      title: '',
-      content: PageContent.toastRequestDeleted,
-      status: 'success',
-    });
+  const handleDelete = (requestId) => {
+    deleteDataRequest({ variables: { id: requestId } });
   };
 
   const handleMoveToCompleteData = (id) => {

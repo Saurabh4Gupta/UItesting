@@ -164,7 +164,7 @@ const TableList = (props) => {
                       actionName={actionName}
                       deleteBtn={cmsData.delete}
                       showStatus={showStatus}
-                      handleDeleteModel={() => handleDeleteModel(overviewId)}
+                      handleDeleteModel={() => handleDeleteModel(originalId)}
                       handleMoveToCompleteModel={() => handleMoveToCompleteModel(overviewId)
                       }
                       handleMoveToOngoing={() => handleMoveToOngoing(overviewId)

@@ -86,7 +86,7 @@ const DataField = (props) => {
             loading={listLoading}
             // market={market}
             // setMarket={setMarket}
-            // refetch={refetch}
+            refetch={refetch}
             clientCode={clientCode}
           />
         </PageController>
