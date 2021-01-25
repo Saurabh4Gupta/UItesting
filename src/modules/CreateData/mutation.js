@@ -1,6 +1,6 @@
 import { gql } from '@apollo/client';
 
-const CREATE_DATA_REQUEST = gql`
+export const CREATE_DATA_REQUEST = gql`
   mutation CreateDataRequest($data: createDataRequestInput!) {
     createDataRequests(data: $data) {
       message
@@ -12,4 +12,14 @@ const CREATE_DATA_REQUEST = gql`
   }
 `;
 
-export default CREATE_DATA_REQUEST;
+export const DELETE_DATA_REQUEST = gql`
+  mutation DeleteDataRequest($id: String!) {
+    deleteDataRequests(id: $id) {
+      message
+      status
+      data {
+        originalId
+      }
+    }
+  }
+`;

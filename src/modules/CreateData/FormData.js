@@ -14,8 +14,8 @@ import { monthOptions, reportingYearData } from '../Mock/mockData';
 import { GET_USERS } from './queries';
 import { MetaDataContext } from '../../contexts/marketOptions';
 import FILE_UPLOAD from '../FileUpload/mutation';
-import CREATE_DATA_REQUEST from './mutation';
 import { getInitialValues } from '../../utils/formValues';
+import { CREATE_DATA_REQUEST } from './mutation';
 
 const toast = Toast();
 const CreateData = (props) => {
