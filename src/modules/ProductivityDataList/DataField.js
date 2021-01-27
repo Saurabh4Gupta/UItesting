@@ -86,6 +86,7 @@ const DataField = (props) => {
             loading={listLoading}
             // market={market}
             // setMarket={setMarket}
+            handleModal={handleModal}
             refetch={refetch}
             clientCode={clientCode}
           />
