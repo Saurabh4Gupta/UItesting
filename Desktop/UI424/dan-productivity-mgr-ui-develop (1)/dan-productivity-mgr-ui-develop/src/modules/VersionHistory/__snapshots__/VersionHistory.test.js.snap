@@ -1,0 +1,149 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`test cases for Table list should match snapshot 1`] = `
+<ForwardRef>
+  <LayoutSection>
+    <ForwardRef />
+  </LayoutSection>
+  <LayoutSection
+    size="1/3"
+  >
+    <ForwardRef>
+      <ForwardRef>
+        Version history
+      </ForwardRef>
+      <List
+        hasTotal={false}
+        isSearchable={false}
+        items={
+          Array [
+            Object {
+              "blobId": "",
+              "createdAt": "2020-12-01",
+              "dataRequest": "",
+              "id": 13,
+              "name": "Microsoft Uk - Productivity Report - ",
+              "size": "242KB",
+              "type": "XLS",
+              "version": "V12.0",
+            },
+            Object {
+              "blobId": "",
+              "createdAt": "2020-12-01",
+              "dataRequest": "",
+              "id": 12,
+              "name": "Microsoft Uk - Productivity Report - ",
+              "size": "242KB",
+              "type": "XLS",
+              "version": "V11.0",
+            },
+            Object {
+              "blobId": "",
+              "createdAt": "2020-12-01",
+              "dataRequest": "",
+              "id": 11,
+              "name": "Microsoft Uk - Productivity Report - ",
+              "size": "242KB",
+              "type": "XLS",
+              "version": "V10.0",
+            },
+            Object {
+              "blobId": "",
+              "createdAt": "2020-12-01",
+              "dataRequest": "",
+              "id": 10,
+              "name": "Microsoft Uk - Productivity Report - ",
+              "size": "242KB",
+              "type": "XLS",
+              "version": "V9.0",
+            },
+            Object {
+              "blobId": "",
+              "createdAt": "2020-12-01",
+              "dataRequest": "",
+              "id": 9,
+              "name": "Microsoft Uk - Productivity Report - ",
+              "size": "242KB",
+              "type": "XLS",
+              "version": "V8.0",
+            },
+            Object {
+              "blobId": "",
+              "createdAt": "2020-12-01",
+              "dataRequest": "",
+              "id": 8,
+              "name": "Microsoft Uk - Productivity Report - ",
+              "size": "242KB",
+              "type": "XLS",
+              "version": "V7.0",
+            },
+            Object {
+              "blobId": "",
+              "createdAt": "2020-12-01",
+              "dataRequest": "",
+              "id": 7,
+              "name": "Microsoft Uk - Productivity Report - ",
+              "size": "242KB",
+              "type": "XLS",
+              "version": "V6.0",
+            },
+            Object {
+              "blobId": "",
+              "createdAt": "2020-12-01",
+              "dataRequest": "",
+              "id": 6,
+              "name": "Microsoft Uk - Productivity Report - ",
+              "size": "242KB",
+              "type": "XLS",
+              "version": "V5.0",
+            },
+            Object {
+              "blobId": "",
+              "createdAt": "2020-12-01",
+              "dataRequest": "",
+              "id": 5,
+              "name": "Microsoft Uk - Productivity Report - ",
+              "size": "242KB",
+              "type": "XLS",
+              "version": "V4.0",
+            },
+            Object {
+              "blobId": "",
+              "createdAt": "2020-12-01",
+              "dataRequest": "",
+              "id": 4,
+              "name": "Microsoft Uk - Productivity Report - ",
+              "size": "242KB",
+              "type": "XLS",
+              "version": "V3.0",
+            },
+          ]
+        }
+        renderItem={[Function]}
+        total={13}
+      />
+      <Box
+        style={
+          Object {
+            "margin": "10px auto",
+          }
+        }
+      >
+        <ForwardRef
+          iconRight="refresh"
+          onClick={[Function]}
+          size="small"
+          style={
+            Object {
+              "color": "black",
+            }
+          }
+          variant="ghost"
+        >
+          Load more
+        </ForwardRef>
+      </Box>
+    </ForwardRef>
+  </LayoutSection>
+</ForwardRef>
+`;

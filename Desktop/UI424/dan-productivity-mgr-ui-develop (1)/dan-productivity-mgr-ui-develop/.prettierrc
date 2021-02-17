@@ -1,0 +1,10 @@
+{
+  "bracketSpacing": true,
+  "jsxBracketSameLine": true,
+  "parser": "flow",
+  "semi": true,
+  "singleQuote": true,
+  "trailingComma": "all",
+	"embeddedLanguageFormatting": "auto"
+	
+}

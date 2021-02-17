@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Success test cases for: RequestSummary component Snapshot test for  RequestSummary component Test to match the snapsot 1`] = `
+<ForwardRef>
+  <Stack
+    flexDirection="row"
+  >
+    <Briefing
+      briefing=""
+    />
+    <OtherProductivityData
+      handleEditData={[Function]}
+      prodRequest={Object {}}
+    />
+  </Stack>
+</ForwardRef>
+`;

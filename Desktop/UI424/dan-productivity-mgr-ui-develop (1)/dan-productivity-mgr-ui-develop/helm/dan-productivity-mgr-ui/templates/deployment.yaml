@@ -1,0 +1,86 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ template "dan-productivity-mgr-ui.fullname" . }}
+  labels:
+    app: {{ template "dan-productivity-mgr-ui.name" . }}
+    chart: {{ template "dan-productivity-mgr-ui.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+  annotations: # Annotation for the pod
+    {{- range $key, $val := .Values.deploy }}
+    {{ $key }}: {{ $val | quote }}
+    {{- end}}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ template "dan-productivity-mgr-ui.name" . }}
+      release: {{ .Release.Name }}
+  template:
+    metadata:
+      annotations: # Annotation for the pod
+        {{- range $key, $val := .Values.deploy }}
+        {{ $key }}: {{ $val | quote }}
+        {{- end}}
+      labels:
+        app: {{ template "dan-productivity-mgr-ui.name" . }}
+        release: {{ .Release.Name }}
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+            - name: NODE_ENV
+              value: "{{ .Values.node_env }}"
+            - name: IS_BYPASS_SECURITY
+              value: "{{ .Values.is_bypass_security }}"
+            - name: PORT
+              value: "{{ .Values.port }}"
+            - name: OKTA_ISSUER
+              value: "{{ .Values.okta_issuer }}"
+            - name: CLIENT_ID
+              value: "{{ .Values.client_id }}"
+            - name: SKIP_PREFLIGHT_CHECK
+              value: "{{ .Values.skip_preflight_check }}"
+            - name: APOLLO_GRAPHQL_URI
+              value: "{{ .Values.apollo_graphql_uri }}"
+            - name: APOLLO_SUBSCRIPTION_URI
+              value: "{{ .Values.apollo_subscription_uri }}"
+            - name: APPORIGIN
+              value: "{{ .Values.apporigin }}"
+            - name: USE_METHOD_TO_FETCH_PERMS
+              value: "{{ .Values.use_method_to_fetch_perms }}"
+            - name: FLAGIT_IS_EMBEDDED_APP
+              value: "{{ .Values.flagit_is_embedded_app }}"
+            - name: UM_GRAPHQL_URL
+              value: "{{ .Values.um_graphql_url }}"  
+            - name: INSTRUMENTATION_KEY
+              value: "{{ .Values.instrumentation_key }}"   
+          ports:
+            - name: http
+              containerPort: {{ .Values.port }}
+              protocol: TCP  
+          livenessProbe:
+            httpGet:
+              path: /_healthz
+              port: {{ .Values.port }}
+          readinessProbe:
+            httpGet:
+              path: /_healthz
+              port: {{ .Values.port }}
+          resources:
+{{ toYaml .Values.resources | indent 12 }}
+    {{- with .Values.nodeSelector }}
+      nodeSelector:
+{{ toYaml . | indent 8 }}
+    {{- end }}
+    {{- with .Values.affinity }}
+      affinity:
+{{ toYaml . | indent 8 }}
+    {{- end }}
+    {{- with .Values.tolerations }}
+      tolerations:
+{{ toYaml . | indent 8 }}
+    {{- end }}
